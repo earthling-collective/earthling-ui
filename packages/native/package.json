@@ -1,0 +1,46 @@
+{
+  "name": "@zabukit/native",
+  "private": true,
+  "version": "1.0.0-alpha.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@tsconfig/react-native": "^3.0.2",
+    "@types/node": "^20.1.4",
+    "@types/react": "^18.0.28",
+    "@types/react-dom": "^18.0.11",
+    "@types/react-native-vector-icons": "^6.4.13",
+    "@vitejs/plugin-react": "^4.0.0",
+    "clsx": "^1.2.1",
+    "nativewind": "^2.0.11",
+    "react-native-vector-icons": "^9.2.0",
+    "typescript": "^5.0.2",
+    "vite": "^4.3.2",
+    "vite-plugin-dts": "^2.3.0",
+    "zod": "^3.21.4"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-native": "*"
+  },
+  "module": "./dist/zabukit.js",
+  "exports": {
+    ".": {
+      "import": "./dist/zabukit.js",
+      "require": "./dist/zabukit.umd.cjs"
+    }
+  },
+  "types": "./dist/main.d.ts",
+  "files": [
+    "dist"
+  ],
+  "packageManager": "yarn@3.5.1"
+}

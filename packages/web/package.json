@@ -1,0 +1,50 @@
+{
+  "name": "@zabukit/web",
+  "private": true,
+  "version": "1.0.0-alpha.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build && unocss -m -c ./uno.config.ts -o dist/uno.css lib/**/*",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.2.5",
+    "@types/react": "^18.0.37",
+    "@types/react-dom": "^18.0.11",
+    "@unocss/cli": "^0.52.7",
+    "@vitejs/plugin-react": "^4.0.0",
+    "clsx": "^1.2.1",
+    "typescript": "^5.0.2",
+    "unocss": "^0.52.7",
+    "vite": "^4.3.9",
+    "vite-plugin-dts": "^2.3.0"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*"
+  },
+  "module": "./dist/web.js",
+  "types": "./dist/main.d.ts",
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./dist/main.d.ts",
+        "default": "./dist/web.js"
+      },
+      "require": {
+        "types": "./dist/main.d.ts",
+        "default": "./dist/web.umd.cjs"
+      }
+    },
+    "./css": "./dist/uno.css"
+  },
+  "files": [
+    "dist"
+  ],
+  "packageManager": "yarn@3.5.1"
+}
