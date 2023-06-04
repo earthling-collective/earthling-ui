@@ -30,14 +30,14 @@ export function Button(props: ButtonProps) {
         onClick={onClick}
         {..._Pressable}
         className={clsx(
-          "rounded-full px-2 h-14 w-full min-w-[56px] items-center justify-center",
+          "rounded-full px-2 h-14 w-full min-w-[56px] items-center justify-center b-solid cursor-pointer",
           {
             //variants
-            "bg-primary-main active:bg-primary-main-active":
+            "bg-primary-main active:bg-primary-main-active b-[transparent]":
               variant === "contained",
-            "border-[2px] border-solid border-primary-main active:border-primary-main-active active:bg-primary-empty-active":
+            "border-[2px] b-primary-main active:b-primary-main-active active:bg-primary-empty-active":
               variant === "outlined",
-            "bg-primary-empty active:bg-primary-empty-active":
+            "bg-primary-empty active:bg-primary-empty-active b-[transparent]":
               variant === "minimal",
             //sizes
             "h-8 min-w-[32px] rounded-full": size === "sm",

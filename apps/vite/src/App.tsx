@@ -1,4 +1,3 @@
-import "@zabukit/web/css";
 import { useState } from "react";
 import { Button } from "@zabukit/web";
 
@@ -7,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Button variant="minimal">test</Button>
+      <Button variant="outlined">test</Button>
     </>
   );
 }

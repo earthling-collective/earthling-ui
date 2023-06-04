@@ -1,4 +1,4 @@
-var colors = {
+export const colors = {
   background: {
     default: "#F2FCFF",
     "default-gradient": "#F2FCFF",
@@ -41,5 +41,3 @@ var colors = {
     main: "",
   },
 };
-
-module.exports = colors;
