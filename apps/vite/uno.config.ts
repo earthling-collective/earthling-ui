@@ -1,5 +1,5 @@
 import { defineConfig, presetUno } from "unocss";
-import { presetZabukit } from "@zabukit/web";
+import { presetZabukit } from "@zabukit/web/preset";
 
 export default defineConfig({
   presets: [presetUno(), presetZabukit()],

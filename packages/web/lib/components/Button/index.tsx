@@ -33,7 +33,7 @@ export function Button(props: ButtonProps) {
           "rounded-full px-2 h-14 w-full min-w-[56px] items-center justify-center b-solid cursor-pointer",
           {
             //variants
-            "bg-primary-main active:bg-primary-main-active b-[transparent]":
+            "bg-primary-main hover:bg-primary-main-hover active:bg-primary-main-active b-[transparent]":
               variant === "contained",
             "border-[2px] b-primary-main active:b-primary-main-active active:bg-primary-empty-active":
               variant === "outlined",

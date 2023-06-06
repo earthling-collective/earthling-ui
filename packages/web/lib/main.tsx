@@ -1,14 +1,4 @@
-import { colors } from "./colors";
-import { Preset } from "unocss";
-
-export { colors };
-
-export function presetZabukit(_options?: {}): Preset {
-  return {
-    name: "@zabukit/web",
-    theme: { colors },
-  };
-}
+export { colors } from "./colors";
 
 export { Alert } from "./components/Alert";
 export type { AlertProps } from "./components/Alert";

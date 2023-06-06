@@ -6,7 +6,7 @@ function App() {
 
   return (
     <>
-      <Button variant="outlined">test</Button>
+      <Button variant="contained">test</Button>
     </>
   );
 }
