@@ -1,5 +1,5 @@
 {
-  "name": "zabukit",
+  "name": "zabukit-repo",
   "version": "1.0.0",
   "main": "index.js",
   "repository": "git@github.com:sFrady20/zabukit.git",
@@ -8,6 +8,7 @@
   "packageManager": "yarn@3.5.1",
   "workspaces": [
     "apps/*",
+    "examples/*",
     "packages/*"
   ]
 }

@@ -1,5 +1,4 @@
-export type Zabukit = { test: "true" };
+export { colors } from "@zabukit/shared";
 
-export default function () {
-  console.log("ZABU");
-}
+export { Button } from "./components/Button";
+export type { ButtonProps } from "./components/Button";

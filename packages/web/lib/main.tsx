@@ -1,4 +1,4 @@
-export { colors } from "./colors";
+export { colors } from "@zabukit/shared";
 
 export { Alert } from "./components/Alert";
 export type { AlertProps } from "./components/Alert";

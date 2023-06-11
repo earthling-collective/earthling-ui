@@ -8,17 +8,13 @@
     "build": "tsc && vite build",
     "preview": "vite preview"
   },
-  "dependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
-  },
   "devDependencies": {
     "@tsconfig/react-native": "^3.0.2",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.8",
-    "@types/react-dom": "^18.2.4",
     "@types/react-native-vector-icons": "^6.4.13",
     "@vitejs/plugin-react": "^4.0.0",
+    "@zabukit/shared": "workspace:^",
     "clsx": "^1.2.1",
     "nativewind": "^2.0.11",
     "react-native-vector-icons": "^9.2.0",
@@ -31,16 +27,12 @@
     "react": "*",
     "react-native": "*"
   },
-  "module": "./dist/zabukit.js",
+  "main": "./lib/main.tsx",
   "exports": {
-    ".": {
-      "import": "./dist/zabukit.js",
-      "require": "./dist/zabukit.umd.cjs"
-    }
+    ".": "./lib/main.tsx"
   },
-  "types": "./dist/main.d.ts",
   "files": [
-    "dist"
+    "lib"
   ],
   "packageManager": "yarn@3.5.1"
 }

@@ -7,8 +7,11 @@ import dts from "vite-plugin-dts";
 export default defineConfig({
   build: {
     lib: {
-      entry: resolve(__dirname, "lib/preset.tsx"),
-      name: "zabukitPreset",
+      entry: [
+        resolve(__dirname, "lib/main.tsx"),
+        resolve(__dirname, "lib/config.tsx"),
+      ],
+      name: "@zabukit/web",
     },
     rollupOptions: {
       external: ["react", "react-dom"],

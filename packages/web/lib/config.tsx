@@ -1,4 +1,4 @@
-import { colors } from "./colors";
+import { colors } from "@zabukit/shared";
 import { Preset } from "unocss";
 
 export function presetZabukit(_options?: {}): Preset {

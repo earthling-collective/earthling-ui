@@ -1580,6 +1580,15 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@babel/runtime@npm:7.22.5":
+  version: 7.22.5
+  resolution: "@babel/runtime@npm:7.22.5"
+  dependencies:
+    regenerator-runtime: ^0.13.11
+  checksum: 12a50b7de2531beef38840d17af50c55a094253697600cee255311222390c68eed704829308d4fd305e1b3dfbce113272e428e9d9d45b1730e0fede997eaceb1
+  languageName: node
+  linkType: hard
+
 "@babel/runtime@npm:^7.0.0, @babel/runtime@npm:^7.20.0, @babel/runtime@npm:^7.8.4":
   version: 7.21.5
   resolution: "@babel/runtime@npm:7.21.5"
@@ -3102,6 +3111,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@types/react@npm:~18.0.27":
+  version: 18.0.38
+  resolution: "@types/react@npm:18.0.38"
+  dependencies:
+    "@types/prop-types": "*"
+    "@types/scheduler": "*"
+    csstype: ^3.0.2
+  checksum: 34481c79f4f7ea2aefbaa45281319dc183200230d932d968463eba1643bd3635073d0a17c5c613150a69e36ca18b811ecffafea6384fa3dff3b5203866339d69
+  languageName: node
+  linkType: hard
+
 "@types/scheduler@npm:*":
   version: 0.16.3
   resolution: "@types/scheduler@npm:0.16.3"
@@ -3323,17 +3343,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@unocss/runtime@npm:^0.53.0":
-  version: 0.53.0
-  resolution: "@unocss/runtime@npm:0.53.0"
-  dependencies:
-    "@unocss/core": 0.53.0
-    "@unocss/preset-attributify": 0.53.0
-    "@unocss/preset-uno": 0.53.0
-  checksum: 83ae242cf7ecd24651434d09cd1397361cd4576b45c436f628fc9e66354f67213588213a5204962a12a9a20eb95f50426ab4d21ea43a375e938aea6756aff6bf
-  languageName: node
-  linkType: hard
-
 "@unocss/scope@npm:0.53.0":
   version: 0.53.0
   resolution: "@unocss/scope@npm:0.53.0"
@@ -3462,20 +3471,18 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@zabukit/native@workspace:packages/native":
+"@zabukit/native@workspace:^, @zabukit/native@workspace:packages/native":
   version: 0.0.0-use.local
   resolution: "@zabukit/native@workspace:packages/native"
   dependencies:
     "@tsconfig/react-native": ^3.0.2
     "@types/node": ^20.2.5
     "@types/react": ^18.2.8
-    "@types/react-dom": ^18.2.4
     "@types/react-native-vector-icons": ^6.4.13
     "@vitejs/plugin-react": ^4.0.0
+    "@zabukit/shared": "workspace:^"
     clsx: ^1.2.1
     nativewind: ^2.0.11
-    react: ^18.2.0
-    react-dom: ^18.2.0
     react-native-vector-icons: ^9.2.0
     typescript: ^5.1.3
     vite: ^4.3.9
@@ -3487,6 +3494,19 @@ __metadata:
   languageName: unknown
   linkType: soft
 
+"@zabukit/shared@workspace:^, @zabukit/shared@workspace:packages/shared":
+  version: 0.0.0-use.local
+  resolution: "@zabukit/shared@workspace:packages/shared"
+  dependencies:
+    "@babel/runtime": 7.22.5
+    "@types/react": ^18.2.8
+    clsx: ^1.2.1
+    nativewind: ^2.0.11
+    react: ^18.2.0
+    vite: ^4.3.9
+  languageName: unknown
+  linkType: soft
+
 "@zabukit/web@workspace:^, @zabukit/web@workspace:packages/web":
   version: 0.0.0-use.local
   resolution: "@zabukit/web@workspace:packages/web"
@@ -3495,11 +3515,10 @@ __metadata:
     "@types/react": ^18.2.8
     "@types/react-dom": ^18.2.4
     "@unocss/cli": ^0.53.0
-    "@unocss/runtime": ^0.53.0
     "@vitejs/plugin-react": ^4.0.0
+    "@zabukit/shared": "workspace:^"
     clsx: ^1.2.1
     react: ^18.2.0
-    react-dom: ^18.2.0
     typescript: ^5.1.3
     unocss: ^0.53.0
     vite: ^4.3.9
@@ -10710,6 +10729,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"typescript@npm:^4.9.4":
+  version: 4.9.5
+  resolution: "typescript@npm:4.9.5"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: ee000bc26848147ad423b581bd250075662a354d84f0e06eb76d3b892328d8d4440b7487b5a83e851b12b255f55d71835b008a66cbf8f255a11e4400159237db
+  languageName: node
+  linkType: hard
+
 "typescript@npm:^5.1.3":
   version: 5.1.3
   resolution: "typescript@npm:5.1.3"
@@ -10727,6 +10756,16 @@ __metadata:
     tsc: bin/tsc
     tsserver: bin/tsserver
   checksum: 3e4f061658e0c8f36c820802fa809e0fd812b85687a9a2f5430bc3d0368e37d1c9605c3ce9b39df9a05af2ece67b1d844f9f6ea8ff42819f13bcb80f85629af0
+  languageName: node
+  linkType: hard
+
+"typescript@patch:typescript@^4.9.4#~builtin<compat/typescript>":
+  version: 4.9.5
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
+  bin:
+    tsc: bin/tsc
+    tsserver: bin/tsserver
+  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 
@@ -11499,25 +11538,35 @@ __metadata:
   languageName: node
   linkType: hard
 
-"zabukit-showcase-expo@workspace:apps/expo":
+"zabukit-repo@workspace:.":
   version: 0.0.0-use.local
-  resolution: "zabukit-showcase-expo@workspace:apps/expo"
+  resolution: "zabukit-repo@workspace:."
+  languageName: unknown
+  linkType: soft
+
+"zabukit-showcase-expo@workspace:examples/expo":
+  version: 0.0.0-use.local
+  resolution: "zabukit-showcase-expo@workspace:examples/expo"
   dependencies:
     "@babel/core": ^7.22.1
+    "@types/react": ~18.0.27
+    "@zabukit/native": "workspace:^"
     expo: ^48.0.19
     expo-status-bar: ^1.4.4
     react: ^18.2.0
     react-native: ^0.71.8
+    typescript: ^4.9.4
   languageName: unknown
   linkType: soft
 
-"zabukit-showcase-nextjs@workspace:apps/nextjs":
+"zabukit-showcase-nextjs@workspace:examples/nextjs":
   version: 0.0.0-use.local
-  resolution: "zabukit-showcase-nextjs@workspace:apps/nextjs"
+  resolution: "zabukit-showcase-nextjs@workspace:examples/nextjs"
   dependencies:
     "@types/node": ^20.2.5
     "@types/react": ^18.2.8
     "@types/react-dom": ^18.2.4
+    "@zabukit/web": "workspace:^"
     next: ^13.4.4
     react: ^18.2.0
     react-dom: ^18.2.0
@@ -11525,9 +11574,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"zabukit-showcase-vite@workspace:apps/vite":
+"zabukit-showcase-vite@workspace:examples/vite":
   version: 0.0.0-use.local
-  resolution: "zabukit-showcase-vite@workspace:apps/vite"
+  resolution: "zabukit-showcase-vite@workspace:examples/vite"
   dependencies:
     "@types/react": ^18.2.8
     "@types/react-dom": ^18.2.4
@@ -11538,12 +11587,6 @@ __metadata:
     typescript: ^5.1.3
     unocss: ^0.53.0
     vite: ^4.3.9
-  languageName: unknown
-  linkType: soft
-
-"zabukit@workspace:.":
-  version: 0.0.0-use.local
-  resolution: "zabukit@workspace:."
   languageName: unknown
   linkType: soft
 
