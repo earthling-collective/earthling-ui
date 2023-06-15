@@ -1,5 +1,5 @@
 {
-  "name": "earthling-ui",
+  "name": "@earthling-ui/theming",
   "version": "1.0.0-alpha.0",
   "type": "module",
   "scripts": {

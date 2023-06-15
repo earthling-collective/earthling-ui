@@ -1,8 +1,8 @@
 {
   "name": "earthling",
   "workspaces": [
-    "packages/*",
-    "examples/*"
+    "examples/*",
+    "packages/*"
   ],
   "packageManager": "yarn@3.5.1"
 }

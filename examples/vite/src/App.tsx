@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Button } from "earthling-ui";
+import { Button } from "@earthling-ui/primitives";
 
 function App() {
   const [count, setCount] = useState(0);
