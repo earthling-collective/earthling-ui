@@ -22,7 +22,7 @@ export function Button(props: ButtonProps) {
 
   return (
     <div {...rest} className={className}>
-      <button {..._Pressable}>
+      <button onClick={onPress || undefined} {..._Pressable}>
         {typeof children === "string" ? (
           <span {..._Text}>{children}</span>
         ) : (

@@ -1,5 +1,5 @@
 import React from "react";
-import { Button } from "more-tools/for-web";
+import { Button } from "earthling-ui";
 
 export default function App() {
   return (

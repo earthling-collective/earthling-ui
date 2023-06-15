@@ -20,7 +20,7 @@ export function Button(props: Za.Button<ViewProps>) {
 
   return (
     <View {...rest} className={className}>
-      <Pressable {..._Pressable}>
+      <Pressable onPress={onPress} {..._Pressable}>
         {typeof children === "string" ? (
           <Text {..._Text}>{children}</Text>
         ) : (
