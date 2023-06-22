@@ -3,9 +3,7 @@
   "version": "1.0.0-alpha.0",
   "type": "module",
   "scripts": {
-    "build": "yarn build:web; yarn build:native;",
-    "build:web": "vite build -c vite.config.web.ts",
-    "build:native": "vite build -c vite.config.native.ts"
+    "build": "vite build"
   },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
@@ -37,18 +35,38 @@
       "optional": true
     }
   },
-  "main": "./dist/main.web.cjs",
-  "module": "./dist/main.web.js",
-  "react-native": "./dist/main.native.js",
+  "main": "./dist/web.cjs",
+  "module": "./dist/web.js",
+  "react-native": "./dist/native.js",
   "exports": {
-    "./*": {
+    "./web": {
       "require": {
-        "default": "./dist/web/*.cjs",
-        "types": "./dist/web/*/web.d.ts"
+        "default": "./dist/web.cjs",
+        "types": "./dist/web/index.d.ts"
       },
       "import": {
-        "default": "./dist/web/*.js",
-        "types": "./dist/web/*/web.d.ts"
+        "default": "./dist/web.js",
+        "types": "./dist/web/index.d.ts"
+      }
+    },
+    "./native": {
+      "require": {
+        "default": "./dist/native.cjs",
+        "types": "./dist/native/index.d.ts"
+      },
+      "import": {
+        "default": "./dist/native.js",
+        "types": "./dist/native/index.d.ts"
+      }
+    },
+    "./*": {
+      "require": {
+        "default": "./dist/*.cjs",
+        "types": "./dist/*/index.d.ts"
+      },
+      "import": {
+        "default": "./dist/*.js",
+        "types": "./dist/*/index.d.ts"
       }
     }
   },

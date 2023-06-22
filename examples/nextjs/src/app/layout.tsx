@@ -1,4 +1,4 @@
-import "uno.css";
+//import "uno.css";
 
 export const metadata = {
   title: "Create Next App",

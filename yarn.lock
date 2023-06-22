@@ -5135,7 +5135,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "eathling-ui-showcase-nextjs@workspace:examples/nextjs"
   dependencies:
-    "@earthling-ui/primitives": "workspace:^"
+    "@earthling-ui/components": "workspace:^"
     "@types/node": ^20.3.1
     "@types/react": ^18.2.13
     "@types/react-dom": ^18.2.6

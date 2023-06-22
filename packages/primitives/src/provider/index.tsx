@@ -1,24 +1,39 @@
-import { createContext, ComponentType } from "react";
-import { Primitive } from "../types";
+import { createContext, ComponentType, useContext, useMemo } from "react";
+import { PrimitiveProps } from "../types";
 
 export type PrimitiveContextType = {
-  Box: ComponentType<Primitive.Atom>;
-  Text: ComponentType<Primitive.Atom>;
+  Box: ComponentType<PrimitiveProps.Box>;
+  Pressable: ComponentType<PrimitiveProps.Pressable>;
+  Text: ComponentType<PrimitiveProps.Box>;
 };
 
 const defaultPrimitiveContext: PrimitiveContextType = {
-  Box: (props: Primitive.Atom) => props.children,
-  Text: (props: Primitive.Atom) => props.children,
+  Box: (props) => <>{props.children}</>,
+  Pressable: (props) => <>{props.children}</>,
+  Text: (props) => <>{props.children}</>,
 };
 
 export const PrimitiveContext = createContext(defaultPrimitiveContext);
 
-export function PrimitiveProvider(props: Primitive.Atom) {
-  const { children } = props;
+export type PrimitiveProviderProps = PrimitiveProps.Box & {
+  primitives?: Partial<PrimitiveContextType>;
+};
+
+export function PrimitiveProvider(props: PrimitiveProviderProps) {
+  const { children, primitives: primitiveProps } = props;
+
+  const primitives = useMemo(
+    () => ({ ...defaultPrimitiveContext, ...primitiveProps }),
+    []
+  );
 
   return (
-    <PrimitiveContext.Provider value={defaultPrimitiveContext}>
+    <PrimitiveContext.Provider value={primitives}>
       {children}
     </PrimitiveContext.Provider>
   );
+}
+
+export function usePrimitive() {
+  return useContext(PrimitiveContext);
 }
