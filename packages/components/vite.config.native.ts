@@ -11,8 +11,7 @@ export default defineConfig({
     outDir: "./dist/native",
     lib: {
       entry: {
-        box: "./src/box/native.tsx",
-        button: "./src/button/native.tsx",
+        button: "./src/button/index.tsx",
       },
       name: "native",
     },

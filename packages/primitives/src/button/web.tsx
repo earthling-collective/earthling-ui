@@ -1,9 +1,4 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
-import { Za } from "../types";
-
-export type ButtonProps = Za.Button<
-  DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
->;
+import { ButtonProps } from "./props";
 
 export function Button(props: ButtonProps) {
   const {

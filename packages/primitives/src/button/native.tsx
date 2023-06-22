@@ -1,9 +1,7 @@
-import { Pressable, Text, View, type ViewProps } from "react-native";
-import { Za } from "../types";
+import { Pressable, Text, View } from "react-native";
+import { ButtonProps } from "./props";
 
-export type ButtonProps = Za.Button<ViewProps>;
-
-export function Button(props: Za.Button<ViewProps>) {
+export function Button(props: ButtonProps) {
   const {
     variant = "contained",
     size = "md",

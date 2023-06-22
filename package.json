@@ -1,5 +1,6 @@
 {
   "name": "earthling",
+  "private": true,
   "workspaces": [
     "examples/*",
     "packages/*"

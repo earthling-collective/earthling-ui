@@ -1,15 +1,16 @@
 {
-  "name": "@earthling-ui/theming",
+  "name": "@earthling-ui/components",
   "version": "1.0.0-alpha.0",
   "type": "module",
   "scripts": {
+    "build": "yarn build:web; yarn build:native;",
     "build:web": "vite build -c vite.config.web.ts",
     "build:native": "vite build -c vite.config.native.ts"
   },
-  "dependencies": {
-    "@unocss/runtime": "^0.53.1"
-  },
   "devDependencies": {
+    "@earthling-ui/config": "workspace:^",
+    "@earthling-ui/primitives": "workspace:^",
+    "@earthling-ui/stylist": "workspace:^",
     "@tsconfig/react-native": "^3.0.2",
     "@types/node": "^20.2.5",
     "@types/react": "^18.2.8",
@@ -29,47 +30,33 @@
   },
   "peerDependencies": {
     "react": "*",
+    "react-dom": "*",
     "react-native": "*"
   },
   "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
     "react-native": {
       "optional": true
     }
   },
   "main": "./dist/main.web.cjs",
   "module": "./dist/main.web.js",
-  "react-native": "./src/main.native.tsx",
+  "react-native": "./dist/main.native.js",
   "exports": {
-    ".": {
+    "./*": {
       "require": {
-        "default": "./dist/web/main.web.cjs",
+        "default": "./dist/web/*.umd.cjs",
         "types": "./dist/web/main.web.d.ts"
       },
       "import": {
         "default": "./dist/web/main.web.js",
         "types": "./dist/web/main.web.d.ts"
       }
-    },
-    "./uno": {
-      "require": {
-        "default": "./dist/web/main.uno.cjs",
-        "types": "./dist/web/main.uno.d.ts"
-      },
-      "import": {
-        "default": "./dist/web/main.uno.js",
-        "types": "./dist/web/main.uno.d.ts"
-      }
     }
   },
   "files": [
-    "dist",
-    "src",
-    "tsconfig.json",
-    "tsconfig.node.json"
-  ],
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
-  "packageManager": "yarn@3.5.1"
+    "dist"
+  ]
 }

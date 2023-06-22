@@ -1,18 +1,17 @@
 import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
-import { resolve } from "path";
 import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    dedupe: ["react"],
+    dedupe: ["react", "react-dom"],
   },
   build: {
     outDir: "./dist/web",
     lib: {
       entry: {
-        alert: "./src/alert/web.tsx",
+        box: "./src/box/web.tsx",
         button: "./src/button/web.tsx",
       },
       name: "web",
