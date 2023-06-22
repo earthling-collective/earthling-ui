@@ -10,15 +10,15 @@
   },
   "dependencies": {
     "@earthling-ui/components": "workspace:^",
-    "@types/react": "~18.0.27",
+    "@types/react": "^18.2.13",
     "expo": "^48.0.19",
     "expo-status-bar": "^1.4.4",
     "react": "^18.2.0",
-    "react-native": "next",
+    "react-native": "^0.72.0",
     "typescript": "^5.1.3"
   },
   "devDependencies": {
-    "@babel/core": "^7.22.1"
+    "@babel/core": "^7.22.5"
   },
   "private": true
 }

@@ -1,5 +1,7 @@
 import { Pressable, Text, View } from "react-native";
-import { ButtonProps } from "./props";
+import type { ButtonProps } from "./props";
+
+export type { ButtonProps };
 
 export function Button(props: ButtonProps) {
   const {

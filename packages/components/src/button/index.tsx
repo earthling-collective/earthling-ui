@@ -1,5 +1,9 @@
-import { Button } from "@earthling-ui/primitives/button";
+import {
+  Button as BaseButton,
+  type ButtonProps as BaseButtonProps,
+} from "@earthling-ui/primitives/button";
 
-export default () => {
-  return <Button>Button</Button>;
-};
+export function Button(props: BaseButtonProps) {
+  const { ...rest } = props;
+  return <BaseButton {...rest}>Button</BaseButton>;
+}

@@ -1,9 +1,9 @@
 import { View } from "react-native";
-import { Primitive } from "../types";
+import type { BoxProps } from "./props";
 
-export type ButtonProps = Primitive.Atom;
+export type { BoxProps };
 
-export function Box(props: ButtonProps) {
+export function Box(props: BoxProps) {
   const { children, ...rest } = props;
   return <View {...rest}>{children}</View>;
 }

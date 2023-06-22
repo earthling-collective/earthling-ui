@@ -20,5 +20,5 @@ export default defineConfig({
       external: ["react", "react-dom"],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [react(), dts({ tsConfigFilePath: "./tsconfig.src.json" })],
 });
