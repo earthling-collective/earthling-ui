@@ -3,7 +3,9 @@
   "version": "1.0.0-alpha.0",
   "type": "module",
   "scripts": {
-    "build": "vite build"
+    "build": "yarn build:web; yarn build:native;",
+    "build:web": "vite build -c vite.config.web.ts",
+    "build:native": "vite build -c vite.config.native.ts"
   },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
@@ -34,39 +36,40 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/web.cjs",
-  "module": "./dist/web.js",
-  "react-native": "./dist/native.js",
+  "main": "./dist/web/index.cjs",
+  "module": "./dist/web/index.js",
+  "react-native": "./dist/native/index.js",
+  "imports": {
+    "#*": {
+      "react-native": "./src/*/index.native.tsx",
+      "import": "./src/*/index.web.tsx",
+      "default": "./src/*/index.tsx"
+    }
+  },
   "exports": {
-    "./web": {
-      "require": {
-        "default": "./dist/web.cjs",
-        "types": "./dist/web/index.d.ts"
+    ".": {
+      "react-native": {
+        "types": "./dist/native/index.d.ts",
+        "default": "./dist/native/index.js"
       },
       "import": {
-        "default": "./dist/web.js",
-        "types": "./dist/web/index.d.ts"
-      }
-    },
-    "./native": {
-      "require": {
-        "default": "./dist/native.cjs",
-        "types": "./dist/native/index.d.ts"
+        "types": "./dist/web/index.d.ts",
+        "default": "./dist/web/index.js"
       },
-      "import": {
-        "default": "./dist/native.js",
-        "types": "./dist/native/index.d.ts"
-      }
+      "types": "./dist/web/index.d.ts",
+      "default": "./dist/web/index.cjs"
     },
     "./*": {
-      "require": {
-        "default": "./dist/*.cjs",
-        "types": "./dist/*/index.d.ts"
+      "react-native": {
+        "types": "./dist/native/*/index.native.d.ts",
+        "default": "./dist/native/*.js"
       },
       "import": {
-        "default": "./dist/*.js",
-        "types": "./dist/*/index.d.ts"
-      }
+        "types": "./dist/web/*/index.web.d.ts",
+        "default": "./dist/web/*.js"
+      },
+      "types": "./dist/web/*/index.web.d.ts",
+      "default": "./dist/web/*.cjs"
     }
   }
 }

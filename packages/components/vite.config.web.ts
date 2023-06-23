@@ -4,22 +4,25 @@ import dts from "vite-plugin-dts";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  resolve: {
+    conditions: ["import"],
+  },
   build: {
-    outDir: "./dist",
+    outDir: "./dist/web",
     lib: {
       entry: {
-        //platforms
-        web: "./src/web.tsx",
-        native: "./src/native.tsx",
-        //components
+        index: "./src/index.tsx",
+        //atoms
         box: "./src/box/index.tsx",
         button: "./src/button/index.tsx",
-        provider: "./src/provider/index.tsx",
       },
     },
     rollupOptions: {
-      external: ["react", "react-dom", "react-native"],
+      external: ["react", "react-dom", "react/jsx-runtime", "react-native"],
     },
   },
-  plugins: [react(), dts({ tsConfigFilePath: "./tsconfig.src.json" })],
+  plugins: [
+    react(),
+    dts({ tsConfigFilePath: "./tsconfig.src.json", entryRoot: "./src" }),
+  ],
 });

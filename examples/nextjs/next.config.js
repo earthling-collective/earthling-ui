@@ -1,7 +1,6 @@
 //const UnoCSS = require("@unocss/webpack").default;
 
-/** @type {import('next').NextConfig} */
-const nextConfig = {
+export default {
   webpack: (config) => {
     // config.plugins.push(UnoCSS());
     // config.optimization.realContentHash = true;
@@ -10,5 +9,3 @@ const nextConfig = {
     return config;
   },
 };
-
-module.exports = nextConfig;

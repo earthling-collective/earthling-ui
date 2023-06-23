@@ -1,9 +1,16 @@
 import {
-  Button as BaseButton,
-  type ButtonProps as BaseButtonProps,
-} from "@earthling-ui/primitives/button";
+  Pressable,
+  type PressableProps,
+} from "@earthling-ui/primitives/pressable";
 
-export function Button(props: BaseButtonProps) {
-  const { ...rest } = props;
-  return <BaseButton {...rest}>Button</BaseButton>;
+export type ButtonProps = PressableProps & {
+  variant?: "contained" | "outlined" | "subtle" | "text";
+  size?: "sm" | "md" | "lg";
+  error?: boolean;
+  loading?: boolean;
+};
+
+export function Button(props: ButtonProps) {
+  const { children, ...rest } = props;
+  return <Pressable {...rest}>{children}</Pressable>;
 }

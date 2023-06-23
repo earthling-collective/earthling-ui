@@ -1,4 +1,7 @@
 {
-  "compilerOptions": {},
+  "compilerOptions": {
+    "moduleResolution": "bundler",
+    "customConditions": ["react-native"]
+  },
   "extends": "expo/tsconfig.base"
 }

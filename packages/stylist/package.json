@@ -33,10 +33,10 @@
       "optional": true
     }
   },
-  "main": "./dist/main.web.cjs",
-  "module": "./dist/main.web.js",
-  "react-native": "./dist/main.native.js",
   "files": [
     "dist"
-  ]
+  ],
+  "main": "./dist/main.web.cjs",
+  "module": "./dist/main.web.js",
+  "react-native": "./dist/main.native.js"
 }
