@@ -2,6 +2,20 @@
   "name": "@earthling-ui/primitives",
   "version": "1.0.0-alpha.0",
   "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sFrady20/earthling-ui",
+    "directory": "packages/primitives"
+  },
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
+  "author": {
+    "email": "sFrady20@gmail.com",
+    "name": "Steven Frady",
+    "url": "https://stevenfrady.com"
+  },
   "scripts": {
     "build": "yarn build:web; yarn build:native;",
     "build:web": "vite build -c vite.config.web.ts",
@@ -34,7 +48,8 @@
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "README.md"
   ],
   "main": "./dist/web/index.cjs",
   "module": "./dist/web/index.js",
