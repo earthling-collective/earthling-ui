@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@earthling-ui/components": "workspace:^",
+    "@earthling-ui/themed": "workspace:^",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
     "@types/react-dom": "^18.2.6",

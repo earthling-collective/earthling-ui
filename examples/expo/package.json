@@ -9,8 +9,8 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@earthling-ui/components": "workspace:^",
     "@earthling-ui/primitives": "workspace:^",
+    "@earthling-ui/themed": "workspace:^",
     "@types/react": "^18.2.13",
     "expo": "^48.0.19",
     "expo-status-bar": "^1.4.4",
