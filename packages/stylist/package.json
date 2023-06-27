@@ -17,41 +17,27 @@
     "url": "https://stevenfrady.com"
   },
   "scripts": {
-    "build": "yarn build:web; yarn build:native;",
-    "build:web": "vite build -c vite.config.web.ts",
-    "build:native": "vite build -c vite.config.native.ts"
+    "build": "vite build"
   },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
-    "@unocss/vite": "^0.53.1",
     "@vitejs/plugin-react": "^4.0.1",
     "react": "^18.2.0",
-    "tailwindcss": "^3.3.2",
     "typescript": "^5.1.3",
-    "unocss": "^0.53.1",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"
   },
   "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-native": "*"
-  },
-  "peerDependenciesMeta": {
-    "react-dom": {
-      "optional": true
-    },
-    "react-native": {
-      "optional": true
-    }
+    "react": "*"
   },
   "files": [
     "dist",
     "README.md"
   ],
-  "main": "./dist/main.web.cjs",
-  "module": "./dist/main.web.js",
-  "react-native": "./dist/main.native.js"
+  "main": "./dist/main.umd.cjs",
+  "module": "./dist/main.js",
+  "types": "./dist/main.d.ts",
+  "react-native": "./dist/main.js"
 }

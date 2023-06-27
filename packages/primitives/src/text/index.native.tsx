@@ -1,6 +1,7 @@
-import { Text as BaseText, TextProps as BaseTextProps } from "react-native";
+import { Text as BaseText } from "react-native";
+import type { TextProps } from "./props";
 
-export type TextProps = BaseTextProps;
+export type { TextProps };
 
 export function Text(props: TextProps) {
   const { children, ...rest } = props;

@@ -1,11 +1,12 @@
 import { useState } from "react";
-import { Button } from "@earthling-ui/components/button";
+import { Box } from "@earthling-ui/themed/box";
+import { Button } from "@earthling-ui/themed/button";
 
 function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <div>
+    <Box>
       {count}
       <Button
         variant="contained"
@@ -17,7 +18,7 @@ function App() {
       </Button>
       <Button variant="outlined">test</Button>
       <Button variant="text">test</Button>
-    </div>
+    </Box>
   );
 }
 

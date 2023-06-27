@@ -1,9 +1,6 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import { TextProps } from "./props";
 
-export type TextProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLSpanElement>,
-  HTMLSpanElement
->;
+export type { TextProps };
 
 export function Text(props: TextProps) {
   const { children, ...rest } = props;

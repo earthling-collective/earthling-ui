@@ -1,12 +1,8 @@
-import { DetailedHTMLProps, HTMLAttributes } from "react";
+import type { BoxProps } from "./props";
 
-export type BoxProps = DetailedHTMLProps<
-  HTMLAttributes<HTMLDivElement>,
-  HTMLDivElement
->;
+export type { BoxProps };
 
 export function Box(props: BoxProps) {
   const { children, ...rest } = props;
-
   return <div {...rest}>{children}</div>;
 }

@@ -1,19 +1,17 @@
-import {
-  Pressable as BasePressable,
-  PressableProps as BasePressableProps,
-} from "react-native";
-import { Text, TextProps } from "#text";
+import { Pressable as BasePressable } from "react-native";
+import { Text } from "#text";
+import type { PressableProps } from "./props";
 
-export type PressableProps = BasePressableProps & {
-  onClick?: PressableProps["onPress"];
-  _Text?: TextProps;
-};
+export type { PressableProps };
 
 export function Pressable(props: PressableProps) {
   const { onClick, onPress, children, _Text, ...rest } = props;
 
   return (
-    <BasePressable {...rest} onPress={onPress || onClick || undefined}>
+    <BasePressable
+      {...rest}
+      onPress={((onPress || onClick) as any) || undefined}
+    >
       {typeof children === "string" ? (
         <Text {..._Text}>{children}</Text>
       ) : (

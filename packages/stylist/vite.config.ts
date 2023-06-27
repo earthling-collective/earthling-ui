@@ -6,17 +6,20 @@ import dts from "vite-plugin-dts";
 // https://vitejs.dev/config/
 export default defineConfig({
   resolve: {
-    dedupe: ["react", "react-native"],
+    dedupe: ["react"],
   },
   build: {
-    outDir: "./dist/native",
+    outDir: "./dist",
     lib: {
-      entry: [resolve(__dirname, "src/main.native.tsx")],
-      name: "native",
+      entry: [resolve(__dirname, "src/main.tsx")],
+      name: "web",
     },
     rollupOptions: {
-      external: ["react", "react-native"],
+      external: ["react", "react-dom"],
     },
   },
-  plugins: [react(), dts()],
+  plugins: [
+    react(),
+    dts({ tsConfigFilePath: "./tsconfig.src.json", entryRoot: "./src" }),
+  ],
 });

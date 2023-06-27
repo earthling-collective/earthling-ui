@@ -1,7 +1,8 @@
-import { View, ViewProps } from "react-native";
-import { Text, TextProps } from "#text";
+import { View } from "react-native";
+import { Text } from "#text";
+import type { BoxProps } from "./props";
 
-export type BoxProps = ViewProps & { _Text?: TextProps };
+export type { BoxProps };
 
 export function Box(props: BoxProps) {
   const { children, _Text, ...rest } = props;
