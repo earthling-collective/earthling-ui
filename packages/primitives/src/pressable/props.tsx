@@ -1,14 +1,15 @@
 import type { PressableProps as BasePressableProps } from "react-native";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import { TextProps } from "#text";
-import { Applicable } from "../apply";
-import { ICustomPrimitiveProps } from "../types";
+import type { TextProps } from "#text";
+import type { Applicable } from "../apply";
+import type { ICustomPrimitiveProps } from "../types";
+import type { Properties } from "csstype";
 
-type NativeProps = BasePressableProps;
+type NativeProps = Omit<BasePressableProps, "style">;
 
 type WebProps = Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
-  "ref"
+  "ref" | "style"
 >;
 
 //overridable
@@ -24,12 +25,14 @@ export type PressableApplicationState = {
 
 export type PressableProps = Applicable<
   Omit<NativeProps, "onPress"> &
-    Omit<WebProps, "onClick"> & {
+    Omit<WebProps, "onClick"> &
+    PressableApplicationState &
+    ICustomPressableProps &
+    ICustomPrimitiveProps & {
+      style?: Properties;
       onPress?: NativeProps["onPress"] | WebProps["onClick"];
       onClick?: NativeProps["onPress"] | WebProps["onClick"];
       _Text?: TextProps;
-    } & PressableApplicationState &
-    ICustomPressableProps &
-    ICustomPrimitiveProps,
+    },
   PressableApplicationState
 >;

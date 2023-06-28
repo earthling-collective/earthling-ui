@@ -1,15 +1,14 @@
 import React from "react";
-import { Box, Button } from "@earthling-ui/components";
+import { Box, Button } from "@earthling-ui/themed";
 
 export default function App() {
   return (
     <>
-      <Box style={{ height: 100, width: 100, backgroundColor: "#FF0000" }}>
+      <Box
+        style={{ height: "100px", width: "100px", backgroundColor: "#FF0000" }}
+      >
         test
       </Box>
-      <Button style={{ borderRadius: 30, backgroundColor: "blue" }}>
-        Test
-      </Button>
     </>
   );
 }

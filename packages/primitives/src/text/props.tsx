@@ -1,13 +1,14 @@
 import type { TextProps as BaseTextProps } from "react-native";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import { Applicable } from "../apply";
-import { ICustomPrimitiveProps } from "../types";
+import type { Applicable } from "../apply";
+import type { ICustomPrimitiveProps } from "../types";
+import type { Properties } from "csstype";
 
-type NativeProps = BaseTextProps;
+type NativeProps = Omit<BaseTextProps, "style">;
 
 type WebProps = Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>,
-  "ref"
+  "ref" | "style"
 >;
 
 //overridable
@@ -22,6 +23,6 @@ export type TextProps = Applicable<
     NativeProps &
     TextApplicationState &
     ICustomTextProps &
-    ICustomPrimitiveProps,
+    ICustomPrimitiveProps & { style?: Properties },
   { loading?: boolean }
 >;

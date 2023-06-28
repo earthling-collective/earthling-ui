@@ -1,12 +1,14 @@
 import { Pressable as BasePressable } from "react-native";
 import { Text } from "#text";
 import type { PressableProps, ICustomPressableProps } from "./props";
+import cssToReactNative from "css-to-react-native";
 
 export type { PressableProps, ICustomPressableProps };
 
 export function Pressable({ apply, ...props }: PressableProps) {
   const {
     children,
+    style,
     //state
     disabled,
     loading,
@@ -46,6 +48,7 @@ export function Pressable({ apply, ...props }: PressableProps) {
       {...rest}
       onPress={((onPress || onClick) as any) || undefined}
       {...applied}
+      style={cssToReactNative(Object.entries(applied.style || style || {}))}
     >
       {typeof children === "string" ? (
         <Text {..._Text}>{children}</Text>

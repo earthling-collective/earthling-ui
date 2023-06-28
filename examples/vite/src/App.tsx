@@ -6,7 +6,7 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <Box>
+    <Box style={{ color: "white" }}>
       {count}
       <Button
         variant="contained"

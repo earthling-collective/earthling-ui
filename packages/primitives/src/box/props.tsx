@@ -1,14 +1,15 @@
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import type { ViewProps } from "react-native";
 import type { TextProps } from "#text";
-import { Applicable } from "../apply";
-import { ICustomPrimitiveProps } from "../types";
+import type { Applicable } from "../apply";
+import type { ICustomPrimitiveProps } from "../types";
+import type { Properties } from "csstype";
 
-type NativeProps = ViewProps;
+type NativeProps = Omit<ViewProps, "style">;
 
 type WebProps = Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-  "ref"
+  "ref" | "style"
 >;
 
 //overridable
@@ -22,7 +23,8 @@ export type BoxApplicationState = {
 export type BoxProps = Applicable<
   NativeProps &
     WebProps &
-    BoxApplicationState & { _Text?: TextProps } & ICustomBoxProps &
-    ICustomPrimitiveProps,
+    BoxApplicationState &
+    ICustomBoxProps &
+    ICustomPrimitiveProps & { style?: Properties; _Text?: TextProps },
   BoxApplicationState
 >;
