@@ -1,9 +1,15 @@
-import { TextProps } from "./props";
+import { TextProps, ICustomTextProps } from "./props";
 
-export type { TextProps };
+export type { TextProps, ICustomTextProps };
 
-export function Text(props: TextProps) {
-  const { children, ...rest } = props;
+export function Text({ apply, ...props }: TextProps) {
+  const { children, loading, ...rest } = props;
 
-  return <span {...rest}>{children}</span>;
+  const { ...applied } = apply?.(props, { loading: loading });
+
+  return (
+    <span {...rest} {...applied}>
+      {children}
+    </span>
+  );
 }

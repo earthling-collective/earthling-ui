@@ -1,16 +1,33 @@
 import { View } from "react-native";
 import { Text } from "#text";
-import type { BoxProps } from "./props";
+import type { BoxProps, ICustomBoxProps } from "./props";
 
-export type { BoxProps };
+export type { BoxProps, ICustomBoxProps };
 
-export function Box(props: BoxProps) {
-  const { children, _Text, ...rest } = props;
+export function Box({ apply, ...props }: BoxProps) {
+  const {
+    children,
+    //state
+    loading,
+    disabled,
+    //descendents
+    _Text,
+    //rest
+    ...rest
+  } = props;
+
+  const { _Text: _AppliedText, ...applied } =
+    apply?.(props, {
+      loading: loading,
+      disabled: disabled,
+    }) || {};
 
   return (
-    <View {...rest}>
+    <View {...rest} {...applied}>
       {typeof children === "string" ? (
-        <Text {..._Text}>{children}</Text>
+        <Text {..._Text} {..._AppliedText}>
+          {children}
+        </Text>
       ) : (
         <>{children}</>
       )}

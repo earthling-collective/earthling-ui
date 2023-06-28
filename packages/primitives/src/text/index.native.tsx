@@ -1,10 +1,16 @@
 import { Text as BaseText } from "react-native";
-import type { TextProps } from "./props";
+import type { TextProps, ICustomTextProps } from "./props";
 
-export type { TextProps };
+export type { TextProps, ICustomTextProps };
 
-export function Text(props: TextProps) {
-  const { children, ...rest } = props;
+export function Text({ apply, ...props }: TextProps) {
+  const { children, loading, ...rest } = props;
 
-  return <BaseText {...rest}>{children}</BaseText>;
+  const { ...applied } = apply?.(props, { loading: loading });
+
+  return (
+    <BaseText {...rest} {...applied}>
+      {children}
+    </BaseText>
+  );
 }

@@ -18,15 +18,18 @@ export const Button = styled(Pressable, {
   borderStyle: "solid",
   borderColor: "transparent",
   cursor: "pointer",
+
   "&>label": {
     color: "$text.default",
   },
 
   "&[variant=contained]": {
     backgroundColor: "$primary.main",
+
     "&>label": {
       color: "$primary.text",
     },
+
     ":hover": {
       backgroundColor: "$primary.hover",
     },
@@ -49,9 +52,11 @@ export const Button = styled(Pressable, {
   "&[variant=text]": {
     backgroundColor: "transparent",
     borderColor: "transparent",
+
     ":hover": {
       borderColor: "primary.hover",
     },
+
     ":pressed": {
       borderColor: "primary.pressed",
     },
