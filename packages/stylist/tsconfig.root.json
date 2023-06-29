@@ -1,4 +1,0 @@
-{
-  "extends": "@earthling-ui/config/tsconfig.root",
-  "exclude": ["src", "node_modules"]
-}

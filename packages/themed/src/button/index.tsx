@@ -2,7 +2,7 @@ import {
   Pressable,
   type PressableProps,
 } from "@earthling-ui/primitives/pressable";
-import { styled } from "@earthling-ui/stylist";
+import { styled } from "@earthling-ui/primitives";
 
 export type ButtonProps = PressableProps & {
   variant?: "contained" | "outlined" | "subtle" | "text";
@@ -11,7 +11,7 @@ export type ButtonProps = PressableProps & {
   loading?: boolean;
 };
 
-export const Button = styled(Pressable, {
+export const Button = styled<ButtonProps>(Pressable, {
   backgroundColor: "transparent",
   borderRadius: "4px",
   borderWidth: "1px",

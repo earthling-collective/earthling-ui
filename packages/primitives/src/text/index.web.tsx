@@ -1,14 +1,13 @@
-import { TextProps, ICustomTextProps } from "./props";
+import { mergeSX } from "..";
+import { TextProps } from "./props";
 
-export type { TextProps, ICustomTextProps };
+export type { TextProps };
 
-export function Text({ apply, ...props }: TextProps) {
-  const { children, loading, ...rest } = props;
-
-  const { ...applied } = apply?.(props, { loading: loading });
+export function Text(props: TextProps) {
+  const { children, sx, loading, ...rest } = props;
 
   return (
-    <span {...rest} {...applied}>
+    <span {...rest} style={mergeSX(sx) as any}>
       {children}
     </span>
   );

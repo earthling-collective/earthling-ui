@@ -6,9 +6,9 @@ function App() {
   const [count, setCount] = useState(0);
 
   return (
-    <Box style={{ color: "white" }}>
+    <Box sx={{ borderColor: "green", borderWidth: 1, borderStyle: "solid" }}>
       {count}
-      <Button
+      {/* <Button
         variant="contained"
         onClick={() => {
           setCount((x) => x + 1);
@@ -17,7 +17,7 @@ function App() {
         test
       </Button>
       <Button variant="outlined">test</Button>
-      <Button variant="text">test</Button>
+      <Button variant="text">test</Button> */}
     </Box>
   );
 }

@@ -1,19 +1,17 @@
 import { Text as BaseText } from "react-native";
-import type { TextProps, ICustomTextProps } from "./props";
+import type { TextProps } from "./props";
 import cssToReactNative from "css-to-react-native";
+import { mergeSX } from "..";
 
-export type { TextProps, ICustomTextProps };
+export type { TextProps };
 
-export function Text({ apply, ...props }: TextProps) {
-  const { children, style, loading, ...rest } = props;
-
-  const { ...applied } = apply?.(props, { loading: loading });
+export function Text(props: TextProps) {
+  const { children, sx, loading, ...rest } = props;
 
   return (
     <BaseText
       {...rest}
-      {...applied}
-      style={cssToReactNative(Object.entries(applied.style || style || {}))}
+      style={cssToReactNative(Object.entries((mergeSX(sx) as any) || {}))}
     >
       {children}
     </BaseText>

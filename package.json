@@ -2,7 +2,7 @@
   "name": "earthling",
   "private": true,
   "scripts": {
-    "build": "yarn workspace @earthling-ui/primitives run build; yarn workspace @earthling-ui/stylist run build; yarn workspace @earthling-ui/themed run build;"
+    "build": "yarn workspace @earthling-ui/primitives run build; yarn workspace @earthling-ui/themed run build;"
   },
   "workspaces": [
     "examples/*",

@@ -1,11 +1,13 @@
 import { Text } from "#text";
-import type { BoxProps, ICustomBoxProps } from "./props";
+import { mergeSX } from "..";
+import type { BoxProps } from "./props";
 
-export type { BoxProps, ICustomBoxProps };
+export type { BoxProps };
 
-export function Box({ apply, ...props }: BoxProps) {
+export function Box(props: BoxProps) {
   const {
     children,
+    sx,
     //state
     loading,
     disabled,
@@ -15,18 +17,10 @@ export function Box({ apply, ...props }: BoxProps) {
     ...rest
   } = props;
 
-  const { _Text: _AppliedText, ...applied } =
-    apply?.(props, {
-      loading: loading,
-      disabled: disabled,
-    }) || {};
-
   return (
-    <div {...rest} {...applied}>
+    <div {...rest} style={mergeSX(sx) as any}>
       {typeof children === "string" ? (
-        <Text {..._Text} {..._AppliedText}>
-          {children}
-        </Text>
+        <Text {..._Text}>{children}</Text>
       ) : (
         <>{children}</>
       )}

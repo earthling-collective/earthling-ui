@@ -1,14 +1,15 @@
 import { View } from "react-native";
 import { Text } from "#text";
-import type { BoxProps, ICustomBoxProps } from "./props";
+import type { BoxProps } from "./props";
 import cssToReactNative from "css-to-react-native";
+import { mergeSX } from "..";
 
-export type { BoxProps, ICustomBoxProps };
+export type { BoxProps };
 
-export function Box({ apply, ...props }: BoxProps) {
+export function Box(props: BoxProps) {
   const {
     children,
-    style,
+    sx,
     //state
     loading,
     disabled,
@@ -18,22 +19,13 @@ export function Box({ apply, ...props }: BoxProps) {
     ...rest
   } = props;
 
-  const { _Text: _AppliedText, ...applied } =
-    apply?.(props, {
-      loading: loading,
-      disabled: disabled,
-    }) || {};
-
   return (
     <View
       {...rest}
-      {...applied}
-      style={cssToReactNative(Object.entries(applied.style || style || {}))}
+      style={cssToReactNative(Object.entries((mergeSX(sx) as any) || {}))}
     >
       {typeof children === "string" ? (
-        <Text {..._Text} {..._AppliedText}>
-          {children}
-        </Text>
+        <Text {..._Text}>{children}</Text>
       ) : (
         <>{children}</>
       )}
