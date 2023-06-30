@@ -5,8 +5,8 @@
     "build": "yarn workspace @earthling-ui/primitives run build; yarn workspace @earthling-ui/themed run build;"
   },
   "workspaces": [
+    "apps/*",
     "examples/*",
     "packages/*"
-  ],
-  "packageManager": "yarn@3.5.1"
+  ]
 }
