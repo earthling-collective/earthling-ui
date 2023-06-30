@@ -1,6 +1,6 @@
 {
-  "name": "template-web",
-  "version": "0.0.0",
+  "name": "earthling-ui-web-docs",
+  "version": "1.0.0-alpha.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
