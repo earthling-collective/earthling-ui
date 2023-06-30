@@ -6,8 +6,4 @@ import { styled } from "@earthling-ui/primitives";
 
 export type BoxProps = BaseBoxProps;
 
-export const Box = styled<BoxProps>(styled(BaseBox, { color: "blue" }), {
-  backgroundColor: "red",
-  width: "100px",
-  height: "100px",
-});
+export const Box = styled<BoxProps>(BaseBox, {});

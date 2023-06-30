@@ -5661,6 +5661,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "earthling-ui-web-docs@workspace:apps/web-docs"
   dependencies:
+    "@earthling-ui/themed": "workspace:^"
     "@mdx-js/loader": ^2.3.0
     "@next/mdx": ^13.4.7
     "@svgr/webpack": ^8.0.1
