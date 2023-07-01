@@ -6,7 +6,7 @@ export function styled<T extends IStylable>(
   sx: SX
 ) {
   return ({ sx: sxProp, ...rest }: T) => (
-    <Component {...rest} sx={mergeSX(sx, sxProp)} />
+    <Component {...(rest as any)} sx={mergeSX(sx, sxProp)} />
   );
 }
 

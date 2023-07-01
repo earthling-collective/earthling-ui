@@ -6,9 +6,9 @@ export default function HomePage() {
     <main>
       <Box
         sx={{
-          borderRadius: 8,
-          width: 80,
-          height: 80,
+          borderRadius: "8px",
+          width: "80px",
+          height: "80px",
           backgroundColor: "black",
         }}
       />

@@ -3896,32 +3896,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@windicss/config@npm:1.9.0":
-  version: 1.9.0
-  resolution: "@windicss/config@npm:1.9.0"
-  dependencies:
-    debug: ^4.3.4
-    jiti: ^1.18.2
-    windicss: ^3.5.6
-  checksum: cfe741ba6e985a057bdd5d1f695ae98935a5ca6fc51ff54381de0cc9aa24e66d8d47de19439406fb294d85b8a46236236fcfc40813509ff3e15cce7bd01e2717
-  languageName: node
-  linkType: hard
-
-"@windicss/plugin-utils@npm:^1.8.10":
-  version: 1.9.0
-  resolution: "@windicss/plugin-utils@npm:1.9.0"
-  dependencies:
-    "@antfu/utils": ^0.7.2
-    "@windicss/config": 1.9.0
-    debug: ^4.3.4
-    fast-glob: ^3.2.12
-    magic-string: ^0.30.0
-    micromatch: ^4.0.5
-    windicss: ^3.5.6
-  checksum: accac0ed77e8aa955acbed08d986fa9eb23df3cf324dcfc2161067007d762780e3783d8327ec316ea4bb895cd64a1b7759ebc2e60a758e40e0e755d797e79fff
-  languageName: node
-  linkType: hard
-
 "@xmldom/xmldom@npm:~0.7.7":
   version: 0.7.11
   resolution: "@xmldom/xmldom@npm:0.7.11"
@@ -4425,13 +4399,6 @@ __metadata:
   version: 1.6.51
   resolution: "big-integer@npm:1.6.51"
   checksum: 3d444173d1b2e20747e2c175568bedeebd8315b0637ea95d75fd27830d3b8e8ba36c6af40374f36bdaea7b5de376dcada1b07587cb2a79a928fccdb6e6e3c518
-  languageName: node
-  linkType: hard
-
-"big.js@npm:^5.2.2":
-  version: 5.2.2
-  resolution: "big.js@npm:5.2.2"
-  checksum: b89b6e8419b097a8fb4ed2399a1931a68c612bce3cfd5ca8c214b2d017531191070f990598de2fc6f3f993d91c0f08aa82697717f6b3b8732c9731866d233c9e
   languageName: node
   linkType: hard
 
@@ -5675,7 +5642,6 @@ __metadata:
     react: ^18.2.0
     react-dom: ^18.2.0
     typescript: ^5.1.3
-    windicss-webpack-plugin: ^1.7.8
   languageName: unknown
   linkType: soft
 
@@ -5734,13 +5700,6 @@ __metadata:
   version: 9.2.2
   resolution: "emoji-regex@npm:9.2.2"
   checksum: 8487182da74aabd810ac6d6f1994111dfc0e331b01271ae01ec1eb0ad7b5ecc2bbbbd2f053c05cb55a1ac30449527d819bbfbf0e3de1023db308cbcb47f86601
-  languageName: node
-  linkType: hard
-
-"emojis-list@npm:^3.0.0":
-  version: 3.0.0
-  resolution: "emojis-list@npm:3.0.0"
-  checksum: ddaaa02542e1e9436c03970eeed445f4ed29a5337dfba0fe0c38dfdd2af5da2429c2a0821304e8a8d1cadf27fdd5b22ff793571fa803ae16852a6975c65e8e70
   languageName: node
   linkType: hard
 
@@ -6663,13 +6622,6 @@ __metadata:
   version: 3.2.0
   resolution: "get-port@npm:3.2.0"
   checksum: 31f530326569683ac4b7452eb7573c40e9dbe52aec14d80745c35475261e6389160da153d5b8ae911150b4ce99003472b30c69ba5be0cedeaa7865b95542d168
-  languageName: node
-  linkType: hard
-
-"get-port@npm:^6.1.2":
-  version: 6.1.2
-  resolution: "get-port@npm:6.1.2"
-  checksum: e3c3d591492a11393455ef220f24c812a28f7da56ec3e4a2512d931a1f196d42850b50ac6138349a44622eda6dc3c0ccd8495cd91376d968e2d9e6f6f849e0a9
   languageName: node
   linkType: hard
 
@@ -7745,7 +7697,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"json5@npm:^2.1.2, json5@npm:^2.2.2":
+"json5@npm:^2.2.2":
   version: 2.2.3
   resolution: "json5@npm:2.2.3"
   bin:
@@ -7828,17 +7780,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"loader-utils@npm:^2.0.0":
-  version: 2.0.4
-  resolution: "loader-utils@npm:2.0.4"
-  dependencies:
-    big.js: ^5.2.2
-    emojis-list: ^3.0.0
-    json5: ^2.1.2
-  checksum: a5281f5fff1eaa310ad5e1164095689443630f3411e927f95031ab4fb83b4a98f388185bb1fe949e8ab8d4247004336a625e9255c22122b815bb9a4c5d8fc3b7
-  languageName: node
-  linkType: hard
-
 "local-pkg@npm:^0.4.3":
   version: 0.4.3
   resolution: "local-pkg@npm:0.4.3"
@@ -7902,7 +7843,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"lodash@npm:^4.17.13, lodash@npm:^4.17.21, lodash@npm:^4.17.4, lodash@npm:~4.17.15":
+"lodash@npm:^4.17.13, lodash@npm:^4.17.4, lodash@npm:~4.17.15":
   version: 4.17.21
   resolution: "lodash@npm:4.17.21"
   checksum: eb835a2e51d381e561e508ce932ea50a8e5a68f4ebdd771ea240d3048244a8d13658acbd502cd4829768c56f2e16bdd4340b9ea141297d472517b83868e677f7
@@ -9956,7 +9897,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"pathe@npm:^1.1.0, pathe@npm:^1.1.1":
+"pathe@npm:^1.1.1":
   version: 1.1.1
   resolution: "pathe@npm:1.1.1"
   checksum: 34ab3da2e5aa832ebc6a330ffe3f73d7ba8aec6e899b53b8ec4f4018de08e40742802deb12cf5add9c73b7bf719b62c0778246bd376ca62b0fb23e0dde44b759
@@ -12611,31 +12552,6 @@ __metadata:
   dependencies:
     string-width: ^1.0.2 || 2 || 3 || 4
   checksum: d5fc37cd561f9daee3c80e03b92ed3e84d80dde3365a8767263d03dacfc8fa06b065ffe1df00d8c2a09f731482fcacae745abfbb478d4af36d0a891fad4834d3
-  languageName: node
-  linkType: hard
-
-"windicss-webpack-plugin@npm:^1.7.8":
-  version: 1.7.8
-  resolution: "windicss-webpack-plugin@npm:1.7.8"
-  dependencies:
-    "@windicss/plugin-utils": ^1.8.10
-    debug: ^4.3.4
-    get-port: ^6.1.2
-    loader-utils: ^2.0.0
-    lodash: ^4.17.21
-    pathe: ^1.1.0
-    webpack-virtual-modules: ^0.5.0
-    windicss: ^3.5.6
-  checksum: c7ad68938a8894812668d549c73b93b8121b5a9aa6f69cfd5e8b8d46840349ecef840046ecda4611b97a94656b7eefaf95ae8865081980ed7237721ba57b517c
-  languageName: node
-  linkType: hard
-
-"windicss@npm:^3.5.6":
-  version: 3.5.6
-  resolution: "windicss@npm:3.5.6"
-  bin:
-    windicss: cli/index.js
-  checksum: e4b6ab048488387b5bebfa6e65ccd0e55504f9133dfeb8c6cd4e817925b9941fff7680dc2aacc5923d293560e834427108039acff89eabe26a7429c0151eb1e7
   languageName: node
   linkType: hard
 

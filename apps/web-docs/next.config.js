@@ -1,5 +1,3 @@
-const WindiCSS = require("windicss-webpack-plugin");
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   experimental: {
@@ -8,9 +6,6 @@ const nextConfig = {
   },
   pageExtensions: ["ts", "tsx", "js", "jsx", "md", "mdx"],
   webpack: (config, {}) => {
-    //TODO: change to unocss
-    config.plugins.push(new WindiCSS());
-
     config.module.rules.push({
       test: /\.svg$/i,
       issuer: /\.[jt]sx?$/,
