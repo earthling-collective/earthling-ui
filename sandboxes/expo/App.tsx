@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Button } from "@earthling-ui/themed";
+import { Box } from "@earthling-ui/themed";
 
 export default function App() {
   return (

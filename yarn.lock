@@ -5591,9 +5591,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"earthling-ui-example-expo@workspace:examples/expo":
+"earthling-ui-example-expo@workspace:sandboxes/expo":
   version: 0.0.0-use.local
-  resolution: "earthling-ui-example-expo@workspace:examples/expo"
+  resolution: "earthling-ui-example-expo@workspace:sandboxes/expo"
   dependencies:
     "@babel/core": ^7.22.5
     "@earthling-ui/primitives": "workspace:^"
@@ -5607,9 +5607,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"earthling-ui-example-vite@workspace:examples/vite":
+"earthling-ui-example-vite@workspace:sandboxes/vite":
   version: 0.0.0-use.local
-  resolution: "earthling-ui-example-vite@workspace:examples/vite"
+  resolution: "earthling-ui-example-vite@workspace:sandboxes/vite"
   dependencies:
     "@earthling-ui/primitives": "workspace:^"
     "@earthling-ui/themed": "workspace:^"
@@ -5658,9 +5658,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"eathling-ui-example-nextjs@workspace:examples/nextjs":
+"eathling-ui-example-nextjs@workspace:sandboxes/nextjs":
   version: 0.0.0-use.local
-  resolution: "eathling-ui-example-nextjs@workspace:examples/nextjs"
+  resolution: "eathling-ui-example-nextjs@workspace:sandboxes/nextjs"
   dependencies:
     "@earthling-ui/themed": "workspace:^"
     "@types/node": ^20.3.1

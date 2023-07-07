@@ -6,7 +6,7 @@
   },
   "workspaces": [
     "apps/*",
-    "examples/*",
+    "sandboxes/*",
     "packages/*"
   ]
 }
