@@ -1,6 +1,6 @@
 {
-  "name": "earthling-ui-sandbox-expo",
-  "version": "1.0.0",
+  "name": "earthling-ui-native-docs",
+  "version": "1.0.0-alpha.0",
   "main": "expo-router/entry",
   "scripts": {
     "start": "expo start",

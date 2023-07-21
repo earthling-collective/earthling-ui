@@ -3,10 +3,11 @@ import { Text } from "#text";
 import type { BoxProps } from "./props";
 import cssToReactNative from "css-to-react-native";
 import { mergeSX } from "..";
+import { forwardRef } from "react";
 
 export type { BoxProps };
 
-export function Box(props: BoxProps) {
+export const Box = forwardRef<View, BoxProps>(function (props, ref) {
   const {
     children,
     sx,
@@ -21,6 +22,7 @@ export function Box(props: BoxProps) {
 
   return (
     <View
+      ref={ref}
       {...rest}
       style={cssToReactNative(Object.entries((mergeSX(sx) as any) || {}))}
     >
@@ -31,4 +33,4 @@ export function Box(props: BoxProps) {
       )}
     </View>
   );
-}
+});

@@ -5,6 +5,7 @@ export default function HomePage() {
   return (
     <main>
       <Box
+        className=""
         sx={{
           borderRadius: "8px",
           width: "80px",

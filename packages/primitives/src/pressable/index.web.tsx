@@ -1,9 +1,13 @@
+import { forwardRef } from "react";
 import { mergeSX } from "..";
 import type { PressableProps, ICustomPressableProps } from "./props";
 
 export type { PressableProps, ICustomPressableProps };
 
-export function Pressable(props: PressableProps) {
+export const Pressable = forwardRef<HTMLButtonElement, any>(function (
+  props,
+  ref
+) {
   const {
     children,
     sx,
@@ -22,6 +26,7 @@ export function Pressable(props: PressableProps) {
 
   return (
     <button
+      ref={ref}
       {...rest}
       onClick={((onPress || onClick) as any) || undefined}
       style={mergeSX(sx) as any}
@@ -29,4 +34,4 @@ export function Pressable(props: PressableProps) {
       {children}
     </button>
   );
-}
+});

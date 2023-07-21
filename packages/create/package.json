@@ -1,0 +1,23 @@
+{
+  "name": "create-earthling-app",
+  "version": "1.0.0-alpha.0",
+  "packageManager": "yarn@3.6.0",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sFrady20/earthling-ui",
+    "directory": "packages/create"
+  },
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
+  "author": {
+    "email": "sFrady20@gmail.com",
+    "name": "Steven Frady",
+    "url": "https://stevenfrady.com"
+  },
+  "files": [
+    "lib",
+    "README.md"
+  ]
+}

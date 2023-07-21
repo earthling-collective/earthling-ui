@@ -1,7 +1,7 @@
 import {
   Box as BaseBox,
   type BoxProps as BaseBoxProps,
-} from "@earthling-ui/primitives/box";
+} from "@earthling-ui/primitives";
 import { styled } from "@earthling-ui/primitives";
 
 export type BoxProps = BaseBoxProps;

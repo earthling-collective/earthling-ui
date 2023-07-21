@@ -1,7 +1,4 @@
-import {
-  Pressable,
-  type PressableProps,
-} from "@earthling-ui/primitives/pressable";
+import { Pressable, type PressableProps } from "@earthling-ui/primitives";
 import { styled } from "@earthling-ui/primitives";
 
 export type ButtonProps = PressableProps & {
@@ -23,7 +20,7 @@ export const Button = styled<ButtonProps>(Pressable, {
     color: "$text.default",
   },
 
-  "&[variant=contained]": {
+  "[contained]": {
     backgroundColor: "$primary.main",
 
     "&>label": {
