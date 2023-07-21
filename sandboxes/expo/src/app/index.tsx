@@ -1,5 +1,5 @@
-import { Box } from "@earthling-ui/themed";
+import { Text } from "react-native";
 
 export default function () {
-  return <Box>Hello</Box>;
+  return <Text>Hello</Text>;
 }

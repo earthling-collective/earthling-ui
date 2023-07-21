@@ -1,4 +1,4 @@
 {
-  "extends": "@earthling-ui/config/tsconfig.src",
+  "extends": "@earthling-ui/config/typescript/src",
   "include": ["src", "lib"]
 }
