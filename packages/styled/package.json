@@ -77,18 +77,6 @@
     },
     "./reference": {
       "types": "./lib/reference.d.ts"
-    },
-    "./*": {
-      "react-native": {
-        "types": "./dist/native/*/index.native.d.ts",
-        "default": "./dist/native/*.js"
-      },
-      "import": {
-        "types": "./dist/web/*/index.web.d.ts",
-        "default": "./dist/web/*.js"
-      },
-      "types": "./dist/web/*/index.web.d.ts",
-      "default": "./dist/web/*.cjs"
     }
   }
 }

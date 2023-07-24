@@ -1,4 +1,4 @@
 {
-  "extends": "@earthling-ui/config/tsconfig.root",
+  "extends": "@earthling-ui/config/typescript/root",
   "exclude": ["src", "node_modules"]
 }

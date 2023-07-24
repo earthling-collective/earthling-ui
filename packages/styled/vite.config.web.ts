@@ -10,6 +10,7 @@ export default defineConfig({
   build: {
     outDir: "./dist/web",
     lib: {
+      name: "styled",
       entry: {
         index: "./src/index.tsx",
       },

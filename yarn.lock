@@ -1810,7 +1810,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"@earthling-ui/styled@workspace:packages/styled":
+"@earthling-ui/styled@workspace:^, @earthling-ui/styled@workspace:packages/styled":
   version: 0.0.0-use.local
   resolution: "@earthling-ui/styled@workspace:packages/styled"
   dependencies:
@@ -1843,6 +1843,7 @@ __metadata:
   dependencies:
     "@earthling-ui/config": "workspace:^"
     "@earthling-ui/primitives": "workspace:^"
+    "@earthling-ui/styled": "workspace:^"
     "@tsconfig/react-native": ^3.0.2
     "@types/node": ^20.3.1
     "@types/react": ^18.2.13

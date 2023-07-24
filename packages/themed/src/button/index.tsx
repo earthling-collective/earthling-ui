@@ -1,5 +1,5 @@
 import { Pressable, type PressableProps } from "@earthling-ui/primitives";
-import { styled } from "@earthling-ui/primitives";
+import { styled, tailwind } from "@earthling-ui/styled";
 
 export type ButtonProps = PressableProps & {
   variant?: "contained" | "outlined" | "subtle" | "text";
@@ -9,57 +9,71 @@ export type ButtonProps = PressableProps & {
 };
 
 export const Button = styled<ButtonProps>(Pressable, {
-  backgroundColor: "transparent",
-  borderRadius: "4px",
-  borderWidth: "1px",
-  borderStyle: "solid",
-  borderColor: "transparent",
-  cursor: "pointer",
+  backgroundColor: "#FFF",
+  color: "#000",
 
-  "&>label": {
-    color: "$text.default",
-  },
-
-  "[contained]": {
-    backgroundColor: "$primary.main",
-
-    "&>label": {
-      color: "$primary.text",
-    },
-
-    ":hover": {
-      backgroundColor: "$primary.hover",
-    },
-    ":pressed": {
-      backgroundColor: "primary.pressed",
+  "[background]": {
+    "[gradient]": {
+      start: "#DDD",
+      end: "#222",
     },
   },
 
-  "&[variant=outlined]": {
-    backgroundColor: "transparent",
-    borderColor: "$primary.main",
-    ":hover": {
-      borderColor: "primary.hover",
-    },
-    ":pressed": {
-      borderColor: "primary.pressed",
-    },
-  },
+  "[button]": {
+    ...tailwind(""),
+    backgroundColor: "$primary",
 
-  "&[variant=text]": {
-    backgroundColor: "transparent",
-    borderColor: "transparent",
-
-    ":hover": {
-      borderColor: "primary.hover",
+    "[focus]": {
+      backgroundColor: "$primary.focus",
     },
 
-    ":pressed": {
-      borderColor: "primary.pressed",
+    "[press]": {
+      backgroundColor: "$primary.active",
     },
-  },
 
-  "&:disabled": {
-    opacity: 0.6,
+    "[outlined]": {
+      backgroundColor: "transparent",
+      borderColor: "$primary",
+
+      "[focus]": {
+        color: "$primary.focus",
+      },
+
+      "[press]": {
+        borderColor: "$primary.active",
+      },
+    },
+
+    "[minimal]": {
+      backgroundColor: "transparent",
+
+      "[focus]": {
+        backgroundColor: "$primary.focus",
+      },
+
+      "[press]": {
+        backgroundColor: "$primary.subtle",
+      },
+    },
+
+    "[text]": {
+      color: "$primary.contrast",
+
+      "[outlined]": {
+        color: "$primary",
+
+        "[focus]": {
+          color: "$primary.focus",
+        },
+
+        "[press]": {
+          color: "$primary.active",
+        },
+      },
+
+      "[minimal]": {
+        color: "$primary.contrast",
+      },
+    },
   },
 });
