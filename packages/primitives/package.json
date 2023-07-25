@@ -26,7 +26,6 @@
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
     "@vitejs/plugin-react": "^4.0.1",
-    "css-to-react-native": "^3.2.0",
     "csstype": "^3.1.2",
     "react": "^18.2.0",
     "react-native": "^0.72.0",
@@ -90,5 +89,8 @@
       "types": "./dist/web/*/index.web.d.ts",
       "default": "./dist/web/*.cjs"
     }
+  },
+  "dependencies": {
+    "css-to-react-native": "^3.2.0"
   }
 }

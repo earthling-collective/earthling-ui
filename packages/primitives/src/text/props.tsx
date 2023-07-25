@@ -1,7 +1,6 @@
 import type { TextProps as BaseTextProps } from "react-native";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
-import type { Properties } from "csstype";
-import { IStylable } from "..";
+import { ICustomPrimitiveProps } from "../types";
 
 type NativeProps = Omit<BaseTextProps, "style">;
 
@@ -11,7 +10,6 @@ type WebProps = Omit<
 >;
 //overridable
 export interface ICustomTextProps {}
-export interface ICustomPrimitiveProps {}
 
 export type TextApplicationState = {
   loading?: boolean;
@@ -20,6 +18,5 @@ export type TextApplicationState = {
 export type TextProps = WebProps &
   NativeProps &
   TextApplicationState &
-  IStylable &
   ICustomTextProps &
-  ICustomPrimitiveProps & { style?: Properties };
+  ICustomPrimitiveProps;

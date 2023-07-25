@@ -1,7 +1,7 @@
 import type { PressableProps as BasePressableProps } from "react-native";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import type { TextProps } from "#text";
-import { IStylable } from "..";
+import { ICustomPrimitiveProps } from "../types";
 
 type NativeProps = Omit<BasePressableProps, "style">;
 
@@ -12,7 +12,6 @@ type WebProps = Omit<
 
 //overridable
 export interface ICustomPressableProps {}
-export interface ICustomPrimitiveProps {}
 
 export type PressableApplicationState = {
   loading?: boolean;
@@ -25,7 +24,6 @@ export type PressableApplicationState = {
 export type PressableProps = Omit<NativeProps, "onPress"> &
   Omit<WebProps, "onClick"> &
   PressableApplicationState &
-  IStylable &
   ICustomPressableProps &
   ICustomPrimitiveProps & {
     onPress?: NativeProps["onPress"] | WebProps["onClick"];

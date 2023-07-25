@@ -1,3 +1,5 @@
-export interface IStylable {
-  sx?: SX;
+import { Properties } from "csstype";
+
+export interface ICustomPrimitiveProps {
+  style?: Properties;
 }

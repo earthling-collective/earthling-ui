@@ -2,7 +2,6 @@ import { View } from "react-native";
 import { Text } from "#text";
 import type { BoxProps } from "./props";
 import cssToReactNative from "css-to-react-native";
-import { mergeSX } from "..";
 import { forwardRef } from "react";
 
 export type { BoxProps };
@@ -10,7 +9,7 @@ export type { BoxProps };
 export const Box = forwardRef<View, BoxProps>(function (props, ref) {
   const {
     children,
-    sx,
+    style,
     //state
     loading,
     disabled,
@@ -24,7 +23,7 @@ export const Box = forwardRef<View, BoxProps>(function (props, ref) {
     <View
       ref={ref}
       {...rest}
-      style={cssToReactNative(Object.entries((mergeSX(sx) as any) || {}))}
+      style={cssToReactNative(Object.entries(style || {}))}
     >
       {typeof children === "string" ? (
         <Text {..._Text}>{children}</Text>

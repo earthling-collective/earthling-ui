@@ -2,7 +2,6 @@ import { Pressable as BasePressable, View } from "react-native";
 import { Text } from "#text";
 import type { PressableProps, ICustomPressableProps } from "./props";
 import cssToReactNative from "css-to-react-native";
-import { mergeSX } from "..";
 import { forwardRef } from "react";
 
 export type { PressableProps, ICustomPressableProps };
@@ -13,7 +12,7 @@ export const Pressable = forwardRef<View, PressableProps>(function (
 ) {
   const {
     children,
-    sx,
+    style,
     //state
     disabled,
     loading,
@@ -34,7 +33,7 @@ export const Pressable = forwardRef<View, PressableProps>(function (
       ref={ref}
       {...rest}
       onPress={((onPress || onClick) as any) || undefined}
-      style={cssToReactNative(Object.entries((mergeSX(sx) as any) || {}))}
+      style={cssToReactNative(Object.entries(style || {}))}
     >
       {typeof children === "string" ? (
         <Text {..._Text}>{children}</Text>
