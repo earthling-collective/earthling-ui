@@ -1,10 +1,13 @@
 import { forwardRef } from "react";
 import { TextInput } from "react-native";
 import { Text } from "#text";
-import { Box } from "#box";
+import { Box, BoxRef } from "#box";
 import { InputProps } from "./props";
 
-export const Input = forwardRef<any, InputProps>((props, ref) => {
+export type { InputProps };
+export type InputRef = BoxRef;
+
+export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
   const { label, _Control, _Label, ...rest } = props;
 
   return (

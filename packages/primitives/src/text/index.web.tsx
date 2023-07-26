@@ -1,13 +1,11 @@
 import { forwardRef } from "react";
-import { TextProps } from "./props";
+import { TextProps, ICustomTextProps } from "./props";
 
-export type { TextProps };
+export type { TextProps, ICustomTextProps };
+export type TextRef = HTMLSpanElement;
 
-export const Text = forwardRef<HTMLSpanElement, TextProps>(function (
-  props,
-  ref
-) {
-  const { children, loading, ...rest } = props;
+export const Text = forwardRef<TextRef, TextProps>(function (props, ref) {
+  const { children, ...rest } = props;
 
   return (
     <span ref={ref} {...rest}>

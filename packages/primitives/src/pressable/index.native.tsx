@@ -5,8 +5,9 @@ import cssToReactNative from "css-to-react-native";
 import { forwardRef } from "react";
 
 export type { PressableProps, ICustomPressableProps };
+export type PressableRef = View;
 
-export const Pressable = forwardRef<View, PressableProps>(function (
+export const Pressable = forwardRef<PressableRef, PressableProps>(function (
   props,
   ref
 ) {

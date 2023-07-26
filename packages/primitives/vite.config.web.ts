@@ -14,6 +14,7 @@ export default defineConfig({
         index: "./src/index.tsx",
         //atoms
         box: "./src/box/index.web.tsx",
+        input: "./src/input/index.web.tsx",
         pressable: "./src/pressable/index.web.tsx",
         text: "./src/text/index.web.tsx",
       },

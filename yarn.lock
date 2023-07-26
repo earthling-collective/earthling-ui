@@ -6073,7 +6073,7 @@ __metadata:
   resolution: "earthling-ui-sandbox-expo@workspace:sandboxes/expo"
   dependencies:
     "@babel/core": ^7.22.5
-    "@earthling-ui/themed": "workspace:^"
+    "@earthling-ui/primitives": "workspace:^"
     "@expo/vector-icons": ^13.0.0
     "@types/react": ~18.2.14
     expo: ^49.0.3

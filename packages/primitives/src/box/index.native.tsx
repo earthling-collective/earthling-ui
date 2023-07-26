@@ -1,10 +1,11 @@
 import { View } from "react-native";
 import { Text } from "#text";
-import type { BoxProps } from "./props";
+import type { BoxProps, ICustomBoxProps } from "./props";
 import cssToReactNative from "css-to-react-native";
 import { forwardRef } from "react";
 
-export type { BoxProps };
+export type { BoxProps, ICustomBoxProps };
+export type BoxRef = View;
 
 export const Box = forwardRef<View, BoxProps>(function (props, ref) {
   const {

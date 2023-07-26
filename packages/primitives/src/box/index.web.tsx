@@ -1,10 +1,11 @@
 import { Text } from "#text";
 import { forwardRef } from "react";
-import type { BoxProps } from "./props";
+import type { BoxProps, ICustomBoxProps } from "./props";
 
-export type { BoxProps };
+export type { BoxProps, ICustomBoxProps };
+export type BoxRef = HTMLDivElement;
 
-export const Box = forwardRef<HTMLDivElement, BoxProps>(function (props, ref) {
+export const Box = forwardRef<BoxRef, BoxProps>(function (props, ref) {
   const {
     children,
     //state

@@ -9,7 +9,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@earthling-ui/themed": "workspace:^",
+    "@earthling-ui/primitives": "workspace:^",
     "@expo/vector-icons": "^13.0.0",
     "expo": "^49.0.3",
     "expo-linking": "^5.0.2",
