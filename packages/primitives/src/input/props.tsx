@@ -4,10 +4,10 @@ import type { TextProps } from "#text";
 import { BoxProps } from "#box";
 import { ICustomPrimitiveProps } from "../types";
 
-type NativeControlProps = Omit<TextInputProps, "style">;
+type NativeControlProps = TextInputProps;
 type WebControlProps = Omit<
   DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>,
-  "ref" | "style"
+  "ref"
 >;
 
 export interface ICustomInputProps {

@@ -49,10 +49,9 @@
   },
   "files": [
     "dist",
-    "lib",
     "README.md"
   ],
-  "main": "./dist/web/index.cjs",
+  "main": "./dist/web/index.umd.cjs",
   "module": "./dist/web/index.js",
   "react-native": "./dist/native/index.js",
   "imports": {
@@ -73,7 +72,7 @@
         "default": "./dist/web/index.js"
       },
       "types": "./dist/web/index.d.ts",
-      "default": "./dist/web/index.cjs"
+      "default": "./dist/web/index.umd.cjs"
     },
     "./reference": {
       "types": "./lib/reference.d.ts"

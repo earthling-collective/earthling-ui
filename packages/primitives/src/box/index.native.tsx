@@ -27,7 +27,12 @@ export const Box = forwardRef<View, BoxProps>(function (props, ref) {
       style={cssToReactNative(Object.entries(style || {}))}
     >
       {typeof children === "string" ? (
-        <Text {..._Text}>{children}</Text>
+        <Text
+          {..._Text}
+          style={cssToReactNative(Object.entries(_Text?.style || {}))}
+        >
+          {children}
+        </Text>
       ) : (
         <>{children}</>
       )}
