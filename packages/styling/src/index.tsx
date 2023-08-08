@@ -51,7 +51,7 @@ export function makeTheme(tokens: TokenDictionary, tree: StyleTree) {
     return solve(tree, ...allTags);
   }
 
-  function include(overrides: StyleTree) {
+  function extend(overrides: StyleTree) {
     return {
       tag: (...allTags: ResolvableTags[]) => {
         return solve(mergeDeep({}, tree, overrides), ...allTags);
@@ -61,7 +61,7 @@ export function makeTheme(tokens: TokenDictionary, tree: StyleTree) {
 
   return {
     tag,
-    include,
+    extend,
   };
 }
 

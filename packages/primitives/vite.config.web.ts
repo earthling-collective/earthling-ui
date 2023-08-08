@@ -25,6 +25,9 @@ export default defineConfig({
   },
   plugins: [
     react(),
-    dts({ tsConfigFilePath: "./tsconfig.src.json", entryRoot: "./src" }),
+    dts({
+      tsConfigFilePath: "./tsconfig.src.json",
+      entryRoot: "./src",
+    }),
   ],
 });

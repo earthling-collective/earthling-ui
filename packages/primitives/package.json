@@ -57,6 +57,10 @@
   "react-native": "./dist/native/index.js",
   "imports": {
     "#*": {
+      "types": {
+        "react-native": "./dist/native/*/index.native.d.ts",
+        "import": "./dist/web/*/index.web.d.ts"
+      },
       "react-native": "./src/*/index.native.tsx",
       "import": "./src/*/index.web.tsx",
       "default": "./src/*/index.tsx"
