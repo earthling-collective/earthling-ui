@@ -74,3 +74,4 @@ type StyleOut = CSS.Properties; //TODO replace with csstype type
 type ResolvableTags = string | ResolvableTags[] | undefined | false | null;
 
 export { flatten } from "./util";
+export { defaultColorTokens } from "./defaultColorTokens";

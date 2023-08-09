@@ -73,9 +73,6 @@
       },
       "types": "./dist/web/index.d.ts",
       "default": "./dist/web/index.umd.cjs"
-    },
-    "./reference": {
-      "types": "./lib/reference.d.ts"
     }
   }
 }

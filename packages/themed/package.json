@@ -54,7 +54,6 @@
   },
   "files": [
     "dist",
-    "lib",
     "README.md"
   ],
   "main": "./dist/web/index.cjs",
@@ -79,9 +78,6 @@
       },
       "types": "./dist/web/index.d.ts",
       "default": "./dist/web/index.cjs"
-    },
-    "./reference": {
-      "types": "./lib/reference.d.ts"
     },
     "./*": {
       "react-native": {

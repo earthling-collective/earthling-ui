@@ -49,7 +49,6 @@
   },
   "files": [
     "dist",
-    "lib",
     "README.md"
   ],
   "main": "./dist/web/index.cjs",

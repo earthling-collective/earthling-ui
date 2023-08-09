@@ -1,5 +1,6 @@
 import { Pressable, type PressableProps } from "@earthling-ui/primitives";
-import { styled, tailwind } from "@earthling-ui/styled";
+import { theme } from "../theme";
+import { ReactNode } from "react";
 
 export type ButtonProps = PressableProps & {
   variant?: "contained" | "outlined" | "subtle" | "text";
@@ -8,19 +9,8 @@ export type ButtonProps = PressableProps & {
   loading?: boolean;
 };
 
-export const Button = styled<ButtonProps>(Pressable, {
-  backgroundColor: "#FFF",
-  color: "#000",
-
-  "[background]": {
-    "[gradient]": {
-      start: "#DDD",
-      end: "#222",
-    },
-  },
-
+theme.extend({
   "[button]": {
-    ...tailwind(""),
     backgroundColor: "$primary",
 
     "[focus]": {
@@ -77,3 +67,8 @@ export const Button = styled<ButtonProps>(Pressable, {
     },
   },
 });
+
+export function Button(props: { children?: ReactNode } & PressableProps) {
+  const { children, ...rest } = props;
+  return <Pressable {...rest}>{children}</Pressable>;
+}

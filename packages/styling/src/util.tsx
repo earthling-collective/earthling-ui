@@ -29,7 +29,7 @@ export function isObject(item: any) {
 export function mergeDeep(
   target: Record<string, any>,
   ...sources: Record<string, any>[]
-) {
+): Record<string, any> {
   if (!sources.length) return target;
   const source = sources.shift();
 
