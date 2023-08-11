@@ -6848,7 +6848,7 @@ __metadata:
     tsup: ^7.2.0
     tsx: ^3.12.7
   bin:
-    create-earthling-app: dist/index.js
+    create-earthling-app: dist/index.cjs
   languageName: unknown
   linkType: soft
 

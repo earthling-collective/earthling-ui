@@ -51,8 +51,6 @@ async function emptyDir(dir: string) {
     )
   ).filter((x) => !!x);
 
-  console.log(templates);
-
   program
     .argument("[directory]", "Project slug")
     .option("-t, --template <template>", "Template")
