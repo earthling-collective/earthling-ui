@@ -2,6 +2,9 @@
   "name": "create-earthling-app",
   "version": "1.0.0-alpha.0",
   "packageManager": "yarn@3.6.0",
+  "type": "module",
+  "main": "dist/index.js",
+  "bin": "dist/index.js",
   "license": "MIT",
   "repository": {
     "type": "git",
@@ -16,8 +19,21 @@
     "name": "Steven Frady",
     "url": "https://stevenfrady.com"
   },
+  "scripts": {
+    "build": "tsx scripts/build.ts"
+  },
   "files": [
-    "lib",
+    "dist",
     "README.md"
-  ]
+  ],
+  "devDependencies": {
+    "@earthling-ui/config": "workspace:^",
+    "@types/inquirer": "^9.0.3",
+    "@types/node": "^20.4.9",
+    "colors": "^1.4.0",
+    "commander": "^11.0.0",
+    "inquirer": "^9.2.10",
+    "tsup": "^7.2.0",
+    "tsx": "^3.12.7"
+  }
 }
