@@ -1,6 +1,6 @@
 {
   "name": "create-earthling-app",
-  "version": "1.0.0-alpha.3",
+  "version": "1.0.0-alpha.4",
   "packageManager": "yarn@3.6.0",
   "type": "module",
   "main": "dist/index.cjs",
@@ -35,5 +35,8 @@
     "inquirer": "^9.2.10",
     "tsup": "^7.2.0",
     "tsx": "^3.12.7"
+  },
+  "dependencies": {
+    "prettier": "^3.0.1"
   }
 }

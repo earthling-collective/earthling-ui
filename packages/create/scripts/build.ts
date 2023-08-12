@@ -17,9 +17,7 @@ const templates: {
   packageJson: Record<string, any>;
 }[] = (
   await Promise.all<any>(
-    (
-      await readdir(templatesDir)
-    ).map(async (name) => {
+    (await readdir(templatesDir)).map(async (name) => {
       const path = join(templatesDir, name);
       const stats = await stat(path);
       if (!stats.isDirectory()) return false;
@@ -57,7 +55,7 @@ await Promise.all(
       recursive: true,
       errorOnExist: false,
       filter: (source) =>
-        ![/node_modules/, /\.git\//].some((x) => x.test(source)),
+        ![/node_modules/, /\.git\//, /\.yarn\//].some((x) => x.test(source)),
     });
 
     //replace template vars

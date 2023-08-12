@@ -1,8 +1,9 @@
-import { cp, mkdir, readFile, readdir, rm, stat } from "fs/promises";
+import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from "fs/promises";
 import { join, resolve } from "path";
 import { Stats, existsSync } from "fs";
 import colors from "colors";
 import { program } from "commander";
+import { format } from "prettier";
 import inquirer from "inquirer";
 
 async function isEmpty(path: string) {
@@ -30,9 +31,7 @@ async function emptyDir(dir: string) {
     packageJson: Record<string, any>;
   }[] = (
     await Promise.all<any>(
-      (
-        await readdir(templatesDir)
-      ).map(async (name) => {
+      (await readdir(templatesDir)).map(async (name) => {
         const path = join(templatesDir, name);
         const stats = await stat(path);
         if (!stats.isDirectory()) return false;
@@ -113,6 +112,20 @@ async function emptyDir(dir: string) {
 
   //copy template
   await cp(template.path, projectPath, { recursive: true });
+
+  //override package.json
+  const updatedPackage = template.packageJson;
+  updatedPackage.name = answers.name;
+  updatedPackage.version = "1.0.0-alpha.0";
+  delete updatedPackage.description;
+  delete updatedPackage.license;
+  delete updatedPackage.repository;
+  delete updatedPackage.bugs;
+  delete updatedPackage.author;
+  await writeFile(
+    resolve(projectPath, "./package.json"),
+    await format(JSON.stringify(updatedPackage), { parser: "json" })
+  );
 
   console.log(`Project created at ${colors.bold(`"${projectPath}"`)}`);
   console.log(colors.bgBlack(colors.blue(`cd ./${answers.name}; yarn;`)));

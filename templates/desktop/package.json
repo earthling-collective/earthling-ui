@@ -37,6 +37,5 @@
     "typescript": "^5.1.6",
     "unocss": "^0.54.2",
     "vite": "^4.4.9"
-  },
-  "packageManager": "yarn@3.5.1"
+  }
 }
