@@ -1,5 +1,4 @@
-import { Box } from "@earthling-ui/themed/box";
-import { Button } from "@earthling-ui/themed/button";
+import { Box, Button } from "@earthling-ui/themed";
 
 export default function App() {
   return (

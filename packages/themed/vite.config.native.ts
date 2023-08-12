@@ -15,6 +15,7 @@ export default defineConfig({
         //atoms
         box: "./src/box/index.tsx",
         button: "./src/button/index.tsx",
+        text: "./src/text/index.tsx",
       },
     },
     rollupOptions: {
