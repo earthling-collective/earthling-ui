@@ -7,11 +7,14 @@ export type { InputProps };
 export type InputRef = BoxRef;
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
-  const { label, _Control, _Label, ...rest } = props;
+  const { label, jss, style, _Control, _Label, ...rest } = props;
 
   return (
-    <Box ref={ref} {...rest}>
-      <input {..._Control} />
+    <Box ref={ref} {...rest} style={Object.assign({}, jss, style)}>
+      <input
+        {..._Control}
+        style={Object.assign({}, _Control?.jss, _Control?.style)}
+      />
       {label !== undefined && <Text {..._Label}>{label}</Text>}
     </Box>
   );

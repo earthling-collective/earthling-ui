@@ -10,6 +10,7 @@ export type BoxRef = View;
 export const Box = forwardRef<View, BoxProps>(function (props, ref) {
   const {
     children,
+    jss,
     style,
     //state
     loading,
@@ -24,7 +25,7 @@ export const Box = forwardRef<View, BoxProps>(function (props, ref) {
     <View
       ref={ref}
       {...rest}
-      style={cssToReactNative(Object.entries(style || {}))}
+      style={[jss, style].map((x) => cssToReactNative(Object.entries(x || {})))}
     >
       {typeof children === "string" ? (
         <Text

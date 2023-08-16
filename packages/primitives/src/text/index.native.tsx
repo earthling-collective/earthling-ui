@@ -7,13 +7,13 @@ export type { TextProps, ICustomTextProps };
 export type TextRef = BaseText;
 
 export const Text = forwardRef<TextRef, TextProps>(function (props, ref) {
-  const { children, style, loading, ...rest } = props;
+  const { children, jss, style, loading, ...rest } = props;
 
   return (
     <BaseText
       ref={ref}
       {...rest}
-      style={cssToReactNative(Object.entries(style || {}))}
+      style={[jss, style].map((x) => cssToReactNative(Object.entries(x || {})))}
     >
       {children}
     </BaseText>

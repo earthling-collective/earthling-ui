@@ -10,6 +10,8 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
 ) {
   const {
     children,
+    jss,
+    style,
     //state
     disabled,
     loading,
@@ -27,6 +29,7 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
     <button
       ref={ref}
       {...rest}
+      style={Object.assign({}, jss, style)}
       onClick={((onPress || onClick) as any) || undefined}
     >
       {children}

@@ -3,11 +3,11 @@ import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import type { TextProps } from "#text";
 import { ICustomPrimitiveProps } from "../types";
 
-type NativeProps = Omit<BasePressableProps, "style">;
+type NativeProps = BasePressableProps;
 
 type WebProps = Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLButtonElement>, HTMLButtonElement>,
-  "ref" | "style"
+  "ref"
 >;
 
 //overridable

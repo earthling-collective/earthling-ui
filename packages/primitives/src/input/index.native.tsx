@@ -9,17 +9,15 @@ export type { InputProps };
 export type InputRef = BoxRef;
 
 export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
-  const { label, style, _Control, _Label, ...rest } = props;
+  const { label, _Control, _Label, ...rest } = props;
 
   return (
-    <Box
-      ref={ref}
-      {...rest}
-      style={cssToReactNative(Object.entries(style || {}))}
-    >
+    <Box ref={ref} {...rest}>
       <TextInput
         {..._Control}
-        style={cssToReactNative(Object.entries(_Control?.style || {}))}
+        style={[_Control?.jss, _Control?.style].map((x) =>
+          cssToReactNative(Object.entries(x || {}))
+        )}
       />
       {label !== undefined && <Text {..._Label}>{label}</Text>}
     </Box>

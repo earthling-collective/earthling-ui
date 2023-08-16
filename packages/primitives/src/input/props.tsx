@@ -22,7 +22,7 @@ export type InputApplicationState = {
 
 export type DescendantProps = {
   _Label?: TextProps;
-  _Control?: WebControlProps & NativeControlProps;
+  _Control?: WebControlProps & NativeControlProps & ICustomPrimitiveProps;
 };
 
 export type InputProps = BoxProps &

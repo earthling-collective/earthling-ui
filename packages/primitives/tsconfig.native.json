@@ -1,0 +1,6 @@
+{
+  "compilerOptions": { "customConditions": ["react-native"] },
+  "extends": "@earthling-ui/config/typescript/src",
+  "include": ["src"],
+  "exclude": ["src/**/*.web.*"]
+}

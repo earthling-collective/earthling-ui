@@ -1,0 +1,6 @@
+{
+  "compilerOptions": { "customConditions": ["import"] },
+  "extends": "@earthling-ui/config/typescript/src",
+  "include": ["src"],
+  "exclude": ["src/**/*.native.*"]
+}

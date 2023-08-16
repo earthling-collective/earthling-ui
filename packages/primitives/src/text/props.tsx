@@ -2,11 +2,11 @@ import type { TextProps as BaseTextProps } from "react-native";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import { ICustomPrimitiveProps } from "../types";
 
-type NativeProps = Omit<BaseTextProps, "style">;
+type NativeProps = BaseTextProps;
 
 type WebProps = Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLSpanElement>, HTMLSpanElement>,
-  "ref" | "style"
+  "ref"
 >;
 //overridable
 export interface ICustomTextProps {}

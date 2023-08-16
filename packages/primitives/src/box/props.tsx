@@ -3,11 +3,11 @@ import type { ViewProps } from "react-native";
 import type { TextProps } from "#text";
 import { ICustomPrimitiveProps } from "../types";
 
-type NativeProps = Omit<ViewProps, "style">;
+type NativeProps = ViewProps;
 
 type WebProps = Omit<
   DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>,
-  "ref" | "style"
+  "ref"
 >;
 
 export interface ICustomBoxProps {}

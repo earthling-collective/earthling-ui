@@ -1,6 +1,8 @@
 {
+  "extends": "@earthling-ui/config/typescript/root",
+  "exclude": ["src", "node_modules"],
   "references": [
-    { "path": "./tsconfig.root.json" },
-    { "path": "./tsconfig.src.json" }
+    { "path": "./tsconfig.web.json" },
+    { "path": "./tsconfig.native.json" }
   ]
 }

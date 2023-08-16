@@ -10,6 +10,8 @@
   },
   "dependencies": {
     "@earthling-ui/primitives": "workspace:^",
+    "@earthling-ui/styling": "workspace:^",
+    "@earthling-ui/themed": "workspace:^",
     "@expo/vector-icons": "^13.0.0",
     "expo": "^49.0.3",
     "expo-linking": "^5.0.2",

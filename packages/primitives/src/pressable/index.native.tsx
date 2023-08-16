@@ -13,6 +13,7 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
 ) {
   const {
     children,
+    jss,
     style,
     //state
     disabled,
@@ -34,7 +35,7 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
       ref={ref}
       {...rest}
       onPress={((onPress || onClick) as any) || undefined}
-      style={cssToReactNative(Object.entries(style || {}))}
+      style={[jss, style].map((x) => cssToReactNative(Object.entries(x || {})))}
     >
       {typeof children === "string" ? (
         <Text {..._Text}>{children}</Text>
