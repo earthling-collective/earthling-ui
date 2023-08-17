@@ -3,7 +3,6 @@ import { TextInput } from "react-native";
 import { Text } from "#text";
 import { Box, BoxRef } from "#box";
 import { InputProps } from "./props";
-import cssToReactNative from "css-to-react-native";
 
 export type { InputProps };
 export type InputRef = BoxRef;
@@ -13,12 +12,7 @@ export const Input = forwardRef<InputRef, InputProps>((props, ref) => {
 
   return (
     <Box ref={ref} {...rest}>
-      <TextInput
-        {..._Control}
-        style={[_Control?.jss, _Control?.style].map((x) =>
-          cssToReactNative(Object.entries(x || {}))
-        )}
-      />
+      <TextInput {..._Control} />
       {label !== undefined && <Text {..._Label}>{label}</Text>}
     </Box>
   );

@@ -8,8 +8,6 @@ export type BoxRef = HTMLDivElement;
 export const Box = forwardRef<BoxRef, BoxProps>(function (props, ref) {
   const {
     children,
-    jss,
-    style,
     //state
     loading,
     disabled,
@@ -20,7 +18,7 @@ export const Box = forwardRef<BoxRef, BoxProps>(function (props, ref) {
   } = props;
 
   return (
-    <div ref={ref} {...rest} style={Object.assign({}, jss, style)}>
+    <div ref={ref} {...rest}>
       {typeof children === "string" ? (
         <Text {..._Text}>{children}</Text>
       ) : (

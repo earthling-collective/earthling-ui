@@ -26,10 +26,11 @@
     "@types/node": "^20.3.1",
     "@types/react": "^18.2.13",
     "@vitejs/plugin-react": "^4.0.1",
-    "css-to-react-native": "^3.2.0",
-    "csstype": "^3.1.2",
+    "clsx": "^2.0.0",
+    "nativewind": "^2.0.11",
     "react": "^18.2.0",
     "react-native": "^0.72.0",
+    "tailwindcss": "^3.3.3",
     "typescript": "^5.1.3",
     "vite": "^4.3.9",
     "vite-plugin-dts": "^2.3.0"
@@ -49,6 +50,7 @@
   },
   "files": [
     "dist",
+    "lib",
     "README.md"
   ],
   "main": "./dist/web/index.cjs",
@@ -89,6 +91,11 @@
       },
       "types": "./dist/web/*/index.web.d.ts",
       "default": "./dist/web/*.cjs"
+    },
+    "./types": {
+      "react-native": "./lib/ref.native.d.ts",
+      "import": "./ref.web.d.ts",
+      "default": "./ref.web.d.ts"
     }
   }
 }

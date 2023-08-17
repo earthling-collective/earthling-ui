@@ -1,5 +1,5 @@
 import { Box } from "@earthling-ui/primitives";
 
 export default function () {
-  return <Box style={{ width: 100, height: 100, backgroundColor: "black" }} />;
+  return <Box className="h-20 w-20 bg-black rounded-lg" />;
 }
