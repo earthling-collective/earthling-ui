@@ -11,12 +11,7 @@ type WebProps = Omit<
 //overridable
 export interface ICustomTextProps {}
 
-export type TextApplicationState = {
-  loading?: boolean;
-};
-
 export type TextProps = WebProps &
   NativeProps &
-  TextApplicationState &
   ICustomTextProps &
   ICustomPrimitiveProps;

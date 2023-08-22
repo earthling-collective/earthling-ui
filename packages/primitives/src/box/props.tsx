@@ -12,18 +12,12 @@ type WebProps = Omit<
 
 export interface ICustomBoxProps {}
 
-export type BoxApplicationState = {
-  loading?: boolean;
-  disabled?: boolean;
-};
-
 export type DescendantProps = {
   _Text?: TextProps;
 };
 
 export type BoxProps = NativeProps &
   WebProps &
-  BoxApplicationState &
   DescendantProps &
   ICustomBoxProps &
   ICustomPrimitiveProps;

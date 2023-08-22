@@ -12,12 +12,6 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
 ) {
   const {
     children,
-    //state
-    disabled,
-    loading,
-    active,
-    hover,
-    focus,
     //handlers
     onClick,
     onPress,

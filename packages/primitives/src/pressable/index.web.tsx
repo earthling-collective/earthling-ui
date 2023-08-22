@@ -10,12 +10,7 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
 ) {
   const {
     children,
-    //state
     disabled,
-    loading,
-    active,
-    hover,
-    focus,
     //handlers
     onClick,
     onPress,
@@ -27,6 +22,7 @@ export const Pressable = forwardRef<PressableRef, PressableProps>(function (
     <button
       ref={ref}
       {...rest}
+      disabled={disabled || undefined}
       onClick={((onPress || onClick) as any) || undefined}
     >
       {children}

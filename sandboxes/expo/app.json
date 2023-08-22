@@ -1,7 +1,8 @@
 {
   "expo": {
-    "name": "",
+    "name": "earthling-sandbox-expo",
     "slug": "template-app",
+    "scheme": "earthling-sandbox-expo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -26,6 +27,7 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "plugins": ["expo-router"]
   }
 }

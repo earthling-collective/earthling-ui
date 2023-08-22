@@ -7,16 +7,7 @@ export type { BoxProps, ICustomBoxProps };
 export type BoxRef = View;
 
 export const Box = forwardRef<View, BoxProps>(function (props, ref) {
-  const {
-    children,
-    //state
-    loading,
-    disabled,
-    //descendents
-    _Text,
-    //rest
-    ...rest
-  } = props;
+  const { children, _Text, ...rest } = props;
 
   return (
     <View ref={ref} {...rest}>

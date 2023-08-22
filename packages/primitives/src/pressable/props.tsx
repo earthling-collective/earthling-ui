@@ -13,17 +13,8 @@ type WebProps = Omit<
 //overridable
 export interface ICustomPressableProps {}
 
-export type PressableApplicationState = {
-  loading?: boolean;
-  disabled?: boolean;
-  active?: boolean;
-  hover?: boolean;
-  focus?: boolean;
-};
-
 export type PressableProps = Omit<NativeProps, "onPress"> &
   Omit<WebProps, "onClick"> &
-  PressableApplicationState &
   ICustomPressableProps &
   ICustomPrimitiveProps & {
     onPress?: NativeProps["onPress"] | WebProps["onClick"];

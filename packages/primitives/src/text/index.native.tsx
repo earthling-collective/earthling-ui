@@ -6,7 +6,7 @@ export type { TextProps, ICustomTextProps };
 export type TextRef = BaseText;
 
 export const Text = forwardRef<TextRef, TextProps>(function (props, ref) {
-  const { children, loading, ...rest } = props;
+  const { children, ...rest } = props;
 
   return (
     <BaseText ref={ref} {...rest}>

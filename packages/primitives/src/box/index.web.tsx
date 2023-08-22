@@ -6,16 +6,7 @@ export type { BoxProps, ICustomBoxProps };
 export type BoxRef = HTMLDivElement;
 
 export const Box = forwardRef<BoxRef, BoxProps>(function (props, ref) {
-  const {
-    children,
-    //state
-    loading,
-    disabled,
-    //descendents
-    _Text,
-    //rest
-    ...rest
-  } = props;
+  const { children, _Text, ...rest } = props;
 
   return (
     <div ref={ref} {...rest}>

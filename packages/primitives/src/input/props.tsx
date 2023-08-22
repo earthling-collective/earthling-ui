@@ -14,19 +14,12 @@ export interface ICustomInputProps {
   label?: string;
 }
 
-export type InputApplicationState = {
-  loading?: boolean;
-  disabled?: boolean;
-  error?: boolean;
-};
-
 export type DescendantProps = {
   _Label?: TextProps;
   _Control?: WebControlProps & NativeControlProps & ICustomPrimitiveProps;
 };
 
 export type InputProps = BoxProps &
-  InputApplicationState &
   DescendantProps &
   ICustomInputProps &
   ICustomPrimitiveProps;
