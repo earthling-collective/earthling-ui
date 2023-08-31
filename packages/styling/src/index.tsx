@@ -52,11 +52,7 @@ export function makeTheme(tokens: TokenDictionary, tree: StyleTree) {
   }
 
   function extend(overrides: StyleTree) {
-    return {
-      tag: (...allTags: ResolvableTags[]) => {
-        return solve(mergeDeep({}, tree, overrides), ...allTags);
-      },
-    };
+    return makeTheme(tokens, mergeDeep({}, tree, overrides));
   }
 
   return {
