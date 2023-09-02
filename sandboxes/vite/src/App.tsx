@@ -1,6 +1,8 @@
 import { Box, Text } from "@earthling-ui/primitives";
-import { defaultColorTokens, styled } from "@earthling-ui/styling";
+import { atomic, defaultColorTokens, styled } from "@earthling-ui/styling";
 import { useEffect, useState } from "react";
+
+atomic("w-full h-[300px] inset-0");
 
 const BizzBox = styled(Box)
   .using(defaultColorTokens)
@@ -56,7 +58,10 @@ function App() {
   const condition2 = useFlippingCondition(5200, "bizz", "buzz");
 
   return (
-    <BizzBox conditions={[condition1, { [condition2]: true }]}>
+    <BizzBox
+    // extended={{ ...atomic("w-full"), backgroundColor: "$yellow.500" }}
+    // with={[condition1, { [condition2]: true }]}
+    >
       <Text>hello?</Text>
     </BizzBox>
   );

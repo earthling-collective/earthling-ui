@@ -75,5 +75,9 @@
       "default": "./dist/web/index.umd.cjs"
     },
     "./types": "./lib/types.d.ts"
+  },
+  "dependencies": {
+    "@unocss/core": "^0.55.4",
+    "@unocss/preset-uno": "^0.55.4"
   }
 }

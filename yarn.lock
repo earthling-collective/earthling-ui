@@ -1804,6 +1804,8 @@ __metadata:
     "@earthling-ui/config": "workspace:^"
     "@types/node": ^20.3.1
     "@types/react": ^18.2.13
+    "@unocss/core": ^0.55.4
+    "@unocss/preset-uno": ^0.55.4
     "@vitejs/plugin-react": ^4.0.1
     css-to-react-native: ^3.2.0
     csstype: ^3.1.2
@@ -4478,6 +4480,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/core@npm:0.55.4, @unocss/core@npm:^0.55.4":
+  version: 0.55.4
+  resolution: "@unocss/core@npm:0.55.4"
+  checksum: 5b45b32cec46b9c5ac63b76664d0018c609d1bfe348fb61fe1a6f8bd065a1f8c591212cf8bad55245840f228050657d693bea2de7633946800655803b5ae56d1
+  languageName: node
+  linkType: hard
+
 "@unocss/extractor-arbitrary-variants@npm:0.53.6":
   version: 0.53.6
   resolution: "@unocss/extractor-arbitrary-variants@npm:0.53.6"
@@ -4493,6 +4502,15 @@ __metadata:
   dependencies:
     "@unocss/core": 0.54.3
   checksum: b9b6b5e39de2266fe4c29a228fcf27da6565ba997215d37e09e0959a601898998da50588d64c95d0e1e24d4c04e6e28f2c23b8ba929d51f8dc288da79eea8285
+  languageName: node
+  linkType: hard
+
+"@unocss/extractor-arbitrary-variants@npm:0.55.4":
+  version: 0.55.4
+  resolution: "@unocss/extractor-arbitrary-variants@npm:0.55.4"
+  dependencies:
+    "@unocss/core": 0.55.4
+  checksum: 1225d2d72041e3467c6de1cb918403e78bb6cdf8687c7815a4163f65c4083cfe9f4dd6add8a082f99a7406fe5fe0fd9170adcad46e4f2a379b9bd5de1597578a
   languageName: node
   linkType: hard
 
@@ -4608,6 +4626,16 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/preset-mini@npm:0.55.4":
+  version: 0.55.4
+  resolution: "@unocss/preset-mini@npm:0.55.4"
+  dependencies:
+    "@unocss/core": 0.55.4
+    "@unocss/extractor-arbitrary-variants": 0.55.4
+  checksum: 213ea24ad3aa66afbe40d93627bf5d56fb3110b5b6de1721a8a730a4f42d4fa76a50e0ba77644527a561de30ec2d2c7c2042a18d4b77e2023d28c52526911a97
+  languageName: node
+  linkType: hard
+
 "@unocss/preset-tagify@npm:0.53.6":
   version: 0.53.6
   resolution: "@unocss/preset-tagify@npm:0.53.6"
@@ -4668,6 +4696,17 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@unocss/preset-uno@npm:^0.55.4":
+  version: 0.55.4
+  resolution: "@unocss/preset-uno@npm:0.55.4"
+  dependencies:
+    "@unocss/core": 0.55.4
+    "@unocss/preset-mini": 0.55.4
+    "@unocss/preset-wind": 0.55.4
+  checksum: f442cf8dab1b39ec0c8cd7b40a44bc2fe331b5a85e73358db421a8cb08e005b2e99d959750f92147f1b434c3354da91d208cb066fae03646543727498ab586d0
+  languageName: node
+  linkType: hard
+
 "@unocss/preset-web-fonts@npm:0.53.6":
   version: 0.53.6
   resolution: "@unocss/preset-web-fonts@npm:0.53.6"
@@ -4705,6 +4744,16 @@ __metadata:
     "@unocss/core": 0.54.3
     "@unocss/preset-mini": 0.54.3
   checksum: b7e2363de384b9465fa681e9cb65f1217145dceda3f9d8c45530fa05a69636d1d5a828a4440bae0c0609e57afa18a5a9e9f007ba30493d944d3c379fd4a3d477
+  languageName: node
+  linkType: hard
+
+"@unocss/preset-wind@npm:0.55.4":
+  version: 0.55.4
+  resolution: "@unocss/preset-wind@npm:0.55.4"
+  dependencies:
+    "@unocss/core": 0.55.4
+    "@unocss/preset-mini": 0.55.4
+  checksum: 28b297ee841deb3b74f68bda90815a4de25b7b84f48cdfd93066c774277549d86b76467c94d5425b64de42ff3dd055d0fac9afca2a6a1df43cecb48411da6aea
   languageName: node
   linkType: hard
 
