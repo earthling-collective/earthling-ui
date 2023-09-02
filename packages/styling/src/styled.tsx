@@ -1,15 +1,21 @@
 import { ComponentProps, ComponentType } from "react";
 import { mergeDeep } from "./util";
+import CSS from "csstype";
 
 export type ConditionMap = Record<string, boolean | undefined>;
 export type ConditionList = Condition[];
 export type Condition = string | ConditionMap | ConditionList;
-export type Styles = import("csstype").Properties;
+
+export type Styles = CSS.Properties;
 export type StyleTree = Styles | { [key: string]: StyleTree };
-export type TokenDictionary = Record<string, string>;
+
+export type TokenValue = string | number;
+export type TokenDictionary = Record<string, TokenValue>;
+
 export type SolvableConditions =
-  | string
   | SolvableConditions[]
+  | Record<string, boolean>
+  | string
   | undefined
   | false
   | null;
@@ -63,7 +69,8 @@ function makeStyleBuilder<
       return tagsOut;
     }
 
-    function parseToken(value: string): string {
+    function parseToken(value: TokenValue): TokenValue {
+      if (typeof value !== "string") return value;
       const tokenMatch = tokenSyntax.exec(value);
       const token = tokenMatch?.[1];
       return token ? parseToken(tokens[token]) : value;
