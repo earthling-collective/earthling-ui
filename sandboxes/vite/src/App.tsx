@@ -1,8 +1,8 @@
-import { Box as PrimitiveBox, Text } from "@earthling-ui/primitives";
+import { Box, Text } from "@earthling-ui/primitives";
 import { defaultColorTokens, styled } from "@earthling-ui/styling";
 import { useEffect, useState } from "react";
 
-const Box = styled(PrimitiveBox)
+const BizzBox = styled(Box)
   .using(defaultColorTokens)
   .extend({
     width: "100px",
@@ -56,9 +56,9 @@ function App() {
   const condition2 = useFlippingCondition(5200, "bizz", "buzz");
 
   return (
-    <Box conditions={[condition1, condition2]}>
+    <BizzBox conditions={[condition1, { [condition2]: true }]}>
       <Text>hello?</Text>
-    </Box>
+    </BizzBox>
   );
 }
 

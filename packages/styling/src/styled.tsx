@@ -1,10 +1,24 @@
-import { ComponentProps, ComponentType } from "react";
+import {
+  ComponentProps,
+  ComponentType,
+  ForwardRefExoticComponent,
+  PropsWithoutRef,
+  RefAttributes,
+  forwardRef,
+} from "react";
 import { mergeDeep } from "./util";
 import CSS from "csstype";
 
 export type ConditionMap = Record<string, boolean | undefined>;
 export type ConditionList = Condition[];
 export type Condition = string | ConditionMap | ConditionList;
+export type Conditions =
+  | Conditions[]
+  | Record<string, boolean>
+  | string
+  | undefined
+  | false
+  | null;
 
 export type Styles = CSS.Properties;
 export type StyleTree = Styles | { [key: string]: StyleTree };
@@ -12,22 +26,26 @@ export type StyleTree = Styles | { [key: string]: StyleTree };
 export type TokenValue = string | number;
 export type TokenDictionary = Record<string, TokenValue>;
 
-export type SolvableConditions =
-  | SolvableConditions[]
-  | Record<string, boolean>
-  | string
-  | undefined
-  | false
-  | null;
+type StyleBuilder<C extends ComponentType<P>, P = ComponentProps<C>> = {
+  using: (...token: TokenDictionary[]) => StyleBuilder<C, P>;
+  extend: (...tree: StyleTree[]) => StyleBuilder<C, P>;
+  build: () => ForwardRefExoticComponent<
+    PropsWithoutRef<
+      P & {
+        conditions: Conditions;
+      }
+    > &
+      RefAttributes<C>
+  >;
+};
 
 const tagSyntax = /^\[(.+)\]$/i;
 const tokenSyntax = /\$([a-zA-Z-_\.0-9]+)/;
 
-export function styled<
-  C extends ComponentType<CProps>,
-  CProps = ComponentProps<C>
->(Component: C) {
-  return makeStyleBuilder<C, CProps>({
+export function styled<C extends ComponentType<P>, P = ComponentProps<C>>(
+  Component: C
+) {
+  return makeStyleBuilder<C, P>({
     BaseComponent: Component,
     tokens: {},
     tree: {},
@@ -35,14 +53,18 @@ export function styled<
 }
 
 function makeStyleBuilder<
-  C extends ComponentType<CProps>,
-  CProps = ComponentProps<C>
->(params: { BaseComponent: C; tokens: TokenDictionary; tree: StyleTree }) {
+  C extends ComponentType<P>,
+  P = ComponentProps<C>
+>(params: {
+  BaseComponent: C;
+  tokens: TokenDictionary;
+  tree: StyleTree;
+}): StyleBuilder<C, P> {
   const { BaseComponent, tokens, tree } = params;
 
   //add tokens
   const using = (...newTokens: TokenDictionary[]) => {
-    return makeStyleBuilder<C, CProps>({
+    return makeStyleBuilder<C, P>({
       BaseComponent,
       tokens: Object.assign({}, tokens, ...newTokens),
       tree,
@@ -51,7 +73,7 @@ function makeStyleBuilder<
 
   //add tree
   const extend = (...newTrees: StyleTree[]) => {
-    return makeStyleBuilder<C, CProps>({
+    return makeStyleBuilder<C, P>({
       BaseComponent,
       tokens,
       tree: mergeDeep({}, tree, ...newTrees),
@@ -59,12 +81,18 @@ function makeStyleBuilder<
   };
 
   const build = () => {
-    function resolveTags(conditions: SolvableConditions[]) {
+    function flattenConditions(...conditions: Conditions[]) {
       let tagsOut: string[] = [];
       for (let arg of conditions) {
         if (!arg) continue;
-        if (typeof arg === "string") tagsOut.push(arg.trim());
-        if (Array.isArray(arg)) tagsOut.push(...resolveTags(arg));
+        else if (typeof arg === "string") tagsOut.push(arg.trim());
+        else if (Array.isArray(arg)) tagsOut.push(...flattenConditions(arg));
+        else if (typeof arg === "object")
+          tagsOut.push(
+            ...Object.entries(arg)
+              .filter(([_k, v]) => !!v)
+              .map(([k, _v]) => k)
+          );
       }
       return tagsOut;
     }
@@ -76,11 +104,8 @@ function makeStyleBuilder<
       return token ? parseToken(tokens[token]) : value;
     }
 
-    function solve(
-      scope: StyleTree,
-      ...conditions: SolvableConditions[]
-    ): Styles {
-      const tags = resolveTags(conditions);
+    function solve(scope: StyleTree, ...conditions: Conditions[]): Styles {
+      const tags = flattenConditions(...conditions);
       let out = {};
 
       for (let key of Object.keys(scope)) {
@@ -101,16 +126,17 @@ function makeStyleBuilder<
     }
 
     //final component
-    return (props: PropsWithConditions) => {
-      const { style, conditions, ...rest } = props;
-      const conditionStyles = solve(tree, conditions);
+    return forwardRef<C, P & { conditions: Conditions }>((props, ref) => {
+      const { style, conditions, ...rest } = props as any;
+      const conditionStyles = solve(tree, ...conditions);
       return (
         <BaseComponent
-          {...(rest as CProps)}
+          ref={ref}
+          {...rest}
           style={Object.assign({}, conditionStyles, style)}
         />
       );
-    };
+    });
   };
 
   return {
