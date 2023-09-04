@@ -59,8 +59,8 @@ function App() {
 
   return (
     <BizzBox
-    // extended={{ ...atomic("w-full"), backgroundColor: "$yellow.500" }}
-    // with={[condition1, { [condition2]: true }]}
+      extended={{ ...atomic("w-full"), backgroundColor: "$yellow.500" }}
+      with={[condition1, { [condition2]: true }]}
     >
       <Text>hello?</Text>
     </BizzBox>

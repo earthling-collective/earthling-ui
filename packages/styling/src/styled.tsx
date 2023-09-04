@@ -32,7 +32,8 @@ type StyleBuilder<C extends ComponentType<P>, P = ComponentProps<C>> = {
   build: () => ForwardRefExoticComponent<
     PropsWithoutRef<
       P & {
-        conditions: Conditions;
+        extended?: StyleTree;
+        with?: Conditions;
       }
     > &
       RefAttributes<C>
@@ -126,17 +127,19 @@ function makeStyleBuilder<
     }
 
     //final component
-    return forwardRef<C, P & { conditions: Conditions }>((props, ref) => {
-      const { style, conditions, ...rest } = props as any;
-      const conditionStyles = solve(tree, ...conditions);
-      return (
-        <BaseComponent
-          ref={ref}
-          {...rest}
-          style={Object.assign({}, conditionStyles, style)}
-        />
-      );
-    });
+    return forwardRef<C, P & { extended?: StyleTree; with?: Conditions }>(
+      (props, ref) => {
+        const { style, extended, conditions, ...rest } = props as any;
+        const conditionStyles = solve(tree, ...conditions);
+        return (
+          <BaseComponent
+            ref={ref}
+            {...rest}
+            style={Object.assign({}, conditionStyles, style)}
+          />
+        );
+      }
+    );
   };
 
   return {
