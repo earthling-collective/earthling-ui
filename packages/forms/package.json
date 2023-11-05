@@ -1,0 +1,61 @@
+{
+  "name": "@earthling-ui/forms",
+  "version": "1.0.0-alpha.0",
+  "type": "module",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sFrady20/earthling-ui",
+    "directory": "packages/forms"
+  },
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
+  "author": {
+    "email": "sFrady20@gmail.com",
+    "name": "Steven Frady",
+    "url": "https://stevenfrady.com"
+  },
+  "scripts": {
+    "build": "vite build"
+  },
+  "devDependencies": {
+    "@earthling-ui/config": "workspace:^",
+    "@types/node": "^20.8.10",
+    "@types/react": "^18.2.35",
+    "@vitejs/plugin-react": "^4.1.1",
+    "immer": "^10.0.3",
+    "react": "^18.2.0",
+    "react-native": "^0.72.0",
+    "typescript": "^5.2.2",
+    "vite": "^4.5.0",
+    "vite-plugin-dts": "^3.6.3",
+    "zustand": "^4.4.6"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "react-native": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.umd.cjs"
+    },
+    "./types": "./lib/types.d.ts"
+  }
+}
