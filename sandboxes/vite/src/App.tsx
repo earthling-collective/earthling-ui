@@ -1,5 +1,4 @@
 import { Box, Text } from "@earthling-ui/primitives";
-import { atomic, defaultColorTokens, styled } from "@earthling-ui/styling";
 import { useEffect, useState } from "react";
 
 atomic("w-full h-[300px] inset-0");
