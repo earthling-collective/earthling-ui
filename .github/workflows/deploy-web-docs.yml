@@ -1,17 +1,37 @@
 name: Deploy Web Docs to Vercel
+
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
   VERCEL_PROJECT_ID: prj_ks08sdZrKji4i2bkasWDri5t65GS
+
 on:
+  workflow_dispatch:
   push:
     branches:
       - main
+    paths:
+      - apps/web-docs/**/*
+
+concurrency:
+  group: deploy-web-docs
+  cancel-in-progress: true
+
 jobs:
   Deploy-Production:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - name: Install
-        run: yarn install
+
+      - name: Regenerate node_modules from cache
+        uses: actions/cache@v3
+        with:
+          path: |
+            .yarn
+            **/node_modules
+          key: ${{ runner.os }}-install-${{ hashFiles('**/yarn.lock') }}-2
+
+      - name: Install project dependencies
+        run: yarn install --immutable
+
       - name: Deploy
         run: yarn workspace earthling-ui-web-docs deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
