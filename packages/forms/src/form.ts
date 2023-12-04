@@ -59,7 +59,12 @@ export function useForm<
   }, [data]);
 
   const reset = useCallback(() => {
-    data.setState(defaultValues, true);
+    data.setState(
+      Object.fromEntries(
+        Object.entries(defaultValues).map(([k, v]) => [k, { value: v }])
+      ),
+      true
+    );
   }, [defaultValues]);
 
   const useFormField = useCallback(function <K extends keyof D & keyof S>(

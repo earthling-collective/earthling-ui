@@ -1,17 +1,14 @@
+import Image from "next/image";
 import Content from "./content.mdx";
-import { Box } from "@earthling-ui/themed";
 
 export default function HomePage() {
   return (
     <main>
-      <Box
-        className=""
-        sx={{
-          borderRadius: "8px",
-          width: "80px",
-          height: "80px",
-          backgroundColor: "black",
-        }}
+      <Image
+        src={"/favicon/android-chrome-192x192.png"}
+        width={44}
+        height={44}
+        alt="Earthling-UI"
       />
       <Content />
     </main>

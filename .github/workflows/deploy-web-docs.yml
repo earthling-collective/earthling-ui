@@ -1,0 +1,17 @@
+name: Deploy Web Docs to Vercel
+env:
+  VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+  VERCEL_PROJECT_ID: prj_ks08sdZrKji4i2bkasWDri5t65GS
+on:
+  push:
+    branches:
+      - main
+jobs:
+  Deploy-Production:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Install
+        run: yarn install
+      - name: Deploy
+        run: yarn workspace @earthling-ui/web-docs deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
