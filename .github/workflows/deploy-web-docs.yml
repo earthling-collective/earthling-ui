@@ -14,4 +14,4 @@ jobs:
       - name: Install
         run: yarn install
       - name: Deploy
-        run: yarn workspace @earthling-ui/web-docs deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+        run: yarn workspace earthling-ui-web-docs deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
