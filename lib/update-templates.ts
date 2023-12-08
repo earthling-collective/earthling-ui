@@ -92,7 +92,7 @@ async function generate(name: string, options: GeneratorOptions) {
   await writeFile(packageJsonPath, JSON.stringify(packageJson, null, "  "));
 
   //install dependencies
-  await exec(`yarn install`);
+  await exec(`yarn install --no-immutable`);
 
   //
   async function installLibraries(libraries: Record<string, LibraryConfig>) {
