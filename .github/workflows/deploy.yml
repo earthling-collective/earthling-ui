@@ -1,4 +1,4 @@
-name: Deploy Web Docs to Vercel
+name: Deploy
 
 env:
   VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
@@ -13,11 +13,11 @@ on:
       - apps/web-docs/**/*
 
 concurrency:
-  group: deploy-web-docs
+  group: deploy
   cancel-in-progress: true
 
 jobs:
-  Deploy-Production:
+  deploy-job:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -28,10 +28,10 @@ jobs:
           path: |
             .yarn
             **/node_modules
-          key: ${{ runner.os }}-install-${{ hashFiles('**/yarn.lock') }}-2
+          key: ${{ runner.os }}-install-${{ hashFiles('**/yarn.lock') }}
 
       - name: Install project dependencies
         run: yarn install --immutable
 
-      - name: Deploy
+      - name: Deploy web docs
         run: yarn workspace earthling-ui-web-docs deploy --prod --token=${{ secrets.VERCEL_TOKEN }}

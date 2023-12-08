@@ -1,0 +1,9 @@
+{
+  "extends": "@earthling-ui/config/typescript/src",
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./*"]
+    }
+  },
+  "include": ["lib", "scripts"]
+}

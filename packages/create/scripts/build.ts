@@ -37,7 +37,7 @@ console.log(`templates mapped`);
 
 //run tsup
 await build({
-  entry: [join(root, "src/index.ts")],
+  entry: ["./src/index.ts"],
   format: ["cjs"],
 });
 console.log(`tsup finished`);

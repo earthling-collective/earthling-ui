@@ -10,9 +10,11 @@
   "scripts": {
     "build": "yarn workspace @earthling-ui/primitives run build",
     "clean": "tsx scripts/clean",
-    "generate-templates": "tsx scripts/generate-templates"
+    "templates:test": "",
+    "templates:update": "tsx scripts/templates/update"
   },
   "devDependencies": {
+    "@earthling-ui/config": "workspace:^",
     "@types/micromatch": "^4.0.6",
     "@types/node": "^20.10.4",
     "@types/shelljs": "^0.8.15",

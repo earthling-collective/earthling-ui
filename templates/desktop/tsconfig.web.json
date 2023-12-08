@@ -13,12 +13,6 @@
     "paths": {
       "@renderer/*": [
         "src/renderer/src/*"
-      ],
-      "@preload/*": [
-        "src/preload/*"
-      ],
-      "@main/*": [
-        "src/main/*"
       ]
     }
   }
