@@ -1,11 +1,11 @@
 {
   "name": "earthling-ui-sandbox-vite",
-  "private": true,
   "version": "0.0.0",
+  "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
     "build": "tsc && vite build",
+    "dev": "vite",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -13,6 +13,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
+    "@earthling-ui/cli": "workspace:^",
     "@earthling-ui/primitives": "workspace:^",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",

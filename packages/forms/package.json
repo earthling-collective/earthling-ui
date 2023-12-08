@@ -1,21 +1,34 @@
 {
   "name": "@earthling-ui/forms",
   "version": "1.0.0-alpha.2",
-  "type": "module",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
     "directory": "packages/forms"
   },
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "license": "MIT",
   "author": {
-    "email": "sFrady20@gmail.com",
     "name": "Steven Frady",
+    "email": "sFrady20@gmail.com",
     "url": "https://stevenfrady.com"
   },
+  "type": "module",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.umd.cjs"
+    },
+    "./types": "./lib/types.d.ts"
+  },
+  "main": "./dist/index.umd.cjs",
+  "module": "./dist/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "vite build"
   },
@@ -46,18 +59,5 @@
     "react-native": {
       "optional": true
     }
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "main": "./dist/index.umd.cjs",
-  "module": "./dist/index.js",
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "default": "./dist/index.umd.cjs"
-    },
-    "./types": "./lib/types.d.ts"
   }
 }

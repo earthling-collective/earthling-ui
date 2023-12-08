@@ -1,59 +1,21 @@
 {
   "name": "@earthling-ui/primitives",
   "version": "1.0.0-alpha.4",
-  "type": "module",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
     "directory": "packages/primitives"
   },
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "license": "MIT",
   "author": {
-    "email": "sFrady20@gmail.com",
     "name": "Steven Frady",
+    "email": "sFrady20@gmail.com",
     "url": "https://stevenfrady.com"
   },
-  "scripts": {
-    "build": "yarn build:web; yarn build:native;",
-    "build:web": "vite build -c vite.config.web.ts",
-    "build:native": "vite build -c vite.config.native.ts"
-  },
-  "devDependencies": {
-    "@earthling-ui/config": "workspace:^",
-    "@types/node": "^20.10.0",
-    "@types/react": "^18.2.39",
-    "@vitejs/plugin-react": "^4.2.0",
-    "clsx": "^2.0.0",
-    "react": "^18.2.0",
-    "react-native": "^0.72.7",
-    "typescript": "^5.3.2",
-    "vite": "^5.0.3",
-    "vite-plugin-dts": "^3.6.3"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-native": "*"
-  },
-  "peerDependenciesMeta": {
-    "react-dom": {
-      "optional": true
-    },
-    "react-native": {
-      "optional": true
-    }
-  },
-  "files": [
-    "dist",
-    "lib",
-    "README.md"
-  ],
-  "main": "./dist/web/index.cjs",
-  "module": "./dist/web/index.js",
-  "react-native": "./dist/native/index.js",
+  "type": "module",
   "imports": {
     "#*": {
       "types": {
@@ -94,6 +56,44 @@
       "react-native": "./lib/types.native.d.ts",
       "import": "./types.web.d.ts",
       "default": "./types.web.d.ts"
+    }
+  },
+  "main": "./dist/web/index.cjs",
+  "module": "./dist/web/index.js",
+  "react-native": "./dist/native/index.js",
+  "files": [
+    "dist",
+    "lib",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "yarn build:web; yarn build:native;",
+    "build:native": "vite build -c vite.config.native.ts",
+    "build:web": "vite build -c vite.config.web.ts"
+  },
+  "devDependencies": {
+    "@earthling-ui/config": "workspace:^",
+    "@types/node": "^20.10.0",
+    "@types/react": "^18.2.39",
+    "@vitejs/plugin-react": "^4.2.0",
+    "clsx": "^2.0.0",
+    "react": "^18.2.0",
+    "react-native": "^0.72.7",
+    "typescript": "^5.3.2",
+    "vite": "^5.0.3",
+    "vite-plugin-dts": "^3.6.3"
+  },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "react-native": "*"
+  },
+  "peerDependenciesMeta": {
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
     }
   }
 }

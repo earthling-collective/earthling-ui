@@ -1,13 +1,13 @@
 {
-  "name": "create-earthling-app",
-  "version": "1.0.0-alpha.4",
+  "name": "@earthling-ui/cli",
+  "version": "1.0.0-alpha.0",
   "bugs": {
     "url": "https://github.com/sFrady20/earthling-ui/issues"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
-    "directory": "packages/create"
+    "directory": "packages/cli"
   },
   "license": "MIT",
   "author": {

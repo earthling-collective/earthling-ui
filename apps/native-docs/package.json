@@ -1,11 +1,12 @@
 {
   "name": "earthling-ui-native-docs",
   "version": "1.0.0-alpha.0",
+  "private": true,
   "main": "expo-router/entry",
   "scripts": {
-    "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
+    "start": "expo start",
     "web": "expo start --web"
   },
   "dependencies": {
@@ -24,6 +25,5 @@
   "devDependencies": {
     "@babel/core": "^7.23.3",
     "@types/react": "^18.2.39"
-  },
-  "private": true
+  }
 }

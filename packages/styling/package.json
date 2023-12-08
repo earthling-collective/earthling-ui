@@ -1,25 +1,59 @@
 {
   "name": "@earthling-ui/styling",
   "version": "1.0.0-alpha.2",
-  "type": "module",
-  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
     "directory": "packages/primitives"
   },
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "license": "MIT",
   "author": {
-    "email": "sFrady20@gmail.com",
     "name": "Steven Frady",
+    "email": "sFrady20@gmail.com",
     "url": "https://stevenfrady.com"
   },
+  "type": "module",
+  "imports": {
+    "#*": {
+      "react-native": "./src/*/index.native.tsx",
+      "import": "./src/*/index.web.tsx",
+      "default": "./src/*/index.tsx"
+    }
+  },
+  "exports": {
+    ".": {
+      "react-native": {
+        "types": "./dist/native/index.d.ts",
+        "default": "./dist/native/index.js"
+      },
+      "import": {
+        "types": "./dist/web/index.d.ts",
+        "default": "./dist/web/index.js"
+      },
+      "types": "./dist/web/index.d.ts",
+      "default": "./dist/web/index.umd.cjs"
+    },
+    "./types": "./lib/types.d.ts"
+  },
+  "main": "./dist/web/index.umd.cjs",
+  "module": "./dist/web/index.js",
+  "react-native": "./dist/native/index.js",
+  "files": [
+    "dist",
+    "README.md"
+  ],
   "scripts": {
     "build": "yarn build:web; yarn build:native;",
-    "build:web": "vite build -c vite.config.web.ts",
-    "build:native": "vite build -c vite.config.native.ts"
+    "build:native": "vite build -c vite.config.native.ts",
+    "build:web": "vite build -c vite.config.web.ts"
+  },
+  "dependencies": {
+    "@unocss/core": "^0.57.7",
+    "@unocss/preset-uno": "^0.57.7",
+    "css": "^3.0.0"
   },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
@@ -47,39 +81,5 @@
     "react-native": {
       "optional": true
     }
-  },
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "main": "./dist/web/index.umd.cjs",
-  "module": "./dist/web/index.js",
-  "react-native": "./dist/native/index.js",
-  "imports": {
-    "#*": {
-      "react-native": "./src/*/index.native.tsx",
-      "import": "./src/*/index.web.tsx",
-      "default": "./src/*/index.tsx"
-    }
-  },
-  "exports": {
-    ".": {
-      "react-native": {
-        "types": "./dist/native/index.d.ts",
-        "default": "./dist/native/index.js"
-      },
-      "import": {
-        "types": "./dist/web/index.d.ts",
-        "default": "./dist/web/index.js"
-      },
-      "types": "./dist/web/index.d.ts",
-      "default": "./dist/web/index.umd.cjs"
-    },
-    "./types": "./lib/types.d.ts"
-  },
-  "dependencies": {
-    "@unocss/core": "^0.57.7",
-    "@unocss/preset-uno": "^0.57.7",
-    "css": "^3.0.0"
   }
 }
