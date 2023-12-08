@@ -11,7 +11,7 @@
   "dependencies": {
     "@earthling-ui/cli": "workspace:*",
     "@supabase/supabase-js": "^2.39.0",
-    "framer-motion": "^10.16.15",
+    "framer-motion": "^10.16.16",
     "immer": "^10.0.3",
     "luxon": "^3.4.4",
     "next": "14.0.4",
