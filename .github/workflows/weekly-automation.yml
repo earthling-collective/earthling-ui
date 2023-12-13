@@ -32,7 +32,8 @@ jobs:
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v5
         with:
-          token: ${{ secrets.PAT }}
+          branch-suffix: short-commit-hash
           commit-message: Update templates
           committer: weekly-automation-workflow<sfrady20@gmail.com>
           delete-branch: true
+          token: ${{ secrets.PAT }}

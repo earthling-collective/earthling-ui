@@ -10,7 +10,6 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@earthling-ui/cli": "workspace:*",
     "@supabase/supabase-js": "^2.39.0",
     "expo": "~49.0.15",
     "expo-status-bar": "~1.6.0",
@@ -24,6 +23,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",
-    "@types/luxon": "^3.3.7"
+    "@types/luxon": "^3.3.7",
+    "earthling-ui": "workspace:*"
   }
 }

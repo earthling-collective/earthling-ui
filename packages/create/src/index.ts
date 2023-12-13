@@ -90,7 +90,7 @@ async function emptyDir(dir: string) {
   const projectPath = join(process.cwd(), `./${answers.name.toLowerCase()}`);
   if (!existsSync(projectPath)) await mkdir(projectPath);
 
-  //make sure directory is
+  //make sure directory is empty
   if (!(await isEmpty(projectPath))) {
     if (
       (
@@ -105,6 +105,7 @@ async function emptyDir(dir: string) {
     )
       await emptyDir(projectPath);
     else {
+      // if cancel, exit
       console.log(colors.red("❌ Cancelled"));
       process.exit(1);
     }
@@ -117,11 +118,13 @@ async function emptyDir(dir: string) {
   const updatedPackage = template.packageJson;
   updatedPackage.name = answers.name;
   updatedPackage.version = "1.0.0-alpha.0";
+  // remove unneeded fields
   delete updatedPackage.description;
   delete updatedPackage.license;
   delete updatedPackage.repository;
   delete updatedPackage.bugs;
   delete updatedPackage.author;
+  //save updated package json
   await writeFile(
     resolve(projectPath, "./package.json"),
     await format(JSON.stringify(updatedPackage), { parser: "json" })

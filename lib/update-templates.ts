@@ -24,7 +24,7 @@ type LibraryConfig = {
 };
 const extraLibraries: Record<string, LibraryConfig> = {
   "@supabase/supabase-js": {},
-  "@earthling-ui/cli": {
+  "earthling-ui": {
     dev: true,
     version: "workspace:*",
   },

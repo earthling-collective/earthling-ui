@@ -13,11 +13,11 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@earthling-ui/cli": "workspace:^",
     "@earthling-ui/primitives": "workspace:^",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.0",
+    "earthling-ui": "workspace:^",
     "typescript": "^5.3.2",
     "vite": "^5.0.3"
   }
