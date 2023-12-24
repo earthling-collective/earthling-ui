@@ -4656,12 +4656,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/gotrue-js@npm:^2.56.0":
-  version: 2.60.1
-  resolution: "@supabase/gotrue-js@npm:2.60.1"
+"@supabase/gotrue-js@npm:^2.60.0":
+  version: 2.62.0
+  resolution: "@supabase/gotrue-js@npm:2.62.0"
   dependencies:
     "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 93b51c0542369151468d26b48980e966c5630c9e9f1207905137225d6f7fc91448a23b2bc6ae787ae4ad135526807b31ac6747ea230b6cee71340d5cd73b9600
+  checksum: b5ad6851f8b14cf26023e0fd75d9b0d053ed318f8553f5473c5663a54a6826443490ad974675df5b163265b6efa4fcf7c80406bbf9a0aa06715e15641d4c61b0
   languageName: node
   linkType: hard
 
@@ -4704,17 +4704,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.39.0":
-  version: 2.39.0
-  resolution: "@supabase/supabase-js@npm:2.39.0"
+"@supabase/supabase-js@npm:^2.39.1":
+  version: 2.39.1
+  resolution: "@supabase/supabase-js@npm:2.39.1"
   dependencies:
     "@supabase/functions-js": "npm:^2.1.5"
-    "@supabase/gotrue-js": "npm:^2.56.0"
+    "@supabase/gotrue-js": "npm:^2.60.0"
     "@supabase/node-fetch": "npm:^2.6.14"
     "@supabase/postgrest-js": "npm:^1.8.6"
     "@supabase/realtime-js": "npm:^2.8.4"
     "@supabase/storage-js": "npm:^2.5.4"
-  checksum: 5719ef47ad295f2e53a7a53543c6574ee4b07cce43d3a9ba1b89f03463c56bbd87b83580aebd778decb4a8b4a845ace489ece715f6d07527a1115bcfc1a72ca2
+  checksum: e673a642eabbbebe5e74e49fabe91da6ac41f806c58766da356d9d44fc251ea32a0a6db7199f200fdb84e11eded4ed278b4615c1b810a85ac2ef4a189a4a38c7
   languageName: node
   linkType: hard
 
@@ -6383,7 +6383,7 @@ __metadata:
   resolution: "app-template@workspace:templates/app"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@supabase/supabase-js": "npm:^2.39.0"
+    "@supabase/supabase-js": "npm:^2.39.1"
     "@types/luxon": "npm:^3.3.7"
     earthling-ui: "workspace:*"
     expo: "npm:~49.0.15"
@@ -8358,7 +8358,7 @@ __metadata:
     "@electron-toolkit/preload": "npm:^2.0.0"
     "@electron-toolkit/tsconfig": "npm:^1.0.1"
     "@electron-toolkit/utils": "npm:^2.0.0"
-    "@supabase/supabase-js": "npm:^2.39.0"
+    "@supabase/supabase-js": "npm:^2.39.1"
     "@types/luxon": "npm:^3.3.7"
     "@types/node": "npm:^18.17.5"
     "@types/react": "npm:^18.2.20"
@@ -16713,7 +16713,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "spa-template@workspace:templates/spa"
   dependencies:
-    "@supabase/supabase-js": "npm:^2.39.0"
+    "@supabase/supabase-js": "npm:^2.39.1"
     "@types/luxon": "npm:^3.3.7"
     "@types/react": "npm:^18.2.43"
     "@types/react-dom": "npm:^18.2.17"
@@ -16778,7 +16778,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ssr-template@workspace:templates/ssr"
   dependencies:
-    "@supabase/supabase-js": "npm:^2.39.0"
+    "@supabase/supabase-js": "npm:^2.39.1"
     "@types/luxon": "npm:^3.3.7"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
