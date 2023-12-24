@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.0",
+    "@supabase/supabase-js": "^2.39.1",
     "earthling-ui": "workspace:*",
     "framer-motion": "^10.16.16",
     "immer": "^10.0.3",
