@@ -1,9 +1,7 @@
 {
   "name": "create-earthling-app",
   "version": "1.0.0-alpha.4",
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "bugs": { "url": "https://github.com/sFrady20/earthling-ui/issues" },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
@@ -18,16 +16,9 @@
   "type": "module",
   "main": "dist/index.cjs",
   "bin": "dist/index.cjs",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "scripts": {
-    "build": "tsx scripts/build.ts"
-  },
-  "dependencies": {
-    "prettier": "^3.1.0"
-  },
+  "files": ["dist", "README.md"],
+  "scripts": { "build": "tsx scripts/build.ts" },
+  "dependencies": { "prettier": "^3.1.0" },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
     "@types/inquirer": "^9.0.7",

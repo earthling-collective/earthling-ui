@@ -22,8 +22,5 @@
     "zod": "^3.22.4",
     "zustand": "^4.4.7"
   },
-  "devDependencies": {
-    "@babel/core": "^7.20.0",
-    "@types/luxon": "^3.3.7"
-  }
+  "devDependencies": { "@babel/core": "^7.20.0", "@types/luxon": "^3.3.7" }
 }
