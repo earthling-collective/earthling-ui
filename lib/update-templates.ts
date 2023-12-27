@@ -54,7 +54,7 @@ export async function updateTemplates() {
     createCmd: `yarn create @quick-start/electron desktop --template react-ts --skip`,
   });
   await generate("app", {
-    createCmd: `yarn create expo-app app`,
+    createCmd: `yarn create expo-app -t expo-template-blank-typescript app`,
   });
 }
 
