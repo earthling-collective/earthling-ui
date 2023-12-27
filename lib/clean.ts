@@ -1,6 +1,7 @@
 import { sortPackageJson } from "sort-package-json";
 import { glob } from "fast-glob";
 import { readFile, writeFile } from "fs/promises";
+import {format} from "prettier";
 
 export async function clean() {
   await sortPackageJsons();
@@ -15,12 +16,13 @@ async function sortPackageJsons() {
     "templates/*/package.json",
   ]);
 
-  await Promise.allSettled(
+  const result = await Promise.allSettled(
     globbed.map(async (x) => {
       console.log(`sorting "${x}"`);
-      let json = JSON.parse((await readFile(x)).toString("utf-8"));
+      let json: object = JSON.parse((await readFile(x)).toString("utf-8"));
       json = sortPackageJson(json);
-      await writeFile(x, JSON.stringify(json, null, "  "));
+      await writeFile(x, await format(JSON.stringify(json), {parser: "json"}));
     })
   );
+  for (let r of result) if (r.status === "rejected") console.log(r.reason);
 }
