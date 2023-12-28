@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { cp, mkdir, readFile, readdir, rm, stat, writeFile } from "fs/promises";
 import { join, resolve } from "path";
 import { Stats, existsSync } from "fs";

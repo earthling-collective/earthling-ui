@@ -1,7 +1,9 @@
 {
   "name": "create-earthling-app",
-  "version": "1.0.0-alpha.4",
-  "bugs": { "url": "https://github.com/sFrady20/earthling-ui/issues" },
+  "version": "1.0.0-alpha.8",
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
@@ -13,12 +15,20 @@
     "email": "sFrady20@gmail.com",
     "url": "https://stevenfrady.com"
   },
-  "type": "module",
-  "main": "dist/index.cjs",
-  "bin": "dist/index.cjs",
-  "files": ["dist", "README.md"],
-  "scripts": { "build": "tsx scripts/build.ts" },
-  "dependencies": { "prettier": "^3.1.0" },
+  "main": "dist/index.js",
+  "bin": {
+    "create-earthling-app": "dist/index.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsup src/index.ts --format \"cjs\""
+  },
+  "dependencies": {
+    "prettier": "^3.1.0"
+  },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
     "@types/inquirer": "^9.0.7",
@@ -27,7 +37,6 @@
     "commander": "^11.1.0",
     "inquirer": "^9.2.12",
     "tsup": "^8.0.1",
-    "tsx": "^4.6.2",
     "typescript": "^5.3.3"
   },
   "packageManager": "yarn@3.6.0"

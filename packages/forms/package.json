@@ -1,7 +1,9 @@
 {
   "name": "@earthling-ui/forms",
   "version": "1.0.0-alpha.2",
-  "bugs": { "url": "https://github.com/sFrady20/earthling-ui/issues" },
+  "bugs": {
+    "url": "https://github.com/sFrady20/earthling-ui/issues"
+  },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
@@ -15,14 +17,25 @@
   },
   "type": "module",
   "exports": {
-    ".": { "types": "./dist/index.d.ts", "default": "./dist/index.umd.cjs" },
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.umd.cjs"
+    },
     "./types": "./lib/types.d.ts"
   },
   "main": "./dist/index.umd.cjs",
   "module": "./dist/index.js",
-  "files": ["dist", "README.md"],
-  "scripts": { "build": "vite build" },
-  "dependencies": { "immer": "^10", "zustand": "^4" },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "vite build"
+  },
+  "dependencies": {
+    "immer": "^10",
+    "zustand": "^4"
+  },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
     "@types/node": "^20.10.0",
@@ -34,9 +47,17 @@
     "vite": "^5.0.3",
     "vite-plugin-dts": "^3.6.3"
   },
-  "peerDependencies": { "react": "*", "react-dom": "*", "react-native": "*" },
+  "peerDependencies": {
+    "react": "*",
+    "react-dom": "*",
+    "react-native": "*"
+  },
   "peerDependenciesMeta": {
-    "react-dom": { "optional": true },
-    "react-native": { "optional": true }
+    "react-dom": {
+      "optional": true
+    },
+    "react-native": {
+      "optional": true
+    }
   }
 }

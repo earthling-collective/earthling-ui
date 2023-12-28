@@ -1,7 +1,12 @@
 {
   "name": "earthling",
   "private": true,
-  "workspaces": ["apps/*", "sandboxes/*", "packages/*", "templates/*"],
+  "workspaces": [
+    "apps/*",
+    "sandboxes/*",
+    "packages/*",
+    "templates/*"
+  ],
   "scripts": {
     "build": "yarn workspace @earthling-ui/primitives run build",
     "clean": "tsx scripts/clean",

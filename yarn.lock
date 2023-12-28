@@ -6387,7 +6387,6 @@ __metadata:
     "@supabase/supabase-js": "npm:^2.39.1"
     "@types/luxon": "npm:^3.3.7"
     "@types/react": "npm:~18.2.14"
-    earthling-ui: "workspace:*"
     expo: "npm:~49.0.15"
     expo-status-bar: "npm:~1.6.0"
     immer: "npm:^10.0.3"
@@ -7933,10 +7932,9 @@ __metadata:
     inquirer: "npm:^9.2.12"
     prettier: "npm:^3.1.0"
     tsup: "npm:^8.0.1"
-    tsx: "npm:^4.6.2"
     typescript: "npm:^5.3.3"
   bin:
-    create-earthling-app: dist/index.cjs
+    create-earthling-app: dist/index.js
   languageName: unknown
   linkType: soft
 
@@ -8367,7 +8365,6 @@ __metadata:
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
     "@vitejs/plugin-react": "npm:^4.0.4"
-    earthling-ui: "workspace:*"
     electron: "npm:^25.6.0"
     electron-builder: "npm:^24.6.3"
     electron-vite: "npm:^1.0.27"
@@ -8688,7 +8685,7 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"earthling-ui@workspace:*, earthling-ui@workspace:^, earthling-ui@workspace:packages/cli":
+"earthling-ui@workspace:^, earthling-ui@workspace:packages/cli":
   version: 0.0.0-use.local
   resolution: "earthling-ui@workspace:packages/cli"
   dependencies:
@@ -16723,7 +16720,6 @@ __metadata:
     "@typescript-eslint/eslint-plugin": "npm:^6.14.0"
     "@typescript-eslint/parser": "npm:^6.14.0"
     "@vitejs/plugin-react": "npm:^4.2.1"
-    earthling-ui: "workspace:*"
     eslint: "npm:^8.55.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.5"
@@ -16787,7 +16783,6 @@ __metadata:
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     autoprefixer: "npm:^10.0.1"
-    earthling-ui: "workspace:*"
     framer-motion: "npm:^10.16.16"
     immer: "npm:^10.0.3"
     luxon: "npm:^3.4.4"
