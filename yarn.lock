@@ -4674,12 +4674,12 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/postgrest-js@npm:^1.8.6":
-  version: 1.9.0
-  resolution: "@supabase/postgrest-js@npm:1.9.0"
+"@supabase/postgrest-js@npm:^1.9.0":
+  version: 1.9.1
+  resolution: "@supabase/postgrest-js@npm:1.9.1"
   dependencies:
     "@supabase/node-fetch": "npm:^2.6.14"
-  checksum: 4de582f3c0990de458a3b186be96ee32b22f4cc0110671a4280b852139c96386b91e135752f210de272825b81980394590538f3a7b9395f71f3e2196ba3a2041
+  checksum: b43c7a9cab0f4a0e832856cfb97ef3d47425d8dc64ca76c08c58d243c67aeacc918f069957f8226f20340bba26439b8f229ec71c22af2a62479b13329e24b014
   languageName: node
   linkType: hard
 
@@ -4704,17 +4704,17 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.39.1":
-  version: 2.39.1
-  resolution: "@supabase/supabase-js@npm:2.39.1"
+"@supabase/supabase-js@npm:^2.39.2":
+  version: 2.39.2
+  resolution: "@supabase/supabase-js@npm:2.39.2"
   dependencies:
     "@supabase/functions-js": "npm:^2.1.5"
     "@supabase/gotrue-js": "npm:^2.60.0"
     "@supabase/node-fetch": "npm:^2.6.14"
-    "@supabase/postgrest-js": "npm:^1.8.6"
+    "@supabase/postgrest-js": "npm:^1.9.0"
     "@supabase/realtime-js": "npm:^2.8.4"
     "@supabase/storage-js": "npm:^2.5.4"
-  checksum: e673a642eabbbebe5e74e49fabe91da6ac41f806c58766da356d9d44fc251ea32a0a6db7199f200fdb84e11eded4ed278b4615c1b810a85ac2ef4a189a4a38c7
+  checksum: 838f66b78b118087c90d2f9cf33aacd8118dc019b4d0ba5746faf45862ee4035c22f86e6d045a21b4a08a1220b41cc9838f0934cf45d3adc357ae8250581ef2d
   languageName: node
   linkType: hard
 
@@ -5109,10 +5109,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@types/luxon@npm:^3.3.7":
-  version: 3.3.7
-  resolution: "@types/luxon@npm:3.3.7"
-  checksum: 282ac72fd55da0c9d57f376ba9061ce83506cf6239c32259dacde0800964089f6183d2e449ef2ddd89b079fb8bfdffd7e5dbf187eb5c9f106aeaeca2aa60ed09
+"@types/luxon@npm:^3.4.0":
+  version: 3.4.0
+  resolution: "@types/luxon@npm:3.4.0"
+  checksum: cafe745e81765e71230a42520caf77d69556e22d50a464dcebd3b7da3989ab9c137de54dbfef60639ea4274326a57b762120c0088d3fb093c25f1ca752146c64
   languageName: node
   linkType: hard
 
@@ -6384,8 +6384,8 @@ __metadata:
   resolution: "app-template@workspace:templates/app"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@supabase/supabase-js": "npm:^2.39.1"
-    "@types/luxon": "npm:^3.3.7"
+    "@supabase/supabase-js": "npm:^2.39.2"
+    "@types/luxon": "npm:^3.4.0"
     "@types/react": "npm:~18.2.14"
     expo: "npm:~49.0.15"
     expo-status-bar: "npm:~1.6.0"
@@ -8359,8 +8359,8 @@ __metadata:
     "@electron-toolkit/preload": "npm:^2.0.0"
     "@electron-toolkit/tsconfig": "npm:^1.0.1"
     "@electron-toolkit/utils": "npm:^2.0.0"
-    "@supabase/supabase-js": "npm:^2.39.1"
-    "@types/luxon": "npm:^3.3.7"
+    "@supabase/supabase-js": "npm:^2.39.2"
+    "@types/luxon": "npm:^3.4.0"
     "@types/node": "npm:^18.17.5"
     "@types/react": "npm:^18.2.20"
     "@types/react-dom": "npm:^18.2.7"
@@ -8370,7 +8370,7 @@ __metadata:
     electron-vite: "npm:^1.0.27"
     eslint: "npm:^8.47.0"
     eslint-plugin-react: "npm:^7.33.2"
-    framer-motion: "npm:^10.16.16"
+    framer-motion: "npm:^10.17.9"
     immer: "npm:^10.0.3"
     luxon: "npm:^3.4.4"
     prettier: "npm:^3.0.2"
@@ -10252,9 +10252,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^10.16.16":
-  version: 10.16.16
-  resolution: "framer-motion@npm:10.16.16"
+"framer-motion@npm:^10.17.9":
+  version: 10.17.9
+  resolution: "framer-motion@npm:10.17.9"
   dependencies:
     "@emotion/is-prop-valid": "npm:^0.8.2"
     tslib: "npm:^2.4.0"
@@ -10269,7 +10269,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: d0623ca22e2e6d3450de28de76cb83916606e0fe9d8f15c84f086c8b517fc422b0706f543699e5f692136c8c1dbe6f843c32eae5999322a47a3cd3655b6ece2a
+  checksum: 7ce3449885c49ea08cda429d82da45e688e321c49ac0443e56b595161e0a8b6d468efba7a13bf55194e7c0f030356383d9b38ca0e9ea48bcc113172b548c1876
   languageName: node
   linkType: hard
 
@@ -16713,8 +16713,8 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "spa-template@workspace:templates/spa"
   dependencies:
-    "@supabase/supabase-js": "npm:^2.39.1"
-    "@types/luxon": "npm:^3.3.7"
+    "@supabase/supabase-js": "npm:^2.39.2"
+    "@types/luxon": "npm:^3.4.0"
     "@types/react": "npm:^18.2.43"
     "@types/react-dom": "npm:^18.2.17"
     "@typescript-eslint/eslint-plugin": "npm:^6.14.0"
@@ -16723,7 +16723,7 @@ __metadata:
     eslint: "npm:^8.55.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.5"
-    framer-motion: "npm:^10.16.16"
+    framer-motion: "npm:^10.17.9"
     immer: "npm:^10.0.3"
     luxon: "npm:^3.4.4"
     react: "npm:^18.2.0"
@@ -16777,13 +16777,13 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "ssr-template@workspace:templates/ssr"
   dependencies:
-    "@supabase/supabase-js": "npm:^2.39.1"
-    "@types/luxon": "npm:^3.3.7"
+    "@supabase/supabase-js": "npm:^2.39.2"
+    "@types/luxon": "npm:^3.4.0"
     "@types/node": "npm:^20"
     "@types/react": "npm:^18"
     "@types/react-dom": "npm:^18"
     autoprefixer: "npm:^10.0.1"
-    framer-motion: "npm:^10.16.16"
+    framer-motion: "npm:^10.17.9"
     immer: "npm:^10.0.3"
     luxon: "npm:^3.4.4"
     next: "npm:14.0.4"
