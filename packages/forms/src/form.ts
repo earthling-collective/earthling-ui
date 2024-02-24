@@ -22,7 +22,7 @@ function makeStore<D extends FormData>(
 
 export function useForm<
   D extends FormData,
-  S extends FormState<D> = FormState<D>
+  S extends FormState<D> = FormState<D>,
 >(options?: {
   defaultValues?: Partial<D>;
   onSubmit?: (data: D) => Promise<void>;
@@ -86,8 +86,7 @@ export function useForm<
         ] as const,
       [data, value, errors]
     );
-  },
-  []);
+  }, []);
 
   const value = useMemo(
     () => ({

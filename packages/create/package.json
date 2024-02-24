@@ -1,6 +1,6 @@
 {
   "name": "create-earthling-app",
-  "version": "1.0.0-alpha.8",
+  "version": "1.0.0-alpha.9",
   "bugs": {
     "url": "https://github.com/sFrady20/earthling-ui/issues"
   },
@@ -24,9 +24,6 @@
   "scripts": {
     "build": "tsup src/index.ts --format \"cjs\""
   },
-  "dependencies": {
-    "prettier": "^3.1.0"
-  },
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
     "@types/inquirer": "^9.0.7",
@@ -34,6 +31,7 @@
     "colors": "^1.4.0",
     "commander": "^11.1.0",
     "inquirer": "^9.2.12",
+    "prettier": "^3.1.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
   },

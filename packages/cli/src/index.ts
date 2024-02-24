@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { blue } from "colors";
 
 (async () => {
