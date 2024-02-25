@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.39.7",
-    "framer-motion": "^11.0.5",
+    "framer-motion": "^11.0.6",
     "immer": "^10.0.3",
     "luxon": "^3.4.4",
     "next": "14.1.0",
