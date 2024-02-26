@@ -1,6 +1,0 @@
-{
-  "references": [
-    { "path": "./tsconfig.root.json" },
-    { "path": "./tsconfig.src.json" }
-  ]
-}
