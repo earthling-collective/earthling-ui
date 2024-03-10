@@ -1,9 +1,7 @@
 {
   "name": "earthling-ui",
   "version": "1.0.0-alpha.1",
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "bugs": { "url": "https://github.com/sFrady20/earthling-ui/issues" },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
@@ -18,21 +16,18 @@
   "type": "module",
   "main": "dist/index.cjs",
   "bin": "dist/index.cjs",
-  "files": [
-    "dist",
-    "README.md"
-  ],
-  "devDependencies": {
-    "@earthling-ui/config": "workspace:^",
-    "@types/inquirer": "^9",
-    "@types/node": "^20.10.0",
-    "colors": "^1.4.0"
-  },
+  "files": ["dist", "README.md"],
   "dependencies": {
     "commander": "^12.0.0",
     "inquirer": "^9.2.15",
     "prettier": "^3.1.0",
     "tsup": "^8.0.1",
     "typescript": "^5.3.3"
+  },
+  "devDependencies": {
+    "@earthling-ui/config": "workspace:^",
+    "@types/inquirer": "^9",
+    "@types/node": "^20.10.0",
+    "colors": "^1.4.0"
   }
 }
