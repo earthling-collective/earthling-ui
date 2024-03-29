@@ -1,28 +1,28 @@
 import { findUpMultiple, pathExistsSync } from "find-up";
 import { readFileSync, existsSync } from "fs";
-import { dirname, join } from "path";
-import type { PackageJson } from "type-fest";
+import { join } from "path";
+import type { PackageJson, PartialDeep } from "type-fest";
 import { parse as parseYaml } from "yaml";
 
-type ZabuKitRc = {};
+type ZabuKitRc = PartialDeep<{}>;
 
 type Dir = {
   location: string;
   rc: ZabuKitRc | null;
+  repo: GitRepo | null;
   package: PackageJson | null;
-  isMonoRepo: boolean;
 };
 
 type GitRepo = {};
 
 export async function analyzeHierarchy() {
-  let rc: ZabuKitRc;
-  let repo: GitRepo;
-  let pkg: PackageJson;
+  let finalRc: ZabuKitRc = {};
+  let parentRepo: GitRepo | null = null;
+  let parentPackage: PackageJson | null = null;
 
   let parents: Dir[] = (
     await findUpMultiple(
-      async (dir) =>
+      (dir) =>
         pathExistsSync(join(dir, "package.json")) ||
         pathExistsSync(join(dir, ".zabukitrc")) ||
         pathExistsSync(join(dir, ".git/config"))
@@ -35,8 +35,8 @@ export async function analyzeHierarchy() {
       let dir: Dir = {
         location,
         rc: null,
+        repo: null,
         package: null,
-        isMonoRepo: false,
       };
 
       //parse zabukit runtime configuration
@@ -44,9 +44,25 @@ export async function analyzeHierarchy() {
       if (existsSync(rcPath)) {
         const rc = parseYaml(readFileSync(rcPath).toString("utf-8"));
 
+        //merge rcs
+        finalRc = rc;
+
         dir = {
           ...dir,
           rc,
+        };
+      }
+
+      //parse git repo information
+      const repoPath = join(location, ".git/config");
+      if (existsSync(repoPath)) {
+        const repo = {};
+
+        if (!parentRepo) parentRepo = repo;
+
+        dir = {
+          ...dir,
+          repo,
         };
       }
 
@@ -56,12 +72,12 @@ export async function analyzeHierarchy() {
         const pkg: PackageJson = JSON.parse(
           readFileSync(packagePath).toString("utf-8")
         );
-        const isMonoRepo = !!pkg.workspaces;
+
+        if (!parentPackage) parentPackage = pkg;
 
         dir = {
           ...dir,
           package: pkg,
-          isMonoRepo,
         };
       }
 
@@ -72,5 +88,8 @@ export async function analyzeHierarchy() {
 
   return {
     parents,
+    parentRepo,
+    finalRc,
+    parentPackage: parentPackage as any as PackageJson,
   };
 }

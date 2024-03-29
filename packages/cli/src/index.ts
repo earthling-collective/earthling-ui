@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { Argument, Option, program } from "commander";
+import { Option, program } from "commander";
 import pkg from "../package.json";
 import { init } from "./actions/init";
 
@@ -10,13 +10,12 @@ program.name("🧩 zabukit").description("").version(pkg.version);
 
 program
   .command("init")
-  .addArgument(
-    new Argument("[type]").choices(["repo", "package"]).default("package")
-  )
+  .argument("<name>")
+  .addOption(new Option("-m, --mode <mode>").default("package"))
   .addOption(new Option("-t, --template <template>").default("default"))
-  .action(async (type, options) => {
+  .action(async (name, options) => {
     try {
-      await init(type, options);
+      await init(name, options);
     } catch (err) {
       console.error(`❌`, err);
     }

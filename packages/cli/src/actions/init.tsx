@@ -1,14 +1,19 @@
-import { analyzeHierarchy } from "./analyze-hierarchy";
+import { initPackage } from "./init-package";
+import { initRepo } from "./init-repo";
 
-export async function init(type: string, options: { template?: string }) {
-  const { template = "default" } = options;
+export async function init(
+  name: string,
+  options: { mode?: "repo" | "package"; template?: string }
+) {
+  const { mode = "package" } = options;
 
-  const { parentRepo } = await analyzeHierarchy();
+  switch (mode) {
+    case "package":
+      initPackage(name, options);
+      break;
 
-  if (parentRepo != null)
-    throw new Error(
-      `Can not initialize a repo here. Parent repo "${parentRepo.name}" found. Try another location.`
-    );
-
-  //
+    case "repo":
+      initRepo(name, options);
+      break;
+  }
 }
