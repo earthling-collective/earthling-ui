@@ -1,6 +1,6 @@
 import { analyzeHierarchy } from "./analyze-hierarchy";
 
-export async function initPackageSpa(name: string, options: { ci?: boolean }) {
+export async function initPackageSpa(name: string, options: InitOptions) {
   const { ci } = options;
 
   const {} = await analyzeHierarchy();

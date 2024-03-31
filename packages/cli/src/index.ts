@@ -13,6 +13,7 @@ program
   .argument("<name>")
   .option("-r, --repo")
   .addOption(new Option("-t, --template <template>").default("default"))
+  .option("--verbose")
   .option("--ci")
   .action(async (name, options) => {
     try {

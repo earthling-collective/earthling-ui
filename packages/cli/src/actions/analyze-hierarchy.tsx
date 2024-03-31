@@ -16,11 +16,13 @@ type Dir = {
 
 type GitRepo = {};
 
-export async function analyzeHierarchy() {
+export async function analyzeHierarchy(options?: { verbose?: boolean }) {
+  const { verbose } = options || {};
+
   let combinedRc: ZabuKitRc = {};
 
-  let repoDir: Dir | null = null;
-  let packageDir: Dir | null = null;
+  let repoDir = null as Dir | null;
+  let packageDir = null as Dir | null;
 
   let parents: Dir[] = (
     await findUpMultiple(
@@ -30,7 +32,7 @@ export async function analyzeHierarchy() {
         pathExistsSync(join(dir, ".git/config"))
           ? dir
           : "",
-      { type: "directory" }
+      { type: "directory", cwd: process.cwd() }
     )
   )
     .map((location) => {
@@ -87,10 +89,18 @@ export async function analyzeHierarchy() {
     })
     .filter((x) => !!x) as Dir[];
 
+  if (verbose)
+    console.log({
+      cwd: process.cwd(),
+      parents: parents.map((x) => x.location),
+      packageDir: packageDir?.location,
+      repoDir: repoDir?.location,
+    });
+
   return {
     parents,
-    packageDir: packageDir as any as Dir | null,
-    repoDir: repoDir as any as Dir | null,
+    packageDir,
+    repoDir,
     combinedRc,
   };
 }

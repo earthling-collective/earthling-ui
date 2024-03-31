@@ -1,11 +1,9 @@
-import { analyzeHierarchy } from "./analyze-hierarchy";
+import shell from "shelljs";
 
-export async function initPackageSsr(name: string, options: { ci?: boolean }) {
-  const { ci } = options;
-
-  const {} = await analyzeHierarchy();
-
-  //ensure the correct directory
+export async function initPackageSsr(name: string, options: InitOptions) {
+  shell.exec(
+    `yarn create next-app ${name} --ts --tailwind --app --src-dir --no-eslint --no-tailwind --import-alias "@/*"`
+  );
 
   console.log(`✅ SSR package "${name}" initialized`);
 }
