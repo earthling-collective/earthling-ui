@@ -1,9 +1,7 @@
 {
   "name": "@earthling-ui/registry",
   "version": "1.0.0-alpha.0",
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "bugs": { "url": "https://github.com/sFrady20/earthling-ui/issues" },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
@@ -18,10 +16,7 @@
   "type": "module",
   "exports": {},
   "main": "lib/index.tsx",
-  "files": [
-    "lib",
-    "README.md"
-  ],
+  "files": ["lib", "README.md"],
   "devDependencies": {
     "@earthling-ui/config": "workspace:^",
     "@earthling-ui/primitives": "workspace:^",

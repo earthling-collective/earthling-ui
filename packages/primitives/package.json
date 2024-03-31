@@ -1,9 +1,7 @@
 {
   "name": "@earthling-ui/primitives",
   "version": "1.0.0-alpha.4",
-  "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
-  },
+  "bugs": { "url": "https://github.com/sFrady20/earthling-ui/issues" },
   "repository": {
     "type": "git",
     "url": "https://github.com/sFrady20/earthling-ui",
@@ -61,11 +59,7 @@
   "main": "./dist/web/index.cjs",
   "module": "./dist/web/index.js",
   "react-native": "./dist/native/index.js",
-  "files": [
-    "dist",
-    "lib",
-    "README.md"
-  ],
+  "files": ["dist", "lib", "README.md"],
   "scripts": {
     "build": "yarn build:web; yarn build:native;",
     "build:native": "vite build -c vite.config.native.ts",
@@ -83,17 +77,9 @@
     "vite": "^5.0.3",
     "vite-plugin-dts": "^3.6.3"
   },
-  "peerDependencies": {
-    "react": "*",
-    "react-dom": "*",
-    "react-native": "*"
-  },
+  "peerDependencies": { "react": "*", "react-dom": "*", "react-native": "*" },
   "peerDependenciesMeta": {
-    "react-dom": {
-      "optional": true
-    },
-    "react-native": {
-      "optional": true
-    }
+    "react-dom": { "optional": true },
+    "react-native": { "optional": true }
   }
 }
