@@ -1,5 +1,6 @@
 import { findUpMultiple, pathExistsSync } from "find-up";
 import { readFileSync, existsSync } from "fs";
+import merge from "lodash/merge";
 import { join } from "path";
 import type { PackageJson, PartialDeep } from "type-fest";
 import { parse as parseYaml } from "yaml";
@@ -16,9 +17,10 @@ type Dir = {
 type GitRepo = {};
 
 export async function analyzeHierarchy() {
-  let finalRc: ZabuKitRc = {};
-  let parentRepo: GitRepo | null = null;
-  let parentPackage: PackageJson | null = null;
+  let combinedRc: ZabuKitRc = {};
+
+  let repoDir: Dir | null = null;
+  let packageDir: Dir | null = null;
 
   let parents: Dir[] = (
     await findUpMultiple(
@@ -45,7 +47,7 @@ export async function analyzeHierarchy() {
         const rc = parseYaml(readFileSync(rcPath).toString("utf-8"));
 
         //merge rcs
-        finalRc = rc;
+        combinedRc = merge(combinedRc, rc);
 
         dir = {
           ...dir,
@@ -58,12 +60,12 @@ export async function analyzeHierarchy() {
       if (existsSync(repoPath)) {
         const repo = {};
 
-        if (!parentRepo) parentRepo = repo;
-
         dir = {
           ...dir,
           repo,
         };
+
+        if (!repoDir) repoDir = dir;
       }
 
       //parse package.json information
@@ -73,23 +75,22 @@ export async function analyzeHierarchy() {
           readFileSync(packagePath).toString("utf-8")
         );
 
-        if (!parentPackage) parentPackage = pkg;
-
         dir = {
           ...dir,
           package: pkg,
         };
+
+        if (!packageDir) packageDir = dir;
       }
 
-      console.log(dir.location);
       return dir;
     })
     .filter((x) => !!x) as Dir[];
 
   return {
     parents,
-    parentRepo,
-    finalRc,
-    parentPackage: parentPackage as any as PackageJson,
+    packageDir: packageDir as any as Dir | null,
+    repoDir: repoDir as any as Dir | null,
+    combinedRc,
   };
 }

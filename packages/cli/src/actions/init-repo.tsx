@@ -1,14 +1,20 @@
 import { analyzeHierarchy } from "./analyze-hierarchy";
 
-export async function initRepo(name: string, options: { template?: string }) {
+export async function initRepo(
+  name: string,
+  options: { template?: string; ci?: boolean }
+) {
   const { template = "default" } = options;
 
-  const { parentPackage } = await analyzeHierarchy();
+  const { repoDir } = await analyzeHierarchy();
 
-  if (parentPackage != null)
+  //block creation if parent repo exists (no sub-repos)
+  if (repoDir != null)
     throw new Error(
-      `Can not initialize a repo here. Parent repo "${parentPackage.name}" found. Try another location.`
+      `Can not initialize a repo here. Parent repo found at "${repoDir.location}". Try another location.`
     );
+
+  //
 
   //
   console.log(

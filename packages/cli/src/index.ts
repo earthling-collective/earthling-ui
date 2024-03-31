@@ -11,8 +11,9 @@ program.name("🧩 zabukit").description("").version(pkg.version);
 program
   .command("init")
   .argument("<name>")
-  .addOption(new Option("-m, --mode <mode>").default("package"))
+  .option("-r, --repo")
   .addOption(new Option("-t, --template <template>").default("default"))
+  .option("--ci")
   .action(async (name, options) => {
     try {
       await init(name, options);

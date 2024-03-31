@@ -1,16 +1,21 @@
-import { analyzeHierarchy } from "./analyze-hierarchy";
+import { initPackageSpa } from "./init-package-spa";
+import { initPackageSsr } from "./init-package-ssr";
 
 export async function initPackage(
   name: string,
-  options: { template?: string }
+  options: { template?: string; ci?: boolean }
 ) {
   const { template = "default" } = options;
 
-  const {} = await analyzeHierarchy();
+  switch (template.toLocaleLowerCase()) {
+    case "default":
+    case "ssr":
+      return await initPackageSsr(name, options);
+    case "spa":
+      return await initPackageSpa(name, options);
+  }
 
-  console.log(
-    `✅ package "${name}" initialized${
-      template !== "default" ? ` using template "${template}"` : ``
-    }`
+  throw new Error(
+    `Template "${template}" not found. Try using "ssr" or "spa".`
   );
 }
