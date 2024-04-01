@@ -4968,7 +4968,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@supabase/supabase-js@npm:^2.39.8":
+"@supabase/supabase-js@npm:^2.41.1":
   version: 2.41.1
   resolution: "@supabase/supabase-js@npm:2.41.1"
   dependencies:
@@ -6565,7 +6565,7 @@ __metadata:
   resolution: "app-template@workspace:templates/app"
   dependencies:
     "@babel/core": "npm:^7.20.0"
-    "@supabase/supabase-js": "npm:^2.39.8"
+    "@supabase/supabase-js": "npm:^2.41.1"
     "@types/luxon": "npm:^3.4.2"
     "@types/react": "npm:~18.2.45"
     expo: "npm:~50.0.14"
@@ -7574,23 +7574,6 @@ __metadata:
   languageName: node
   linkType: hard
 
-"choo@workspace:packages/choo":
-  version: 0.0.0-use.local
-  resolution: "choo@workspace:packages/choo"
-  dependencies:
-    "@types/node": "npm:^20"
-    "@types/react": "npm:^18"
-    "@types/react-dom": "npm:^18"
-    autoprefixer: "npm:^10.0.1"
-    next: "npm:14.1.4"
-    postcss: "npm:^8"
-    react: "npm:^18"
-    react-dom: "npm:^18"
-    tailwindcss: "npm:^3.3.0"
-    typescript: "npm:^5"
-  languageName: unknown
-  linkType: soft
-
 "chownr@npm:^2.0.0":
   version: 2.0.0
   resolution: "chownr@npm:2.0.0"
@@ -8517,7 +8500,7 @@ __metadata:
     "@electron-toolkit/preload": "npm:^3.0.0"
     "@electron-toolkit/tsconfig": "npm:^1.0.1"
     "@electron-toolkit/utils": "npm:^3.0.0"
-    "@supabase/supabase-js": "npm:^2.39.8"
+    "@supabase/supabase-js": "npm:^2.41.1"
     "@types/luxon": "npm:^3.4.2"
     "@types/node": "npm:^18.19.9"
     "@types/react": "npm:^18.2.48"
@@ -8528,7 +8511,7 @@ __metadata:
     electron-vite: "npm:^2.0.0"
     eslint: "npm:^8.56.0"
     eslint-plugin-react: "npm:^7.33.2"
-    framer-motion: "npm:^11.0.20"
+    framer-motion: "npm:^11.0.24"
     immer: "npm:^10.0.4"
     luxon: "npm:^3.4.4"
     prettier: "npm:^3.2.4"
@@ -10484,9 +10467,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"framer-motion@npm:^11.0.20":
-  version: 11.0.23
-  resolution: "framer-motion@npm:11.0.23"
+"framer-motion@npm:^11.0.24":
+  version: 11.0.24
+  resolution: "framer-motion@npm:11.0.24"
   dependencies:
     tslib: "npm:^2.4.0"
   peerDependencies:
@@ -10500,7 +10483,7 @@ __metadata:
       optional: true
     react-dom:
       optional: true
-  checksum: 10/6e6b3a46f0914f6a2fe0a71feb6b12433bc4815fc7ef0402525f0621eb6f2cfc9594c0d8cd2f32d74748ef82541b3eca53c0672d0f4c205305883061a898946a
+  checksum: 10/b2bccbbd4cb362d8c73cce8b3d744257ba8648fc053ae60478fd70db6de0e01829e453cf4b016bb36303a91d85dad80fdcaa9ab5e3905e6bba741a2d1fb479f0
   languageName: node
   linkType: hard
 
@@ -17428,7 +17411,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "spa-template@workspace:templates/spa"
   dependencies:
-    "@supabase/supabase-js": "npm:^2.39.8"
+    "@supabase/supabase-js": "npm:^2.41.1"
     "@types/luxon": "npm:^3.4.2"
     "@types/react": "npm:^18.2.66"
     "@types/react-dom": "npm:^18.2.22"
@@ -17438,7 +17421,7 @@ __metadata:
     eslint: "npm:^8.57.0"
     eslint-plugin-react-hooks: "npm:^4.6.0"
     eslint-plugin-react-refresh: "npm:^0.4.6"
-    framer-motion: "npm:^11.0.20"
+    framer-motion: "npm:^11.0.24"
     immer: "npm:^10.0.4"
     luxon: "npm:^3.4.4"
     react: "npm:^18.2.0"
@@ -17487,6 +17470,31 @@ __metadata:
   checksum: 10/c34828732ab8509c2741e5fd1af6b767c3daf2c642f267788f933a65b1614943c282e74c4284f4fa749c264b18ee016a0d37a3e5b73aee446da46277d3a85daa
   languageName: node
   linkType: hard
+
+"ssr-template@workspace:templates/ssr":
+  version: 0.0.0-use.local
+  resolution: "ssr-template@workspace:templates/ssr"
+  dependencies:
+    "@supabase/supabase-js": "npm:^2.41.1"
+    "@types/luxon": "npm:^3.4.2"
+    "@types/node": "npm:^20"
+    "@types/react": "npm:^18"
+    "@types/react-dom": "npm:^18"
+    autoprefixer: "npm:^10.0.1"
+    framer-motion: "npm:^11.0.24"
+    immer: "npm:^10.0.4"
+    luxon: "npm:^3.4.4"
+    next: "npm:14.1.4"
+    postcss: "npm:^8"
+    react: "npm:^18"
+    react-dom: "npm:^18"
+    tailwindcss: "npm:^3.3.0"
+    typescript: "npm:^5"
+    use-immer: "npm:^0.9.0"
+    zod: "npm:^3.22.4"
+    zustand: "npm:^4.5.2"
+  languageName: unknown
+  linkType: soft
 
 "ssri@npm:^10.0.0":
   version: 10.0.5

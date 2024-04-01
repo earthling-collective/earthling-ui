@@ -10,7 +10,7 @@
     "web": "expo start --web"
   },
   "dependencies": {
-    "@supabase/supabase-js": "^2.39.8",
+    "@supabase/supabase-js": "^2.41.1",
     "expo": "~50.0.14",
     "expo-status-bar": "~1.11.1",
     "immer": "^10.0.4",
