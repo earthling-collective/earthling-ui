@@ -8,7 +8,10 @@
     "dev": "vite",
     "preview": "vite preview"
   },
-  "dependencies": { "react": "^18.2.0", "react-dom": "^18.2.0" },
+  "dependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
   "devDependencies": {
     "@earthling-ui/primitives": "workspace:^",
     "@types/react": "^18.2.39",
