@@ -9,7 +9,7 @@
     "start": "next start"
   },
   "dependencies": {
-    "@earthling-ui/primitives": "workspace:^",
+    "@earthling-ui/primitives": "workspace:*",
     "@mdx-js/loader": "^3.0.0",
     "@next/mdx": "^14.0.3",
     "axios": "^1.6.2",

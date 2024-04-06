@@ -23,8 +23,8 @@
     "README.md"
   ],
   "devDependencies": {
-    "@earthling-ui/config": "workspace:^",
-    "@earthling-ui/primitives": "workspace:^",
+    "@earthling-ui/config": "workspace:*",
+    "@earthling-ui/primitives": "workspace:*",
     "@types/node": "^20.10.0",
     "react": "^18.2.0",
     "typescript": "^5.3.3"
