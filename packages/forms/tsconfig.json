@@ -1,7 +1,5 @@
 {
-  "extends": "@earthling-ui/config/typescript/root",
+  "extends": "@ecol-ui/config/typescript/root",
   "exclude": ["src", "lib", "node_modules"],
-  "references": [
-    { "path": "./tsconfig.src.json" }
-  ]
+  "references": [{ "path": "./tsconfig.src.json" }]
 }

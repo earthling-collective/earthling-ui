@@ -2,7 +2,7 @@ import {
   Pressable,
   PressableRef,
   PressableProps,
-} from "@earthling-ui/primitives/pressable";
+} from "@ecol-ui/primitives/pressable";
 import { forwardRef } from "react";
 
 export const Button = forwardRef<PressableRef, PressableProps>((props, ref) => {

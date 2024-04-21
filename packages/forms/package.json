@@ -1,12 +1,12 @@
 {
-  "name": "@earthling-ui/forms",
+  "name": "@ecol-ui/forms",
   "version": "1.0.0-alpha.2",
   "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
+    "url": "https://github.com/earthling-collective/ecol-ui/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sFrady20/earthling-ui",
+    "url": "https://github.com/earthling-collective/ecol-ui",
     "directory": "packages/forms"
   },
   "license": "MIT",
@@ -37,7 +37,7 @@
     "zustand": "^4"
   },
   "devDependencies": {
-    "@earthling-ui/config": "workspace:*",
+    "@ecol-ui/config": "workspace:*",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.39",
     "@vitejs/plugin-react": "^4.2.0",

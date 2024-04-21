@@ -1,5 +1,5 @@
 {
-  "name": "earthling-ui-sandbox-vite",
+  "name": "ecol-ui-sandbox-vite",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -13,7 +13,7 @@
     "react-dom": "^18.2.0"
   },
   "devDependencies": {
-    "@earthling-ui/primitives": "workspace:*",
+    "@ecol-ui/primitives": "workspace:*",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.0",

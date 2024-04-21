@@ -1,5 +1,5 @@
 {
-  "name": "@earthling-ui/config",
+  "name": "@ecol-ui/config",
   "private": true,
   "exports": {
     "./postcss": {},

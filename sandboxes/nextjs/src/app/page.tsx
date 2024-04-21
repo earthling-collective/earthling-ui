@@ -1,7 +1,7 @@
 "use client";
 
-import { Box, Input } from "@earthling-ui/primitives";
-import { useForm } from "@earthling-ui/forms";
+import { Box, Input } from "@ecol-ui/primitives";
+import { useForm } from "@ecol-ui/forms";
 
 export default function App() {
   const { submit, useFormField } = useForm<{ name: string; password: string }>({

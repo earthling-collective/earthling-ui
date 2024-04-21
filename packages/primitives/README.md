@@ -1,5 +1,3 @@
-## @earthling-ui/primitives
+## @ecol-ui/primitives
 
 headless ui components for web and native
-
-this is like radix

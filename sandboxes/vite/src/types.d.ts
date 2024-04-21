@@ -1,2 +1,2 @@
 /// <reference types="vite/client" />
-/// <reference types="@earthling-ui/primitives/types" />
+/// <reference types="@ecol-ui/primitives/types" />

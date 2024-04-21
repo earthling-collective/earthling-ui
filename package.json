@@ -1,5 +1,5 @@
 {
-  "name": "earthling-ui",
+  "name": "@ecol-ui/repo",
   "private": true,
   "workspaces": [
     "apps/*",

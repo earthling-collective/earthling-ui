@@ -1,4 +1,4 @@
-import { Box, BoxProps, BoxRef } from "@earthling-ui/primitives/box";
+import { Box, BoxProps, BoxRef } from "@ecol-ui/primitives/box";
 import { forwardRef, useContext } from "react";
 import { createContext } from "vm";
 

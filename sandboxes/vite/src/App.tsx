@@ -1,4 +1,4 @@
-import { Box, Text } from "@earthling-ui/primitives";
+import { Box, Text } from "@ecol-ui/primitives";
 
 function App() {
   return (

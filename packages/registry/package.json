@@ -1,12 +1,12 @@
 {
-  "name": "@earthling-ui/registry",
+  "name": "@ecol-ui/registry",
   "version": "1.0.0-alpha.0",
   "bugs": {
-    "url": "https://github.com/sFrady20/earthling-ui/issues"
+    "url": "https://github.com/earthling-collective/ecol-ui/issues"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/sFrady20/earthling-ui",
+    "url": "https://github.com/earthling-collective/ecol-ui",
     "directory": "packages/cli"
   },
   "license": "MIT",
@@ -23,8 +23,8 @@
     "README.md"
   ],
   "devDependencies": {
-    "@earthling-ui/config": "workspace:*",
-    "@earthling-ui/primitives": "workspace:*",
+    "@ecol-ui/config": "workspace:*",
+    "@ecol-ui/primitives": "workspace:*",
     "@types/node": "^20.10.0",
     "react": "^18.2.0",
     "typescript": "^5.3.3"

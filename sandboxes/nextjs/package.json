@@ -10,8 +10,8 @@
     "start": "next start"
   },
   "dependencies": {
-    "@earthling-ui/forms": "workspace:*",
-    "@earthling-ui/primitives": "workspace:*",
+    "@ecol-ui/forms": "workspace:*",
+    "@ecol-ui/primitives": "workspace:*",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.39",
     "@types/react-dom": "^18.2.17",
