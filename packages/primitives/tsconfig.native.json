@@ -1,6 +1,9 @@
 {
-  "compilerOptions": { "customConditions": ["react-native"] },
-  "extends": "@ecol-ui/config/typescript/src",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "customConditions": ["react-native"],
+    "composite": true
+  },
   "include": ["src", "lib"],
   "exclude": ["src/**/*.web.*", "lib/**/*.web.*"]
 }

@@ -1,8 +1,8 @@
 import type { DetailedHTMLProps, InputHTMLAttributes } from "react";
 import type { TextInputProps } from "react-native";
 import type { TextProps } from "#text";
-import { BoxProps } from "#box";
-import { ICustomPrimitiveProps } from "../types";
+import { type BoxProps } from "#box";
+import type { ICustomPrimitiveProps } from "../types";
 
 type NativeControlProps = TextInputProps;
 type WebControlProps = Omit<

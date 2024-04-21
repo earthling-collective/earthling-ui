@@ -1,5 +1,5 @@
 {
-  "name": "@ecol-ui/registry",
+  "name": "@ecol/ui-registry",
   "version": "1.0.0-alpha.0",
   "bugs": {
     "url": "https://github.com/earthling-collective/ecol-ui/issues"
@@ -23,8 +23,7 @@
     "README.md"
   ],
   "devDependencies": {
-    "@ecol-ui/config": "workspace:*",
-    "@ecol-ui/primitives": "workspace:*",
+    "@ecol/ui-primitives": "workspace:*",
     "@types/node": "^20.10.0",
     "react": "^18.2.0",
     "typescript": "^5.3.3"

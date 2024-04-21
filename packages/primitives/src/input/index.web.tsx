@@ -1,7 +1,7 @@
 import { forwardRef } from "react";
 import { Text } from "#text";
-import { Box, BoxRef } from "#box";
-import { InputProps } from "./props";
+import { Box, type BoxRef } from "#box";
+import { type InputProps } from "./props";
 
 export type { InputProps };
 export type InputRef = BoxRef;

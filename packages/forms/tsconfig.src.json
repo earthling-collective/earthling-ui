@@ -1,4 +1,0 @@
-{
-  "extends": "@ecol-ui/config/typescript/src",
-  "include": ["src", "lib"]
-}

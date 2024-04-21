@@ -1,1 +1,0 @@
-## @ecol-ui config

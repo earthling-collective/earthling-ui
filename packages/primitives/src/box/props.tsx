@@ -1,7 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 import type { ViewProps } from "react-native";
 import type { TextProps } from "#text";
-import { ICustomPrimitiveProps } from "../types";
+import type { ICustomPrimitiveProps } from "../types";
 
 type NativeProps = ViewProps;
 

@@ -1,5 +1,5 @@
 {
-  "name": "@ecol-ui/primitives",
+  "name": "@ecol/ui-primitives",
   "version": "1.0.0-alpha.4",
   "bugs": {
     "url": "https://github.com/earthling-collective/ecol-ui/issues"
@@ -72,7 +72,6 @@
     "build:web": "vite build -c vite.config.web.ts"
   },
   "devDependencies": {
-    "@ecol-ui/config": "workspace:*",
     "@types/node": "^20.10.0",
     "@types/react": "^18.2.39",
     "@vitejs/plugin-react": "^4.2.0",

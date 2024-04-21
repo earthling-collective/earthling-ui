@@ -1,7 +1,7 @@
 import type { PressableProps as BasePressableProps } from "react-native";
 import type { DetailedHTMLProps, HTMLAttributes } from "react";
 import type { TextProps } from "#text";
-import { ICustomPrimitiveProps } from "../types";
+import type { ICustomPrimitiveProps } from "../types";
 
 type NativeProps = BasePressableProps;
 

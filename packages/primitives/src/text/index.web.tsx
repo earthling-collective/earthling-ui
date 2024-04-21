@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { TextProps, ICustomTextProps } from "./props";
+import { type TextProps, type ICustomTextProps } from "./props";
 
 export type { TextProps, ICustomTextProps };
 export type TextRef = HTMLSpanElement;

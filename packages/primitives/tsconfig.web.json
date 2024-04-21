@@ -1,6 +1,9 @@
 {
-  "compilerOptions": { "customConditions": ["import"] },
-  "extends": "@ecol-ui/config/typescript/src",
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "customConditions": ["import"],
+    "composite": true
+  },
   "include": ["src", "lib"],
   "exclude": ["src/**/*.native.*", "lib/**/*.native.*"]
 }
