@@ -1,4 +1,4 @@
-Bun.build({
+await Bun.build({
   entrypoints: [
     "src/components/button/index.tsx",
     "src/components/card/index.tsx",
@@ -6,4 +6,5 @@ Bun.build({
     "src/components/textarea/index.tsx",
   ],
   outdir: "dist",
+  minify: true,
 });

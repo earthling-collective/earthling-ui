@@ -1,7 +1,6 @@
 import { cn } from "../../utils/cn";
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-import { ComponentProps, forwardRef } from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import { type ComponentProps, forwardRef } from "react";
 
 const cardVariants = cva("flow-root border border-current/30 rounded-md", {
   variants: {},
