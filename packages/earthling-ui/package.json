@@ -29,6 +29,7 @@
   },
   "module": "index.ts",
   "style": "index.css",
+  "bin": "src/cli.ts",
   "files": [
     "src/**/*",
     "README.md"
@@ -36,6 +37,8 @@
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
+    "commander": "^13.1.0",
+    "isomorphic-git": "^1.29.0",
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
