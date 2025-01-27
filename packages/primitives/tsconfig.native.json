@@ -1,9 +1,0 @@
-{
-  "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "customConditions": ["react-native"],
-    "composite": true
-  },
-  "include": ["src", "lib"],
-  "exclude": ["src/**/*.web.*", "lib/**/*.web.*"]
-}

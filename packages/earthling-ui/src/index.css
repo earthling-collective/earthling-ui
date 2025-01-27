@@ -1,0 +1,30 @@
+@source "./";
+
+@theme {
+  --font-body: var(--font-body);
+
+  --radius-control: var(--radius-control); /* buttons, inputs, etc */
+
+  --color-background: var(--color-background);
+  --color-foreground: var(--color-foreground);
+  --color-outline: var(--color-outline);
+
+  --color-primary: var(--color-primary);
+  --color-primary-foreground: var(--color-primary-foreground);
+
+  --color-secondary: var(--color-secondary);
+  --color-secondary-foreground: var(--color-secondary-foreground);
+
+  --color-good: var(--color-good);
+  --color-good-foreground: var(--color-good-foreground);
+
+  --color-bad: var(--color-bad);
+  --color-bad-foreground: var(--color-bad-foreground);
+}
+
+@layer base {
+  :root {
+    background: var(--color-background);
+    color: var(--color-foreground);
+  }
+}
