@@ -1,6 +1,6 @@
 {
   "name": "earthling-ui",
-  "version": "1.1.0-alpha.3",
+  "version": "1.1.0-alpha.4",
   "homepage": "https://ui.earthling.dev",
   "bugs": "https://github.com/earthling-dev/earthling-ui/issues",
   "repository": {
@@ -33,9 +33,9 @@
     "earthling-ui": "src/cli.ts"
   },
   "files": [
+    "dist/**/*",
     "src/**/*",
-    "README.md",
-    "tsconfig.json"
+    "README.md"
   ],
   "scripts": {
     "build": "bun run scripts/build.ts"
