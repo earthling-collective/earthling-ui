@@ -1,4 +1,4 @@
-await Bun.build({
+Bun.build({
   entrypoints: [
     "src/components/button/index.tsx",
     "src/components/card/index.tsx",
@@ -7,4 +7,5 @@ await Bun.build({
   ],
   outdir: "dist",
   minify: true,
+  splitting: true,
 });
