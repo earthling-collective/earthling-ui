@@ -1,8 +1,6 @@
-import type { VariantProps } from "class-variance-authority";
-import { cva } from "class-variance-authority";
-import type { ComponentProps } from "react";
-import { forwardRef } from "react";
 import { cn } from "../../utils/cn";
+import { cva, VariantProps } from "class-variance-authority";
+import { ComponentProps, forwardRef } from "react";
 
 const textAreaVariants = cva(
   "focus-visible:ring-ring field-sizing-content resize-none rounded-md border border-[currentColor]/30 text-sm font-medium whitespace-nowrap ring-offset-background transition-colors hover:border-[currentColor]/50 hover:bg-[currentColor]/5 focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
