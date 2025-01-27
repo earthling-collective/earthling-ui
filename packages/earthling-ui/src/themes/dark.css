@@ -1,4 +1,4 @@
-:root.dark {
+@utility theme-dark {
   --radius-control: 8px;
 
   --color-background: oklch(0.2 0 0);

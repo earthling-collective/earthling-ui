@@ -1,26 +1,9 @@
 @import "tailwindcss";
 @import "earthling-ui";
-@import "earthling-ui/theme/default";
 @import "earthling-ui/theme/dark";
 
 @layer base {
-  :root {
-    --radius-control: 8px;
-
-    --color-foreground: oklch(0.25 0 0);
-    --color-background: oklch(0.98 0 0);
-    --color-outline: oklch(0 0 0);
-
-    --color-primary: oklch(0.55 0.18 230);
-    --color-primary-foreground: oklch(0.98 0 0);
-
-    --color-secondary: oklch(0.65 0.15 50);
-    --color-secondary-foreground: oklch(0.98 0 0);
-
-    --color-good: oklch(0.6 0.17 140);
-    --color-good-foreground: oklch(0.98 0 0);
-
-    --color-bad: oklch(0.6 0.2 30);
-    --color-bad-foreground: oklch(0.98 0 0);
+  :root[data-theme="dark"] {
+    @apply theme-dark;
   }
 }
