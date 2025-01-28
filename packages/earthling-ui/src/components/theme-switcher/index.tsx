@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { forwardRef, type ComponentProps, type ComponentRef } from "react";
 
 const themeSwitcherVariants = cva(
-  "flex flex-row overflow-hidden rounded-control border border-current/30",
+  "flex flex-row overflow-hidden rounded-control border border-current/30 focus-within:ring-2 focus-within:ring-outline",
   {
     variants: {},
     defaultVariants: {},
