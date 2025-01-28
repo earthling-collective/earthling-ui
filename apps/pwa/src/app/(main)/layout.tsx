@@ -18,16 +18,32 @@ export default async function ({ children }: { children: React.ReactNode }) {
             </Link>
           </Button>
           <div className="flex flex-row items-center gap-2">
-            <Button asChild size="sm">
-              <Link
-                href={`https://github.com/earthling-collective/earthling-ui`}
-                target="_blank"
-                rel="noopener noreferrer"
+            <div className="flex flex-row items-center">
+              <Button asChild size="sm" className="rounded-r-none">
+                <Link
+                  href={`https://github.com/earthling-collective/earthling-ui`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="icon-[simple-icons--github]" />
+                  <div>Github</div>
+                </Link>
+              </Button>
+              <Button
+                asChild
+                size="icon"
+                variant={"outline"}
+                className="-ml-px rounded-l-none"
               >
-                <i className="icon-[simple-icons--github]" />
-                <div>Github</div>
-              </Link>
-            </Button>
+                <Link
+                  href={`http://npmjs.com/package/earthling-ui`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <i className="icon-[simple-icons--npm]" />
+                </Link>
+              </Button>
+            </div>
             <Button asChild size="icon" variant={"outline"}>
               <Link
                 href={`http://x.com/slowjamsteve`}
