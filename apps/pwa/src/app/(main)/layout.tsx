@@ -10,7 +10,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex min-h-screen flex-1 flex-col">
       <header>
-        <div className="container mx-auto flex flex-row items-center justify-between py-4">
+        <div className="container mx-auto flex max-w-6xl flex-row items-center justify-between py-4">
           <Button asChild size="sm" variant={"ghost"}>
             <Link href="/" className="flex flex-row items-center gap-2">
               {/* <Image src={earthling} alt="Earthling" width={40} height={40} /> */}
