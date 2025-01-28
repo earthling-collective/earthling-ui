@@ -28,6 +28,15 @@ export default async function ({ children }: { children: React.ReactNode }) {
                 <div>Github</div>
               </Link>
             </Button>
+            <Button asChild size="icon" variant={"outline"}>
+              <Link
+                href={`http://x.com/slowjamsteve`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="icon-[simple-icons--x]" />
+              </Link>
+            </Button>
             <ThemeSwitcher>
               <ThemeSwitcherItem
                 checked={theme === "system"}
