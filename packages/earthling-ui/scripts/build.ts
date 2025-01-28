@@ -4,8 +4,10 @@ Bun.build({
     "src/components/card/index.tsx",
     "src/components/input/index.tsx",
     "src/components/textarea/index.tsx",
+    "src/components/theme-switcher/index.tsx",
   ],
   outdir: "dist",
   minify: true,
   splitting: true,
+  banner: '"use client";',
 });

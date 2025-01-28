@@ -9,6 +9,9 @@
     "start": "next start"
   },
   "dependencies": {
+    "@iconify-json/lucide": "^1.2.25",
+    "@iconify-json/simple-icons": "^1.2.22",
+    "@iconify/tailwind4": "^1.0.1",
     "@tailwindcss/postcss": "^4.0.0",
     "earthling-ui": "workspace:*",
     "next": "15.1.6",
@@ -21,6 +24,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "postcss": "^8.5.1",
+    "prettier-plugin-tailwindcss": "^0.6.11",
     "typescript": "^5"
   }
 }

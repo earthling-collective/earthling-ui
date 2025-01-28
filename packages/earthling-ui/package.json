@@ -1,6 +1,6 @@
 {
   "name": "earthling-ui",
-  "version": "1.1.0-alpha.7",
+  "version": "1.1.0-alpha.9",
   "homepage": "https://ui.earthling.dev",
   "bugs": "https://github.com/earthling-dev/earthling-ui/issues",
   "repository": {
@@ -41,6 +41,7 @@
     "build": "bun run scripts/build.ts"
   },
   "dependencies": {
+    "@iconify/tailwind4": "^1.0.1",
     "@radix-ui/react-slot": "^1.1.1",
     "class-variance-authority": "^0.7.1",
     "commander": "^13.1.0",
