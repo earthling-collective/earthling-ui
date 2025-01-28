@@ -1,3 +1,5 @@
+import dts from "bun-plugin-dts";
+
 Bun.build({
   entrypoints: [
     "src/components/button/index.tsx",
@@ -10,4 +12,5 @@ Bun.build({
   minify: true,
   splitting: true,
   banner: '"use client";',
+  plugins: [dts({})],
 });
