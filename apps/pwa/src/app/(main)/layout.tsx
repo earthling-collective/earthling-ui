@@ -2,6 +2,8 @@ import Link from "next/link";
 import { Button } from "earthling-ui/button";
 import { ThemeSwitcher, ThemeSwitcherItem } from "earthling-ui/theme-switcher";
 import { cookies } from "next/headers";
+import earthling from "../icon.png";
+import Image from "next/image";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -11,14 +13,15 @@ export default async function ({ children }: { children: React.ReactNode }) {
     <div className="flex min-h-screen flex-1 flex-col">
       <header>
         <div className="container mx-auto flex max-w-6xl flex-row items-center justify-between py-4">
-          <Button asChild size="sm" variant={"ghost"}>
-            <Link href="/" className="flex flex-row items-center gap-2">
-              {/* <Image src={earthling} alt="Earthling" width={40} height={40} /> */}
-              <h1 className="font-display text-sm font-medium tracking-widest">
-                Earthling UI
-              </h1>
-            </Link>
-          </Button>
+          <Link
+            href="/"
+            className="flex flex-row items-center gap-2 hover:opacity-80"
+          >
+            <Image src={earthling} alt="Earthling" width={32} height={32} />
+            <h1 className="font-display text-sm font-medium tracking-widest">
+              Earthling UI
+            </h1>
+          </Link>
           <div className="flex flex-row items-center gap-2">
             <Button asChild size="sm">
               <Link

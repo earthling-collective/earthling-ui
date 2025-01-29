@@ -10,7 +10,9 @@
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
   --color-outline: var(--color-outline);
+  --color-light: var(--color-light);
 
+  /* color schemes */
   --color-primary: var(--color-primary);
   --color-primary-foreground: var(--color-primary-foreground);
 
@@ -33,6 +35,7 @@
     --color-foreground: oklch(0.25 0 0);
     --color-background: oklch(0.98 0 0);
     --color-outline: oklch(0 0 0);
+    --color-light: oklch(0.98 0 0 / 0.2);
 
     --color-primary: oklch(17.42% 0.0017 17.32);
     --color-primary-foreground: oklch(96.29% 0 0);

@@ -1,12 +1,17 @@
-import { Card, CardHeader, CardSubtitle, CardTitle } from "earthling-ui/card";
+import Link from "next/link";
+import { Surface } from "earthling-ui/surface";
+import pkg from "../../../../../packages/earthling-ui/package.json";
 
 export default async function () {
   return (
-    <div className="container mx-auto flow-root max-w-6xl">
+    <div className="container mx-auto max-w-6xl">
       <div className="mx-auto my-16 max-w-6xl">
         <div className="mb-4 flex justify-center">
-          <div className="relative rounded-full border border-current/10 bg-current/5 px-3 py-1 text-sm font-medium text-current/60">
-            Coming Soon...
+          <div className="relative flex flex-row items-center gap-2 rounded-full border border-current/10 bg-current/5 px-3 py-1 text-xs font-medium text-current/60">
+            {pkg.version.includes("alpha") && (
+              <span className="text-yellow-500">Alpha</span>
+            )}
+            <span className="text-current/50">v{pkg.version}</span>
           </div>
         </div>
         <div className="text-center">
@@ -27,25 +32,37 @@ export default async function () {
         </div>
       </div>
 
-      {/* <div className="my-8 grid grid-cols-3 gap-4">
+      <div className="my-8 grid grid-cols-3 gap-4">
         {[
-          { title: "Button", subtitle: "4 snippets" },
-          { title: "Card", subtitle: "4 snippets" },
-          { title: "Input", subtitle: "4 snippets" },
-          { title: "Textarea", subtitle: "4 snippets" },
+          {
+            title: "Button",
+            subtitle: "",
+            href: "/components/button",
+          },
+          { title: "Input", subtitle: "", href: "/components/input" },
+          {
+            title: "Surface",
+            subtitle: "",
+            href: "/components/surface",
+          },
+          {
+            title: "Textarea",
+            subtitle: "",
+            href: "/components/textarea",
+          },
         ]
           .sort((a, b) =>
             a.title > b.title ? 1 : a.title === b.title ? 0 : -1,
           )
-          .map(({ title, subtitle }, i) => (
-            <Card key={i}>
-              <CardHeader>
-                <CardTitle>{title}</CardTitle>
-                <CardSubtitle>{subtitle}</CardSubtitle>
-              </CardHeader>
-            </Card>
+          .map(({ title, subtitle, href }, i) => (
+            <Surface interactive asChild className="p-4">
+              <Link href={href}>
+                <h3 className="font-medium">{title}</h3>
+                <p className="text-sm text-current/60">{subtitle}</p>
+              </Link>
+            </Surface>
           ))}
-      </div> */}
+      </div>
     </div>
   );
 }
