@@ -1,5 +1,5 @@
 @utility theme-dark {
-  --radius-control: 8px;
+  --radius-control: 999px;
 
   --color-background: oklch(17.42% 0.0017 17.32);
   --color-foreground: oklch(96.29% 0 0);

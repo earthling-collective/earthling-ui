@@ -2,8 +2,13 @@ import "@/styles/main.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import LocalFont from "next/font/local";
+import { Geist } from "next/font/google";
 
-const bodyFont = LocalFont({ src: "./font.otf", variable: "--font-body" });
+const displayFont = LocalFont({
+  src: "./font.otf",
+  variable: "--font-display",
+});
+const bodyFont = Geist({ subsets: ["latin"], variable: "--font-body" });
 const monoFont = LocalFont({ src: "./font.otf", variable: "--font-mono" });
 
 export const metadata: Metadata = {
@@ -25,7 +30,7 @@ export default async function ({
     <html
       lang="en"
       data-theme={theme}
-      className={`${bodyFont.variable} ${monoFont.variable}`}
+      className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
     >
       <body className="antialiased">{children}</body>
     </html>

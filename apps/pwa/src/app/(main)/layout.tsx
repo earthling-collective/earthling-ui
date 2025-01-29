@@ -14,37 +14,32 @@ export default async function ({ children }: { children: React.ReactNode }) {
           <Button asChild size="sm" variant={"ghost"}>
             <Link href="/" className="flex flex-row items-center gap-2">
               {/* <Image src={earthling} alt="Earthling" width={40} height={40} /> */}
-              <h1 className="text-sm font-medium uppercase">Earthling UI</h1>
+              <h1 className="font-display text-sm font-medium tracking-widest">
+                Earthling UI
+              </h1>
             </Link>
           </Button>
           <div className="flex flex-row items-center gap-2">
-            <div className="flex flex-row items-center">
-              <Button asChild size="sm" className="rounded-r-none">
-                <Link
-                  href={`https://github.com/earthling-collective/earthling-ui`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="icon-[simple-icons--github]" />
-                  <div>Github</div>
-                </Link>
-              </Button>
-              <Button
-                asChild
-                size="icon"
-                variant={"outline"}
-                className="-ml-px rounded-l-none"
+            <Button asChild size="sm">
+              <Link
+                href={`https://github.com/earthling-collective/earthling-ui`}
+                target="_blank"
+                rel="noopener noreferrer"
               >
-                <Link
-                  href={`http://npmjs.com/package/earthling-ui`}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <i className="icon-[simple-icons--npm]" />
-                </Link>
-              </Button>
-            </div>
-            <Button asChild size="icon" variant={"outline"}>
+                <i className="icon-[simple-icons--github]" />
+                <div>Github</div>
+              </Link>
+            </Button>
+            <Button asChild size="sm" variant={"ghost"}>
+              <Link
+                href={`http://npmjs.com/package/earthling-ui`}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <i className="icon-[simple-icons--npm]" />
+              </Link>
+            </Button>
+            <Button asChild size="sm" variant={"ghost"}>
               <Link
                 href={`http://x.com/slowjamsteve`}
                 target="_blank"

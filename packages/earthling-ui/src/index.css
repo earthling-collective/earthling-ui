@@ -1,6 +1,7 @@
 @source "./";
 
 @theme {
+  --font-display: var(--font-display);
   --font-body: var(--font-body);
   --font-mono: var(--font-mono);
 
@@ -27,7 +28,7 @@
   :root {
     @apply min-h-screen bg-background text-foreground font-body;
 
-    --radius-control: 8px;
+    --radius-control: 999px;
 
     --color-foreground: oklch(0.25 0 0);
     --color-background: oklch(0.98 0 0);

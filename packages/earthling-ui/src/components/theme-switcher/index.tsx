@@ -13,18 +13,20 @@ const themeSwitcherVariants = cva(
 export interface ThemeSwitcherProps
   extends ComponentProps<"fieldset">,
     VariantProps<typeof themeSwitcherVariants> {
-  label?: string;
+  legend?: string;
 }
 
 const ThemeSwitcher = forwardRef<ComponentRef<"fieldset">, ThemeSwitcherProps>(
-  ({ className, children, label, ...props }, ref) => {
+  ({ className, children, legend, ...props }, ref) => {
     return (
       <fieldset
         className={cn(themeSwitcherVariants({}), className)}
         ref={ref}
         {...props}
       >
-        <label className="sr-only">{label ?? `Select a display theme:`}</label>
+        <legend className="sr-only">
+          {legend ?? `Select a display theme:`}
+        </legend>
         {children}
       </fieldset>
     );
