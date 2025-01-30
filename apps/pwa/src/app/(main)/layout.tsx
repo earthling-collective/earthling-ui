@@ -100,9 +100,9 @@ export default async function ({ children }: { children: React.ReactNode }) {
           </ThemeSwitcher>
         </div>
       </header>
-      <div className="grid grid-cols-[fit-content(100%)_1fr]">
-        <aside className="hidden w-64 flex-col justify-end border-r border-current/10 md:flex">
-          <div className="sticky bottom-0 flex min-h-[calc(100vh-72px)] flex-col p-4">
+      <div className="grid grid-cols-[fit-content(100%)_1fr_fit-content(100%)]">
+        <aside className="hidden w-[280px] flex-col justify-end border-r border-[transparent] xl:flex">
+          <nav className="sticky bottom-0 flex min-h-[calc(100vh-72px)] flex-col p-4">
             {componentInformation
               .sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((info) => (
@@ -116,9 +116,12 @@ export default async function ({ children }: { children: React.ReactNode }) {
                   <Link href={`/components/${info.path}`}>{info.name}</Link>
                 </Button>
               ))}
-          </div>
+          </nav>
         </aside>
-        <main className="flex flex-1 flex-col">{children}</main>
+        <main className="col-span-3 flex flex-1 flex-col px-4 xl:col-span-1">
+          {children}
+        </main>
+        <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex"></aside>
       </div>
     </div>
   );

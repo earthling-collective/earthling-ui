@@ -4,8 +4,8 @@ import pkg from "../../../../../packages/earthling-ui/package.json";
 
 export default async function () {
   return (
-    <div className="container mx-auto max-w-6xl px-4 xl:px-0">
-      <div className="mx-auto my-16 max-w-sm md:max-w-6xl">
+    <div className="container mx-auto max-w-6xl">
+      <div className="mx-auto my-16 max-w-md md:max-w-6xl">
         <div className="mb-4 flex justify-center">
           <div className="relative flex flex-row items-center gap-2 rounded-full border border-current/10 bg-current/5 px-3 py-1 text-xs font-medium text-current/60">
             {pkg.version.includes("alpha") && (
@@ -56,9 +56,13 @@ export default async function () {
             a.title > b.title ? 1 : a.title === b.title ? 0 : -1,
           )
           .map(({ title, subtitle, href }, i) => (
-            <Surface interactive asChild className="col-span-3 md:col-span-1">
+            <Surface
+              interactive
+              asChild
+              className="col-span-3 shadow-xs md:col-span-1"
+            >
               <Link href={href}>
-                <h3 className="font-medium">{title}</h3>
+                <h3 className="font-semibold">{title}</h3>
                 <p className="text-sm text-current/60">{subtitle}</p>
               </Link>
             </Surface>
