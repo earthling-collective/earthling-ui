@@ -7,7 +7,6 @@ import { copy } from "copy-paste";
 import path from "node:path";
 
 const handleSigTerm = () => process.exit(0);
-
 process.on("SIGINT", handleSigTerm);
 process.on("SIGTERM", handleSigTerm);
 
@@ -21,12 +20,12 @@ program
 program
   .command("create <destination>")
   .description("Create a new earthling-ui monorepo")
-  .option("--pwa", "Include a PWA project") // nextjs
-  .option("--db", "Include a database project") // drizzle+postgres
-  .option("--cli", "Include a CLI project") // commander
+  .option("--pwa <name>", "Include a PWA project") // nextjs
+  .option("--db <name>", "Include a database project") // drizzle+postgres
+  .option("--lib <name>", "Include an internal librarry project") // bun build
+  .option("--cli <name>", "Include a CLI project") // commander
   .action(async (destination) => {
     console.log(`Creating a new earthling-ui project in ${destination}`);
-
     await clone({
       fs,
       http,
@@ -36,25 +35,24 @@ program
   });
 
 program
-  .command("copy <component>")
-  .description("Copy a component from earthling-ui to your clipboard")
+  .command("eject <component>")
+  .description("Eject a component from earthling-ui into your project")
   .action(async (component) => {
+    console.log(`🚧 Coming soon`);
+  });
+
+program
+  .command("copy <snippet>")
+  .description("Copy a component from earthling-ui to your clipboard")
+  .action(async (snippet) => {
     try {
-      const componentPath = path.resolve(
-        __dirname,
-        `components/${component}/index.tsx`
-      );
-      const componentCode = fs.readFileSync(componentPath, "utf8");
-
-      copy(componentCode);
-
-      console.log(`✅ "${component}" copied to clipboard`);
+      const snippetPath = path.resolve(__dirname, `snippets/${snippet}.tsx`);
+      const snippetCode = fs.readFileSync(snippetPath, "utf8");
+      copy(snippetCode);
+      console.log(`✅ "${snippet}" copied to clipboard`);
     } catch (error: any) {
-      console.error(`❌ Failed to copy "${component}": ${error.message}`);
+      console.error(`❌ Failed to copy "${snippet}": ${error.message}`);
     }
   });
 
 program.parse(process.argv);
-
-const opts = program.opts();
-const { args } = program;

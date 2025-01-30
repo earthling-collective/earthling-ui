@@ -7,23 +7,36 @@
 
   --radius-control: var(--radius-control); /* buttons, inputs, etc */
 
+  /* utility colors */
+  --color-outline: var(--color-outline); /* focus rings */
+  --color-light: var(--color-light); /* highlight effects */
+  --color-shadow: var(--color-shadow); /* shadows */
+
+  /* default color scheme */
   --color-background: var(--color-background);
   --color-foreground: var(--color-foreground);
-  --color-outline: var(--color-outline);
-  --color-light: var(--color-light);
+  --color-accent: var(--color-accent);
 
-  /* color schemes */
+  /* other color schemes */
   --color-primary: var(--color-primary);
   --color-primary-foreground: var(--color-primary-foreground);
+  --color-pimary-accent: var(--color-primary-accent);
 
   --color-secondary: var(--color-secondary);
   --color-secondary-foreground: var(--color-secondary-foreground);
+  --color-secondary-accent: var(--color-secondary-accent);
 
   --color-good: var(--color-good);
   --color-good-foreground: var(--color-good-foreground);
+  --color-good-accent: var(--color-good-accent);
+
+  --color-caution: var(--color-caution);
+  --color-caution-foreground: var(--color-caution-foreground);
+  --color-caution-accent: var(--color-caution-accent);
 
   --color-bad: var(--color-bad);
   --color-bad-foreground: var(--color-bad-foreground);
+  --color-bad-accent: var(--color-bad-accent);
 }
 
 @layer base {
@@ -45,6 +58,9 @@
 
     --color-good: oklch(0.6 0.17 140);
     --color-good-foreground: oklch(0.98 0 0);
+
+    --color-caution: oklch(0.6 0.2 90);
+    --color-caution-foreground: oklch(0.98 0 0);
 
     --color-bad: oklch(0.6 0.2 30);
     --color-bad-foreground: oklch(0.98 0 0);

@@ -65,7 +65,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "good", "bad"],
+        options: ["default", "primary", "secondary", "good", "caution", "bad"],
         defaultValue: "default",
         description: "The color scheme of the button",
       },
@@ -99,6 +99,20 @@ export const componentInformation: ComponentInfo[] = [
         defaultValue: "md",
         description: "The size of the input",
       },
+      {
+        prop: "scheme",
+        label: "Scheme",
+        type: "select",
+        options: ["default", "primary", "secondary", "good", "caution", "bad"],
+        defaultValue: "default",
+        description: "The color scheme of the input",
+      },
+      {
+        prop: "disabled",
+        label: "Disabled",
+        type: "boolean",
+        description: "Whether the input is disabled",
+      },
     ],
     example: (props) => <Input {...props} placeholder="Type something..." />,
   },
@@ -115,6 +129,14 @@ export const componentInformation: ComponentInfo[] = [
         options: ["sm", "md", "lg"],
         defaultValue: "md",
         description: "The size of the textarea",
+      },
+      {
+        prop: "scheme",
+        label: "Scheme",
+        type: "select",
+        options: ["default", "primary", "secondary", "good", "caution", "bad"],
+        defaultValue: "default",
+        description: "The color scheme of the input",
       },
     ],
     example: (props) => (
@@ -135,7 +157,14 @@ export const componentInformation: ComponentInfo[] = [
       "@radix-ui/react-slot",
       "@/utils/cn",
     ],
-    props: [],
+    props: [
+      {
+        prop: "interactive",
+        label: "Interactive",
+        type: "boolean",
+        description: "Whether the surface is interactive",
+      },
+    ],
     example: (props) => (
       <Surface {...props} className="max-w-md">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
