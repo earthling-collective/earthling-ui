@@ -1,5 +1,6 @@
 "use client";
 
+import { ComponentPropInfo } from "@/lib/component-info";
 import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
 import { cn } from "earthling-ui/utils/cn";
@@ -9,19 +10,9 @@ import { useState } from "react";
 export interface StageProps
   extends Pick<React.ComponentProps<"div">, "className"> {
   defaultProps?: object;
-  controls: StageControl[];
-  children?: (props: object) => React.ReactNode;
+  controls: ComponentPropInfo[];
+  children?: (props: Record<string, any>) => React.ReactNode;
 }
-
-export type StageControl =
-  | {
-      label: string;
-      prop: string;
-      type: "select";
-      options: string[];
-    }
-  | { label: string; prop: string; type: "string" }
-  | { label: string; prop: string; type: "number" };
 
 export function Stage({
   className,
@@ -46,20 +37,34 @@ export function Stage({
       </div>
       <div className="flex flex-col gap-4 py-4">
         {controls.map((control) => (
-          <div key={control.prop} className="flex flex-col gap-2">
+          <div key={control.prop} className="flex flex-col items-start gap-2">
             <label className="text-sm font-medium">{control.label}</label>
-            <Input
-              className="flex-1 rounded-md border border-current/10 bg-current/5 px-3 py-2 text-sm text-current/60 outline-none"
-              value={(props as any)[control.prop] || ""}
-              onChange={(e) => {
-                setProps({
-                  ...props,
-                  [control.prop]: e.target.value || undefined,
-                });
-              }}
-            />
-            {"options" in control && (
-              <div className="flex flex-row gap-2">
+            {control.type === "string" && (
+              <Input
+                className="flex-1 rounded-md border border-current/10 bg-current/5 px-3 py-2 text-sm text-current/60 outline-none"
+                value={(props as any)[control.prop] || ""}
+                onChange={(e) => {
+                  setProps({
+                    ...props,
+                    [control.prop]: e.target.value || undefined,
+                  });
+                }}
+              />
+            )}
+            {control.type === "boolean" && (
+              <input
+                type="checkbox"
+                checked={(props as any)[control.prop] || false}
+                onChange={(e) => {
+                  setProps({
+                    ...props,
+                    [control.prop]: e.target.checked,
+                  });
+                }}
+              />
+            )}
+            {control.type === "select" && (
+              <div className="flex flex-row flex-wrap gap-2">
                 {control.options.map((option) => (
                   <Button
                     key={option}

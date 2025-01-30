@@ -4,6 +4,7 @@ import { ThemeSwitcher, ThemeSwitcherItem } from "earthling-ui/theme-switcher";
 import { cookies } from "next/headers";
 import earthling from "../icon.png";
 import Image from "next/image";
+import { componentInformation } from "@/lib/component-info";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -99,7 +100,26 @@ export default async function ({ children }: { children: React.ReactNode }) {
           </ThemeSwitcher>
         </div>
       </header>
-      <div className="flex flex-1 flex-col">{children}</div>
+      <div className="grid grid-cols-[fit-content(100%)_1fr]">
+        <aside className="hidden w-64 flex-col justify-end border-r border-current/10 md:flex">
+          <div className="sticky bottom-0 flex min-h-[calc(100vh-72px)] flex-col p-4">
+            {componentInformation
+              .sort((a, b) => (a.name > b.name ? 1 : -1))
+              .map((info) => (
+                <Button
+                  key={info.path}
+                  variant={"ghost"}
+                  size="sm"
+                  asChild
+                  className="justify-start"
+                >
+                  <Link href={`/components/${info.path}`}>{info.name}</Link>
+                </Button>
+              ))}
+          </div>
+        </aside>
+        <main className="flex flex-1 flex-col">{children}</main>
+      </div>
     </div>
   );
 }
