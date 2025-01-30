@@ -10,13 +10,20 @@ const surfaceVariants = cva(
       material: {
         paper: "border border-current/10 bg-current/5",
         glass:
-          "before:pointer-events-none before:absolute before:inset-[-1px] before:p-px before:rounded-[inherit] before:[mask-image:linear-gradient(#000,#000),_linear-gradient(#000,#000)] before:[mask-clip:content-box,_border-box] before:[mask-origin:content-box,_border-box] before:[mask-composite:exclude] before:select-none before:bg-[linear-gradient(var(--color-light),transparent_45%)] ",
+          "border border-current/5 before:pointer-events-none before:absolute before:inset-[-1px] before:p-px before:rounded-[inherit] before:[mask-image:linear-gradient(#000,#000),_linear-gradient(#000,#000)] before:[mask-clip:content-box,_border-box] before:[mask-origin:content-box,_border-box] before:[mask-composite:exclude] before:select-none before:bg-[linear-gradient(var(--color-light),transparent_45%)] ",
       },
       interactive: {
         true: "cursor-pointer hover:bg-current/10 hover:border-current/20",
         false: "",
       },
     },
+    compoundVariants: [
+      {
+        material: "glass",
+        interactive: true,
+        className: "hover:border-current/10",
+      },
+    ],
     defaultVariants: {
       interactive: false,
       material: "glass",

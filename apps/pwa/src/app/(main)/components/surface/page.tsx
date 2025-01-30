@@ -1,12 +1,19 @@
+"use client";
+
 import { Stage } from "@/components/stage";
 import { Surface } from "earthling-ui/surface";
+
+const dependencies = [
+  "class-variance-authority",
+  "@radix-ui/react-slot",
+  "@/utils/cn",
+];
 
 export default async function ({}: {}) {
   return (
     <>
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-3xl p-4 md:my-12 md:p-0">
         <Stage
-          component={Surface}
           controls={[
             {
               label: "Material",
@@ -22,7 +29,13 @@ export default async function ({}: {}) {
             },
           ]}
         >
-          Hello
+          {(props) => (
+            <Surface {...props} className="max-w-md">
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+              molestie, nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit
+              amet ullamcorper velit nisl in velit.
+            </Surface>
+          )}
         </Stage>
       </div>
     </>

@@ -4,13 +4,13 @@ import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
 import { cn } from "earthling-ui/utils/cn";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
-import { ElementType, useState } from "react";
+import { useState } from "react";
 
 export interface StageProps
-  extends Pick<React.ComponentProps<"div">, "className" | "children"> {
-  component: ElementType;
+  extends Pick<React.ComponentProps<"div">, "className"> {
   defaultProps?: object;
   controls: StageControl[];
+  children?: (props: object) => React.ReactNode;
 }
 
 export type StageControl =
@@ -25,7 +25,6 @@ export type StageControl =
 
 export function Stage({
   className,
-  component: Component,
   defaultProps,
   controls,
   children,
@@ -42,10 +41,10 @@ export function Stage({
         <ErrorBoundary
           errorComponent={({ error }) => <div>Error: {error.message}</div>}
         >
-          <Component {...props}>{children}</Component>
+          {children?.(props)}
         </ErrorBoundary>
       </div>
-      <div className="flex flex-col gap-4 p-4">
+      <div className="flex flex-col gap-4 py-4">
         {controls.map((control) => (
           <div key={control.prop} className="flex flex-col gap-2">
             <label className="text-sm font-medium">{control.label}</label>

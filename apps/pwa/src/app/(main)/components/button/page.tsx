@@ -1,12 +1,19 @@
+"use client";
+
 import { Stage } from "@/components/stage";
 import { Button } from "earthling-ui/button";
+
+const dependencies = [
+  "class-variance-authority",
+  "@radix-ui/react-slot",
+  "@/utils/cn",
+];
 
 export default async function ({}: {}) {
   return (
     <>
-      <div className="container mx-auto max-w-6xl">
+      <div className="container mx-auto max-w-3xl p-4 md:my-12 md:p-0">
         <Stage
-          component={Button}
           controls={[
             {
               label: "Variant",
@@ -28,7 +35,12 @@ export default async function ({}: {}) {
             },
           ]}
         >
-          Hello
+          {(props) => (
+            <Button {...props}>
+              <i className="icon-[lucide--house]" />
+              Click me
+            </Button>
+          )}
         </Stage>
       </div>
     </>
