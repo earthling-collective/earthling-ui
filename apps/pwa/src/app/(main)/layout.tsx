@@ -6,6 +6,7 @@ import earthling from "../icon.png";
 import Image from "next/image";
 import { componentInformation } from "@/lib/component-info";
 import { Input } from "earthling-ui/input";
+import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -64,41 +65,25 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <i className="icon-[simple-icons--x]" />
             </Link>
           </Button>
-          <ThemeSwitcher>
-            <ThemeSwitcherItem
-              checked={theme === "system"}
-              onCheckedChange={async (checked: boolean) => {
-                "use server";
-                if (!checked) return;
-                const jar = await cookies();
-                jar.set("theme", "system");
-              }}
-            >
+          <ToggleGroup
+            type="single"
+            size="sm"
+            onValueChange={async (value) => {
+              "use server";
+              const jar = await cookies();
+              jar.set("theme", value);
+            }}
+          >
+            <ToggleGroupItem value="system">
               <i className="icon-[lucide--computer]" />
-            </ThemeSwitcherItem>
-            <ThemeSwitcherItem
-              checked={theme === "light"}
-              onCheckedChange={async (checked: boolean) => {
-                "use server";
-                if (!checked) return;
-                const jar = await cookies();
-                jar.set("theme", "light");
-              }}
-            >
+            </ToggleGroupItem>
+            <ToggleGroupItem value="light">
               <i className="icon-[lucide--sun]" />
-            </ThemeSwitcherItem>
-            <ThemeSwitcherItem
-              checked={theme === "dark"}
-              onCheckedChange={async (checked: boolean) => {
-                "use server";
-                if (!checked) return;
-                const jar = await cookies();
-                jar.set("theme", "dark");
-              }}
-            >
+            </ToggleGroupItem>
+            <ToggleGroupItem value="dark">
               <i className="icon-[lucide--moon]" />
-            </ThemeSwitcherItem>
-          </ThemeSwitcher>
+            </ToggleGroupItem>
+          </ToggleGroup>
         </div>
       </header>
       <div className="grid grid-cols-[fit-content(100%)_1fr_fit-content(100%)]">

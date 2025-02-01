@@ -3,6 +3,7 @@
 import { ComponentPropInfo } from "@/lib/component-info";
 import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
+import { Switch } from "earthling-ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
 import { ErrorBoundary } from "next/dist/client/components/error-boundary";
@@ -55,13 +56,12 @@ export function Stage({
                 />
               )}
               {control.type === "boolean" && (
-                <input
-                  type="checkbox"
+                <Switch
                   checked={(props as any)[control.prop] || false}
-                  onChange={(e) => {
+                  onCheckedChange={(checked) => {
                     setProps({
                       ...props,
-                      [control.prop]: e.target.checked,
+                      [control.prop]: checked,
                     });
                   }}
                 />

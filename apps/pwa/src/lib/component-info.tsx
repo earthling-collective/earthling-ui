@@ -101,7 +101,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "good", "caution", "bad"],
+        options: allSchemes,
         defaultValue: "default",
         description: "The color scheme of the input",
       },
@@ -131,7 +131,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "good", "caution", "bad"],
+        options: allSchemes,
         defaultValue: "default",
         description: "The color scheme of the input",
       },
@@ -163,7 +163,34 @@ export const componentInformation: ComponentInfo[] = [
       },
     ],
   },
-
+  {
+    path: "switch",
+    name: "Switch",
+    description: "A switch component",
+    dependencies: [
+      "class-variance-authority",
+      "@radix-ui/react-switch",
+      "@/utils/cn",
+    ],
+    props: [
+      {
+        prop: "material",
+        label: "Material",
+        type: "select",
+        options: ["paper"],
+        defaultValue: "paper",
+        description: "The material of the switch",
+      },
+      {
+        prop: "scheme",
+        label: "Scheme",
+        type: "select",
+        options: allSchemes,
+        defaultValue: "default",
+        description: "The color scheme of the switch",
+      },
+    ],
+  },
   {
     path: "toggle-group",
     name: "ToggleGroup",
