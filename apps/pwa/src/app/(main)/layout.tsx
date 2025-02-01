@@ -1,6 +1,5 @@
 import Link from "next/link";
 import { Button } from "earthling-ui/button";
-import { ThemeSwitcher, ThemeSwitcherItem } from "earthling-ui/theme-switcher";
 import { cookies } from "next/headers";
 import earthling from "../icon.png";
 import Image from "next/image";
