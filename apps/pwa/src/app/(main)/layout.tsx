@@ -16,7 +16,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
       <header className="bg-background sticky top-0 z-10 flex flex-row items-center justify-between border-b border-current/10 px-4 py-3">
         <Link
           href="/"
-          className="flex flex-row items-center gap-3 hover:opacity-80"
+          className="flex flex-row items-center gap-2 hover:opacity-80"
         >
           <Image src={earthling} alt="Earthling" width={32} height={32} />
           <h1 className="font-display font-medium tracking-widest">
@@ -46,7 +46,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <div>Github</div>
             </Link>
           </Button>
-          <Button asChild size="sm" variant={"ghost"}>
+          <Button asChild size="sm" material={"ghost"}>
             <Link
               href={`http://npmjs.com/package/earthling-ui`}
               target="_blank"
@@ -55,7 +55,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <i className="icon-[simple-icons--npm]" />
             </Link>
           </Button>
-          <Button asChild size="sm" variant={"ghost"}>
+          <Button asChild size="sm" material={"ghost"}>
             <Link
               href={`http://x.com/slowjamsteve`}
               target="_blank"
@@ -110,7 +110,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
               .map((info) => (
                 <Button
                   key={info.path}
-                  variant={"ghost"}
+                  material="ghost"
                   size="sm"
                   asChild
                   className="justify-start"

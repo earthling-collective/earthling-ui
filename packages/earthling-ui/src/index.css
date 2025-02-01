@@ -1,5 +1,7 @@
 @source "./";
 
+@plugin "@iconify/tailwind4";
+
 @theme {
   --font-display: var(--font-display);
   --font-body: var(--font-body);
@@ -29,6 +31,14 @@
   --color-secondary-foreground: var(--color-secondary-foreground);
   --color-secondary-accent: var(--color-secondary-accent);
 
+  --color-tertiary: var(--color-tertiary);
+  --color-tertiary-foreground: var(--color-tertiary-foreground);
+  --color-tertiary-accent: var(--color-tertiary-accent);
+
+  --color-muted: var(--color-muted);
+  --color-muted-foreground: var(--color-muted-foreground);
+  --color-muted-accent: var(--color-muted-accent);
+
   --color-good: var(--color-good);
   --color-good-foreground: var(--color-good-foreground);
   --color-good-accent: var(--color-good-accent);
@@ -42,14 +52,9 @@
   --color-bad-accent: var(--color-bad-accent);
 }
 
+/* default theme */
 @layer base {
   :root {
-    --tw-shadow-color: var(--color-shadow);
-  }
-
-  :root {
-    @apply min-h-screen bg-background text-foreground font-body;
-
     --radius-control: 999px;
 
     --color-surface: oklch(0.99 0 0);
@@ -77,4 +82,12 @@
   }
 }
 
-@plugin "@iconify/tailwind4";
+/* universal styles */
+@layer base {
+  :root {
+    @apply min-h-screen bg-background text-foreground font-body;
+  }
+  * {
+    border-color: color-mix(in oklab, currentColor 30%, transparent);
+  }
+}

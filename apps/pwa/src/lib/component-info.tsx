@@ -1,10 +1,3 @@
-import { Button } from "earthling-ui/button";
-import { Input } from "earthling-ui/input";
-import { Surface } from "earthling-ui/surface";
-import { TextArea } from "earthling-ui/textarea";
-import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
-import { ReactNode } from "react";
-
 export type ComponentInfo = {
   path: string;
   name: string;
@@ -12,6 +5,17 @@ export type ComponentInfo = {
   dependencies: string[];
   props: ComponentPropInfo[];
 };
+
+const allSchemes = [
+  "default",
+  "primary",
+  "secondary",
+  "tertiary",
+  "muted",
+  "good",
+  "caution",
+  "bad",
+];
 
 export type ComponentPropInfo = {
   label: string;
@@ -40,12 +44,12 @@ export const componentInformation: ComponentInfo[] = [
     ],
     props: [
       {
-        prop: "variant",
-        label: "Variant",
+        prop: "material",
+        label: "Material",
         type: "select",
-        options: ["filled", "outline", "ghost"],
+        options: ["paper", "glass", "outline", "ghost"],
         defaultValue: "filled",
-        description: "The variant of the button",
+        description: "The material of the button",
       },
       {
         prop: "aria-pressed",
@@ -65,7 +69,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "good", "caution", "bad"],
+        options: allSchemes,
         defaultValue: "default",
         description: "The color scheme of the button",
       },
@@ -171,20 +175,20 @@ export const componentInformation: ComponentInfo[] = [
     ],
     props: [
       {
+        prop: "material",
+        label: "Material",
+        type: "select",
+        options: ["paper", "glass", "outline", "ghost"],
+        defaultValue: "default",
+        description: "The material of the toggle group",
+      },
+      {
         prop: "size",
         label: "Size",
         type: "select",
         options: ["sm", "md", "lg"],
         defaultValue: "md",
         description: "The size of the toggle group",
-      },
-      {
-        prop: "variant",
-        label: "Variant",
-        type: "select",
-        options: ["default", "outline"],
-        defaultValue: "default",
-        description: "The variant of the toggle group",
       },
     ],
   },
