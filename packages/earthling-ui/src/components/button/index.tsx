@@ -1,3 +1,5 @@
+"use client";
+
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
@@ -9,7 +11,7 @@ const buttonVariants = cva(
     variants: {
       variant: {
         filled:
-          "bg-[var(--scheme-tint)] text-[var(--scheme-foreground)] hover:bg-[var(--scheme-tint)]/85 aria-pressed:bg-[var(--scheme-tint)]/70 aria-pressed:hover:bg-[var(--scheme-tint)]/55",
+          "bg-[var(--scheme-tint)] text-[var(--scheme-foreground)] shadow-xs hover:bg-[var(--scheme-tint)]/85 aria-pressed:bg-[var(--scheme-tint)]/70 aria-pressed:hover:bg-[var(--scheme-tint)]/55",
         outline:
           "border-[var(--scheme-tint)]/30 hover:border-[var(--scheme-tint)]/50 hover:bg-[var(--scheme-tint)]/5 aria-pressed:bg-[var(--scheme-tint)]/10 aria-pressed:hover:bg-[var(--scheme-tint)]/15",
         ghost:

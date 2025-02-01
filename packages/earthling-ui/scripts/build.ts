@@ -8,12 +8,14 @@ import dts from "bun-plugin-dts";
       "src/components/surface/index.tsx",
       "src/components/textarea/index.tsx",
       "src/components/theme-switcher/index.tsx",
+      "src/components/toggle-group/index.tsx",
     ],
     outdir: "dist/components",
     root: "src/components",
     minify: true,
     splitting: true,
     banner: '"use client";',
+    external: ["react"],
     plugins: [dts()],
   });
 
@@ -24,6 +26,7 @@ import dts from "bun-plugin-dts";
     minify: true,
     splitting: true,
     banner: '"use client";',
+    external: ["react"],
     plugins: [dts()],
   });
 })();

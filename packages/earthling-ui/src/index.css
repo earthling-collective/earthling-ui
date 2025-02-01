@@ -8,9 +8,12 @@
   --radius-control: var(--radius-control); /* buttons, inputs, etc */
 
   /* utility colors */
+  --color-surface: var(--color-surface); /* paper, glass, etc */
   --color-outline: var(--color-outline); /* focus rings */
   --color-light: var(--color-light); /* highlight effects */
   --color-shadow: var(--color-shadow); /* shadows */
+
+  --tw-shadow-color: oklch(0 100% 0);
 
   /* default color scheme */
   --color-background: var(--color-background);
@@ -41,14 +44,21 @@
 
 @layer base {
   :root {
+    --tw-shadow-color: var(--color-shadow);
+  }
+
+  :root {
     @apply min-h-screen bg-background text-foreground font-body;
 
     --radius-control: 999px;
 
-    --color-foreground: oklch(0.25 0 0);
-    --color-background: oklch(0.98 0 0);
+    --color-surface: oklch(0.99 0 0);
     --color-outline: oklch(0 0 0);
-    --color-light: oklch(0.98 0 0 / 0.2);
+    --color-light: oklch(1 0 0 / 0.2);
+    --color-shadow: oklch(0.25 0 0);
+
+    --color-foreground: oklch(0.25 0 0);
+    --color-background: oklch(0.99 0 0);
 
     --color-primary: oklch(17.42% 0.0017 17.32);
     --color-primary-foreground: oklch(96.29% 0 0);

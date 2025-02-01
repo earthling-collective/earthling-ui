@@ -1,16 +1,18 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 import { Slot } from "@radix-ui/react-slot";
 import { cva, type VariantProps } from "class-variance-authority";
 import { type ComponentProps, forwardRef } from "react";
 
 const surfaceVariants = cva(
-  "flow-root rounded-md bg-current/5 transition-colors relative p-4",
+  "flow-root rounded-md bg-surface border-current/10 transition-colors relative p-4",
   {
     variants: {
       material: {
-        paper: "border border-current/10 bg-current/5",
+        paper: "bg-current/5",
         glass:
-          "border border-current/5 before:pointer-events-none before:absolute before:inset-[-1px] before:p-px before:rounded-[inherit] before:[mask-image:linear-gradient(#000,#000),_linear-gradient(#000,#000)] before:[mask-clip:content-box,_border-box] before:[mask-origin:content-box,_border-box] before:[mask-composite:exclude] before:select-none before:bg-[linear-gradient(var(--color-light),transparent_45%)] ",
+          "border border-current/5 shadow-xs backdrop-blur-sm before:pointer-events-none before:absolute before:inset-[-1px] before:rounded-[inherit] before:bg-[linear-gradient(var(--color-light),transparent_45%)] before:p-px before:[mask-clip:content-box,_border-box] before:[mask-composite:exclude] before:[mask-image:linear-gradient(#000,#000),_linear-gradient(#000,#000)] before:[mask-origin:content-box,_border-box] before:select-none",
       },
       interactive: {
         true: "cursor-pointer hover:bg-current/10 hover:border-current/20",

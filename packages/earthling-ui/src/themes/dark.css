@@ -1,9 +1,11 @@
 @utility theme-dark {
   --radius-control: 999px;
 
+  --color-surface: oklch(0.2 0 0);
+  --color-outline: oklch(1 0 0);
+
   --color-background: oklch(17.42% 0.0017 17.32);
   --color-foreground: oklch(96.29% 0 0);
-  --color-outline: oklch(1 0 0);
 
   --color-primary: oklch(96.29% 0 0);
   --color-primary-foreground: oklch(17.42% 0.0017 17.32);
