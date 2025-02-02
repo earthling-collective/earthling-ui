@@ -69,7 +69,7 @@ const ToggleGroup = forwardRef<
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
 
 const toggleGroupItemVariants = cva(
-  "-ml-px inline-flex cursor-pointer items-center justify-center gap-1 transition-colors first:ml-0 first:rounded-l-control last:rounded-r-control",
+  "-ml-px inline-flex cursor-pointer items-center justify-center gap-1.5 transition-colors first:ml-0 first:rounded-l-control last:rounded-r-control",
   {
     variants: {
       material: {

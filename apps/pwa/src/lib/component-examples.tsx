@@ -1,5 +1,12 @@
 import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "earthling-ui/select";
 import { Surface } from "earthling-ui/surface";
 import { Switch } from "earthling-ui/switch";
 import { TextArea } from "earthling-ui/textarea";
@@ -20,6 +27,18 @@ export const componentExamples = {
       className={cn("max-w-md", props.className)}
     />
   ),
+  select: (props) => (
+    <Select {...props}>
+      <SelectTrigger className={cn("max-w-md", props.className)}>
+        <SelectValue placeholder="Select a theme" />
+      </SelectTrigger>
+      <SelectContent>
+        <SelectItem value="system">System</SelectItem>
+        <SelectItem value="light">Light</SelectItem>
+        <SelectItem value="dark">Dark</SelectItem>
+      </SelectContent>
+    </Select>
+  ),
   surface: (props) => (
     <Surface {...props} className="max-w-md">
       Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
@@ -29,15 +48,15 @@ export const componentExamples = {
   ),
   ["toggle-group"]: (props) => (
     <ToggleGroup {...props} type="single">
-      <ToggleGroupItem value="Sytem">
+      <ToggleGroupItem value="system">
         <i className="icon-[lucide--computer]" />
         <div>System</div>
       </ToggleGroupItem>
-      <ToggleGroupItem value="Light">
+      <ToggleGroupItem value="light">
         <i className="icon-[lucide--sun]" />
         <div>Light</div>
       </ToggleGroupItem>
-      <ToggleGroupItem value="Dark">
+      <ToggleGroupItem value="dark">
         <i className="icon-[lucide--moon]" />
         <div>Dark</div>
       </ToggleGroupItem>

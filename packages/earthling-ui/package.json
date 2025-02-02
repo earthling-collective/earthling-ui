@@ -51,6 +51,7 @@
     "isomorphic-git": "^1.29.0"
   },
   "devDependencies": {
+    "@radix-ui/react-select": "^2.1.5",
     "@radix-ui/react-slot": "^1.1.1",
     "@radix-ui/react-switch": "^1.1.2",
     "@types/bun": "latest",

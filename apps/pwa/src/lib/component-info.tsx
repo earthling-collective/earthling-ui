@@ -1,13 +1,13 @@
 export type ComponentInfo = {
   path: string;
   name: string;
+  status: "future" | "wip" | "ready";
   description: string;
   dependencies: string[];
   props: ComponentPropInfo[];
 };
 
 const allSchemes = [
-  "default",
   "primary",
   "secondary",
   "tertiary",
@@ -27,6 +27,10 @@ export type ComponentPropInfo = {
       type: "select";
       options: string[];
     }
+  | {
+      type: "toggle-group";
+      options: string[];
+    }
   | { type: "boolean" }
   | { type: "string" }
   | { type: "number" }
@@ -34,9 +38,22 @@ export type ComponentPropInfo = {
 
 export const componentInformation: ComponentInfo[] = [
   {
+    path: "accordion",
+    name: "Accordion",
+    description: "An accordion component",
+    status: "wip",
+    dependencies: [
+      "class-variance-authority",
+      "@radix-ui/react-accordion",
+      "@/utils/cn",
+    ],
+    props: [],
+  },
+  {
     path: "button",
     name: "Button",
     description: "A button component",
+    status: "wip",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-slot",
@@ -46,21 +63,21 @@ export const componentInformation: ComponentInfo[] = [
       {
         prop: "material",
         label: "Material",
-        type: "select",
-        options: ["paper", "glass", "outline", "ghost"],
-        defaultValue: "filled",
+        type: "toggle-group",
+        options: ["paper", "outline", "ghost"],
+        defaultValue: "paper",
         description: "The material of the button",
       },
       {
         prop: "aria-pressed",
         label: "Selected",
         type: "boolean",
-        description: "The selected state of the button",
+        description: "The toggle-grouped state of the button",
       },
       {
         prop: "size",
         label: "Size",
-        type: "select",
+        type: "toggle-group",
         options: ["sm", "md", "lg"],
         defaultValue: "md",
         description: "The size of the button",
@@ -70,13 +87,13 @@ export const componentInformation: ComponentInfo[] = [
         label: "Scheme",
         type: "select",
         options: allSchemes,
-        defaultValue: "default",
+        defaultValue: "primary",
         description: "The color scheme of the button",
       },
       {
         prop: "shape",
         label: "Shape",
-        type: "select",
+        type: "toggle-group",
         options: ["pill", "icon"],
         defaultValue: "pill",
         description: "The shape of the button",
@@ -88,11 +105,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Input",
     description: "An input component",
     dependencies: ["class-variance-authority", "@/utils/cn"],
+    status: "wip",
     props: [
       {
         prop: "size",
         label: "Size",
-        type: "select",
+        type: "toggle-group",
         options: ["sm", "md", "lg"],
         defaultValue: "md",
         description: "The size of the input",
@@ -118,11 +136,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Textarea",
     description: "A textarea component",
     dependencies: ["class-variance-authority", "@/utils/cn"],
+    status: "wip",
     props: [
       {
         prop: "size",
         label: "Size",
-        type: "select",
+        type: "toggle-group",
         options: ["sm", "md", "lg"],
         defaultValue: "md",
         description: "The size of the textarea",
@@ -138,9 +157,22 @@ export const componentInformation: ComponentInfo[] = [
     ],
   },
   {
+    path: "select",
+    name: "Select",
+    description: "A select component",
+    status: "future",
+    dependencies: [
+      "class-variance-authority",
+      "@radix-ui/react-select",
+      "@/utils/cn",
+    ],
+    props: [],
+  },
+  {
     path: "surface",
     name: "Surface",
     description: "A surface component",
+    status: "wip",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-slot",
@@ -150,7 +182,7 @@ export const componentInformation: ComponentInfo[] = [
       {
         prop: "material",
         label: "Material",
-        type: "select",
+        type: "toggle-group",
         options: ["paper", "glass"],
         defaultValue: "glass",
         description: "The material of the surface",
@@ -167,6 +199,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "switch",
     name: "Switch",
     description: "A switch component",
+    status: "wip",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-switch",
@@ -176,7 +209,7 @@ export const componentInformation: ComponentInfo[] = [
       {
         prop: "material",
         label: "Material",
-        type: "select",
+        type: "toggle-group",
         options: ["paper"],
         defaultValue: "paper",
         description: "The material of the switch",
@@ -195,6 +228,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "toggle-group",
     name: "ToggleGroup",
     description: "A toggle group component",
+    status: "wip",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-toggle-group",
@@ -204,15 +238,15 @@ export const componentInformation: ComponentInfo[] = [
       {
         prop: "material",
         label: "Material",
-        type: "select",
-        options: ["paper", "glass", "outline", "ghost"],
+        type: "toggle-group",
+        options: ["paper"],
         defaultValue: "default",
         description: "The material of the toggle group",
       },
       {
         prop: "size",
         label: "Size",
-        type: "select",
+        type: "toggle-group",
         options: ["sm", "md", "lg"],
         defaultValue: "md",
         description: "The size of the toggle group",

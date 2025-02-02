@@ -5,6 +5,7 @@ import dts from "bun-plugin-dts";
     entrypoints: [
       "src/components/button/index.tsx",
       "src/components/input/index.tsx",
+      "src/components/select/index.tsx",
       "src/components/surface/index.tsx",
       "src/components/switch/index.tsx",
       "src/components/textarea/index.tsx",

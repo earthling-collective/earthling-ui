@@ -3,6 +3,13 @@
 import { ComponentPropInfo } from "@/lib/component-info";
 import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "earthling-ui/select";
 import { Switch } from "earthling-ui/switch";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
@@ -61,14 +68,54 @@ export function Stage({
                   onCheckedChange={(checked) => {
                     setProps({
                       ...props,
-                      [control.prop]: checked,
+                      [control.prop]: checked || false,
                     });
                   }}
                 />
               )}
               {control.type === "select" && (
                 <div className="flex flex-row flex-wrap items-center gap-2">
-                  <ToggleGroup type="single" className="flex-wrap">
+                  <Select
+                    value={(props as any)[control.prop] || control.defaultValue}
+                    onValueChange={(value) => {
+                      setProps({
+                        ...props,
+                        [control.prop]: value,
+                      });
+                    }}
+                  >
+                    <SelectTrigger>
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {control.options.map((option) => (
+                        <SelectItem value={option} key={option}>
+                          {option}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
+                  <Button
+                    size={"sm"}
+                    material={"ghost"}
+                    onClick={() => {
+                      setProps({
+                        ...props,
+                        [control.prop]: undefined,
+                      });
+                    }}
+                  >
+                    <i className="icon-[lucide--x]" />
+                  </Button>
+                </div>
+              )}
+              {control.type === "toggle-group" && (
+                <div className="flex flex-row flex-wrap items-center gap-2">
+                  <ToggleGroup
+                    type="single"
+                    className="flex-wrap"
+                    value={(props as any)[control.prop] || ""}
+                  >
                     {control.options.map((option) => (
                       <ToggleGroupItem
                         value={option}

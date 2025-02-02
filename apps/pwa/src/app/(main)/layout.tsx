@@ -67,6 +67,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
           <ToggleGroup
             type="single"
             size="sm"
+            value={theme}
             onValueChange={async (value) => {
               "use server";
               const jar = await cookies();
@@ -88,7 +89,13 @@ export default async function ({ children }: { children: React.ReactNode }) {
       <div className="grid grid-cols-[fit-content(100%)_1fr_fit-content(100%)]">
         <aside className="hidden w-[280px] flex-col justify-end border-r border-[transparent] xl:flex">
           <nav className="sticky bottom-0 flex min-h-[calc(100vh-72px)] flex-col p-4">
-            <Input placeholder="Search components..." className="mb-2" />
+            <Button
+              className="text-foreground/50 mb-2 justify-start"
+              material="outline"
+            >
+              <i className="icon-[lucide--search]" />
+              <div>Search...</div>
+            </Button>
             {componentInformation
               .sort((a, b) => (a.name > b.name ? 1 : -1))
               .map((info) => (
@@ -97,6 +104,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
                   material="ghost"
                   size="sm"
                   asChild
+                  scheme={info.status === "future" ? "muted" : "primary"}
                   className="justify-start"
                 >
                   <Link href={`/components/${info.path}`}>{info.name}</Link>

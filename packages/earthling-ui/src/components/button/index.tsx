@@ -13,12 +13,11 @@ const buttonVariants = cva(
         paper:
           "bg-[var(--scheme-tint)] text-[var(--scheme-foreground)] shadow-xs hover:bg-[var(--scheme-tint)]/85 aria-pressed:bg-[var(--scheme-tint)]/70 aria-pressed:hover:bg-[var(--scheme-tint)]/55",
         outline:
-          "border-[var(--scheme-tint)]/30 hover:border-[var(--scheme-tint)]/50 hover:bg-[var(--scheme-tint)]/5 aria-pressed:bg-[var(--scheme-tint)]/10 aria-pressed:hover:bg-[var(--scheme-tint)]/15",
+          "text-foreground border-[var(--scheme-tint)]/30 hover:border-[var(--scheme-tint)]/50 hover:bg-[var(--scheme-tint)]/5 aria-pressed:bg-[var(--scheme-tint)]/10 aria-pressed:hover:bg-[var(--scheme-tint)]/15",
         ghost:
-          "hover:bg-[var(--scheme-tint)]/5 aria-pressed:bg-[var(--scheme-tint)]/10 aria-pressed:hover:bg-[var(--scheme-tint)]/15",
+          "text-foreground hover:bg-[var(--scheme-tint)]/5 aria-pressed:bg-[var(--scheme-tint)]/10 aria-pressed:hover:bg-[var(--scheme-tint)]/15",
       },
       scheme: {
-        default: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
         primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
@@ -39,7 +38,7 @@ const buttonVariants = cva(
     },
     defaultVariants: {
       material: "paper",
-      scheme: "default",
+      scheme: "primary",
       size: "md",
       shape: "pill",
     },
