@@ -70,10 +70,6 @@ export const Nav = () => {
       <div className="flex flex-col">
         {componentInformation
           .sort((a, b) => (a.name > b.name ? 1 : -1))
-          .filter(
-            (x) =>
-              process.env.NODE_ENV === "development" || x.status !== "future",
-          )
           .map((info) => (
             <Button
               key={info.path}
@@ -81,13 +77,9 @@ export const Nav = () => {
               size="sm"
               asChild
               aria-pressed={pathname === `/components/${info.path}`}
-              disabled={info.status === "future"}
               className="justify-start"
             >
-              <Link href={`/components/${info.path}`}>
-                {info.name}
-                {info.status === `wip` && ` 🚧`}
-              </Link>
+              <Link href={`/components/${info.path}`}>{info.name}</Link>
             </Button>
           ))}
       </div>

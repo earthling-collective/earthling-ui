@@ -2,6 +2,8 @@ import { notFound } from "next/navigation";
 import ClientComponent from "./client-component";
 import { resolve } from "path";
 import { readFile } from "fs/promises";
+import { Breadcrumb, Breadcrumbs } from "earthling-ui/breadcrumbs";
+import Link from "next/link";
 
 export default async function ({
   params,
@@ -22,7 +24,15 @@ export default async function ({
   }
 
   return (
-    <div className="container mx-auto max-w-3xl py-4 md:my-12 md:p-0">
+    <div className="container mx-auto max-w-3xl py-4 md:my-4 md:p-0">
+      <Breadcrumbs className="mb-8 text-sm">
+        <Breadcrumb className={"text-muted-foreground"}>Components</Breadcrumb>
+        <Breadcrumb className={"capitalize"}>
+          <Link href={`/components/${path}`} className="hover:underline">
+            {path}
+          </Link>
+        </Breadcrumb>
+      </Breadcrumbs>
       <ClientComponent path={path} code={code} />
     </div>
   );

@@ -1,7 +1,6 @@
 export type ComponentInfo = {
   path: string;
   name: string;
-  status: "future" | "wip" | "ready";
   pending?: "example"[];
   description: string;
   dependencies: string[];
@@ -12,6 +11,7 @@ const allSchemes = [
   "primary",
   "secondary",
   "tertiary",
+  "neutral",
   "muted",
   "good",
   "caution",
@@ -42,7 +42,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "accordion",
     name: "Accordion",
     description: "An accordion component",
-    status: "wip",
     pending: ["example"],
     dependencies: [
       "class-variance-authority",
@@ -55,7 +54,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "badge",
     name: "Badge",
     description: "A badge component",
-    status: "wip",
     dependencies: ["class-variance-authority", "@/utils/cn"],
     props: [
       {
@@ -77,10 +75,20 @@ export const componentInformation: ComponentInfo[] = [
     ],
   },
   {
+    path: "breadcrumbs",
+    name: "Breadcrumbs",
+    description: "A breadcrumbs component",
+    dependencies: [
+      "class-variance-authority",
+      "react-aria-components",
+      "@/utils/cn",
+    ],
+    props: [],
+  },
+  {
     path: "button",
     name: "Button",
     description: "A button component",
-    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-slot",
@@ -137,7 +145,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "drawer",
     name: "Drawer",
     description: "A drawer component",
-    status: "wip",
     pending: ["example"],
     dependencies: ["class-variance-authority", "@/utils/cn", "vaul"],
     props: [],
@@ -147,7 +154,6 @@ export const componentInformation: ComponentInfo[] = [
     name: "Input",
     description: "An input component",
     dependencies: ["class-variance-authority", "@/utils/cn"],
-    status: "ready",
     props: [
       {
         prop: "size",
@@ -178,7 +184,6 @@ export const componentInformation: ComponentInfo[] = [
     name: "Textarea",
     description: "A textarea component",
     dependencies: ["class-variance-authority", "@/utils/cn"],
-    status: "ready",
     props: [
       {
         prop: "size",
@@ -202,7 +207,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "popover",
     name: "Popover",
     description: "A popover component",
-    status: "wip",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-popover",
@@ -214,7 +218,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "separator",
     name: "Separator",
     description: "A separator component",
-    status: "wip",
     pending: ["example"],
     dependencies: [
       "class-variance-authority",
@@ -227,7 +230,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "select",
     name: "Select",
     description: "A select component",
-    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-select",
@@ -239,7 +241,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "surface",
     name: "Surface",
     description: "A surface component",
-    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-slot",
@@ -266,7 +267,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "switch",
     name: "Switch",
     description: "A switch component",
-    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-switch",
@@ -295,11 +295,10 @@ export const componentInformation: ComponentInfo[] = [
     path: "tabs",
     name: "Tabs",
     description: "A tabs component",
-    status: "ready",
     pending: ["example"],
     dependencies: [
       "class-variance-authority",
-      "@radix-ui/react-tabs",
+      "react-aria-components",
       "@/utils/cn",
     ],
     props: [
@@ -325,7 +324,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "toggle-group",
     name: "ToggleGroup",
     description: "A toggle group component",
-    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-toggle-group",

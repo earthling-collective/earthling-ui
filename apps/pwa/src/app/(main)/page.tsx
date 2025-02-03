@@ -37,10 +37,6 @@ export default async function () {
       <div className="my-8 grid grid-cols-3 gap-4">
         {componentInformation
           .sort((a, b) => (a.name > b.name ? 1 : a.name === b.name ? 0 : -1))
-          .filter(
-            (x) =>
-              process.env.NODE_ENV === "development" || x.status !== "future",
-          )
           .map(({ name, path }, i) => (
             <Surface
               interactive

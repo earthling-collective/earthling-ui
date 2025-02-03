@@ -19,11 +19,10 @@ export default function ({ path, code }: { path: string; code: string }) {
 
   return (
     <>
-      <Tabs defaultSelectedKey="props">
-        <TabList>
+      <Tabs defaultSelectedKey="props" size="sm">
+        <TabList className="mx-4">
           <Tab id="props">Props</Tab>
           <Tab id="code">Code</Tab>
-          <Tab id="examples">Examples</Tab>
         </TabList>
         <TabPanel id="props">
           <Stage controls={info?.props || []}>

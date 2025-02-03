@@ -20,6 +20,7 @@ import { TextArea } from "earthling-ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
 import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
+import { Breadcrumb, Breadcrumbs } from "earthling-ui/breadcrumbs";
 
 export const componentExamples = {
   accordion: (props) => (
@@ -56,6 +57,13 @@ export const componentExamples = {
     </Accordion>
   ),
   badge: (props) => <Badge {...props}>Badge</Badge>,
+  breadcrumbs: (props) => (
+    <Breadcrumbs {...props}>
+      <Breadcrumb>Home</Breadcrumb>
+      <Breadcrumb>Library</Breadcrumb>
+      <Breadcrumb>Data</Breadcrumb>
+    </Breadcrumbs>
+  ),
   button: (props: Record<string, any>) => (
     <Button {...props}>
       <i className="icon-[lucide--house]" />
@@ -96,13 +104,13 @@ export const componentExamples = {
         <Tab id="tab2">Tab 2</Tab>
         <Tab id="tab3">Tab 3</Tab>
       </TabList>
-      <TabPanel id="tab1">
+      <TabPanel id="tab1" className={"py-4"}>
         <div>Tab 1 content</div>
       </TabPanel>
-      <TabPanel id="tab2">
+      <TabPanel id="tab2" className={"py-4"}>
         <div>Tab 2 content</div>
       </TabPanel>
-      <TabPanel id="tab3">
+      <TabPanel id="tab3" className={"py-4"}>
         <div>Tab 3 content</div>
       </TabPanel>
     </Tabs>

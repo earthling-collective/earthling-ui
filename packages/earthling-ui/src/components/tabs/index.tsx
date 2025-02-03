@@ -73,7 +73,7 @@ TabList.displayName = "TabList";
 
 //Tab
 const tabVariants = cva(
-  "border-b-2 border-transparent aria-selected:border-b-[var(--scheme-tint)] outline-none ring-outline focus-visible:ring-2 cursor-pointer inline-flex items-center justify-center transition-colors",
+  "border-b-2 border-transparent aria-selected:border-b-[var(--scheme-tint)] outline-none ring-outline focus-visible:ring-2 cursor-pointer inline-flex items-center justify-center transition-colors hover:bg-[var(--scheme-tint)]/5",
   {
     variants: {
       size: {

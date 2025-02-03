@@ -6,6 +6,7 @@ import dts from "bun-plugin-dts";
       ...[
         "accordion",
         "badge",
+        "breadcrumbs",
         "button",
         "drawer",
         "input",

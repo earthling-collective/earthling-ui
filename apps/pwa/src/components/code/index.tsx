@@ -4,7 +4,7 @@ import highlight from "@/services/highlight";
 import { Button } from "earthling-ui/button";
 import { Surface } from "earthling-ui/surface";
 import { cn } from "earthling-ui/utils/cn";
-import { HTMLAttributes, forwardRef, useMemo } from "react";
+import { HTMLAttributes, forwardRef, useMemo, useState } from "react";
 
 export interface CodeProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
@@ -22,10 +22,12 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
     [children, language],
   );
 
+  const [isCopied, setIsCopied] = useState(false);
+
   return (
     <Surface
       material={"paper"}
-      className="group relative bg-[#0d1117] p-8 text-sm text-[white]"
+      className="group overfow-auto relative rounded-xl border bg-[#0d1117] p-8 text-sm text-[white]"
     >
       <code
         ref={ref}
@@ -39,10 +41,19 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
         <Button
           className="pointer-events-auto sticky top-[80px]"
           size="sm"
-          scheme={"secondary"}
+          scheme={isCopied ? "good" : "neutral"}
           shape={"icon"}
+          onClick={() => {
+            navigator.clipboard.writeText(children || "");
+            setIsCopied(true);
+            setTimeout(() => setIsCopied(false), 2000);
+          }}
         >
-          <i className="icon-[lucide--copy]" />
+          <i
+            className={cn(
+              isCopied ? "icon-[lucide--check]" : "icon-[lucide--copy]",
+            )}
+          />
         </Button>
       </div>
     </Surface>
