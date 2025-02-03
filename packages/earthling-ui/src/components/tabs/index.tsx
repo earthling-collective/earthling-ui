@@ -1,58 +1,147 @@
 "use client";
 
 import {
+  createContext,
   forwardRef,
+  useContext,
   type ComponentPropsWithoutRef,
   type ComponentRef,
+  type ContextType,
 } from "react";
-import * as TabsPrimitive from "@radix-ui/react-tabs";
+import {
+  Tab as TabPrimitive,
+  TabList as TabListPrimitive,
+  TabPanel as TabPanelPrimitive,
+  Tabs as TabsPrimitive,
+} from "react-aria-components";
 import { cn } from "@/utils/cn";
+import { cva, type VariantProps } from "class-variance-authority";
 
-const Tabs = TabsPrimitive.Root;
+const TabsContext = createContext<Pick<TabProps, "size" | "scheme">>({
+  size: "md",
+  scheme: "primary",
+});
 
-const TabsList = forwardRef<
-  ComponentRef<typeof TabsPrimitive.List>,
-  ComponentPropsWithoutRef<typeof TabsPrimitive.List>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.List
-    ref={ref}
-    className={cn(
-      "inline-flex h-10 items-center justify-center rounded-md bg-muted p-1 text-muted-foreground",
-      className
-    )}
-    {...props}
-  />
-));
-TabsList.displayName = TabsPrimitive.List.displayName;
+//Tabs
+export const tabsVariants = cva("", {
+  variants: {},
+  defaultVariants: {},
+});
 
-const TabsTrigger = forwardRef<
-  ComponentRef<typeof TabsPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof TabsPrimitive.Trigger>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Trigger
-    ref={ref}
-    className={cn(
-      "inline-flex items-center justify-center whitespace-nowrap rounded-sm px-3 py-1.5 text-sm font-medium ring-offset-background transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 data-[state=active]:bg-background data-[state=active]:text-foreground data-[state=active]:shadow-sm",
-      className
-    )}
-    {...props}
-  />
-));
-TabsTrigger.displayName = TabsPrimitive.Trigger.displayName;
+interface TabsProps
+  extends ComponentPropsWithoutRef<typeof TabsPrimitive>,
+    VariantProps<typeof tabsVariants>,
+    ContextType<typeof TabsContext> {}
 
-const TabsContent = forwardRef<
-  ComponentRef<typeof TabsPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof TabsPrimitive.Content>
->(({ className, ...props }, ref) => (
-  <TabsPrimitive.Content
-    ref={ref}
-    className={cn(
-      "mt-2 ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
-      className
-    )}
-    {...props}
-  />
-));
-TabsContent.displayName = TabsPrimitive.Content.displayName;
+const Tabs = forwardRef<ComponentRef<typeof TabsPrimitive>, TabsProps>(
+  ({ className, size, scheme, ...props }, ref) => {
+    return (
+      <TabsContext.Provider value={{ size, scheme }}>
+        <TabsPrimitive
+          ref={ref}
+          {...props}
+          className={cn(tabsVariants({}), className)}
+        />
+      </TabsContext.Provider>
+    );
+  }
+);
+Tabs.displayName = "Tabs";
 
-export { Tabs, TabsList, TabsTrigger, TabsContent };
+//TabList
+const tabListVariants = cva("flex flex-row", {
+  variants: {},
+  defaultVariants: {},
+});
+
+export interface TabListProps
+  extends ComponentPropsWithoutRef<typeof TabListPrimitive>,
+    VariantProps<typeof tabListVariants> {}
+
+const TabList = forwardRef<ComponentRef<typeof TabListPrimitive>, TabListProps>(
+  ({ className, ...props }, ref) => {
+    return (
+      <TabListPrimitive
+        ref={ref}
+        {...props}
+        className={cn(tabListVariants({}), className)}
+      />
+    );
+  }
+);
+TabList.displayName = "TabList";
+
+//Tab
+const tabVariants = cva(
+  "border-b-2 border-transparent aria-selected:border-b-[var(--scheme-tint)] outline-none ring-outline focus-visible:ring-2 cursor-pointer inline-flex items-center justify-center transition-colors",
+  {
+    variants: {
+      size: {
+        sm: "h-9 px-3",
+        md: "h-10 px-4",
+        lg: "h-11 px-8",
+      },
+      scheme: {
+        primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
+        secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
+        tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
+        muted: `[--scheme-tint:var(--color-muted);--scheme-foreground:var(--color-muted-foreground)]`,
+        good: `[--scheme-tint:var(--color-good);--scheme-foreground:var(--color-good-foreground)]`,
+        caution: `[--scheme-tint:var(--color-caution);--scheme-foreground:var(--color-caution-foreground)]`,
+        bad: `[--scheme-tint:var(--color-bad);--scheme-foreground:var(--color-bad-foreground)]`,
+      },
+    },
+    defaultVariants: {
+      size: "md",
+      scheme: "primary",
+    },
+  }
+);
+
+export interface TabProps
+  extends ComponentPropsWithoutRef<typeof TabPrimitive>,
+    VariantProps<typeof tabVariants> {}
+
+const Tab = forwardRef<ComponentRef<typeof TabPanelPrimitive>, TabProps>(
+  ({ className, size, scheme, ...props }, ref) => {
+    const context = useContext(TabsContext);
+
+    return (
+      <TabPrimitive
+        ref={ref}
+        {...props}
+        className={cn(
+          tabVariants({
+            size: size || context.size,
+            scheme: scheme || context.scheme,
+          }),
+          className
+        )}
+      />
+    );
+  }
+);
+Tab.displayName = "Tab";
+
+//TabPanel
+const tabPanelVariants = cva("", { variants: {}, defaultVariants: {} });
+
+export interface TabPanelProps
+  extends ComponentPropsWithoutRef<typeof TabPanelPrimitive>,
+    VariantProps<typeof tabPanelVariants> {}
+
+const TabPanel = forwardRef<
+  ComponentRef<typeof TabPanelPrimitive>,
+  TabPanelProps
+>(({ className, ...props }, ref) => {
+  return (
+    <TabPanelPrimitive
+      ref={ref}
+      {...props}
+      className={cn(tabPanelVariants({}), className)}
+    />
+  );
+});
+TabPanel.displayName = "TabPanel";
+
+export { Tabs, TabList, TabPanel, Tab };

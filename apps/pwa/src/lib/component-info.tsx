@@ -295,14 +295,31 @@ export const componentInformation: ComponentInfo[] = [
     path: "tabs",
     name: "Tabs",
     description: "A tabs component",
-    status: "wip",
+    status: "ready",
     pending: ["example"],
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-tabs",
       "@/utils/cn",
     ],
-    props: [],
+    props: [
+      {
+        prop: "scheme",
+        label: "Scheme",
+        type: "select",
+        options: allSchemes,
+        defaultValue: "primary",
+        description: "The color scheme of the tabs",
+      },
+      {
+        prop: "size",
+        label: "Size",
+        type: "toggle-group",
+        options: ["sm", "md", "lg"],
+        defaultValue: "md",
+        description: "The size of the tabs",
+      },
+    ],
   },
   {
     path: "toggle-group",

@@ -19,7 +19,7 @@ import { Switch } from "earthling-ui/switch";
 import { TextArea } from "earthling-ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "earthling-ui/tabs";
+import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
 
 export const componentExamples = {
   accordion: (props) => (
@@ -91,20 +91,20 @@ export const componentExamples = {
   ),
   tabs: (props) => (
     <Tabs {...props}>
-      <TabsList>
-        <TabsTrigger value="tab1">Tab 1</TabsTrigger>
-        <TabsTrigger value="tab2">Tab 2</TabsTrigger>
-        <TabsTrigger value="tab3">Tab 3</TabsTrigger>
-      </TabsList>
-      <TabsContent value="tab1">
+      <TabList>
+        <Tab id="tab1">Tab 1</Tab>
+        <Tab id="tab2">Tab 2</Tab>
+        <Tab id="tab3">Tab 3</Tab>
+      </TabList>
+      <TabPanel id="tab1">
         <div>Tab 1 content</div>
-      </TabsContent>
-      <TabsContent value="tab2">
+      </TabPanel>
+      <TabPanel id="tab2">
         <div>Tab 2 content</div>
-      </TabsContent>
-      <TabsContent value="tab3">
+      </TabPanel>
+      <TabPanel id="tab3">
         <div>Tab 3 content</div>
-      </TabsContent>
+      </TabPanel>
     </Tabs>
   ),
   ["toggle-group"]: (props) => (

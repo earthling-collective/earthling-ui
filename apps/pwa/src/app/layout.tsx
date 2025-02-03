@@ -2,14 +2,14 @@ import "@/styles/main.css";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import LocalFont from "next/font/local";
-import { Geist } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google";
 
 const displayFont = LocalFont({
   src: "./font.otf",
   variable: "--font-display",
 });
 const bodyFont = Geist({ subsets: ["latin"], variable: "--font-body" });
-const monoFont = LocalFont({ src: "./font.otf", variable: "--font-mono" });
+const monoFont = Geist_Mono({ subsets: ["latin"], variable: "--font-mono" });
 
 export const metadata: Metadata = {
   title: "Earthling UI",
