@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn";
 import { type ComponentProps, forwardRef } from "react";
 
 const buttonVariants = cva(
-  "focus-visible:ring-ring inline-flex aspect-[var(--scheme-aspect)] cursor-pointer items-center items-center justify-center justify-center gap-2 rounded-control border border-transparent text-sm font-medium whitespace-nowrap  ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+  "focus-visible:ring-ring inline-flex aspect-[var(--scheme-aspect)] cursor-pointer items-center items-center justify-center justify-center gap-2 rounded-control border border-transparent text-sm font-medium whitespace-nowrap  ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden aria-disabled:pointer-events-none aria-disabled:opacity-50",
   {
     variants: {
       material: {
@@ -65,6 +65,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         ref={ref}
         data-scheme={scheme}
+        aria-disabled={props.disabled}
         {...props}
       />
     );

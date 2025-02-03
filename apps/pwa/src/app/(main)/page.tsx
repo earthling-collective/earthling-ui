@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Surface } from "earthling-ui/surface";
 import pkg from "../../../../../packages/earthling-ui/package.json";
+import { componentInformation } from "@/lib/component-info";
 
 export default async function () {
   return (
@@ -34,36 +35,17 @@ export default async function () {
       </div>
 
       <div className="my-8 grid grid-cols-3 gap-4">
-        {[
-          {
-            title: "Button",
-            subtitle: "",
-            href: "/components/button",
-          },
-          { title: "Input", subtitle: "", href: "/components/input" },
-          {
-            title: "Surface",
-            subtitle: "",
-            href: "/components/surface",
-          },
-          {
-            title: "Textarea",
-            subtitle: "",
-            href: "/components/textarea",
-          },
-        ]
-          .sort((a, b) =>
-            a.title > b.title ? 1 : a.title === b.title ? 0 : -1,
-          )
-          .map(({ title, subtitle, href }, i) => (
+        {componentInformation
+          .sort((a, b) => (a.name > b.name ? 1 : a.name === b.name ? 0 : -1))
+          .filter((x) => x.status !== "future")
+          .map(({ name, path }, i) => (
             <Surface
               interactive
               asChild
               className="col-span-3 shadow-xs md:col-span-1"
             >
-              <Link href={href}>
-                <h3 className="font-semibold">{title}</h3>
-                <p className="text-sm text-current/60">{subtitle}</p>
+              <Link href={`/components/${path}`}>
+                <h3 className="font-semibold">{name}</h3>
               </Link>
             </Surface>
           ))}

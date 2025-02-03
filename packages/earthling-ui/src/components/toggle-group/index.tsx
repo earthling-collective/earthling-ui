@@ -16,12 +16,8 @@ const toggleGroupVariants = cva("flex items-center justify-center", {
     material: {
       paper:
         "rounded-control bg-[var(--scheme-base)] bg-muted text-muted-foreground",
-      glass: "",
-      outline: "",
-      ghost: "",
     },
     scheme: {
-      default: `[--scheme-tint:currentColor;--scheme-foreground:var(--color-background)];--scheme-base:var(--color-muted);`,
       primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
       secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
       tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
@@ -47,7 +43,7 @@ const ToggleGroupContext = createContext<
 >({
   size: "md",
   material: "paper",
-  scheme: "default",
+  scheme: "primary",
 });
 
 const ToggleGroup = forwardRef<
@@ -69,19 +65,14 @@ const ToggleGroup = forwardRef<
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
 
 const toggleGroupItemVariants = cva(
-  "-ml-px inline-flex cursor-pointer items-center justify-center gap-1.5 transition-colors first:ml-0 first:rounded-l-control last:rounded-r-control",
+  "-ml-px inline-flex cursor-pointer items-center justify-center gap-1.5 transition-colors first:ml-0 first:rounded-l-control last:rounded-r-control text-sm font-medium",
   {
     variants: {
       material: {
         paper:
           "aria-checked:bg-primary aria-checked:text-primary-foreground rounded-control",
-        glass: "",
-        outline:
-          "border border-current/30 hover:bg-current/5 aria-checked:bg-current/10 aria-checked:hover:bg-current/15",
-        ghost: "",
       },
       scheme: {
-        default: `[--scheme-tint:currentColor;--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,

@@ -14,7 +14,6 @@ const textAreaVariants = cva(
         lg: "min-h-11 px-8 py-[calc((44px-1.5rem)/2)]",
       },
       scheme: {
-        default: `[--scheme-tint:currentColor;--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
@@ -26,7 +25,7 @@ const textAreaVariants = cva(
     },
     defaultVariants: {
       size: "md",
-      scheme: "default",
+      scheme: "primary",
     },
   }
 );

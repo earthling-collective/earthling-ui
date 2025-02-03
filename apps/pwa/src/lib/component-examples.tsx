@@ -1,5 +1,6 @@
 import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
+import { Badge } from "earthling-ui/badge";
 import {
   Select,
   SelectContent,
@@ -14,6 +15,7 @@ import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
 
 export const componentExamples = {
+  badge: (props) => <Badge {...props}>Badge</Badge>,
   button: (props: Record<string, any>) => (
     <Button {...props}>
       <i className="icon-[lucide--house]" />
@@ -24,6 +26,7 @@ export const componentExamples = {
   textarea: (props) => (
     <TextArea
       placeholder="Type something..."
+      {...props}
       className={cn("max-w-md", props.className)}
     />
   ),
@@ -47,7 +50,7 @@ export const componentExamples = {
     </Surface>
   ),
   ["toggle-group"]: (props) => (
-    <ToggleGroup {...props} type="single">
+    <ToggleGroup {...props} type="single" defaultValue="system">
       <ToggleGroupItem value="system">
         <i className="icon-[lucide--computer]" />
         <div>System</div>

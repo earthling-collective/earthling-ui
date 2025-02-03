@@ -1,11 +1,18 @@
 import Link from "next/link";
 import { Button } from "earthling-ui/button";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+} from "earthling-ui/drawer";
 import { cookies } from "next/headers";
 import earthling from "../icon.png";
 import Image from "next/image";
 import { componentInformation } from "@/lib/component-info";
 import { Input } from "earthling-ui/input";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
+import { Nav } from "./nav";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -70,6 +77,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
             value={theme}
             onValueChange={async (value) => {
               "use server";
+              if (!value) return;
               const jar = await cookies();
               jar.set("theme", value);
             }}
@@ -84,33 +92,21 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <i className="icon-[lucide--moon]" />
             </ToggleGroupItem>
           </ToggleGroup>
+          {/* <Drawer direction="right" modal={false}>
+            <DrawerTrigger asChild>
+              <Button size="sm" material={"ghost"} shape={"icon"}>
+                <i className="icon-[lucide--menu]" />
+              </Button>
+            </DrawerTrigger>
+            <DrawerContent>
+              <DrawerHeader>Hey</DrawerHeader>
+            </DrawerContent>
+          </Drawer> */}
         </div>
       </header>
       <div className="grid grid-cols-[fit-content(100%)_1fr_fit-content(100%)]">
         <aside className="hidden w-[280px] flex-col justify-end border-r border-[transparent] xl:flex">
-          <nav className="sticky bottom-0 flex min-h-[calc(100vh-72px)] flex-col p-4">
-            <Button
-              className="text-foreground/50 mb-2 justify-start"
-              material="outline"
-            >
-              <i className="icon-[lucide--search]" />
-              <div>Search...</div>
-            </Button>
-            {componentInformation
-              .sort((a, b) => (a.name > b.name ? 1 : -1))
-              .map((info) => (
-                <Button
-                  key={info.path}
-                  material="ghost"
-                  size="sm"
-                  asChild
-                  scheme={info.status === "future" ? "muted" : "primary"}
-                  className="justify-start"
-                >
-                  <Link href={`/components/${info.path}`}>{info.name}</Link>
-                </Button>
-              ))}
-          </nav>
+          <Nav />
         </aside>
         <main className="col-span-3 flex flex-1 flex-col px-4 xl:col-span-1">
           {children}

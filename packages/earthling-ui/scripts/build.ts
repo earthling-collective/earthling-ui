@@ -3,13 +3,18 @@ import dts from "bun-plugin-dts";
 (async () => {
   await Bun.build({
     entrypoints: [
-      "src/components/button/index.tsx",
-      "src/components/input/index.tsx",
-      "src/components/select/index.tsx",
-      "src/components/surface/index.tsx",
-      "src/components/switch/index.tsx",
-      "src/components/textarea/index.tsx",
-      "src/components/toggle-group/index.tsx",
+      ...[
+        "badge",
+        "button",
+        "drawer",
+        "input",
+        "popover",
+        "select",
+        "surface",
+        "switch",
+        "textarea",
+        "toggle-group",
+      ].map((name) => `src/components/${name}/index.tsx`),
     ],
     outdir: "dist/components",
     root: "src/components",

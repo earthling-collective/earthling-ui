@@ -29,7 +29,10 @@ export function Stage({
   controls,
   children,
 }: StageProps) {
-  const [props, setProps] = useState(defaultProps ?? {});
+  const [props, setProps] = useState(
+    defaultProps ??
+      Object.fromEntries(controls.map((x) => [x.prop, x.defaultValue])),
+  );
 
   return (
     <div className={cn("w-full", className)}>
@@ -95,18 +98,6 @@ export function Stage({
                       ))}
                     </SelectContent>
                   </Select>
-                  <Button
-                    size={"sm"}
-                    material={"ghost"}
-                    onClick={() => {
-                      setProps({
-                        ...props,
-                        [control.prop]: undefined,
-                      });
-                    }}
-                  >
-                    <i className="icon-[lucide--x]" />
-                  </Button>
                 </div>
               )}
               {control.type === "toggle-group" && (
@@ -131,18 +122,6 @@ export function Stage({
                       </ToggleGroupItem>
                     ))}
                   </ToggleGroup>
-                  <Button
-                    size={"sm"}
-                    material={"ghost"}
-                    onClick={() => {
-                      setProps({
-                        ...props,
-                        [control.prop]: undefined,
-                      });
-                    }}
-                  >
-                    <i className="icon-[lucide--x]" />
-                  </Button>
                 </div>
               )}
             </div>
