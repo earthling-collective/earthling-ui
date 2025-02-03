@@ -1,3 +1,9 @@
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "earthling-ui/accordion";
 import { Button } from "earthling-ui/button";
 import { Input } from "earthling-ui/input";
 import { Badge } from "earthling-ui/badge";
@@ -13,8 +19,42 @@ import { Switch } from "earthling-ui/switch";
 import { TextArea } from "earthling-ui/textarea";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "earthling-ui/tabs";
 
 export const componentExamples = {
+  accordion: (props) => (
+    <Accordion
+      type="single"
+      collapsible
+      {...props}
+      className={cn("w-full max-w-md", props.className)}
+    >
+      <AccordionItem value="item-1">
+        <AccordionTrigger>Item 1</AccordionTrigger>
+        <AccordionContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
+          nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet
+          ullamcorper velit nisl in velit.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-2">
+        <AccordionTrigger>Item 2</AccordionTrigger>
+        <AccordionContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
+          nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet
+          ullamcorper velit nisl in velit.
+        </AccordionContent>
+      </AccordionItem>
+      <AccordionItem value="item-3">
+        <AccordionTrigger>Item 3</AccordionTrigger>
+        <AccordionContent>
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
+          nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet
+          ullamcorper velit nisl in velit.
+        </AccordionContent>
+      </AccordionItem>
+    </Accordion>
+  ),
   badge: (props) => <Badge {...props}>Badge</Badge>,
   button: (props: Record<string, any>) => (
     <Button {...props}>
@@ -48,6 +88,24 @@ export const componentExamples = {
       nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet ullamcorper
       velit nisl in velit.
     </Surface>
+  ),
+  tabs: (props) => (
+    <Tabs {...props}>
+      <TabsList>
+        <TabsTrigger value="tab1">Tab 1</TabsTrigger>
+        <TabsTrigger value="tab2">Tab 2</TabsTrigger>
+        <TabsTrigger value="tab3">Tab 3</TabsTrigger>
+      </TabsList>
+      <TabsContent value="tab1">
+        <div>Tab 1 content</div>
+      </TabsContent>
+      <TabsContent value="tab2">
+        <div>Tab 2 content</div>
+      </TabsContent>
+      <TabsContent value="tab3">
+        <div>Tab 3 content</div>
+      </TabsContent>
+    </Tabs>
   ),
   ["toggle-group"]: (props) => (
     <ToggleGroup {...props} type="single" defaultValue="system">

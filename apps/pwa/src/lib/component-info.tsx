@@ -2,6 +2,7 @@ export type ComponentInfo = {
   path: string;
   name: string;
   status: "future" | "wip" | "ready";
+  pending?: "example"[];
   description: string;
   dependencies: string[];
   props: ComponentPropInfo[];
@@ -41,7 +42,8 @@ export const componentInformation: ComponentInfo[] = [
     path: "accordion",
     name: "Accordion",
     description: "An accordion component",
-    status: "future",
+    status: "wip",
+    pending: ["example"],
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-accordion",
@@ -53,7 +55,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "badge",
     name: "Badge",
     description: "A badge component",
-    status: "future",
+    status: "wip",
     dependencies: ["class-variance-authority", "@/utils/cn"],
     props: [
       {
@@ -78,7 +80,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "button",
     name: "Button",
     description: "A button component",
-    status: "wip",
+    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-slot",
@@ -135,7 +137,8 @@ export const componentInformation: ComponentInfo[] = [
     path: "drawer",
     name: "Drawer",
     description: "A drawer component",
-    status: "future",
+    status: "wip",
+    pending: ["example"],
     dependencies: ["class-variance-authority", "@/utils/cn", "vaul"],
     props: [],
   },
@@ -144,7 +147,7 @@ export const componentInformation: ComponentInfo[] = [
     name: "Input",
     description: "An input component",
     dependencies: ["class-variance-authority", "@/utils/cn"],
-    status: "wip",
+    status: "ready",
     props: [
       {
         prop: "size",
@@ -175,7 +178,7 @@ export const componentInformation: ComponentInfo[] = [
     name: "Textarea",
     description: "A textarea component",
     dependencies: ["class-variance-authority", "@/utils/cn"],
-    status: "wip",
+    status: "ready",
     props: [
       {
         prop: "size",
@@ -199,7 +202,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "popover",
     name: "Popover",
     description: "A popover component",
-    status: "future",
+    status: "wip",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-popover",
@@ -208,10 +211,23 @@ export const componentInformation: ComponentInfo[] = [
     props: [],
   },
   {
+    path: "separator",
+    name: "Separator",
+    description: "A separator component",
+    status: "wip",
+    pending: ["example"],
+    dependencies: [
+      "class-variance-authority",
+      "@radix-ui/react-separator",
+      "@/utils/cn",
+    ],
+    props: [],
+  },
+  {
     path: "select",
     name: "Select",
     description: "A select component",
-    status: "wip",
+    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-select",
@@ -223,7 +239,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "surface",
     name: "Surface",
     description: "A surface component",
-    status: "wip",
+    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-slot",
@@ -250,7 +266,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "switch",
     name: "Switch",
     description: "A switch component",
-    status: "wip",
+    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-switch",
@@ -276,10 +292,23 @@ export const componentInformation: ComponentInfo[] = [
     ],
   },
   {
+    path: "tabs",
+    name: "Tabs",
+    description: "A tabs component",
+    status: "wip",
+    pending: ["example"],
+    dependencies: [
+      "class-variance-authority",
+      "@radix-ui/react-tabs",
+      "@/utils/cn",
+    ],
+    props: [],
+  },
+  {
     path: "toggle-group",
     name: "ToggleGroup",
     description: "A toggle group component",
-    status: "wip",
+    status: "ready",
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-toggle-group",

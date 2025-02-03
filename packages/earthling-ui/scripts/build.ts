@@ -4,14 +4,17 @@ import dts from "bun-plugin-dts";
   await Bun.build({
     entrypoints: [
       ...[
+        "accordion",
         "badge",
         "button",
         "drawer",
         "input",
         "popover",
         "select",
+        "separator",
         "surface",
         "switch",
+        "tabs",
         "textarea",
         "toggle-group",
       ].map((name) => `src/components/${name}/index.tsx`),

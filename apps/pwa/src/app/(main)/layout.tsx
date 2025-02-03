@@ -1,16 +1,8 @@
 import Link from "next/link";
 import { Button } from "earthling-ui/button";
-import {
-  Drawer,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTrigger,
-} from "earthling-ui/drawer";
 import { cookies } from "next/headers";
 import earthling from "../icon.png";
 import Image from "next/image";
-import { componentInformation } from "@/lib/component-info";
-import { Input } from "earthling-ui/input";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { Nav } from "./nav";
 
