@@ -21,16 +21,13 @@ import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { cn } from "earthling-ui/utils/cn";
 import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
 import { Breadcrumb, Breadcrumbs } from "earthling-ui/breadcrumbs";
+import { Popover, PopoverContent, PopoverTrigger } from "earthling-ui/popover";
+import { Drawer, DrawerContent, DrawerTrigger } from "earthling-ui/drawer";
 
 export const componentExamples = {
   accordion: (props) => (
-    <Accordion
-      type="single"
-      collapsible
-      {...props}
-      className={cn("w-full max-w-md", props.className)}
-    >
-      <AccordionItem value="item-1">
+    <Accordion {...props} className={cn("w-full max-w-md", props.className)}>
+      <AccordionItem id="item-1">
         <AccordionTrigger>Item 1</AccordionTrigger>
         <AccordionContent>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
@@ -38,7 +35,7 @@ export const componentExamples = {
           ullamcorper velit nisl in velit.
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-2">
+      <AccordionItem id="item-2">
         <AccordionTrigger>Item 2</AccordionTrigger>
         <AccordionContent>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
@@ -46,7 +43,7 @@ export const componentExamples = {
           ullamcorper velit nisl in velit.
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem value="item-3">
+      <AccordionItem id="item-3">
         <AccordionTrigger>Item 3</AccordionTrigger>
         <AccordionContent>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
@@ -64,11 +61,21 @@ export const componentExamples = {
       <Breadcrumb>Data</Breadcrumb>
     </Breadcrumbs>
   ),
-  button: (props: Record<string, any>) => (
+  button: (props) => (
     <Button {...props}>
       <i className="icon-[lucide--house]" />
       {props.shape !== "icon" && `Click me`}
     </Button>
+  ),
+  drawer: (props) => (
+    <Drawer {...props}>
+      <DrawerTrigger asChild>
+        <Button>Open Drawer</Button>
+      </DrawerTrigger>
+      <DrawerContent>
+        <div className="h-50 w-50" />
+      </DrawerContent>
+    </Drawer>
   ),
   input: (props) => <Input placeholder="Type something..." {...props} />,
   textarea: (props) => (
@@ -77,6 +84,14 @@ export const componentExamples = {
       {...props}
       className={cn("max-w-md", props.className)}
     />
+  ),
+  popover: (props) => (
+    <Popover {...props}>
+      <PopoverTrigger asChild>
+        <Button>Open Popover</Button>
+      </PopoverTrigger>
+      <PopoverContent>Lorem ipsum dolor sit amet</PopoverContent>
+    </Popover>
   ),
   select: (props) => (
     <Select {...props}>

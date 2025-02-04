@@ -4,10 +4,9 @@ import { Code } from "@/components/code";
 import { Stage } from "@/components/stage";
 import { componentExamples } from "@/lib/component-examples";
 import { componentInformation } from "@/lib/component-info";
-import { Surface } from "earthling-ui/surface";
 import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
 import { notFound } from "next/navigation";
-import { useMemo, lazy } from "react";
+import { useMemo } from "react";
 
 export default function ({ path, code }: { path: string; code: string }) {
   const info = useMemo(

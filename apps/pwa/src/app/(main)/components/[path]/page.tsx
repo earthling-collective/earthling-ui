@@ -26,7 +26,11 @@ export default async function ({
   return (
     <div className="container mx-auto max-w-3xl py-4 md:my-4 md:p-0">
       <Breadcrumbs className="mb-8 text-sm">
-        <Breadcrumb className={"text-muted-foreground"}>Components</Breadcrumb>
+        <Breadcrumb className={"text-muted-foreground"}>
+          <Link href={`/#components`} className="hover:underline">
+            Components
+          </Link>
+        </Breadcrumb>
         <Breadcrumb className={"capitalize"}>
           <Link href={`/components/${path}`} className="hover:underline">
             {path}

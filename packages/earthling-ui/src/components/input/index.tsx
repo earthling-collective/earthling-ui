@@ -3,6 +3,7 @@
 import { cn } from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import { type ComponentProps, forwardRef } from "react";
+import { Input as InputPrimitive } from "react-aria-components";
 
 const inputVariants = cva(
   "focus-visible:ring-ring rounded-control border border-[var(--scheme-tint)]/30 text-sm font-medium whitespace-nowrap ring-offset-background transition-colors hover:border-[var(--scheme-tint)]/50 hover:bg-[var(--scheme-tint)]/5 focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
@@ -38,7 +39,7 @@ export interface InputProps
 const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ className, size, scheme, ...props }, ref) => {
     return (
-      <input
+      <InputPrimitive
         className={cn(inputVariants({ size, scheme }), className)}
         ref={ref}
         data-scheme={scheme}

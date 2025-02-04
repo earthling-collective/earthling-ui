@@ -1,7 +1,6 @@
 export type ComponentInfo = {
   path: string;
   name: string;
-  pending?: "example"[];
   description: string;
   dependencies: string[];
   props: ComponentPropInfo[];
@@ -21,20 +20,21 @@ const allSchemes = [
 export type ComponentPropInfo = {
   label: string;
   prop: string;
-  defaultValue?: string;
   description: string;
 } & (
   | {
       type: "select";
+      defaultValue?: string;
       options: string[];
     }
   | {
       type: "toggle-group";
+      defaultValue?: string;
       options: string[];
     }
-  | { type: "boolean" }
-  | { type: "string" }
-  | { type: "number" }
+  | { type: "boolean"; defaultValue?: boolean }
+  | { type: "string"; defaultValue?: string }
+  | { type: "number"; defaultValue?: number }
 );
 
 export const componentInformation: ComponentInfo[] = [
@@ -42,7 +42,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "accordion",
     name: "Accordion",
     description: "An accordion component",
-    pending: ["example"],
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-accordion",
@@ -145,9 +144,24 @@ export const componentInformation: ComponentInfo[] = [
     path: "drawer",
     name: "Drawer",
     description: "A drawer component",
-    pending: ["example"],
     dependencies: ["class-variance-authority", "@/utils/cn", "vaul"],
-    props: [],
+    props: [
+      {
+        prop: "modal",
+        label: "Modal",
+        type: "boolean",
+        defaultValue: true,
+        description: "Whether the drawer is modal",
+      },
+      {
+        prop: "position",
+        label: "Position",
+        type: "toggle-group",
+        options: ["left", "right", "top", "bottom"],
+        defaultValue: "bottom",
+        description: "The position of the drawer",
+      },
+    ],
   },
   {
     path: "input",
@@ -218,7 +232,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "separator",
     name: "Separator",
     description: "A separator component",
-    pending: ["example"],
     dependencies: [
       "class-variance-authority",
       "@radix-ui/react-separator",
@@ -295,7 +308,6 @@ export const componentInformation: ComponentInfo[] = [
     path: "tabs",
     name: "Tabs",
     description: "A tabs component",
-    pending: ["example"],
     dependencies: [
       "class-variance-authority",
       "react-aria-components",

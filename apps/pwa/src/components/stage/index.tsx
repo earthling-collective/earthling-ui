@@ -38,7 +38,7 @@ export function Stage({
     <div className={cn("w-full", className)}>
       <div
         className={cn(
-          "before:user-select-none relative flex aspect-video flex-row items-center justify-center overflow-hidden rounded-xl border border-current/10 bg-current/5 shadow-xs before:pointer-events-none before:absolute before:inset-0 before:z-[-1] before:bg-[radial-gradient(currentColor_1px,transparent_1px)] before:[background-size:16px_16px] before:opacity-10",
+          "before:user-select-none relative flex h-100 flex-row items-center justify-center overflow-hidden rounded-xl border border-current/10 bg-current/5 shadow-xs before:pointer-events-none before:absolute before:inset-0 before:z-[-1] before:bg-[radial-gradient(currentColor_1px,transparent_1px)] before:[background-size:16px_16px] before:opacity-10",
         )}
       >
         <ErrorBoundary

@@ -101,6 +101,6 @@
     @apply min-h-screen bg-background text-foreground font-body;
   }
   * {
-    border-color: color-mix(in oklab, currentColor 30%, transparent);
+    @apply border-current/15;
   }
 }

@@ -5,56 +5,83 @@ import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
 } from "react";
-import * as AccordionPrimitive from "@radix-ui/react-accordion";
 import { cn } from "@/utils/cn";
+import {
+  DisclosureGroup as DisclosureGroupPrimitive,
+  Disclosure as DisclosurePrimitive,
+  DisclosurePanel as DisclosurePanelPrimitive,
+  Header as HeaderPrimitive,
+  Button as ButtonPrimitive,
+} from "react-aria-components";
+import { cva } from "class-variance-authority";
 
-const Accordion = AccordionPrimitive.Root;
+// Accordion
+const Accordion = DisclosureGroupPrimitive;
+
+// AccordionItem
+const accordionItemVariants = cva("border-b last:border-b-0");
 
 const AccordionItem = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Item>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Item>
+  ComponentRef<typeof DisclosurePrimitive>,
+  ComponentPropsWithoutRef<typeof DisclosurePrimitive>
 >(({ className, ...props }, ref) => (
-  <AccordionPrimitive.Item
+  <DisclosurePrimitive
     ref={ref}
-    className={cn("border-b", className)}
+    className={cn(accordionItemVariants(), className)}
     {...props}
   />
 ));
 AccordionItem.displayName = "AccordionItem";
 
+// AccordionTrigger
+const accordionTriggerVariants = cva("flex");
+
+const accordionTriggerButtonVariants = cva(
+  "flex flex-1 items-center justify-between gap-2 py-4 font-medium transition-all hover:underline group outline-none focus-visible:ring-2 focus-visible:ring-outline cursor-pointer"
+);
+
 const AccordionTrigger = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Trigger>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Trigger>
+  ComponentRef<typeof ButtonPrimitive>,
+  ComponentPropsWithoutRef<typeof ButtonPrimitive>
 >(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Header className="flex">
-    <AccordionPrimitive.Trigger
+  <HeaderPrimitive className={cn(accordionTriggerVariants())}>
+    <ButtonPrimitive
+      slot={"trigger"}
       ref={ref}
-      className={cn(
-        "flex flex-1 items-center justify-between py-4 font-medium transition-all hover:underline [&[data-state=open]>svg]:rotate-180",
-        className
-      )}
+      className={cn(accordionTriggerButtonVariants(), className)}
       {...props}
     >
-      {children}
-      <i className="icon-[lucide--chevron-down] shrink-0 transition-transform duration-200" />
-    </AccordionPrimitive.Trigger>
-  </AccordionPrimitive.Header>
+      {typeof children === "function" ? (
+        children
+      ) : (
+        <>
+          {children}
+          <i className="icon-[lucide--chevron-down] shrink-0 transition-transform duration-200 group-aria-[expanded=true]:rotate-180" />
+        </>
+      )}
+    </ButtonPrimitive>
+  </HeaderPrimitive>
 ));
-AccordionTrigger.displayName = AccordionPrimitive.Trigger.displayName;
+AccordionTrigger.displayName = "AccordionTrigger";
+
+// AccordionContent
+const accordionContentVariants = cva(
+  "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+);
 
 const AccordionContent = forwardRef<
-  ComponentRef<typeof AccordionPrimitive.Content>,
-  ComponentPropsWithoutRef<typeof AccordionPrimitive.Content>
+  ComponentRef<typeof DisclosurePanelPrimitive>,
+  ComponentPropsWithoutRef<typeof DisclosurePanelPrimitive>
 >(({ className, children, ...props }, ref) => (
-  <AccordionPrimitive.Content
+  <DisclosurePanelPrimitive
     ref={ref}
-    className="overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+    className={cn(accordionContentVariants(), className)}
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </AccordionPrimitive.Content>
+  </DisclosurePanelPrimitive>
 ));
 
-AccordionContent.displayName = AccordionPrimitive.Content.displayName;
+AccordionContent.displayName = "AccordionContent";
 
 export { Accordion, AccordionItem, AccordionTrigger, AccordionContent };

@@ -27,7 +27,7 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
   return (
     <Surface
       material={"paper"}
-      className="group overfow-auto relative rounded-xl border bg-[#0d1117] p-8 text-sm text-[white]"
+      className="group h-auto rounded-xl border bg-[#0d1117] p-8 text-sm text-[white]"
     >
       <code
         ref={ref}
@@ -39,7 +39,7 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
       />
       <div className="pointer-events-none absolute inset-0 hidden flex-col items-end p-4 group-hover:flex">
         <Button
-          className="pointer-events-auto sticky top-[80px]"
+          className="pointer-events-auto sticky top-[81px]"
           size="sm"
           scheme={isCopied ? "good" : "neutral"}
           shape={"icon"}

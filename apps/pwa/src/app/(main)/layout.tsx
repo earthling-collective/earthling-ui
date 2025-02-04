@@ -5,6 +5,13 @@ import earthling from "../icon.png";
 import Image from "next/image";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { Nav } from "./nav";
+import {
+  Drawer,
+  DrawerClose,
+  DrawerContent,
+  DrawerHeader,
+  DrawerTrigger,
+} from "earthling-ui/drawer";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -12,7 +19,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-1 flex-col">
-      <header className="bg-background sticky top-0 z-10 flex flex-row items-center justify-between border-b border-current/10 px-4 py-3">
+      <header className="bg-background sticky top-0 z-10 flex flex-row items-center justify-between border-b border-current/15 px-4 py-3">
         <Link
           href="/"
           className="flex flex-row items-center gap-2 hover:opacity-80"
@@ -22,7 +29,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
             Earthling UI
           </h1>
         </Link>
-        <div className="flex items-center gap-2 md:hidden">
+        <div className="flex flex-row items-center gap-2">
           <Button asChild size="sm">
             <Link
               href={`https://github.com/earthling-collective/earthling-ui`}
@@ -33,19 +40,12 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <div>Github</div>
             </Link>
           </Button>
-        </div>
-        <div className="hidden flex-row items-center gap-2 md:flex">
-          <Button asChild size="sm">
-            <Link
-              href={`https://github.com/earthling-collective/earthling-ui`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="icon-[simple-icons--github]" />
-              <div>Github</div>
-            </Link>
-          </Button>
-          <Button asChild size="sm" material={"ghost"}>
+          <Button
+            asChild
+            size="sm"
+            material={"ghost"}
+            className="hidden md:flex"
+          >
             <Link
               href={`http://npmjs.com/package/earthling-ui`}
               target="_blank"
@@ -54,7 +54,12 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <i className="icon-[simple-icons--npm]" />
             </Link>
           </Button>
-          <Button asChild size="sm" material={"ghost"}>
+          <Button
+            asChild
+            size="sm"
+            material={"ghost"}
+            className="hidden md:flex"
+          >
             <Link
               href={`http://x.com/slowjamsteve`}
               target="_blank"
@@ -73,6 +78,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
               const jar = await cookies();
               jar.set("theme", value);
             }}
+            className="hidden md:block"
           >
             <ToggleGroupItem value="system">
               <i className="icon-[lucide--computer]" />
@@ -84,16 +90,63 @@ export default async function ({ children }: { children: React.ReactNode }) {
               <i className="icon-[lucide--moon]" />
             </ToggleGroupItem>
           </ToggleGroup>
-          {/* <Drawer direction="right" modal={false}>
+          <Drawer position="right">
             <DrawerTrigger asChild>
-              <Button size="sm" material={"ghost"} shape={"icon"}>
+              <Button
+                size="sm"
+                material={"ghost"}
+                shape={"icon"}
+                className="md:hidden"
+              >
                 <i className="icon-[lucide--menu]" />
               </Button>
             </DrawerTrigger>
             <DrawerContent>
-              <DrawerHeader>Hey</DrawerHeader>
+              <div className="flex w-[280px] flex-col gap-2 p-4">
+                <div className="flex flex-col">
+                  <Button
+                    asChild
+                    size="sm"
+                    material="ghost"
+                    className="justify-start"
+                  >
+                    <Link
+                      href={`https://github.com/earthling-collective/earthling-ui`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="icon-[simple-icons--github]" />
+                      <div>Github</div>
+                    </Link>
+                  </Button>
+                  <Button
+                    asChild
+                    size="sm"
+                    material="ghost"
+                    className="justify-start"
+                  >
+                    <Link
+                      href={`http://npmjs.com/package/earthling-ui`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      <i className="icon-[simple-icons--npm]" />
+                      <div>NPM</div>
+                    </Link>
+                  </Button>
+                </div>
+                <div className="flex flex-col">
+                  <Button
+                    size="sm"
+                    material={"ghost"}
+                    className="justify-start"
+                  >
+                    Theme Editor
+                  </Button>
+                </div>
+              </div>
             </DrawerContent>
-          </Drawer> */}
+          </Drawer>
         </div>
       </header>
       <div className="grid grid-cols-[fit-content(100%)_1fr_fit-content(100%)]">
