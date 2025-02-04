@@ -77,7 +77,7 @@ const tabVariants = cva(
   {
     variants: {
       size: {
-        sm: "h-9 px-3",
+        sm: "h-9 px-3 text-sm",
         md: "h-10 px-4",
         lg: "h-11 px-8",
       },

@@ -7,25 +7,30 @@ import {
 } from "react";
 import { cn } from "@/utils/cn";
 import {
-  DisclosureGroup as DisclosureGroupPrimitive,
-  Disclosure as DisclosurePrimitive,
-  DisclosurePanel as DisclosurePanelPrimitive,
-  Header as HeaderPrimitive,
-  Button as ButtonPrimitive,
+  DisclosureGroup,
+  Disclosure,
+  DisclosurePanel,
+  Header,
+  Button,
 } from "react-aria-components";
 import { cva } from "class-variance-authority";
 
 // Accordion
-const Accordion = DisclosureGroupPrimitive;
+const Accordion = forwardRef<
+  ComponentRef<typeof DisclosureGroup>,
+  ComponentPropsWithoutRef<typeof DisclosureGroup>
+>(({ className, ...props }, ref) => (
+  <DisclosureGroup ref={ref} {...props} className={cn("w-full", className)} />
+));
 
 // AccordionItem
 const accordionItemVariants = cva("border-b last:border-b-0");
 
 const AccordionItem = forwardRef<
-  ComponentRef<typeof DisclosurePrimitive>,
-  ComponentPropsWithoutRef<typeof DisclosurePrimitive>
+  ComponentRef<typeof Disclosure>,
+  ComponentPropsWithoutRef<typeof Disclosure>
 >(({ className, ...props }, ref) => (
-  <DisclosurePrimitive
+  <Disclosure
     ref={ref}
     className={cn(accordionItemVariants(), className)}
     {...props}
@@ -41,11 +46,11 @@ const accordionTriggerButtonVariants = cva(
 );
 
 const AccordionTrigger = forwardRef<
-  ComponentRef<typeof ButtonPrimitive>,
-  ComponentPropsWithoutRef<typeof ButtonPrimitive>
+  ComponentRef<typeof Button>,
+  ComponentPropsWithoutRef<typeof Button>
 >(({ className, children, ...props }, ref) => (
-  <HeaderPrimitive className={cn(accordionTriggerVariants())}>
-    <ButtonPrimitive
+  <Header className={cn(accordionTriggerVariants())}>
+    <Button
       slot={"trigger"}
       ref={ref}
       className={cn(accordionTriggerButtonVariants(), className)}
@@ -59,8 +64,8 @@ const AccordionTrigger = forwardRef<
           <i className="icon-[lucide--chevron-down] shrink-0 transition-transform duration-200 group-aria-[expanded=true]:rotate-180" />
         </>
       )}
-    </ButtonPrimitive>
-  </HeaderPrimitive>
+    </Button>
+  </Header>
 ));
 AccordionTrigger.displayName = "AccordionTrigger";
 
@@ -70,16 +75,16 @@ const accordionContentVariants = cva(
 );
 
 const AccordionContent = forwardRef<
-  ComponentRef<typeof DisclosurePanelPrimitive>,
-  ComponentPropsWithoutRef<typeof DisclosurePanelPrimitive>
+  ComponentRef<typeof DisclosurePanel>,
+  ComponentPropsWithoutRef<typeof DisclosurePanel>
 >(({ className, children, ...props }, ref) => (
-  <DisclosurePanelPrimitive
+  <DisclosurePanel
     ref={ref}
     className={cn(accordionContentVariants(), className)}
     {...props}
   >
     <div className={cn("pb-4 pt-0", className)}>{children}</div>
-  </DisclosurePanelPrimitive>
+  </DisclosurePanel>
 ));
 
 AccordionContent.displayName = "AccordionContent";

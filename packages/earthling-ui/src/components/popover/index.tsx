@@ -31,4 +31,29 @@ const PopoverContent = forwardRef<
 ));
 PopoverContent.displayName = PopoverPrimitive.Content.displayName;
 
-export { Popover, PopoverTrigger, PopoverContent };
+const PopoverArrow = forwardRef<
+  ComponentRef<typeof PopoverPrimitive.Arrow>,
+  ComponentPropsWithoutRef<typeof PopoverPrimitive.Arrow>
+>(({ className, ...props }, ref) => (
+  <PopoverPrimitive.Arrow
+    asChild
+    ref={ref}
+    className={cn("-mt-px", className)}
+    {...props}
+  >
+    <svg
+      width="10"
+      height="5"
+      viewBox="0 0 10 5"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.0 4.35968L-1.0 -0.5L11.0 -0.5L5.0 4.35968Z"
+        className="fill-background stroke-current/15"
+      />
+    </svg>
+  </PopoverPrimitive.Arrow>
+));
+
+export { Popover, PopoverTrigger, PopoverContent, PopoverArrow };

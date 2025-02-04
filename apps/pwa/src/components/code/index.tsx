@@ -27,7 +27,7 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
   return (
     <Surface
       material={"paper"}
-      className="group h-auto rounded-xl border bg-[#0d1117] p-8 text-sm text-[white]"
+      className="group h-auto rounded-xl border bg-[#0d1117] p-6 text-sm text-[white]"
     >
       <code
         ref={ref}

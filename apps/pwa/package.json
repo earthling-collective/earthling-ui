@@ -12,11 +12,13 @@
   "dependencies": {
     "@iconify-json/lucide": "^1.2.25",
     "@iconify-json/simple-icons": "^1.2.22",
+    "@iconify-json/svg-spinners": "^1.2.2",
     "@iconify/tailwind4": "^1.0.1",
     "@tailwindcss/postcss": "^4.0.0",
     "earthling-ui": "workspace:*",
     "highlight.js": "^11.11.1",
     "next": "15.1.6",
+    "prettier": "^3.4.2",
     "raw-loader": "^4.0.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",

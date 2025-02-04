@@ -66,6 +66,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         )}
         ref={ref}
         data-scheme={scheme}
+        aria-disabled={props.disabled}
         {...props}
       />
     );
