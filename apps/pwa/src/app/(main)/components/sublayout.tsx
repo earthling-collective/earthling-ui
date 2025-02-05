@@ -9,8 +9,16 @@ import { Tab, TabList, TabPanel, Tabs } from "earthling-ui/tabs";
 import { componentInformation } from "@/lib/component-info";
 import { Badge } from "earthling-ui/badge";
 import { Separator } from "earthling-ui/separator";
+import { type ComponentPropsWithoutRef } from "react";
+import { cn } from "earthling-ui/utils/cn";
 
-export async function ComponentSublayout({ path }: { path: string }) {
+export async function ComponentSublayout({
+  path,
+  anatomy,
+}: {
+  path: string;
+  anatomy: string;
+}) {
   try {
     const filePath = resolve(
       process.cwd(),
@@ -44,50 +52,75 @@ export async function ComponentSublayout({ path }: { path: string }) {
 
       <ComponentSandbox path={path} propInfo={info.props} />
 
-      <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">Usage</h3>
-      {/* <h4>Import</h4> */}
+      <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">Structure</h3>
+      <h4 className="my-4">Exports</h4>
       <Code
         language="typescript"
         formatting="typescript"
-        className="my-8"
       >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
-      {/* <h4>Anatomy</h4> */}
-      {/* <h4>Examples</h4> */}
+      <h4 className="my-4">Anatomy</h4>
+      <Code language="typescript" formatting="typescript">
+        {anatomy}
+      </Code>
 
-      <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">
-        Forking the component
-      </h3>
+      <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">Usage</h3>
       <Tabs size="sm">
         <TabList className={"mb-4"}>
-          <Tab id="cli">CLI</Tab>
-          <Tab id="manual">Manual</Tab>
+          <Tab id="import">Import</Tab>
+          <Tab id="eject">Automatic Install (Eject)</Tab>
+          <Tab id="manual">Manual Install</Tab>
         </TabList>
-        <TabPanel id="cli">
+        <TabPanel id="eject">
           <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
         </TabPanel>
         <TabPanel id="manual">
-          <div className="grid grid-cols-[fit-content(100%)_1fr] gap-4">
-            <div className="row-span-2 flex flex-col items-center gap-2">
-              <Badge scheme={"neutral"}>1</Badge>
-              <Separator orientation="vertical" className="flex-1" />
-            </div>
-            <h5 className="font-medium">Install dependencies</h5>
-            <Code
-              language="shell"
-              className="col-start-2"
-            >{`bun add ${info.dependencies.filter((x) => x !== "react" && !x.startsWith("@/")).join(" ")}`}</Code>
-
-            <div className="row-span-2 flex flex-col items-center gap-2">
-              <Badge scheme={"neutral"}>2</Badge>
-              <Separator orientation="vertical" className="flex-1" />
-            </div>
-            <h5 className="font-medium">
-              Copy this source code into your project
-            </h5>
-            <Code language="typescript">{sourceCode}</Code>
-          </div>
+          <Steps>
+            <Step step={1} title="Install dependencies">
+              <Code
+                language="shell"
+                className="col-start-2"
+              >{`bun add ${info.dependencies.filter((x) => x !== "react" && !x.startsWith("@/")).join(" ")}`}</Code>
+            </Step>
+            <Step step={2} title="Copy this source code into your project">
+              <Code language="typescript">{sourceCode}</Code>
+            </Step>
+          </Steps>
         </TabPanel>
       </Tabs>
+    </div>
+  );
+}
+
+interface StepsProps extends ComponentPropsWithoutRef<"div"> {}
+function Steps({ className, children, ...rest }: StepsProps) {
+  return (
+    <div
+      className={cn("grid grid-cols-[fit-content(100%)_1fr] gap-4", className)}
+    >
+      {children}
+    </div>
+  );
+}
+
+interface StepProps extends ComponentPropsWithoutRef<"div"> {
+  step: number;
+  title: string;
+}
+function Step({ title, children, className, step, ...rest }: StepProps) {
+  return (
+    <div
+      className={cn(
+        "col-span-2 row-span-2 grid grid-cols-subgrid gap-[inherit]",
+        className,
+      )}
+      {...rest}
+    >
+      <div className="row-span-2 flex flex-col items-center gap-2">
+        <Badge scheme={"neutral"}>{step}</Badge>
+        <Separator orientation="vertical" className="flex-1" />
+      </div>
+      <h5 className="font-medium">{title}</h5>
+      <div>{children}</div>
     </div>
   );
 }

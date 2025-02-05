@@ -35,7 +35,6 @@ import dts from "bun-plugin-dts";
     root: "src/utils",
     minify: true,
     splitting: true,
-    banner: '"use client";',
     external: ["react"],
     plugins: [dts()],
   });

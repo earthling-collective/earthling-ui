@@ -29,13 +29,16 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
   const [formatted, setFormatted] = useState(children || "");
   useEffect(() => {
     if (!formatting) return;
-    (async () =>
-      setFormatted(
-        await format(children || "", {
-          parser: formatting,
-          plugins: [typescript, estree],
-        }),
-      ))();
+    (async () => {
+      let formatted = await format(children || "", {
+        parser: formatting,
+        plugins: [typescript, estree],
+      });
+      // remove trailing semicolon from tsx examples
+      if (language === "typescript")
+        formatted = formatted.replace(/\>\;\s*$/, ">");
+      setFormatted(formatted);
+    })();
   }, [children, formatting]);
 
   const highlighted = useMemo(

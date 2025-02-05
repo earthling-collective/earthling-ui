@@ -25,7 +25,7 @@ export function ComponentSandboxControls({
   if (!controls?.length) return null;
 
   return (
-    <div className="grid grid-cols-[2fr_1fr_1fr_auto] rounded-lg border">
+    <div className="grid grid-cols-[2fr_1fr_1fr_auto] overflow-hidden rounded-lg border">
       <div className="bg-muted text-muted-foreground col-span-full grid grid-cols-subgrid grid-rows-1 items-center gap-4 border-b px-4 py-2 text-sm font-medium">
         <div></div>
         <div>Prop</div>
