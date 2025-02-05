@@ -22,7 +22,8 @@ export default async function () {
           </h1>
           <p className="text-md mt-4 font-light text-pretty text-current/60 md:text-lg">
             Import components à la carte or eject them into your project via
-            CLI. Never rebuild the wheel.
+            CLI.
+            {/* Never reinvent the wheel. */}
             {/* Import components à la carte, install them via CLI, or copy-paste
             code—your workflow, your rules. */}
             {/* zero-fluff components designed for tomorrow's web.

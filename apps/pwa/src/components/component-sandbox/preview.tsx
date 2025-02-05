@@ -40,7 +40,7 @@ export function ComponentSandboxPreview({
       <ErrorBoundary
         errorComponent={({ error }) => <div>Error: {error.message}</div>}
       >
-        <div className="flex w-full max-w-md flex-col items-center">
+        <div className="mx-8 flex w-full max-w-md flex-col items-center">
           <Comp {...props} />
         </div>
       </ErrorBoundary>

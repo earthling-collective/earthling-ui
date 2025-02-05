@@ -1,4 +1,4 @@
-import { componentInformation } from "@/lib/component-info";
+import { componentInformation, ComponentPropInfo } from "@/lib/component-info";
 import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
 import { notFound } from "next/navigation";
 import { ComponentSandboxProvider } from "./context";
@@ -14,7 +14,13 @@ function captureComponentChildren(code: string): string | null {
   return match ? match[1].trim() : null;
 }
 
-export async function ComponentSandbox({ path }: { path: string }) {
+export async function ComponentSandbox({
+  path,
+  propInfo,
+}: {
+  path: string;
+  propInfo: ComponentPropInfo[];
+}) {
   const info = componentInformation.find((c) => c.path === path);
   if (!info) return notFound();
 
@@ -52,7 +58,7 @@ export async function ComponentSandbox({ path }: { path: string }) {
         </TabPanel>
       </Tabs>
       <div className="my-4 flex flex-col gap-4">
-        <ComponentSandboxControls controls={info?.props || []} />
+        <ComponentSandboxControls controls={propInfo} />
       </div>
     </ComponentSandboxProvider>
   );

@@ -4,22 +4,46 @@ import highlight from "@/services/highlight";
 import { Button } from "earthling-ui/button";
 import { Surface } from "earthling-ui/surface";
 import { cn } from "earthling-ui/utils/cn";
-import { HTMLAttributes, forwardRef, useMemo, useState } from "react";
+import { HighlightOptions } from "highlight.js";
+import { BuiltInParserName, format, LiteralUnion } from "prettier";
+import {
+  HTMLAttributes,
+  forwardRef,
+  useMemo,
+  useState,
+  useEffect,
+} from "react";
+import typescript from "prettier/plugins/typescript";
+import estree from "prettier/plugins/estree";
 
 export interface CodeProps
   extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
   children?: string;
-  language: string;
+  language: HighlightOptions["language"];
+  formatting?: LiteralUnion<BuiltInParserName, string>;
 }
 
-// const d = glslPlugin;
-
 export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
-  const { children, language, className, ...rest } = props;
+  const { children, language, className, formatting, ...rest } = props;
+
+  const [formatted, setFormatted] = useState(children || "");
+  useEffect(() => {
+    if (!formatting) return;
+    (async () =>
+      setFormatted(
+        await format(children || "", {
+          parser: formatting,
+          plugins: [typescript, estree],
+        }),
+      ))();
+  }, [children, formatting]);
 
   const highlighted = useMemo(
-    () => highlight.highlight(children || "", { language }).value,
-    [children, language],
+    () =>
+      highlight.highlight((!!formatting ? formatted : children) || "", {
+        language,
+      }).value,
+    [children, language, formatting, formatted],
   );
 
   const [isCopied, setIsCopied] = useState(false);
@@ -27,12 +51,15 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
   return (
     <Surface
       material={"paper"}
-      className="group h-auto rounded-xl border bg-[#0d1117] p-6 text-sm text-[white]"
+      className={cn(
+        "group h-auto rounded-xl border bg-[#0d1117] p-6 text-sm text-[white]",
+        className,
+      )}
     >
       <code
         ref={ref}
         {...rest}
-        className={cn("font-mono whitespace-pre-wrap", className)}
+        className={cn("font-mono whitespace-pre-wrap")}
         dangerouslySetInnerHTML={{
           __html: highlighted,
         }}
@@ -44,7 +71,9 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>((props, ref) => {
           scheme={isCopied ? "good" : "neutral"}
           shape={"icon"}
           onClick={() => {
-            navigator.clipboard.writeText(children || "");
+            navigator.clipboard.writeText(
+              (!!formatting ? formatted : children) || "",
+            );
             setIsCopied(true);
             setTimeout(() => setIsCopied(false), 2000);
           }}

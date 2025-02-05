@@ -3,6 +3,7 @@ export type ComponentInfo = {
   name: string;
   description: string;
   dependencies: string[];
+  exports: string[];
   props: ComponentPropInfo[];
 };
 
@@ -43,9 +44,15 @@ export const componentInformation: ComponentInfo[] = [
     name: "Accordion",
     description: "An accordion component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-accordion",
-      "@/utils/cn",
+    ],
+    exports: [
+      "Accordion",
+      "AccordionItem",
+      "AccordionTrigger",
+      "AccordionContent",
     ],
     props: [],
   },
@@ -53,7 +60,8 @@ export const componentInformation: ComponentInfo[] = [
     path: "badge",
     name: "Badge",
     description: "A badge component",
-    dependencies: ["class-variance-authority", "@/utils/cn"],
+    dependencies: ["react", "class-variance-authority", "@/utils/cn"],
+    exports: ["Badge"],
     props: [
       {
         prop: "material",
@@ -78,10 +86,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Breadcrumbs",
     description: "A breadcrumbs component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "react-aria-components",
       "@/utils/cn",
     ],
+    exports: ["Breadcrumbs", "Breadcrumb"],
     props: [],
   },
   {
@@ -89,10 +99,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Button",
     description: "A button component",
     dependencies: [
+      "React",
       "class-variance-authority",
       "@radix-ui/react-slot",
       "@/utils/cn",
     ],
+    exports: ["Button"],
     props: [
       {
         prop: "material",
@@ -144,13 +156,14 @@ export const componentInformation: ComponentInfo[] = [
     path: "drawer",
     name: "Drawer",
     description: "A drawer component",
-    dependencies: ["class-variance-authority", "@/utils/cn", "vaul"],
+    dependencies: ["react", "class-variance-authority", "@/utils/cn", "vaul"],
+    exports: ["Drawer", "DrawerTrigger", "DrawerContent"],
     props: [
       {
         prop: "modal",
         label: "Modal",
         type: "boolean",
-        defaultValue: true,
+        defaultValue: false,
         description: "Whether the drawer is modal",
       },
       {
@@ -167,7 +180,8 @@ export const componentInformation: ComponentInfo[] = [
     path: "input",
     name: "Input",
     description: "An input component",
-    dependencies: ["class-variance-authority", "@/utils/cn"],
+    dependencies: ["react", "class-variance-authority", "@/utils/cn"],
+    exports: ["Input"],
     props: [
       {
         prop: "size",
@@ -197,7 +211,8 @@ export const componentInformation: ComponentInfo[] = [
     path: "textarea",
     name: "Textarea",
     description: "A textarea component",
-    dependencies: ["class-variance-authority", "@/utils/cn"],
+    dependencies: ["react", "class-variance-authority", "@/utils/cn"],
+    exports: ["Textarea"],
     props: [
       {
         prop: "size",
@@ -222,10 +237,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Popover",
     description: "A popover component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-popover",
       "@/utils/cn",
     ],
+    exports: ["Popover", "PopoverTrigger", "PopoverContent", "PopoverArrow"],
     props: [],
   },
   {
@@ -233,10 +250,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Separator",
     description: "A separator component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-separator",
       "@/utils/cn",
     ],
+    exports: ["Separator"],
     props: [],
   },
   {
@@ -244,10 +263,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Select",
     description: "A select component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-select",
       "@/utils/cn",
     ],
+    exports: ["Select", "SelectTrigger", "SelectContent", "SelectItem"],
     props: [],
   },
   {
@@ -255,10 +276,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Surface",
     description: "A surface component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-slot",
       "@/utils/cn",
     ],
+    exports: ["Surface"],
     props: [
       {
         prop: "material",
@@ -281,10 +304,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Switch",
     description: "A switch component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-switch",
       "@/utils/cn",
     ],
+    exports: ["Switch"],
     props: [
       {
         prop: "material",
@@ -309,10 +334,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "Tabs",
     description: "A tabs component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "react-aria-components",
       "@/utils/cn",
     ],
+    exports: ["Tabs", "TabList", "TabPanel", "Tab"],
     props: [
       {
         prop: "scheme",
@@ -337,10 +364,12 @@ export const componentInformation: ComponentInfo[] = [
     name: "ToggleGroup",
     description: "A toggle group component",
     dependencies: [
+      "react",
       "class-variance-authority",
       "@radix-ui/react-toggle-group",
       "@/utils/cn",
     ],
+    exports: ["ToggleGroup", "ToggleGroupItem"],
     props: [
       {
         prop: "material",

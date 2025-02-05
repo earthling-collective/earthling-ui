@@ -5,13 +5,7 @@ import earthling from "../icon.png";
 import Image from "next/image";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { Nav } from "./nav";
-import {
-  Drawer,
-  DrawerClose,
-  DrawerContent,
-  DrawerHeader,
-  DrawerTrigger,
-} from "earthling-ui/drawer";
+import { Drawer, DrawerContent, DrawerTrigger } from "earthling-ui/drawer";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -19,12 +13,12 @@ export default async function ({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-1 flex-col">
-      <header className="bg-background sticky top-0 z-10 flex flex-row items-center justify-between border-b border-current/15 px-4 py-3">
+      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between border-b border-current/5 px-4 py-3 backdrop-blur-lg">
         <Link
           href="/"
           className="flex flex-row items-center gap-2 hover:opacity-80"
         >
-          <Image src={earthling} alt="Earthling" width={32} height={32} />
+          {/* <Image src={earthling} alt="Earthling" width={32} height={32} /> */}
           <h1 className="font-display font-medium tracking-widest">
             Earthling UI
           </h1>
@@ -158,6 +152,36 @@ export default async function ({ children }: { children: React.ReactNode }) {
         </main>
         <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex"></aside>
       </div>
+      <footer className="mt-4 flex flex-row items-center justify-center gap-4 border-t border-current/5 py-4 text-center">
+        <div className="font-display text-xs">Earthling UI</div>
+        <Link
+          href="https://github.com/earthling-collective/earthling-ui"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground text-xs underline hover:no-underline"
+        >
+          GitHub
+        </Link>
+        <Link
+          href="https://www.npmjs.com/package/earthling-ui"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="text-muted-foreground text-xs underline hover:no-underline"
+        >
+          NPM
+        </Link>
+        <div className="text-muted-foreground max-w-md text-center text-xs">
+          Created by{" "}
+          <Link
+            href="https://stevenfrady.com"
+            target="_blank"
+            className="underline hover:no-underline"
+          >
+            Steven Frady
+          </Link>
+          .
+        </div>
+      </footer>
     </div>
   );
 }

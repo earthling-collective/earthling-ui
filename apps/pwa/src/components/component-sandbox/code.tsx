@@ -1,11 +1,8 @@
 "use client";
 
-import { useMemo, useEffect, useState } from "react";
+import { useMemo } from "react";
 import { Code } from "@/components/code";
 import { useComponentSandbox } from "./context";
-import { format } from "prettier";
-import typescript from "prettier/plugins/typescript";
-import estree from "prettier/plugins/estree";
 
 function replacePropsWithValues(
   jsx: string,
@@ -32,21 +29,14 @@ function replacePropsWithValues(
 export function ComponentSandboxCode({ children }: { children?: string }) {
   const [props] = useComponentSandbox();
 
-  const [code, setCode] = useState("");
+  const code = useMemo(
+    () => replacePropsWithValues(children || "", props),
+    [children, props],
+  );
 
-  useEffect(() => {
-    (async () => {
-      if (!children) return;
-      setCode(
-        (
-          await format(replacePropsWithValues(children, props), {
-            parser: "typescript",
-            plugins: [typescript, estree],
-          })
-        ).replace(/\;\s*$/, ""),
-      );
-    })();
-  }, [props, children]);
-
-  return <Code language="typescript">{code}</Code>;
+  return (
+    <Code language="typescript" formatting="typescript">
+      {code}
+    </Code>
+  );
 }
