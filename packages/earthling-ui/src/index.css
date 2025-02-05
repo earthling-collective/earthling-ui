@@ -78,7 +78,7 @@
     --color-tertiary: oklch(17.42% 0.0017 17.32);
     --color-tertiary-foreground: oklch(96.29% 0 0);
 
-    --color-neutral: oklch(17.42% 0.0017 17.32);
+    --color-neutral: oklch(94% 0 0);
     --color-neutral-foreground: oklch(96.29% 0 0);
 
     --color-muted: oklch(94% 0 0);
