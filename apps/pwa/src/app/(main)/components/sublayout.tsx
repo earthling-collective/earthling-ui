@@ -7,7 +7,7 @@ import { ComponentSandbox } from "@/components/component-sandbox";
 import { Code } from "@/components/code";
 import { Tab, TabList, TabPanel, Tabs } from "earthling-ui/tabs";
 import { componentInformation } from "@/lib/component-info";
-import { Badge } from "earthling-ui/badge";
+import { Chip } from "earthling-ui/chip";
 import { Separator } from "earthling-ui/separator";
 import { type ComponentPropsWithoutRef } from "react";
 import { cn } from "earthling-ui/utils/cn";
@@ -186,9 +186,9 @@ function Step({ title, children, className, step, ...rest }: StepProps) {
       {...rest}
     >
       <div className="row-span-2 flex flex-col items-center gap-2">
-        <Badge scheme={"neutral"} className="aspect-square">
+        <Chip scheme={"neutral"} className="aspect-square">
           {step}
-        </Badge>
+        </Chip>
         <Separator orientation="vertical" className="flex-1" />
       </div>
       <h5 className="font-medium">{title}</h5>
@@ -213,9 +213,9 @@ function CompletionStep({
       {...rest}
     >
       <div className="flex flex-col items-center gap-2">
-        <Badge scheme={"primary"} className="aspect-square">
+        <Chip scheme={"primary"} className="aspect-square">
           <i className="icon-[lucide--check]" />
-        </Badge>
+        </Chip>
         <Separator orientation="vertical" className="flex-1" />
       </div>
       <h5 className="font-medium">{title}</h5>
