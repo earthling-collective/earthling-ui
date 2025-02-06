@@ -129,15 +129,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
                     </Link>
                   </Button>
                 </div>
-                <div className="flex flex-col">
-                  <Button
-                    size="sm"
-                    material={"ghost"}
-                    className="justify-start"
-                  >
-                    Theme Editor
-                  </Button>
-                </div>
+                <div className="flex flex-col"></div>
               </div>
             </DrawerContent>
           </Drawer>

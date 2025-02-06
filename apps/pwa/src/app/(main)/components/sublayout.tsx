@@ -12,6 +12,8 @@ import { Separator } from "earthling-ui/separator";
 import { type ComponentPropsWithoutRef } from "react";
 import { cn } from "earthling-ui/utils/cn";
 import { Button } from "earthling-ui/button";
+import { useScrollSpy } from "@/utils/use-scroll-spy";
+import { Subnav } from "./subnav";
 
 export async function ComponentSublayout({
   path,
@@ -53,78 +55,63 @@ export async function ComponentSublayout({
 
           <h2 className="text-2xl font-bold">{info.name}</h2>
 
-          <ComponentSandbox path={path} propInfo={info.props} />
+          <section id="sandbox" className="scroll-mt-[111px]">
+            <ComponentSandbox path={path} propInfo={info.props} />
+          </section>
 
-          <h3
-            className="mt-8 mb-4 border-b pb-1 text-lg font-medium"
-            id="structure"
-          >
-            Structure
-          </h3>
-          <h4 className="my-4">Exports</h4>
-          <Code
-            language="typescript"
-            formatting="typescript"
-          >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
-          <h4 className="my-4">Anatomy</h4>
-          <Code language="typescript" formatting="typescript">
-            {anatomy}
-          </Code>
+          <section id="structure" className="scroll-mt-[81px]">
+            <h3
+              className="mt-8 mb-4 border-b pb-1 text-lg font-medium"
+              id="structure"
+            >
+              Structure
+            </h3>
+            <h4 className="my-4">Exports</h4>
+            <Code
+              language="typescript"
+              formatting="typescript"
+            >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
+            <h4 className="my-4">Anatomy</h4>
+            <Code language="typescript" formatting="typescript">
+              {anatomy}
+            </Code>
+          </section>
 
-          <h3
-            className="mt-8 mb-4 border-b pb-1 text-lg font-medium"
-            id="usage"
-          >
-            Usage
-          </h3>
-          <Tabs size="sm">
-            <TabList className={"mb-4"}>
-              <Tab id="import">Import</Tab>
-              <Tab id="eject">Automatic Install (Eject)</Tab>
-              <Tab id="manual">Manual Install</Tab>
-            </TabList>
-            <TabPanel id="eject">
-              <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
-            </TabPanel>
-            <TabPanel id="manual">
-              <Steps>
-                <Step step={1} title="Install dependencies">
-                  <Code
-                    language="shell"
-                    className="col-start-2"
-                  >{`bun add ${info.dependencies.filter((x) => x !== "react" && !x.startsWith("@/")).join(" ")}`}</Code>
-                </Step>
-                <Step step={2} title="Copy this source code into your project">
-                  <Code language="typescript">{sourceCode}</Code>
-                </Step>
-              </Steps>
-            </TabPanel>
-          </Tabs>
+          <section id="usage" className="scroll-mt-[81px]">
+            <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">
+              Usage
+            </h3>
+            <Tabs size="sm">
+              <TabList className={"mb-4"}>
+                <Tab id="import">Import</Tab>
+                <Tab id="eject">Automatic Install (Eject)</Tab>
+                <Tab id="manual">Manual Install</Tab>
+              </TabList>
+              <TabPanel id="eject">
+                <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
+              </TabPanel>
+              <TabPanel id="manual">
+                <Steps>
+                  <Step step={1} title="Install dependencies">
+                    <Code
+                      language="shell"
+                      className="col-start-2"
+                    >{`bun add ${info.dependencies.filter((x) => x !== "react" && !x.startsWith("@/")).join(" ")}`}</Code>
+                  </Step>
+                  <Step
+                    step={2}
+                    title="Copy this source code into your project"
+                  >
+                    <Code language="typescript">{sourceCode}</Code>
+                  </Step>
+                </Steps>
+              </TabPanel>
+            </Tabs>
+          </section>
         </div>
       </main>
       <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex">
-        <nav className="sticky top-[61px] flex flex-col gap-2 p-4">
-          <div className="my-12 flex flex-col">
-            <Link
-              href={`#sandbox`}
-              className="text-muted-foreground hover:text-foreground py-1 text-sm font-medium transition-colors"
-            >
-              <div>Sandbox</div>
-            </Link>
-            <Link
-              href={`#structure`}
-              className="text-muted-foreground hover:text-foreground py-1 text-sm font-medium transition-colors"
-            >
-              <div>Structure</div>
-            </Link>
-            <Link
-              href={`#usage`}
-              className="text-muted-foreground hover:text-foreground py-1 text-sm font-medium transition-colors"
-            >
-              <div>Usage</div>
-            </Link>
-          </div>
-        </nav>
+        <Subnav />
       </aside>
     </>
   );
