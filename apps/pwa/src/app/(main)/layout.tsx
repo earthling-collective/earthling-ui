@@ -13,7 +13,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-1 flex-col">
-      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between border-b border-current/5 px-4 py-3 backdrop-blur-lg">
+      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between border-b px-4 py-3 backdrop-blur-lg">
         <Link
           href="/"
           className="flex flex-row items-center gap-2 hover:opacity-80"
@@ -141,7 +141,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
         </aside>
         {children}
       </div>
-      <footer className="mt-4 flex flex-row items-center justify-center gap-4 border-t border-current/5 py-4 text-center">
+      <footer className="mt-4 flex flex-row items-center justify-center gap-4 border-t py-4 text-center">
         <div className="font-display text-xs">Earthling UI</div>
         <Link
           href="https://github.com/earthling-collective/earthling-ui"

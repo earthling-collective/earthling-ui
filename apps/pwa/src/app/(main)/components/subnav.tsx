@@ -10,7 +10,7 @@ export function Subnav({
   children,
   ...rest
 }: ComponentPropsWithoutRef<"div">) {
-  const active = useScrollSpy(["sandbox", "structure", "usage"]);
+  const active = useScrollSpy(["sandbox", "anatomy", "installation"]);
 
   return (
     <nav
@@ -20,8 +20,8 @@ export function Subnav({
       <div className="my-12 flex flex-col">
         {[
           { id: "sandbox", title: "Sandbox" },
-          { id: "structure", title: "Structure" },
-          { id: "usage", title: "Usage" },
+          { id: "anatomy", title: "Anatomy" },
+          { id: "installation", title: "Installation" },
         ].map(({ id, title }) => (
           <Link
             key={id}

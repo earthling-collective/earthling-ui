@@ -53,42 +53,71 @@ export async function ComponentSublayout({
             </Breadcrumb>
           </Breadcrumbs>
 
-          <h2 className="text-2xl font-bold">{info.name}</h2>
+          <h2 className="text-3xl font-bold">{info.name}</h2>
 
           <section id="sandbox" className="scroll-mt-[111px]">
             <ComponentSandbox path={path} propInfo={info.props} />
           </section>
 
-          <section id="structure" className="scroll-mt-[81px]">
-            <h3
-              className="mt-8 mb-4 border-b pb-1 text-lg font-medium"
-              id="structure"
-            >
-              Structure
+          <section id="anatomy" className="scroll-mt-[81px]">
+            <h3 className="mt-8 mb-4 border-b pb-1 text-xl font-medium">
+              Anatomy
             </h3>
-            <h4 className="my-4">Exports</h4>
-            <Code
-              language="typescript"
-              formatting="typescript"
-            >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
-            <h4 className="my-4">Anatomy</h4>
             <Code language="typescript" formatting="typescript">
               {anatomy}
             </Code>
           </section>
 
-          <section id="usage" className="scroll-mt-[81px]">
-            <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">
-              Usage
+          <section id="installation" className="scroll-mt-[81px]">
+            <h3 className="mt-8 mb-4 border-b pb-1 text-xl font-medium">
+              Installation
             </h3>
-            <Tabs size="sm">
-              <TabList className={"mb-4"}>
+            <Tabs>
+              <TabList className={"mb-8"}>
                 <Tab id="import">Import</Tab>
                 <Tab id="eject">Automatic Install (Eject)</Tab>
                 <Tab id="manual">Manual Install</Tab>
               </TabList>
+              <TabPanel id="import">
+                <Steps>
+                  <Step step={1} title="Ensure Earthling UI is installed">
+                    <Code language="shell">{`bun add earthling-ui`}</Code>
+                  </Step>
+                  <Step step={2} title="Import the component from earthling-ui">
+                    <Code
+                      language="typescript"
+                      formatting={"typescript"}
+                    >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
+                  </Step>
+                  <CompletionStep
+                    step={3}
+                    title="The component is ready to use"
+                  />
+                </Steps>
+              </TabPanel>
               <TabPanel id="eject">
-                <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
+                <Steps>
+                  <Step step={1} title="Eject the component into your project">
+                    <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
+                    <div className="mt-4">
+                      The CLI will automatically copy the component into your
+                      project and install the necessary dependencies.
+                    </div>
+                  </Step>
+                  <Step
+                    step={2}
+                    title="Import the component from the install location"
+                  >
+                    <Code
+                      language="typescript"
+                      formatting={"typescript"}
+                    >{`import { ${info.exports.join(", ")} } from "@/components/${path}"`}</Code>
+                  </Step>
+                  <CompletionStep
+                    step={3}
+                    title="The component is ready to use"
+                  />
+                </Steps>
               </TabPanel>
               <TabPanel id="manual">
                 <Steps>
@@ -102,8 +131,23 @@ export async function ComponentSublayout({
                     step={2}
                     title="Copy this source code into your project"
                   >
-                    <Code language="typescript">{sourceCode}</Code>
+                    <Code language="typescript" expandable>
+                      {sourceCode}
+                    </Code>
                   </Step>
+                  <Step
+                    step={3}
+                    title="Import the component from the install location"
+                  >
+                    <Code
+                      language="typescript"
+                      formatting={"typescript"}
+                    >{`import { ${info.exports.join(", ")} } from "@/components/${path}"`}</Code>
+                  </Step>
+                  <CompletionStep
+                    step={3}
+                    title="The component is ready to use"
+                  />
                 </Steps>
               </TabPanel>
             </Tabs>
@@ -142,11 +186,39 @@ function Step({ title, children, className, step, ...rest }: StepProps) {
       {...rest}
     >
       <div className="row-span-2 flex flex-col items-center gap-2">
-        <Badge scheme={"neutral"}>{step}</Badge>
+        <Badge scheme={"neutral"} className="aspect-square">
+          {step}
+        </Badge>
         <Separator orientation="vertical" className="flex-1" />
       </div>
       <h5 className="font-medium">{title}</h5>
-      <div>{children}</div>
+      <div className="pb-4">{children}</div>
+    </div>
+  );
+}
+
+function CompletionStep({
+  title,
+  children,
+  className,
+  step,
+  ...rest
+}: StepProps) {
+  return (
+    <div
+      className={cn(
+        "col-span-2 row-span-1 grid grid-cols-subgrid items-center gap-[inherit]",
+        className,
+      )}
+      {...rest}
+    >
+      <div className="flex flex-col items-center gap-2">
+        <Badge scheme={"primary"} className="aspect-square">
+          <i className="icon-[lucide--check]" />
+        </Badge>
+        <Separator orientation="vertical" className="flex-1" />
+      </div>
+      <h5 className="font-medium">{title}</h5>
     </div>
   );
 }

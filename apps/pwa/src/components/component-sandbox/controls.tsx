@@ -50,7 +50,7 @@ export function ComponentSandboxControls({
                 {control.prop}
               </span>
             </div>
-            <div>{control.defaultValue}</div>
+            <div>{`${control.defaultValue}`}</div>
             <div>
               {control.type === "string" && (
                 <Input

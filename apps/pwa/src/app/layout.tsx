@@ -1,4 +1,5 @@
 import "@/styles/main.css";
+import "@/services/gtag";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import LocalFont from "next/font/local";

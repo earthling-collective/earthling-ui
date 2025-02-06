@@ -5,9 +5,9 @@ import dts from "bun-plugin-dts";
     entrypoints: [
       ...[
         "accordion",
-        "badge",
         "breadcrumbs",
         "button",
+        "chip",
         "drawer",
         "input",
         "popover",

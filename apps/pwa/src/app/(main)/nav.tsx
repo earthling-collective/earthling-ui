@@ -10,10 +10,7 @@ export const Nav = () => {
   const pathname = usePathname();
   return (
     <nav className="sticky bottom-0 flex min-h-[calc(100vh-61px)] flex-col gap-2 p-4">
-      <Button
-        className="text-foreground/50 mb-2 justify-start"
-        material="outline"
-      >
+      <Button className="mb-2 justify-start" material="paper" scheme={"muted"}>
         <i className="icon-[lucide--search]" />
         <div>Search...</div>
       </Button>

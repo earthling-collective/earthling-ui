@@ -6,9 +6,15 @@ import { type ComponentProps, forwardRef } from "react";
 import { Input as InputPrimitive } from "react-aria-components";
 
 const inputVariants = cva(
-  "focus-visible:ring-ring rounded-control border border-[var(--scheme-tint)]/30 text-sm font-medium whitespace-nowrap ring-offset-background transition-colors hover:border-[var(--scheme-tint)]/50 hover:bg-[var(--scheme-tint)]/5 focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+  "focus-visible:ring-ring rounded-control border text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
+      material: {
+        paper:
+          "bg-(--scheme-tint)/5 text-current border-transparent hover:bg-(--scheme-tint)/10",
+        outline:
+          "border-(--scheme-tint)/30 hover:border-(--scheme-tint)/50 hover:bg-(--scheme-tint)/5 ",
+      },
       size: {
         sm: "h-9 px-3",
         md: "h-10 px-4 py-2",
@@ -26,6 +32,7 @@ const inputVariants = cva(
       },
     },
     defaultVariants: {
+      material: "outline",
       size: "md",
       scheme: "default",
     },
@@ -37,10 +44,10 @@ export interface InputProps
     VariantProps<typeof inputVariants> {}
 
 const Input = forwardRef<HTMLInputElement, InputProps>(
-  ({ className, size, scheme, ...props }, ref) => {
+  ({ className, size, scheme, material, ...props }, ref) => {
     return (
       <InputPrimitive
-        className={cn(inputVariants({ size, scheme }), className)}
+        className={cn(inputVariants({ size, scheme, material }), className)}
         ref={ref}
         data-scheme={scheme}
         {...props}

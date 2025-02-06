@@ -3,7 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 import { Slot } from "@radix-ui/react-slot";
 
-const badgeVariants = cva(
+const chipVariants = cva(
   "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
   {
     variants: {
@@ -29,21 +29,21 @@ const badgeVariants = cva(
   }
 );
 
-export interface BadgeProps
+export interface ChipProps
   extends ComponentProps<"div">,
-    VariantProps<typeof badgeVariants> {
+    VariantProps<typeof chipVariants> {
   asChild?: boolean;
 }
 
-function Badge({ className, material, scheme, ...props }: BadgeProps) {
+function Chip({ className, material, scheme, ...props }: ChipProps) {
   const Comp = props.asChild ? Slot : "div";
 
   return (
     <Comp
-      className={cn(badgeVariants({ material, scheme }), className)}
+      className={cn(chipVariants({ material, scheme }), className)}
       {...props}
     />
   );
 }
 
-export { Badge, badgeVariants };
+export { Chip, chipVariants };

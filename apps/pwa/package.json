@@ -16,6 +16,7 @@
     "@iconify/tailwind4": "^1.0.1",
     "@tailwindcss/postcss": "^4.0.0",
     "earthling-ui": "workspace:*",
+    "ga-gtag": "^1.2.0",
     "highlight.js": "^11.11.1",
     "next": "15.1.6",
     "prettier": "^3.4.2",
@@ -26,6 +27,7 @@
   },
   "devDependencies": {
     "@radix-ui/react-toggle-group": "^1.1.1",
+    "@types/ga-gtag": "^1.2.0",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

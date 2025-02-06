@@ -58,11 +58,11 @@ export const componentInformation: ComponentInfo[] = [
     props: [],
   },
   {
-    path: "badge",
-    name: "Badge",
-    description: "A badge component",
+    path: "chip",
+    name: "Chip",
+    description: "A chip component",
     dependencies: ["react", "class-variance-authority", "@/utils/cn"],
-    exports: ["Badge"],
+    exports: ["Chip"],
     props: [
       {
         prop: "material",
@@ -70,7 +70,7 @@ export const componentInformation: ComponentInfo[] = [
         type: "toggle-group",
         options: ["paper"],
         defaultValue: "paper",
-        description: "The material of the badge",
+        description: "The material of the Chip",
       },
       {
         prop: "scheme",
@@ -78,7 +78,7 @@ export const componentInformation: ComponentInfo[] = [
         type: "select",
         options: allSchemes,
         defaultValue: "primary",
-        description: "The color scheme of the button",
+        description: "The color scheme of the chip",
       },
     ],
   },
@@ -164,7 +164,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "modal",
         label: "Modal",
         type: "boolean",
-        defaultValue: false,
+        defaultValue: true,
         description: "Whether the drawer is modal",
       },
       {
@@ -184,6 +184,14 @@ export const componentInformation: ComponentInfo[] = [
     dependencies: ["react", "class-variance-authority", "@/utils/cn"],
     exports: ["Input"],
     props: [
+      {
+        prop: "material",
+        label: "Material",
+        type: "toggle-group",
+        options: ["paper", "outline"],
+        defaultValue: "outline",
+        description: "The material of the input",
+      },
       {
         prop: "size",
         label: "Size",
