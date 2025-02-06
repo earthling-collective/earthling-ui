@@ -77,7 +77,7 @@ export const Code = forwardRef<HTMLDivElement, CodeProps>(
         />
         <div className="pointer-events-none absolute inset-0 hidden flex-col items-end p-4 group-hover:flex">
           <Button
-            className="pointer-events-auto sticky top-4"
+            className="pointer-events-auto sticky top-[81px]"
             size="sm"
             scheme={isCopied ? "good" : "neutral"}
             shape={"icon"}
