@@ -11,6 +11,7 @@ import { Badge } from "earthling-ui/badge";
 import { Separator } from "earthling-ui/separator";
 import { type ComponentPropsWithoutRef } from "react";
 import { cn } from "earthling-ui/utils/cn";
+import { Button } from "earthling-ui/button";
 
 export async function ComponentSublayout({
   path,
@@ -34,60 +35,98 @@ export async function ComponentSublayout({
   if (!info) return notFound();
 
   return (
-    <div className="container mx-auto max-w-3xl py-4 md:my-4 md:p-0">
-      <Breadcrumbs className="mb-8 text-sm">
-        <Breadcrumb className={"text-muted-foreground"}>
-          <Link href={`/#components`} className="hover:underline">
-            Components
-          </Link>
-        </Breadcrumb>
-        <Breadcrumb className={"capitalize"}>
-          <Link href={`/components/${path}`} className="hover:underline">
-            {path}
-          </Link>
-        </Breadcrumb>
-      </Breadcrumbs>
+    <>
+      <main className="col-span-3 flex flex-1 flex-col px-4 xl:col-span-1">
+        <div className="container mx-auto max-w-3xl py-4 md:my-4 md:p-0">
+          <Breadcrumbs className="mb-8 text-sm">
+            <Breadcrumb className={"text-muted-foreground"}>
+              <Link href={`/#components`} className="hover:underline">
+                Components
+              </Link>
+            </Breadcrumb>
+            <Breadcrumb className={"capitalize"}>
+              <Link href={`/components/${path}`} className="hover:underline">
+                {path}
+              </Link>
+            </Breadcrumb>
+          </Breadcrumbs>
 
-      <h2 className="text-2xl font-bold">{info.name}</h2>
+          <h2 className="text-2xl font-bold">{info.name}</h2>
 
-      <ComponentSandbox path={path} propInfo={info.props} />
+          <ComponentSandbox path={path} propInfo={info.props} />
 
-      <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">Structure</h3>
-      <h4 className="my-4">Exports</h4>
-      <Code
-        language="typescript"
-        formatting="typescript"
-      >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
-      <h4 className="my-4">Anatomy</h4>
-      <Code language="typescript" formatting="typescript">
-        {anatomy}
-      </Code>
+          <h3
+            className="mt-8 mb-4 border-b pb-1 text-lg font-medium"
+            id="structure"
+          >
+            Structure
+          </h3>
+          <h4 className="my-4">Exports</h4>
+          <Code
+            language="typescript"
+            formatting="typescript"
+          >{`import { ${info.exports.join(", ")} } from "earthling-ui/${path}"`}</Code>
+          <h4 className="my-4">Anatomy</h4>
+          <Code language="typescript" formatting="typescript">
+            {anatomy}
+          </Code>
 
-      <h3 className="mt-8 mb-4 border-b pb-1 text-lg font-medium">Usage</h3>
-      <Tabs size="sm">
-        <TabList className={"mb-4"}>
-          <Tab id="import">Import</Tab>
-          <Tab id="eject">Automatic Install (Eject)</Tab>
-          <Tab id="manual">Manual Install</Tab>
-        </TabList>
-        <TabPanel id="eject">
-          <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
-        </TabPanel>
-        <TabPanel id="manual">
-          <Steps>
-            <Step step={1} title="Install dependencies">
-              <Code
-                language="shell"
-                className="col-start-2"
-              >{`bun add ${info.dependencies.filter((x) => x !== "react" && !x.startsWith("@/")).join(" ")}`}</Code>
-            </Step>
-            <Step step={2} title="Copy this source code into your project">
-              <Code language="typescript">{sourceCode}</Code>
-            </Step>
-          </Steps>
-        </TabPanel>
-      </Tabs>
-    </div>
+          <h3
+            className="mt-8 mb-4 border-b pb-1 text-lg font-medium"
+            id="usage"
+          >
+            Usage
+          </h3>
+          <Tabs size="sm">
+            <TabList className={"mb-4"}>
+              <Tab id="import">Import</Tab>
+              <Tab id="eject">Automatic Install (Eject)</Tab>
+              <Tab id="manual">Manual Install</Tab>
+            </TabList>
+            <TabPanel id="eject">
+              <Code language="shell">{`bun x earthling-ui eject ${path}`}</Code>
+            </TabPanel>
+            <TabPanel id="manual">
+              <Steps>
+                <Step step={1} title="Install dependencies">
+                  <Code
+                    language="shell"
+                    className="col-start-2"
+                  >{`bun add ${info.dependencies.filter((x) => x !== "react" && !x.startsWith("@/")).join(" ")}`}</Code>
+                </Step>
+                <Step step={2} title="Copy this source code into your project">
+                  <Code language="typescript">{sourceCode}</Code>
+                </Step>
+              </Steps>
+            </TabPanel>
+          </Tabs>
+        </div>
+      </main>
+      <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex">
+        <nav className="sticky top-[61px] flex flex-col gap-2 p-4">
+          <div className="my-12 flex flex-col">
+            <Link
+              href={`#sandbox`}
+              className="text-muted-foreground hover:text-foreground py-1 text-sm font-medium transition-colors"
+            >
+              <div>Sandbox</div>
+            </Link>
+            <Link
+              href={`#structure`}
+              className="text-muted-foreground hover:text-foreground py-1 text-sm font-medium transition-colors"
+            >
+              <div>Structure</div>
+            </Link>
+            <Link
+              href={`#usage`}
+              className="text-muted-foreground hover:text-foreground py-1 text-sm font-medium transition-colors"
+            >
+              <div>Usage</div>
+            </Link>
+          </div>
+        </nav>
+      </aside>
+    </>
   );
 }
 

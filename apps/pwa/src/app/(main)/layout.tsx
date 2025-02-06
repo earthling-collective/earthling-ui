@@ -143,14 +143,11 @@ export default async function ({ children }: { children: React.ReactNode }) {
           </Drawer>
         </div>
       </header>
-      <div className="grid grid-cols-[fit-content(100%)_1fr_fit-content(100%)]">
+      <div className="grid grid-cols-[auto_1fr_auto]">
         <aside className="hidden w-[280px] flex-col justify-end border-r border-[transparent] xl:flex">
           <Nav />
         </aside>
-        <main className="col-span-3 flex flex-1 flex-col px-4 xl:col-span-1">
-          {children}
-        </main>
-        <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex"></aside>
+        {children}
       </div>
       <footer className="mt-4 flex flex-row items-center justify-center gap-4 border-t border-current/5 py-4 text-center">
         <div className="font-display text-xs">Earthling UI</div>

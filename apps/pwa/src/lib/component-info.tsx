@@ -46,7 +46,8 @@ export const componentInformation: ComponentInfo[] = [
     dependencies: [
       "react",
       "class-variance-authority",
-      "@radix-ui/react-accordion",
+      "react-aria-components",
+      "@/utils/cn",
     ],
     exports: [
       "Accordion",
@@ -268,7 +269,13 @@ export const componentInformation: ComponentInfo[] = [
       "@radix-ui/react-select",
       "@/utils/cn",
     ],
-    exports: ["Select", "SelectTrigger", "SelectContent", "SelectItem"],
+    exports: [
+      "Select",
+      "SelectTrigger",
+      "SelectValue",
+      "SelectContent",
+      "SelectItem",
+    ],
     props: [],
   },
   {
