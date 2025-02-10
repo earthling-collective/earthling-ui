@@ -32,6 +32,9 @@ const templateCfg: Record<string, TemplateConfig> = {
   spa: {
     type: "app",
   },
+  app: {
+    type: "app",
+  },
   db: {
     type: "package",
   },
@@ -197,6 +200,7 @@ program
     s.message(`Setting up project template`);
 
     //replace the template placeholders
+    await recursiveFindReplace(absDestination, `template-name`, destination);
     await recursiveFindReplace(
       absDestination,
       `template-package-name`,
