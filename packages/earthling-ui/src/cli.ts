@@ -199,13 +199,25 @@ program
     //replace the template placeholders
     await recursiveFindReplace(
       absDestination,
-      `@template-${template}/${template}`,
+      `template-package-name`,
       parent?.scope ? `@${parent.scope}/${destination}` : destination
     );
     await recursiveFindReplace(
       absDestination,
-      `template-${template}`,
+      `template-display-name`,
       destination
+    );
+    await recursiveFindReplace(
+      absDestination,
+      `template-short-display-name`,
+      destination
+    );
+    await recursiveFindReplace(
+      absDestination,
+      `template-app-id`,
+      parent?.scope
+        ? `com.${parent.scope}.${destination}`
+        : `com.${destination}.app`
     );
 
     //remove git dir
