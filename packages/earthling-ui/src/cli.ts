@@ -1,15 +1,14 @@
+import { intro, log, outro, spinner } from "@clack/prompts";
 import { Command } from "commander";
-import pkg from "../package.json";
 import { copy } from "copy-paste";
-import path from "node:path";
 import findParentDir from "find-parent-dir";
-import { join } from "node:path";
-import fs from "node:fs";
 import { clone } from "isomorphic-git";
 import http from "isomorphic-git/http/node";
-import { intro, outro, spinner } from "@clack/prompts";
+import fs from "node:fs";
+import fsp from "node:fs/promises";
+import path, { dirname, join } from "node:path";
 import { type PackageJson } from "type-fest";
-import { log } from "@clack/prompts";
+import pkg from "../package.json";
 
 const handleSigTerm = () => process.exit(0);
 process.on("SIGINT", handleSigTerm);
@@ -22,7 +21,11 @@ program
   .description("A CLI for earthling-ui")
   .version(pkg.version);
 
-const templateCfg = {
+type TemplateConfig = {
+  type: "app" | "package" | "repo";
+};
+
+const templateCfg: Record<string, TemplateConfig> = {
   ssr: {
     type: "app",
   },
@@ -43,13 +46,89 @@ const templateCfg = {
   },
 };
 
+// recursively check if a valid parent package.json exists
+function checkParent(
+  path: string,
+  projectType: (typeof templateCfg)[string]["type"]
+): { path: string; dir: string; scope?: string } | null {
+  if (projectType === "repo") return null;
+
+  const parentPackageDir = findParentDir.sync(path, "package.json");
+  if (!parentPackageDir) return null;
+
+  const parentPackagePath =
+    parentPackageDir && join(parentPackageDir, "package.json");
+
+  // read the parent package.json
+  try {
+    var parentPackage = JSON.parse(
+      fs.readFileSync(parentPackagePath, "utf8")
+    ) as PackageJson;
+  } catch (error) {
+    return checkParent(join(parentPackageDir, "../"), projectType);
+  }
+
+  // check if the workspaces field is valid
+  if (!parentPackage.workspaces) {
+    return checkParent(join(parentPackageDir, "../"), projectType);
+  }
+
+  // check if the workspace is valid
+  if (
+    !(
+      Array.isArray(parentPackage.workspaces)
+        ? parentPackage.workspaces
+        : parentPackage.workspaces.packages
+    )?.includes(
+      projectType === "app"
+        ? "apps/*"
+        : projectType === "package"
+          ? "packages/*"
+          : "*"
+    )
+  ) {
+    return checkParent(join(parentPackageDir, "../"), projectType);
+  }
+
+  return {
+    path: parentPackagePath,
+    dir: dirname(parentPackagePath),
+    scope: parentPackage.name?.match(/@([\w\d\-]+)\//)?.[1],
+  };
+}
+
+async function recursiveFindReplace(
+  dir: string,
+  find: string,
+  replace: string
+) {
+  const files = await fsp.readdir(dir);
+
+  await Promise.all(
+    files.map(async (file) => {
+      const filePath = path.join(dir, file);
+      const stat = await fsp.stat(filePath);
+
+      if (stat.isDirectory()) {
+        await recursiveFindReplace(filePath, find, replace);
+      } else {
+        const content = await fsp.readFile(filePath, "utf8");
+        const updatedContent = content.replaceAll(find, replace);
+        await fsp.writeFile(filePath, updatedContent, "utf8");
+      }
+    })
+  );
+}
+
 program
   .command("create [template] [destination]")
   .description("Create a new earthling-ui project")
-  .configureOutput({
-    writeErr: (str) => log.error(str),
-  })
   .action(async (template: string, destination: string, options) => {
+    if (!/^[\w\d\-]+$/.test(destination))
+      throw new Error(
+        `Invalid destination: ${destination} (only alphanumeric characters and dashes allowed)`
+      );
+
     intro(`Creating a new earthling-ui monorepo`);
 
     //default to monorepo
@@ -61,54 +140,38 @@ program
     //get template config
     const cfg = templateCfg[template as keyof typeof templateCfg];
 
+    //create a clack spinner
     const s = spinner();
 
     //check for existing parent
     s.message(`Determining destination directory`);
-    const parentPkgDir = findParentDir.sync(process.cwd(), "package.json");
-    const parentPkgPath = parentPkgDir && join(parentPkgDir, "package.json");
+    const parent = checkParent(process.cwd(), cfg.type);
 
-    if (parentPkgPath) {
-      log.info(`Found parent package at ${parentPkgPath}`);
-
-      const parentPkg = JSON.parse(
-        fs.readFileSync(parentPkgPath, "utf8")
-      ) as PackageJson;
-
-      if (cfg.type === "repo")
-        throw new Error(`Cannot create a repo project inside another project`);
-
-      if (!Array.isArray(parentPkg.workspaces))
-        throw new Error(
-          `Workspaces field is not an array in ${parentPkgPath} (Not yet supported)`
-        );
-
-      if (cfg.type === "app" && !parentPkg.workspaces?.includes("apps/*"))
-        throw new Error(`No apps/* workspace found in ${parentPkgPath}`);
-
-      if (
-        cfg.type === "package" &&
-        !parentPkg.workspaces?.includes("packages/*")
-      )
-        throw new Error(`No packages/* workspace found in ${parentPkgPath}`);
-    }
+    //log parent root if exists
+    if (parent) log.info(`Parent root: ${parent.dir}`);
 
     //get the absolute destination path
     let absDestination = join(process.cwd(), destination);
 
     //if the destination is a subdirectory of the parent package, use that as the destination
-    if (parentPkgPath) {
+    if (parent) {
       switch (cfg.type) {
         case "app":
-          absDestination = join(parentPkgDir, "./apps", destination);
+          absDestination = join(parent.dir, "./apps", destination);
           break;
         case "package":
-          absDestination = join(parentPkgDir, "./packages", destination);
+          absDestination = join(parent.dir, "./packages", destination);
           break;
       }
     }
 
+    //log the repo root
+    log.info(`Project root: ${absDestination}`);
+
+    //update spinner message
     s.message(`Creating destination directory`);
+
+    //create the destination directory
     if (!fs.existsSync(absDestination))
       fs.mkdirSync(absDestination, { recursive: true });
 
@@ -118,8 +181,10 @@ program
       process.exit(1);
     }
 
-    //clone the template repository
+    //update spinner message
     s.message(`Cloning template repository`);
+
+    //clone the template repository
     await clone({
       fs,
       http,
@@ -128,7 +193,25 @@ program
       singleBranch: true,
     });
 
-    s.stop(`Template cloned`);
+    //update spinner message
+    s.message(`Setting up project template`);
+
+    //replace the template placeholders
+    await recursiveFindReplace(
+      absDestination,
+      `@template-${template}/${template}`,
+      parent?.scope ? `@${parent.scope}/${destination}` : destination
+    );
+    await recursiveFindReplace(
+      absDestination,
+      `template-${template}`,
+      destination
+    );
+
+    //remove git dir
+    await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
+
+    // s.stop(`Template cloned`);
 
     outro(`Earthling-ui project created in ${absDestination}`);
   });

@@ -40,6 +40,25 @@
         "typescript": "^5",
       },
     },
+    "apps/test": {
+      "name": "@earthling-ui/test",
+      "version": "0.0.0-alpha.0",
+      "dependencies": {
+        "@tailwindcss/postcss": "^4.0.0",
+        "earthling-ui": "^1.1.0-alpha.8",
+        "next": "15.1.6",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "tailwindcss": "^4.0.0",
+      },
+      "devDependencies": {
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "postcss": "^8.5.1",
+        "typescript": "^5",
+      },
+    },
     "packages/earthling-ui": {
       "name": "earthling-ui",
       "version": "1.1.0-alpha.21",
@@ -86,6 +105,8 @@
     "@clack/prompts": ["@clack/prompts@0.10.0", "", { "dependencies": { "@clack/core": "0.4.1", "picocolors": "^1.0.0", "sisteransi": "^1.0.5" } }, "sha512-H3rCl6CwW1NdQt9rE3n373t7o5cthPv7yUoxF2ytZvyvlJv89C5RYMJu83Hed8ODgys5vpBU0GKxIRG83jd8NQ=="],
 
     "@earthling-ui/pwa": ["@earthling-ui/pwa@workspace:apps/pwa"],
+
+    "@earthling-ui/test": ["@earthling-ui/test@workspace:apps/test"],
 
     "@emnapi/runtime": ["@emnapi/runtime@1.3.1", "", { "dependencies": { "tslib": "^2.4.0" } }, "sha512-kEBmG8KyqtxJZv+ygbEim+KCGtIq1fC22Ms3S4ziXmYKm8uyoLX0MHONVKwp+9opg390VaKRNt4a7A9NwmpNhw=="],
 

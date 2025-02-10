@@ -1,6 +1,6 @@
 {
   "name": "earthling-ui",
-  "version": "1.1.0-alpha.21",
+  "version": "1.1.0-alpha.22",
   "homepage": "https://ui.earthling.dev",
   "bugs": "https://github.com/earthling-dev/earthling-ui/issues",
   "repository": {
@@ -42,7 +42,7 @@
   ],
   "scripts": {
     "build": "bun run scripts/build.ts",
-    "dev": "chokidar \"src/**/*.{ts,tsx}\" -c \"bun run scripts/build.ts\""
+    "dev": "bun run build && chokidar \"src/**/*.{ts,tsx}\" -c \"bun run scripts/build.ts\""
   },
   "dependencies": {
     "@clack/prompts": "^0.10.0",
