@@ -1,10 +1,15 @@
 import { Command } from "commander";
 import pkg from "../package.json";
-import { clone } from "isomorphic-git";
-import fs from "node:fs";
-import http from "isomorphic-git/http/node";
 import { copy } from "copy-paste";
 import path from "node:path";
+import findParentDir from "find-parent-dir";
+import { join } from "node:path";
+import fs from "node:fs";
+import { clone } from "isomorphic-git";
+import http from "isomorphic-git/http/node";
+import { intro, outro, spinner } from "@clack/prompts";
+import { type PackageJson } from "type-fest";
+import { log } from "@clack/prompts";
 
 const handleSigTerm = () => process.exit(0);
 process.on("SIGINT", handleSigTerm);
@@ -17,21 +22,115 @@ program
   .description("A CLI for earthling-ui")
   .version(pkg.version);
 
+const templateCfg = {
+  ssr: {
+    type: "app",
+  },
+  spa: {
+    type: "app",
+  },
+  db: {
+    type: "package",
+  },
+  lib: {
+    type: "package",
+  },
+  cli: {
+    type: "package",
+  },
+  monorepo: {
+    type: "repo",
+  },
+};
+
 program
-  .command("create <destination>")
-  .description("Create a new earthling-ui monorepo")
-  .option("--pwa <name>", "Include a PWA project") // nextjs
-  .option("--db <name>", "Include a database project") // drizzle+postgres
-  .option("--lib <name>", "Include an internal librarry project") // bun build
-  .option("--cli <name>", "Include a CLI project") // commander
-  .action(async (destination) => {
-    console.log(`Creating a new earthling-ui project in ${destination}`);
+  .command("create [template] [destination]")
+  .description("Create a new earthling-ui project")
+  .configureOutput({
+    writeErr: (str) => log.error(str),
+  })
+  .action(async (template: string, destination: string, options) => {
+    intro(`Creating a new earthling-ui monorepo`);
+
+    //default to monorepo
+    if (!template) template = "monorepo";
+    //check if template is valid
+    if (!Object.keys(templateCfg).includes(template))
+      throw new Error(`Invalid template: ${template}`);
+
+    //get template config
+    const cfg = templateCfg[template as keyof typeof templateCfg];
+
+    const s = spinner();
+
+    //check for existing parent
+    s.message(`Determining destination directory`);
+    const parentPkgDir = findParentDir.sync(process.cwd(), "package.json");
+    const parentPkgPath = parentPkgDir && join(parentPkgDir, "package.json");
+
+    if (parentPkgPath) {
+      log.info(`Found parent package at ${parentPkgPath}`);
+
+      const parentPkg = JSON.parse(
+        fs.readFileSync(parentPkgPath, "utf8")
+      ) as PackageJson;
+
+      if (cfg.type === "repo")
+        throw new Error(`Cannot create a repo project inside another project`);
+
+      if (!Array.isArray(parentPkg.workspaces))
+        throw new Error(
+          `Workspaces field is not an array in ${parentPkgPath} (Not yet supported)`
+        );
+
+      if (cfg.type === "app" && !parentPkg.workspaces?.includes("apps/*"))
+        throw new Error(`No apps/* workspace found in ${parentPkgPath}`);
+
+      if (
+        cfg.type === "package" &&
+        !parentPkg.workspaces?.includes("packages/*")
+      )
+        throw new Error(`No packages/* workspace found in ${parentPkgPath}`);
+    }
+
+    //get the absolute destination path
+    let absDestination = join(process.cwd(), destination);
+
+    //if the destination is a subdirectory of the parent package, use that as the destination
+    if (parentPkgPath) {
+      switch (cfg.type) {
+        case "app":
+          absDestination = join(parentPkgDir, "./apps", destination);
+          break;
+        case "package":
+          absDestination = join(parentPkgDir, "./packages", destination);
+          break;
+      }
+    }
+
+    s.message(`Creating destination directory`);
+    if (!fs.existsSync(absDestination))
+      fs.mkdirSync(absDestination, { recursive: true });
+
+    //check if any file exists inside the destination directory
+    if (fs.readdirSync(absDestination).length > 0) {
+      console.error(`❌ Directory ${absDestination} is not empty`);
+      process.exit(1);
+    }
+
+    //clone the template repository
+    s.message(`Cloning template repository`);
     await clone({
       fs,
       http,
-      dir: "./",
-      url: "https://github.com/earthling-collective/template-monorepo.git",
+      dir: absDestination,
+      url: `https://github.com/earthling-collective/template-${template}.git`,
+      singleBranch: true,
     });
+
+    s.stop(`Template cloned`);
+
+    outro(`Earthling-ui project created in ${absDestination}`);
   });
 
 program
