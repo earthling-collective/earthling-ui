@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Button } from "earthling-ui/button";
 import { cookies } from "next/headers";
-import earthling from "../icon.png";
-import Image from "next/image";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 import { Nav } from "./nav";
 import { Drawer, DrawerContent, DrawerTrigger } from "earthling-ui/drawer";
+import { pageInformation } from "@/lib/page-info";
+import { MobileNav } from "./mobile-nav";
 
 export default async function ({ children }: { children: React.ReactNode }) {
   const jar = await cookies();
@@ -18,7 +18,6 @@ export default async function ({ children }: { children: React.ReactNode }) {
           href="/"
           className="flex flex-row items-center gap-2 hover:opacity-80"
         >
-          {/* <Image src={earthling} alt="Earthling" width={32} height={32} /> */}
           <h1 className="font-display font-medium tracking-widest">
             Earthling UI
           </h1>
@@ -97,39 +96,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
             </DrawerTrigger>
             <DrawerContent>
               <div className="flex w-[280px] flex-col gap-2 p-4">
-                <div className="flex flex-col">
-                  <Button
-                    asChild
-                    size="sm"
-                    material="ghost"
-                    className="justify-start"
-                  >
-                    <Link
-                      href={`https://github.com/earthling-collective/earthling-ui`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="icon-[simple-icons--github]" />
-                      <div>Github</div>
-                    </Link>
-                  </Button>
-                  <Button
-                    asChild
-                    size="sm"
-                    material="ghost"
-                    className="justify-start"
-                  >
-                    <Link
-                      href={`http://npmjs.com/package/earthling-ui`}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      <i className="icon-[simple-icons--npm]" />
-                      <div>NPM</div>
-                    </Link>
-                  </Button>
-                </div>
-                <div className="flex flex-col"></div>
+                <MobileNav />
               </div>
             </DrawerContent>
           </Drawer>

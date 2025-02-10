@@ -2,7 +2,7 @@ import { intro, log, outro, spinner } from "@clack/prompts";
 import { Command } from "commander";
 import { copy } from "copy-paste";
 import findParentDir from "find-parent-dir";
-import { clone } from "isomorphic-git";
+import { clone, init } from "isomorphic-git";
 import http from "isomorphic-git/http/node";
 import fs from "node:fs";
 import fsp from "node:fs/promises";
@@ -210,6 +210,11 @@ program
 
     //remove git dir
     await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
+
+    //reinitialize git if a repo project type
+    if (cfg.type === "repo") {
+      await init({ fs, dir: absDestination });
+    }
 
     // s.stop(`Template cloned`);
 

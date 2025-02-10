@@ -1,18 +1,28 @@
 # Earthling UI
 
-A modern, themeable React component library built with TypeScript and Tailwind CSS.
+A modern, themeable React component library built with TypeScript, Tailwind CSS, and a suite of CLI tools to scaffold projects quickly.
 
-> ⚠️ **Alpha Status**: This project is in active development. APIs may change between minor versions.
+> ⚠️ **Alpha Status**: This project is in active development. APIs and features may change between releases.
 
 ## Features
 
-- 🎨 **Themeable Components**: Includes light and dark themes out of the box
-- 🔧 **Type-Safe**: Built with TypeScript for excellent developer experience
-- 📦 **Modern Stack**: React + Tailwind CSS + Radix UI primitives
-- 🎯 **Variant Support**: Flexible component variants using class-variance-authority
-- 💪 **Accessible**: Built on top of Radix UI primitives for robust accessibility
+- 🎨 **Themeable Components**: Switch between light and dark themes effortlessly.
+- 🔧 **Type-Safe**: Built with TypeScript for an excellent developer experience.
+- 📦 **Modern Stack**: React + Tailwind CSS + Radix UI primitives.
+- 🎯 **Flexible Templates**: Create new projects from a variety of templates:
+  - **ssr** – Server-side rendered applications (scaffolded under `apps/*`)
+  - **spa** – Single-page applications (scaffolded under `apps/*`)
+  - **db** – Package projects (scaffolded under `packages/*`)
+  - **cli** – Package projects (scaffolded under `packages/*`)
+  - **monorepo** – Full repository setups at the root
+- 🛠 **CLI Tool**: Quickly scaffold projects using our CLI commands.
+- 💡 **Additional Commands**:
+  - **Eject** components to integrate them directly into your project.
+  - **Copy** component snippets directly to your clipboard.
 
 ## Installation
+
+Install Earthling UI via Bun:
 
 ```bash
 bun add earthling-ui
@@ -38,15 +48,13 @@ Each component supports:
 
 ```tsx
 import { Button } from "earthling-ui/button";
-import { ThemeSwitcher } from "earthling-ui/theme-switcher";
 
 function App() {
   return (
     <div>
-      <Button variant="filled" scheme="primary" size="md">
+      <Button material="filled" scheme="primary" size="md">
         Click me
       </Button>
-      <ThemeSwitcher />
     </div>
   );
 }
@@ -75,37 +83,31 @@ Earthling UI supports light, dark, and system themes through data attributes:
 }
 ```
 
-Use the `ThemeSwitcher` component to toggle between themes, or manually set the data-theme attribute:
-
 ```tsx
 // Manual theme control
 document.documentElement.setAttribute("data-theme", "dark"); // or 'light' or 'system'
 ```
 
-## CLI Tool
-
-The package includes a CLI tool for common tasks:
-
-```bash
-# Install globally
-bun add -g earthling-ui
-
-# Or run with bunx
-bunx earthling-ui [command]
-```
-
 ## Development
 
-To build the library locally:
+This is a monorepo managed with Bun workspaces. Key packages:
+
+- `packages/earthling-ui`: The main UI component library
+- `apps/pwa`: Demo/documentation site (work in progress)
 
 ```bash
 # Install dependencies
 bun install
 
-# Build the library
-bun run build
+# Build the UI library and watch for changes
+cd packages/earthling-ui
+bun run dev
+
+# Run the demo site
+cd apps/pwa
+bun run dev
 ```
 
-## Contributing
+## License
 
-This project is in alpha. While we welcome feedback and suggestions, the API is still evolving. Please open an issue on GitHub to discuss major changes.
+MIT © [Steven Frady](https://stevenfrady.com)
