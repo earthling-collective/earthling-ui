@@ -21,31 +21,86 @@ program
   .description("A CLI for earthling-ui")
   .version(pkg.version);
 
+type TemplateReplacements = Record<
+  string,
+  (params: { projectName: string; projectScope?: string }) => string
+>;
+
 type TemplateConfig = {
   type: "app" | "package" | "repo";
+  aliases: string[];
+  replacements: TemplateReplacements;
+};
+
+const globalReplacements: TemplateReplacements = {
+  "earthling-template-name": ({ projectName }) => projectName,
+  "earthling-template-package-name": ({ projectName, projectScope }) =>
+    projectScope ? `@${projectScope}/${projectName}` : projectName,
+  "earthling-template-display-name": ({ projectName }) => projectName,
+  "earthling-template-short-display-name": ({ projectName }) => projectName,
+  "earthling-template-app-id": ({ projectName, projectScope }) =>
+    projectScope
+      ? `com.${projectScope}.${projectName}`
+      : `com.${projectName}.app`,
+  earthling_template_lib: ({ projectName }) => projectName.replaceAll("-", "_"),
 };
 
 const templateCfg: Record<string, TemplateConfig> = {
-  ssr: {
+  next: {
     type: "app",
+    aliases: ["ssr", "nextjs"],
+    replacements: {
+      ...globalReplacements,
+    },
   },
-  spa: {
+  vite: {
     type: "app",
+    aliases: ["spa"],
+    replacements: {
+      ...globalReplacements,
+    },
   },
-  app: {
+  tauri: {
     type: "app",
+    aliases: ["app", "desktop"],
+    replacements: {
+      ...globalReplacements,
+    },
+  },
+  electron: {
+    type: "app",
+    aliases: ["kiosk"],
+    replacements: {
+      ...globalReplacements,
+    },
   },
   db: {
     type: "package",
+    aliases: ["database"],
+    replacements: {
+      ...globalReplacements,
+    },
   },
   lib: {
     type: "package",
+    aliases: ["library"],
+    replacements: {
+      ...globalReplacements,
+    },
   },
   cli: {
     type: "package",
+    aliases: [],
+    replacements: {
+      ...globalReplacements,
+    },
   },
   monorepo: {
     type: "repo",
+    aliases: ["repo"],
+    replacements: {
+      ...globalReplacements,
+    },
   },
 };
 
@@ -127,9 +182,9 @@ program
   .command("create [template] [destination]")
   .description("Create a new earthling-ui project")
   .action(async (template: string, destination: string, options) => {
-    if (!/^[\w\d\-]+$/.test(destination))
+    if (!/^[a-z\d\-]+$/.test(destination))
       throw new Error(
-        `Invalid destination: ${destination} (only alphanumeric characters and dashes allowed)`
+        `Invalid destination: ${destination} (only lowercase alphanumeric characters and dashes allowed)`
       );
 
     intro(`Creating a new earthling-ui monorepo`);
@@ -137,21 +192,16 @@ program
     //default to monorepo
     if (!template) template = "monorepo";
     //check if template is valid
-    if (!Object.keys(templateCfg).includes(template))
-      throw new Error(`Invalid template: ${template}`);
+    const templateKey = Object.entries(templateCfg).find(([key, cfg]) =>
+      [key, ...cfg.aliases].includes(template)
+    )?.[0];
+    if (!templateKey) throw new Error(`Invalid template: ${template}`);
 
     //get template config
-    const cfg = templateCfg[template as keyof typeof templateCfg];
-
-    //create a clack spinner
-    const s = spinner();
+    const cfg = templateCfg[templateKey as keyof typeof templateCfg];
 
     //check for existing parent
-    s.message(`Determining destination directory`);
     const parent = checkParent(process.cwd(), cfg.type);
-
-    //log parent root if exists
-    if (parent) log.info(`Parent root: ${parent.dir}`);
 
     //get the absolute destination path
     let absDestination = join(process.cwd(), destination);
@@ -169,10 +219,12 @@ program
     }
 
     //log the repo root
-    log.info(`Project root: ${absDestination}`);
-
-    //update spinner message
-    s.message(`Creating destination directory`);
+    log.info(
+      [
+        ...(parent ? [`Parent root: ${parent.dir}`] : []),
+        `Project root: ${absDestination}`,
+      ].join(`\n`)
+    );
 
     //create the destination directory
     if (!fs.existsSync(absDestination))
@@ -184,45 +236,32 @@ program
       process.exit(1);
     }
 
-    //update spinner message
-    s.message(`Cloning template repository`);
+    let s = spinner();
+    s.start("Cloning template directory");
 
     //clone the template repository
     await clone({
       fs,
       http,
       dir: absDestination,
-      url: `https://github.com/earthling-collective/template-${template}.git`,
+      url: `https://github.com/earthling-collective/template-${templateKey}.git`,
       singleBranch: true,
     });
 
     //update spinner message
-    s.message(`Setting up project template`);
+    s.message(`Performing template replacements`);
 
     //replace the template placeholders
-    await recursiveFindReplace(absDestination, `template-name`, destination);
-    await recursiveFindReplace(
-      absDestination,
-      `template-package-name`,
-      parent?.scope ? `@${parent.scope}/${destination}` : destination
-    );
-    await recursiveFindReplace(
-      absDestination,
-      `template-display-name`,
-      destination
-    );
-    await recursiveFindReplace(
-      absDestination,
-      `template-short-display-name`,
-      destination
-    );
-    await recursiveFindReplace(
-      absDestination,
-      `template-app-id`,
-      parent?.scope
-        ? `com.${parent.scope}.${destination}`
-        : `com.${destination}.app`
-    );
+    const replacements = Object.entries(cfg.replacements);
+    for await (let [x, y] of replacements) {
+      await recursiveFindReplace(
+        absDestination,
+        x,
+        y({ projectName: destination, projectScope: parent?.scope })
+      );
+    }
+
+    s.message(`Managing git repo`);
 
     //remove git dir
     await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
@@ -232,7 +271,7 @@ program
       await init({ fs, dir: absDestination });
     }
 
-    // s.stop(`Template cloned`);
+    s.stop(`Successfully cloned template`);
 
     outro(`Earthling-ui project created in ${absDestination}`);
   });
