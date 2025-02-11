@@ -42,7 +42,8 @@ const globalReplacements: TemplateReplacements = {
     projectScope
       ? `com.${projectScope}.${projectName}`
       : `com.${projectName}.app`,
-  earthling_template_lib: ({ projectName }) => projectName.replaceAll("-", "_"),
+  earthling_template_lib: ({ projectName }) =>
+    `${projectName.replaceAll("-", "_")}_lib`,
 };
 
 const templateCfg: Record<string, TemplateConfig> = {
@@ -264,7 +265,9 @@ program
     s.message(`Managing git repo`);
 
     //remove git dir
-    await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
+    if (!!parent) {
+      await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
+    }
 
     //reinitialize git if a repo project type
     if (cfg.type === "repo") {
