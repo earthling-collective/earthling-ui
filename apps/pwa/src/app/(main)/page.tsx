@@ -44,6 +44,7 @@ export default async function () {
               )
               .map(({ name, path }, i) => (
                 <Surface
+                  key={i}
                   interactive
                   asChild
                   className="col-span-3 shadow-xs md:col-span-1"

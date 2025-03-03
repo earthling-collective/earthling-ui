@@ -129,8 +129,9 @@ export async function ComponentSublayout({
                   </Step>
                   <Step
                     step={2}
-                    title="Copy this source code into your project"
+                    title="Copy the component source code into your project"
                   >
+                    <Code language="typescript">{`bun x earthling-ui copy ${path}`}</Code>
                     <Code language="typescript" expandable>
                       {sourceCode}
                     </Code>

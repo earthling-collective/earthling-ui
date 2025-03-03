@@ -24,7 +24,7 @@ const globalReplacements: TemplateReplacements = {
     projectScope ? `@${projectScope}/${projectName}` : projectName,
   "earthling-template-display-name": ({ projectName }) => projectName,
   "earthling-template-short-display-name": ({ projectName }) => projectName,
-  "earthling-template-app-id": ({ projectName, projectScope }) =>
+  "earthling.template-app.id": ({ projectName, projectScope }) =>
     projectScope
       ? `com.${projectScope}.${projectName}`
       : `com.${projectName}.app`,
@@ -54,16 +54,16 @@ const templateCfg: Record<string, TemplateConfig> = {
       ...globalReplacements,
     },
   },
-  electron: {
+  kiosk: {
     type: "app",
-    aliases: ["kiosk"],
+    aliases: ["electron"],
     replacements: {
       ...globalReplacements,
     },
   },
   db: {
     type: "package",
-    aliases: ["database"],
+    aliases: ["database", "drizzle"],
     replacements: {
       ...globalReplacements,
     },

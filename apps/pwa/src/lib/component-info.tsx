@@ -100,7 +100,7 @@ export const componentInformation: ComponentInfo[] = [
     name: "Button",
     description: "A button component",
     dependencies: [
-      "React",
+      "react",
       "class-variance-authority",
       "@radix-ui/react-slot",
       "@/utils/cn",
