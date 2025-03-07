@@ -36,6 +36,10 @@ export const Nav = () => {
 
       <Separator className="mx-3 w-auto" />
 
+      <div className="text-muted-foreground mx-3 mt-3 mb-1 text-xs">
+        Components
+      </div>
+
       <div className="flex flex-col">
         {componentInformation
           .sort((a, b) => (a.name > b.name ? 1 : -1))

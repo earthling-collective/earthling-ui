@@ -21,6 +21,12 @@ export const pageInformation = [
       "Learn how to customize your theme and find the default theme.",
   },
   {
+    href: "/templates",
+    label: "Templates",
+    icon: "icon-[lucide--package]",
+    description: "View the list of available templates.",
+  },
+  {
     href: "/changelog",
     label: "Latest updates",
     icon: "icon-[lucide--git-pull-request-arrow]",
