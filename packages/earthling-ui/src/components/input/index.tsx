@@ -15,27 +15,19 @@ const inputVariants = cva(
         outline:
           "border-(--scheme-tint)/30 hover:border-(--scheme-tint)/50 hover:bg-(--scheme-tint)/5 ",
       },
-      size: {
-        sm: "h-9 px-3",
-        md: "h-10 px-4 py-2",
-        lg: "h-11 px-8",
-      },
+      size: { sm: "h-9 px-3", md: "h-10 px-4 py-2", lg: "h-11 px-8" },
       scheme: {
-        default: `[--scheme-tint:currentColor;--scheme-foreground:var(--color-background)]`,
-        primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
-        secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
-        muted: `[--scheme-tint:var(--color-muted);--scheme-foreground:var(--color-muted-foreground)]`,
-        good: `[--scheme-tint:var(--color-good);--scheme-foreground:var(--color-good-foreground)]`,
-        caution: `[--scheme-tint:var(--color-caution);--scheme-foreground:var(--color-caution-foreground)]`,
-        bad: `[--scheme-tint:var(--color-bad);--scheme-foreground:var(--color-bad-foreground)]`,
+        default: `[--scheme-tint:currentColor] [--scheme-foreground:var(--color-background)]`,
+        primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
+        secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
+        tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
+        muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
+        good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
+        caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
+        bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
       },
     },
-    defaultVariants: {
-      material: "outline",
-      size: "md",
-      scheme: "default",
-    },
+    defaultVariants: { material: "outline", size: "md", scheme: "default" },
   }
 );
 

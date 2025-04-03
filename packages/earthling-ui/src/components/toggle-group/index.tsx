@@ -15,36 +15,25 @@ const toggleGroupVariants = cva("flex items-center justify-center", {
   variants: {
     material: {
       paper:
-        "rounded-control bg-[var(--scheme-base)] bg-muted text-muted-foreground",
+        "rounded-control bg-(--scheme-base) bg-muted text-muted-foreground",
     },
     scheme: {
-      primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
-      secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
-      tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
-      muted: `[--scheme-tint:var(--color-muted);--scheme-foreground:var(--color-muted-foreground)]`,
-      good: `[--scheme-tint:var(--color-good);--scheme-foreground:var(--color-good-foreground)]`,
-      caution: `[--scheme-tint:var(--color-caution);--scheme-foreground:var(--color-caution-foreground)]`,
-      bad: `[--scheme-tint:var(--color-bad);--scheme-foreground:var(--color-bad-foreground)]`,
+      primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
+      secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
+      tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
+      muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
+      good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
+      caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
+      bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
     },
-    size: {
-      sm: "p-1",
-      md: "p-1",
-      lg: "p-1",
-    },
+    size: { sm: "p-1", md: "p-1", lg: "p-1" },
   },
-  defaultVariants: {
-    material: "paper",
-    size: "md",
-  },
+  defaultVariants: { material: "paper", size: "md" },
 });
 
 const ToggleGroupContext = createContext<
   VariantProps<typeof toggleGroupVariants>
->({
-  size: "md",
-  material: "paper",
-  scheme: "primary",
-});
+>({ size: "md", material: "paper", scheme: "primary" });
 
 const ToggleGroup = forwardRef<
   ComponentRef<typeof ToggleGroupPrimitive.Root>,
@@ -87,10 +76,7 @@ const toggleGroupItemVariants = cva(
         lg: "h-9 px-5 min-w-11",
       },
     },
-    defaultVariants: {
-      material: "paper",
-      size: "md",
-    },
+    defaultVariants: { material: "paper", size: "md" },
   }
 );
 

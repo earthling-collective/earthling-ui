@@ -14,9 +14,7 @@ const switchVariants = cva(
   "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline  disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-muted",
   {
     variants: {
-      material: {
-        paper: "bg-muted data-[state=checked]:bg-[var(--scheme-tint)]",
-      },
+      material: { paper: "bg-muted data-[state=checked]:bg-(--scheme-tint)" },
       scheme: {
         default: `[--scheme-tint:currentColor;]`,
         primary: `[--scheme-tint:var(--color-primary);]`,
@@ -28,10 +26,7 @@ const switchVariants = cva(
         bad: `[--scheme-tint:var(--color-bad);]`,
       },
     },
-    defaultVariants: {
-      material: "paper",
-      scheme: "default",
-    },
+    defaultVariants: { material: "paper", scheme: "default" },
   }
 );
 
@@ -40,24 +35,20 @@ const switchThumbVariants = cva(
   {
     variants: {
       material: {
-        paper:
-          "bg-muted-foreground data-[state=checked]:bg-[var(--scheme-tint)]",
+        paper: "bg-muted-foreground data-[state=checked]:bg-(--scheme-tint)",
       },
       scheme: {
-        default: `[--scheme-tint:var(--color-background);]`,
-        primary: `[--scheme-tint:var(--color-primary-foreground);]`,
-        secondary: `[--scheme-tint:var(--color-secondary-foreground);]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary-foreground);]`,
-        muted: `[--scheme-tint:var(--color-muted-foreground);]`,
-        good: `[--scheme-tint:var(--color-good-foreground);]`,
-        caution: `[--scheme-tint:var(--color-caution-foreground);]`,
-        bad: `[--scheme-tint:var(--color-bad-foreground);]`,
+        default: `[--scheme-tint:var(--color-background)]`,
+        primary: `[--scheme-tint:var(--color-primary-foreground)]`,
+        secondary: `[--scheme-tint:var(--color-secondary-foreground)]`,
+        tertiary: `[--scheme-tint:var(--color-tertiary-foreground)]`,
+        muted: `[--scheme-tint:var(--color-muted-foreground)]`,
+        good: `[--scheme-tint:var(--color-good-foreground)]`,
+        caution: `[--scheme-tint:var(--color-caution-foreground)]`,
+        bad: `[--scheme-tint:var(--color-bad-foreground)]`,
       },
     },
-    defaultVariants: {
-      material: "paper",
-      scheme: "default",
-    },
+    defaultVariants: { material: "paper", scheme: "default" },
   }
 );
 

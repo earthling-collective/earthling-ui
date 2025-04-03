@@ -5,7 +5,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import { type ComponentProps, forwardRef } from "react";
 
 const textAreaVariants = cva(
-  "focus-visible:ring-ring field-sizing-content resize-none rounded-md border border-[var(--scheme-tint)]/30 text-sm font-medium whitespace-nowrap ring-offset-background transition-colors hover:border-[var(--scheme-tint)]/50 hover:bg-[var(--scheme-tint)]/5 focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+  "focus-visible:ring-ring field-sizing-content resize-none rounded-md border border-(--scheme-tint)/30 text-sm font-medium whitespace-nowrap ring-offset-background transition-colors hover:border-(--scheme-tint)/50 hover:bg-(--scheme-tint)/5 focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       size: {
@@ -14,19 +14,16 @@ const textAreaVariants = cva(
         lg: "min-h-11 px-8 py-[calc((44px-1.5rem)/2)]",
       },
       scheme: {
-        primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
-        secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
-        muted: `[--scheme-tint:var(--color-muted);--scheme-foreground:var(--color-muted-foreground)]`,
-        good: `[--scheme-tint:var(--color-good);--scheme-foreground:var(--color-good-foreground)]`,
-        caution: `[--scheme-tint:var(--color-caution);--scheme-foreground:var(--color-caution-foreground)]`,
-        bad: `[--scheme-tint:var(--color-bad);--scheme-foreground:var(--color-bad-foreground)]`,
+        primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
+        secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
+        tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
+        muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
+        good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
+        caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
+        bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
       },
     },
-    defaultVariants: {
-      size: "md",
-      scheme: "primary",
-    },
+    defaultVariants: { size: "md", scheme: "primary" },
   }
 );
 
