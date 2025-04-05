@@ -58,6 +58,7 @@ for (const template of templates) {
     // Clean up by removing the created folder completely.
     try {
       rmSync(expectedPath, { recursive: true, force: true });
+
       // Ensure the folder is removed.
       if (existsSync(expectedPath)) {
         // Fallback to rmdirSync if the folder still exists. (windows)
