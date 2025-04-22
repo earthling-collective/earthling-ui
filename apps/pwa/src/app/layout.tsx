@@ -1,9 +1,9 @@
 import "@/styles/main.css";
-import "@/services/gtag";
 import type { Metadata } from "next";
 import { cookies } from "next/headers";
 import LocalFont from "next/font/local";
 import { Geist, Geist_Mono } from "next/font/google";
+import { GoogleAnalytics } from "@next/third-parties/google";
 
 const displayFont = LocalFont({
   src: "./font.otf",
@@ -33,7 +33,12 @@ export default async function ({
       data-theme={theme}
       className={`${displayFont.variable} ${bodyFont.variable} ${monoFont.variable}`}
     >
-      <body className="antialiased">{children}</body>
+      <body className="antialiased">
+        {children}
+        {process.env.NEXT_PUBLIC_GA_ID && (
+          <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GA_ID} />
+        )}
+      </body>
     </html>
   );
 }

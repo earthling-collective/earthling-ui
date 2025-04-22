@@ -4,5 +4,4 @@ export default async function () {
   return <WorkInProgress />;
 }
 
-// Preloaded theme reference
-// Theme editor
+// Template list
