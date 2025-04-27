@@ -24,7 +24,6 @@ export default async function ({
   children: React.ReactNode;
 }>) {
   const jar = await cookies();
-
   const theme = jar.get("theme")?.value ?? "system";
 
   return (

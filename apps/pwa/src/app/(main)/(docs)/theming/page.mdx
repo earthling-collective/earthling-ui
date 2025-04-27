@@ -1,1 +1,150 @@
-<WIP />
+# Theming
+
+Earthling UI provides a flexible theming system that allows you to customize the look and feel of your components. The theming system is built on CSS variables and utility classes, making it easy to create and switch between different themes.
+
+## Theme Structure
+
+Themes in Earthling UI are defined using CSS variables that control various aspects of the design:
+
+- **Colors**: Background, foreground, primary, secondary, tertiary, neutral, muted, and semantic colors (good, caution, bad)
+- **Radius**: Border radius for controls like buttons and inputs
+- **Typography**: Font families for display, body, and monospace text
+
+## Default Theme
+
+Earthling UI comes with a default light theme that's applied automatically. Here's a sample of the default theme variables:
+
+```css
+:root {
+  --radius-control: 999px;
+
+  --color-surface: oklch(0.99 0 0);
+  --color-outline: oklch(0 0 0);
+  --color-light: oklch(1 0 0 / 0.2);
+  --color-shadow: oklch(0.25 0 0);
+
+  --color-foreground: oklch(0.25 0 0);
+  --color-background: oklch(0.99 0 0);
+
+  --color-primary: oklch(17.42% 0.0017 17.32);
+  --color-primary-foreground: oklch(96.29% 0 0);
+
+  /* Additional color variables... */
+}
+```
+
+## Using Built-in Themes
+
+Earthling UI includes additional themes that you can import and use:
+
+```jsx
+// Import the default theme
+import "earthling-ui/src/index.css";
+// Import the dark theme
+import "earthling-ui/theme/dark";
+```
+
+To apply a theme, use the corresponding CSS class:
+
+```jsx
+<div className="theme-dark">
+  {/* Components in here will use the dark theme */}
+</div>
+```
+
+## Creating Custom Themes
+
+You can create your own themes by defining a set of CSS variables:
+
+```css
+@utility theme-custom {
+  --radius-control: 8px;
+
+  --color-background: oklch(98% 0.01 240);
+  --color-foreground: oklch(20% 0.02 240);
+
+  --color-primary: oklch(60% 0.2 200);
+  --color-primary-foreground: oklch(98% 0 0);
+
+  /* Define other color variables... */
+}
+```
+
+Then apply your custom theme using the class name:
+
+```jsx
+<div className="theme-custom">
+  {/* Components in here will use your custom theme */}
+</div>
+```
+
+## Theme Variables Reference
+
+Here's a complete list of theme variables you can customize:
+
+### Typography
+
+- `--font-display`: Font for headings and display text
+- `--font-body`: Font for body text
+- `--font-mono`: Font for monospace text (code)
+
+### Radius
+
+- `--radius-control`: Border radius for controls (buttons, inputs, etc.)
+
+### Utility Colors
+
+- `--color-surface`: Background color for surfaces (cards, dialogs)
+- `--color-outline`: Color for focus rings and outlines
+- `--color-light`: Color for highlight effects
+- `--color-shadow`: Color for shadows
+
+### Base Colors
+
+- `--color-background`: Default background color
+- `--color-foreground`: Default text color
+
+### Semantic Colors
+
+Each semantic color has three variants:
+
+- Base color (e.g., `--color-primary`)
+- Foreground color (e.g., `--color-primary-foreground`)
+- Accent color (e.g., `--color-primary-accent`)
+
+Available semantic colors:
+
+- `primary`: Main brand color
+- `secondary`: Secondary brand color
+- `tertiary`: Tertiary brand color
+- `neutral`: Neutral color for backgrounds
+- `muted`: Subdued color for less important elements
+- `good`: Success/positive color
+- `caution`: Warning color
+- `bad`: Error/negative color
+
+## Theme Switching
+
+You can implement theme switching by toggling CSS classes on a parent element:
+
+```jsx
+function ThemeSwitcher() {
+  const [theme, setTheme] = useState("default");
+
+  return (
+    <div className={theme === "dark" ? "theme-dark" : ""}>
+      <button onClick={() => setTheme(theme === "dark" ? "default" : "dark")}>
+        Toggle Theme
+      </button>
+      {/* Your app content */}
+    </div>
+  );
+}
+```
+
+## Best Practices
+
+1. **Use semantic color variables** instead of hardcoding colors to ensure consistency across themes
+2. **Test your components in all themes** to ensure they look good in different color schemes
+3. **Consider accessibility** when creating custom themes, ensuring sufficient contrast between text and background
+4. **Use the oklch color space** for smooth transitions and better color perception across different screens

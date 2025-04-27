@@ -1,0 +1,68 @@
+# Getting Started with Earthling UI
+
+Earthling UI is a modern, opinionated component library designed to help you build beautiful, accessible, and consistent user interfaces. It's built with a focus on developer experience and flexibility, allowing you to either import components directly or eject them into your project.
+
+## Installation
+
+Install Earthling UI in your project:
+
+```bash
+bun add earthling-ui
+```
+
+## Quick Start
+
+### Option 1: Create a new project
+
+The easiest way to get started is to create a new project using the Earthling UI CLI:
+
+```bash
+bunx earthling-ui create next my-app
+```
+
+This will create a new Next.js project with Earthling UI pre-configured. You can also use other templates like `spa` (Vite), `tauri` (desktop app), or `monorepo`.
+
+### Option 2: Add to an existing project
+
+1. Install the package as shown above
+2. Import the CSS in your main layout or entry file:
+
+```jsx
+import "earthling-ui/src/index.css";
+```
+
+3. Import components directly:
+
+```jsx
+import { Button } from "earthling-ui/button";
+
+export default function MyComponent() {
+  return <Button>Click me</Button>;
+}
+```
+
+## Using Themes
+
+Earthling UI comes with a default theme, but you can also import additional themes:
+
+```jsx
+// Import the default theme
+import "earthling-ui/src/index.css";
+// Import a specific theme
+import "earthling-ui/theme/dark";
+```
+
+You can apply themes using CSS classes:
+
+```jsx
+<div className="theme-dark">
+  {/* Components in here will use the dark theme */}
+</div>
+```
+
+## What's Next?
+
+- Explore the [CLI documentation](/cli) to learn about project creation and component management
+- Check out the [theming guide](/theming) to customize the look and feel of your components
+- Browse the available [templates](/templates) for different project types
+- View the [component documentation](/components) to see all available components

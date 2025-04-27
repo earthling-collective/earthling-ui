@@ -2,6 +2,8 @@
 @import "earthling-ui";
 @import "earthling-ui/theme/dark";
 
+@plugin "@tailwindcss/typography";
+
 @layer base {
   :root[data-theme="dark"] {
     @apply theme-dark;

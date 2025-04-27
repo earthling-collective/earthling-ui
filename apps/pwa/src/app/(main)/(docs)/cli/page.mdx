@@ -1,0 +1,139 @@
+# CLI
+
+Earthling UI provides a command-line interface (CLI) to help you create new projects, eject components, and manage your UI development workflow. The CLI is built to be simple and intuitive, making it easy to get started with Earthling UI.
+
+## Installation
+
+The CLI is included when you install the Earthling UI package:
+
+```bash
+bun add earthling-ui
+```
+
+You can also run it directly using `bunx`:
+
+```bash
+bunx earthling-ui <command>
+```
+
+## Commands
+
+### create
+
+Create a new project with Earthling UI pre-configured.
+
+```bash
+bunx earthling-ui create [template] [destination]
+```
+
+**Arguments:**
+
+- `template`: The template to use (optional, defaults to `monorepo`)
+- `destination`: The name of the project (and directory) to create
+
+**Examples:**
+
+```bash
+# Create a Next.js project
+bunx earthling-ui create next my-app
+
+# Create a Vite SPA project
+bunx earthling-ui create spa my-spa
+
+# Create a monorepo
+bunx earthling-ui create monorepo my-workspace
+```
+
+#### Available Templates
+
+| Template   | Type    | Description                   | Aliases               |
+| ---------- | ------- | ----------------------------- | --------------------- |
+| `next`     | app     | Next.js application           | `ssr`, `nextjs`       |
+| `vite`     | app     | Vite single-page application  | `spa`                 |
+| `tauri`    | app     | Tauri desktop application     | `app`, `desktop`      |
+| `kiosk`    | app     | Electron kiosk application    | `electron`            |
+| `db`       | package | Database package with Drizzle | `database`, `drizzle` |
+| `lib`      | package | Library package               | `library`             |
+| `cli`      | package | CLI package                   |                       |
+| `monorepo` | repo    | Monorepo workspace            | `repo`                |
+
+#### Monorepo Integration
+
+The CLI automatically detects if you're in a monorepo and places new projects in the appropriate directory:
+
+- `app` templates go into the `apps/` directory
+- `package` templates go into the `packages/` directory
+- `repo` templates create a new root directory
+
+### eject
+
+Eject a component from Earthling UI into your project. This allows you to customize the component to your specific needs.
+
+```bash
+bunx earthling-ui eject <component>
+```
+
+**Arguments:**
+
+- `component`: The name of the component to eject
+
+**Example:**
+
+```bash
+bunx earthling-ui eject button
+```
+
+> Note: The eject command is currently under development and will be available in a future release.
+
+### copy
+
+Copy a component snippet to your clipboard.
+
+```bash
+bunx earthling-ui copy <snippet>
+```
+
+**Arguments:**
+
+- `snippet`: The name of the snippet to copy
+
+**Example:**
+
+```bash
+bunx earthling-ui copy button
+```
+
+## Project Structure
+
+When you create a new project using the CLI, it will have the following structure (depending on the template):
+
+### Next.js Template
+
+```
+my-app/
+├── public/
+├── src/
+│   ├── app/
+│   │   └── page.tsx
+│   ├── components/
+│   └── styles/
+├── package.json
+└── tsconfig.json
+```
+
+### Monorepo Template
+
+```
+my-workspace/
+├── apps/
+├── packages/
+├── package.json
+└── tsconfig.json
+```
+
+## Best Practices
+
+1. **Use the create command** for new projects to ensure proper setup with Earthling UI
+2. **Choose the right template** based on your project needs (Next.js for SSR, Vite for SPAs, etc.)
+3. **Consider using a monorepo** for larger projects with multiple apps or packages
+4. **Eject components only when necessary** - importing directly is preferred for most use cases

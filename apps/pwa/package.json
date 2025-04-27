@@ -18,6 +18,7 @@
     "@mdx-js/react": "^3.1.0",
     "@next/mdx": "^15.3.1",
     "@tailwindcss/postcss": "^4.1.1",
+    "@tailwindcss/typography": "^0.5.16",
     "@types/mdx": "^2.0.13",
     "earthling-ui": "workspace:*",
     "ga-gtag": "^1.2.0",
@@ -27,6 +28,7 @@
     "raw-loader": "^4.0.2",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
+    "remark-gfm": "^4.0.1",
     "tailwindcss": "^4.1.1"
   },
   "devDependencies": {
