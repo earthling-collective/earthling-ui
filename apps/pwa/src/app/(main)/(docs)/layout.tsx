@@ -13,7 +13,7 @@ export default async function ({ children }: { children: ReactNode }) {
           <article
             className={cn(
               "prose prose-neutral max-w-none",
-              theme === "system" && "dark:prose-invert",
+              (!theme || theme === "system") && "dark:prose-invert",
               theme === "dark" && "prose-invert",
             )}
           >
