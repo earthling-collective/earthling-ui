@@ -7,5 +7,22 @@ export function useMDXComponents(components: MDXComponents): MDXComponents {
     ...components,
 
     WIP: WorkInProgress,
+
+    code: (props) => {
+      const lanugageClassName = /language-(\w+)/.exec(
+        props.className || "",
+      )?.[1];
+
+      switch (lanugageClassName) {
+        case "css":
+          return <Code {...props} language="css" />;
+        case "jsx":
+          return <Code {...props} language="typescript" />;
+        case "bash":
+          return <Code {...props} language="bash" />;
+        default:
+          return <>{props.children}</>;
+      }
+    },
   };
 }

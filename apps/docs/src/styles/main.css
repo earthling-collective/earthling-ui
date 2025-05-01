@@ -13,4 +13,8 @@
       @apply theme-dark;
     }
   }
+
+  .prose pre {
+    position: relative;
+  }
 }

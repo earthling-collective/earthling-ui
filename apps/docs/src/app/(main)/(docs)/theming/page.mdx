@@ -39,9 +39,9 @@ Earthling UI includes additional themes that you can import and use:
 
 ```jsx
 // Import the default theme
-import "earthling-ui/src/index.css";
+@import "earthling-ui";
 // Import the dark theme
-import "earthling-ui/theme/dark";
+@import "earthling-ui/theme/dark";
 ```
 
 To apply a theme, use the corresponding CSS class:
@@ -122,25 +122,6 @@ Available semantic colors:
 - `good`: Success/positive color
 - `caution`: Warning color
 - `bad`: Error/negative color
-
-## Theme Switching
-
-You can implement theme switching by toggling CSS classes on a parent element:
-
-```jsx
-function ThemeSwitcher() {
-  const [theme, setTheme] = useState("default");
-
-  return (
-    <div className={theme === "dark" ? "theme-dark" : ""}>
-      <button onClick={() => setTheme(theme === "dark" ? "default" : "dark")}>
-        Toggle Theme
-      </button>
-      {/* Your app content */}
-    </div>
-  );
-}
-```
 
 ## Best Practices
 

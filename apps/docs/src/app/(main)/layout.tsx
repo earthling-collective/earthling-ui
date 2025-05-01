@@ -13,7 +13,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-1 flex-col">
-      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between border-b px-4 py-3 backdrop-blur-lg">
+      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between px-4 py-3 backdrop-blur-lg">
         <Link
           href="/"
           className="flex flex-row items-center gap-2 hover:opacity-80"

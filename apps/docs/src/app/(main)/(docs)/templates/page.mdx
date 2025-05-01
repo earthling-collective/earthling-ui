@@ -8,174 +8,28 @@ Earthling UI provides a variety of project templates to help you get started qui
 
 Application templates are designed for building user-facing applications.
 
-#### Next.js (`next`)
-
-A template for building server-rendered React applications with Next.js.
-
-```bash
-bunx earthling-ui create next my-app
-```
-
-**Features:**
-
-- Server-side rendering
-- File-based routing
-- API routes
-- Pre-configured with Earthling UI components
-- Tailwind CSS integration
-- TypeScript support
-
-**Aliases:** `ssr`, `nextjs`
-
-#### Vite SPA (`vite`)
-
-A template for building single-page applications with Vite and React.
-
-```bash
-bunx earthling-ui create vite my-spa
-```
-
-**Features:**
-
-- Fast development server
-- Optimized production build
-- Pre-configured with Earthling UI components
-- Tailwind CSS integration
-- TypeScript support
-
-**Aliases:** `spa`
-
-#### Tauri Desktop (`tauri`)
-
-A template for building desktop applications with Tauri and React.
-
-```bash
-bunx earthling-ui create tauri my-desktop-app
-```
-
-**Features:**
-
-- Cross-platform desktop application
-- Small binary size
-- Native system integration
-- Pre-configured with Earthling UI components
-- Tailwind CSS integration
-- TypeScript support
-
-**Aliases:** `app`, `desktop`
-
-#### Electron Kiosk (`kiosk`)
-
-A template for building kiosk applications with Electron and React.
-
-```bash
-bunx earthling-ui create kiosk my-kiosk-app
-```
-
-**Features:**
-
-- Fullscreen kiosk mode
-- Electron runtime
-- Pre-configured with Earthling UI components
-- Tailwind CSS integration
-- TypeScript support
-
-**Aliases:** `electron`
+| Template Name            | Command                                         | Features                                                                                                                                                                    | Aliases          |
+| ------------------------ | ----------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- |
+| Next.js (`next`)         | `bunx earthling-ui create next my-app`          | Server-side rendering, File-based routing, API routes, Pre-configured with Earthling UI components, Tailwind CSS integration, TypeScript support                            | `ssr`, `nextjs`  |
+| Vite SPA (`vite`)        | `bunx earthling-ui create vite my-spa`          | Fast development server, Optimized production build, Pre-configured with Earthling UI components, Tailwind CSS integration, TypeScript support                              | `spa`            |
+| Tauri Desktop (`tauri`)  | `bunx earthling-ui create tauri my-desktop-app` | Cross-platform desktop application, Small binary size, Native system integration, Pre-configured with Earthling UI components, Tailwind CSS integration, TypeScript support | `app`, `desktop` |
+| Electron Kiosk (`kiosk`) | `bunx earthling-ui create kiosk my-kiosk-app`   | Fullscreen kiosk mode, Electron runtime, Pre-configured with Earthling UI components, Tailwind CSS integration, TypeScript support                                          | `electron`       |
 
 ### Package Templates
 
 Package templates are designed for building libraries and utilities.
 
-#### Database Package (`db`)
-
-A template for building database packages with Drizzle ORM.
-
-```bash
-bunx earthling-ui create db my-db-package
-```
-
-**Features:**
-
-- Drizzle ORM integration
-- Database migrations
-- TypeScript support
-- Ready for publishing
-
-**Aliases:** `database`, `drizzle`
-
-#### Library Package (`lib`)
-
-A template for building general-purpose libraries.
-
-```bash
-bunx earthling-ui create lib my-library
-```
-
-**Features:**
-
-- TypeScript support
-- Testing setup
-- Documentation scaffolding
-- Ready for publishing
-
-**Aliases:** `library`
-
-#### CLI Package (`cli`)
-
-A template for building command-line interfaces.
-
-```bash
-bunx earthling-ui create cli my-cli
-```
-
-**Features:**
-
-- Command parsing
-- Interactive prompts
-- TypeScript support
-- Ready for publishing
+| Template Name           | Command                                     | Features                                                                               | Aliases               |
+| ----------------------- | ------------------------------------------- | -------------------------------------------------------------------------------------- | --------------------- |
+| Database Package (`db`) | `bunx earthling-ui create db my-db-package` | Drizzle ORM integration, Database migrations, TypeScript support, Ready for publishing | `database`, `drizzle` |
+| Library Package (`lib`) | `bunx earthling-ui create lib my-library`   | TypeScript support, Testing setup, Documentation scaffolding, Ready for publishing     | `library`             |
+| CLI Package (`cli`)     | `bunx earthling-ui create cli my-cli`       | Command parsing, Interactive prompts, TypeScript support, Ready for publishing         |                       |
 
 ### Repository Templates
 
-#### Monorepo (`monorepo`)
-
-A template for setting up a monorepo workspace with Bun.
-
-```bash
-bunx earthling-ui create monorepo my-workspace
-```
-
-**Features:**
-
-- Workspace configuration
-- Shared dependencies
-- Organized project structure
-- TypeScript support
-
-**Aliases:** `repo`
-
-## Template Structure
-
-Each template follows a consistent structure:
-
-```
-template/
-├── package.json       # Project dependencies and scripts
-├── tsconfig.json      # TypeScript configuration
-├── src/               # Source code
-│   └── ...
-├── public/            # Static assets (for app templates)
-└── ...                # Template-specific files
-```
-
-## Customizing Templates
-
-After creating a project from a template, you can customize it to fit your needs:
-
-1. **Update the package.json** with your project details
-2. **Modify the theme** by editing the CSS variables
-3. **Add or remove dependencies** as needed
-4. **Customize the components** by importing and extending them
+| Template Name         | Command                                          | Features                                                                                      | Aliases |
+| --------------------- | ------------------------------------------------ | --------------------------------------------------------------------------------------------- | ------- |
+| Monorepo (`monorepo`) | `bunx earthling-ui create monorepo my-workspace` | Workspace configuration, Shared dependencies, Organized project structure, TypeScript support | `repo`  |
 
 ## Best Practices
 

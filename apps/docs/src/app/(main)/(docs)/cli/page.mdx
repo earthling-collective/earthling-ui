@@ -44,27 +44,6 @@ bunx earthling-ui create spa my-spa
 bunx earthling-ui create monorepo my-workspace
 ```
 
-#### Available Templates
-
-| Template   | Type    | Description                   | Aliases               |
-| ---------- | ------- | ----------------------------- | --------------------- |
-| `next`     | app     | Next.js application           | `ssr`, `nextjs`       |
-| `vite`     | app     | Vite single-page application  | `spa`                 |
-| `tauri`    | app     | Tauri desktop application     | `app`, `desktop`      |
-| `kiosk`    | app     | Electron kiosk application    | `electron`            |
-| `db`       | package | Database package with Drizzle | `database`, `drizzle` |
-| `lib`      | package | Library package               | `library`             |
-| `cli`      | package | CLI package                   |                       |
-| `monorepo` | repo    | Monorepo workspace            | `repo`                |
-
-#### Monorepo Integration
-
-The CLI automatically detects if you're in a monorepo and places new projects in the appropriate directory:
-
-- `app` templates go into the `apps/` directory
-- `package` templates go into the `packages/` directory
-- `repo` templates create a new root directory
-
 ### eject
 
 Eject a component from Earthling UI into your project. This allows you to customize the component to your specific needs.
@@ -101,34 +80,6 @@ bunx earthling-ui copy <snippet>
 
 ```bash
 bunx earthling-ui copy button
-```
-
-## Project Structure
-
-When you create a new project using the CLI, it will have the following structure (depending on the template):
-
-### Next.js Template
-
-```
-my-app/
-├── public/
-├── src/
-│   ├── app/
-│   │   └── page.tsx
-│   ├── components/
-│   └── styles/
-├── package.json
-└── tsconfig.json
-```
-
-### Monorepo Template
-
-```
-my-workspace/
-├── apps/
-├── packages/
-├── package.json
-└── tsconfig.json
 ```
 
 ## Best Practices

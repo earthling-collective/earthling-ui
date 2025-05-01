@@ -25,10 +25,10 @@ This will create a new Next.js project with Earthling UI pre-configured. You can
 ### Option 2: Add to an existing project
 
 1. Install the package as shown above
-2. Import the CSS in your main layout or entry file:
+2. Import the CSS in your main CSS file:
 
-```jsx
-import "earthling-ui/src/index.css";
+```css
+@import "earthling-ui";
 ```
 
 3. Import components directly:
@@ -45,11 +45,8 @@ export default function MyComponent() {
 
 Earthling UI comes with a default theme, but you can also import additional themes:
 
-```jsx
-// Import the default theme
-import "earthling-ui/src/index.css";
-// Import a specific theme
-import "earthling-ui/theme/dark";
+```css
+@import "earthling-ui/theme/dark";
 ```
 
 You can apply themes using CSS classes:
