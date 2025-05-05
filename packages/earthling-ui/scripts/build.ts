@@ -8,6 +8,7 @@ import dts from "bun-plugin-dts";
         "breadcrumbs",
         "button",
         "chip",
+        "dialog",
         "drawer",
         "input",
         "popover",

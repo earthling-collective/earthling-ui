@@ -7,6 +7,7 @@ import {
   type ComponentProps,
   type ComponentPropsWithoutRef,
   type ComponentRef,
+  type ForwardRefExoticComponent,
 } from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "@/utils/cn";
@@ -31,15 +32,22 @@ const Drawer = ({ position, children, ...props }: DrawerProps) => (
 );
 Drawer.displayName = "Drawer";
 
-const DrawerTrigger = DrawerPrimitive.Trigger;
+type DrawerTriggerPrimitive = typeof DrawerPrimitive.Trigger;
+export type DrawerTriggerProps = ComponentProps<DrawerTriggerPrimitive>;
+const DrawerTrigger = DrawerPrimitive.Trigger as React.FC<DrawerTriggerProps>;
 
-const DrawerPortal = DrawerPrimitive.Portal;
+export type DrawerPortalProps = ComponentProps<typeof DrawerPrimitive.Portal>;
+const DrawerPortal = DrawerPrimitive.Portal as React.FC<DrawerPortalProps>;
 
-const DrawerClose = DrawerPrimitive.Close;
+export type DrawerCloseProps = ComponentProps<typeof DrawerPrimitive.Close>;
+const DrawerClose = DrawerPrimitive.Close as React.FC<DrawerCloseProps>;
 
-const DrawerOverlay = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Overlay>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
+type DrawerOverlayPrimitive = typeof DrawerPrimitive.Overlay;
+export type DrawerOverlayProps =
+  ComponentPropsWithoutRef<DrawerOverlayPrimitive>;
+const DrawerOverlay: ForwardRefExoticComponent<DrawerOverlayProps> = forwardRef<
+  ComponentRef<DrawerOverlayPrimitive>,
+  DrawerOverlayProps
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
@@ -130,9 +138,11 @@ const DrawerFooter = ({ className, ...props }: ComponentProps<"div">) => (
 );
 DrawerFooter.displayName = "DrawerFooter";
 
-const DrawerTitle = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Title>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
+type DrawerTitlePrimitive = typeof DrawerPrimitive.Title;
+export type DrawerTitleProps = ComponentPropsWithoutRef<DrawerTitlePrimitive>;
+const DrawerTitle: ForwardRefExoticComponent<DrawerTitleProps> = forwardRef<
+  ComponentRef<DrawerTitlePrimitive>,
+  DrawerTitleProps
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Title
     ref={ref}
@@ -145,16 +155,19 @@ const DrawerTitle = forwardRef<
 ));
 DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
 
-const DrawerDescription = forwardRef<
-  ComponentRef<typeof DrawerPrimitive.Description>,
-  ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
->(({ className, ...props }, ref) => (
-  <DrawerPrimitive.Description
-    ref={ref}
-    className={cn("text-sm text-muted-foreground", className)}
-    {...props}
-  />
-));
+type DrawerDescriptionPrimitive = typeof DrawerPrimitive.Description;
+export type DrawerDescriptionProps =
+  ComponentPropsWithoutRef<DrawerDescriptionPrimitive>;
+const DrawerDescription: ForwardRefExoticComponent<DrawerDescriptionProps> =
+  forwardRef<ComponentRef<DrawerDescriptionPrimitive>, DrawerDescriptionProps>(
+    ({ className, ...props }, ref) => (
+      <DrawerPrimitive.Description
+        ref={ref}
+        className={cn("text-sm text-muted-foreground", className)}
+        {...props}
+      />
+    )
+  );
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
 export {

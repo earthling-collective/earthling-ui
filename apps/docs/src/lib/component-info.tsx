@@ -154,6 +154,27 @@ export const componentInformation: ComponentInfo[] = [
     ],
   },
   {
+    path: "dialog",
+    name: "Dialog",
+    description: "A dialog component",
+    dependencies: [
+      "react",
+      "class-variance-authority",
+      "@/utils/cn",
+      "@radix-ui/react-dialog",
+    ],
+    exports: ["Dialog", "DialogTrigger", "DialogContent"],
+    props: [
+      {
+        prop: "modal",
+        label: "Modal",
+        type: "boolean",
+        defaultValue: true,
+        description: "Whether the drawer is modal",
+      },
+    ],
+  },
+  {
     path: "drawer",
     name: "Drawer",
     description: "A drawer component",
