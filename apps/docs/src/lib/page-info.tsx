@@ -26,11 +26,11 @@ export const pageInformation = [
     icon: "icon-[lucide--package]",
     description: "View the list of available templates.",
   },
-  {
-    href: "/changelog",
-    label: "Latest updates",
-    icon: "icon-[lucide--git-pull-request-arrow]",
-    description:
-      "Learn about the latest changes and improvements to Earthling UI.",
-  },
+  // {
+  //   href: "/changelog",
+  //   label: "Latest updates",
+  //   icon: "icon-[lucide--git-pull-request-arrow]",
+  //   description:
+  //     "Learn about the latest changes and improvements to Earthling UI.",
+  // },
 ];
