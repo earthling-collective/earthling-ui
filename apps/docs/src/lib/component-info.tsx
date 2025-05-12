@@ -308,6 +308,19 @@ export const componentInformation: ComponentInfo[] = [
     props: [],
   },
   {
+    path: "slider",
+    name: "Slider",
+    description: "A slider component",
+    dependencies: [
+      "react",
+      "class-variance-authority",
+      "@radix-ui/react-slider",
+      "@/utils/cn",
+    ],
+    exports: ["Slider"],
+    props: [],
+  },
+  {
     path: "surface",
     name: "Surface",
     description: "A surface component",

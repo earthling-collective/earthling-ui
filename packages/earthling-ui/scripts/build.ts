@@ -14,6 +14,7 @@ import dts from "bun-plugin-dts";
         "popover",
         "select",
         "separator",
+        "slider",
         "surface",
         "switch",
         "tabs",
