@@ -3,12 +3,48 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@/utils/cn";
 import {
+  createContext,
   forwardRef,
+  useCallback,
+  useContext,
+  useMemo,
+  useState,
   type ComponentPropsWithoutRef,
   type ComponentRef,
 } from "react";
 
-const Dialog = DialogPrimitive.Root;
+const DialogContext = createContext<{}>({
+  isOpen: false,
+  setOpen: (open: boolean) => {},
+});
+
+const useDialog = () => useContext(DialogContext);
+
+const Dialog = function ({
+  open: openProp,
+  onOpenChange: onOpenChangeProp,
+  ...rest
+}: ComponentPropsWithoutRef<typeof DialogPrimitive.Root>) {
+  const [isOpenState, setIsOpenState] = useState(openProp || false);
+
+  const isOpen = useMemo(() => {
+    return openProp !== undefined ? openProp : isOpenState;
+  }, [openProp, isOpenState]);
+
+  const setOpen = useCallback(
+    (open: boolean) => {
+      onOpenChangeProp?.(open);
+      setIsOpenState(open);
+    },
+    [onOpenChangeProp]
+  );
+
+  return (
+    <DialogContext.Provider value={{ isOpen, setOpen }}>
+      <DialogPrimitive.Root {...rest} open={isOpen} onOpenChange={setOpen} />
+    </DialogContext.Provider>
+  );
+};
 
 const DialogTrigger = DialogPrimitive.Trigger;
 
@@ -121,4 +157,5 @@ export {
   DialogFooter,
   DialogTitle,
   DialogDescription,
+  useDialog,
 };
