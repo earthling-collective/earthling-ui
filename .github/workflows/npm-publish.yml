@@ -27,12 +27,9 @@ jobs:
         run: bun install
 
       - name: Build package
-        run: |
-          cd packages/earthling-ui
-          bun run build
+        run: bun run --cwd packages/earthling-ui build
 
       - name: Publish to npm
-        run: |
-          npm publish
+        run: npm publish -w earthling-ui
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
