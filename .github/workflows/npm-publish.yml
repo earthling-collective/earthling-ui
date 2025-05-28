@@ -24,13 +24,15 @@ jobs:
           echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
-        run: bun install
+        run: bun install --filter earthling-ui
 
       - name: Build package
-        run: bun run build --filter=earthling-ui
+        run: |
+          cd packages/earthling-ui
+          bun run build
 
       - name: Publish to npm
         run: |
-          npm publish packages/earthling-ui
+          npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
