@@ -248,9 +248,7 @@ export async function createAction(template: string, destination: string) {
   s.message(`Managing git repo`);
 
   //remove git dir
-  if (!!parent) {
-    await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
-  }
+  await fsp.rm(absDestination + "/.git", { recursive: true, force: true });
 
   //reinitialize git if a repo project type
   if (cfg.type === "repo") {
