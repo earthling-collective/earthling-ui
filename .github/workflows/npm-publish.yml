@@ -1,9 +1,10 @@
 name: Publish to npm
 
 on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
+  workflow_dispatch:
 
 jobs:
   publish:
@@ -20,7 +21,7 @@ jobs:
 
       - name: Install bun
         run: |
-          curl -fsSL https://bun.sh/install | bash -s "bun-v1.1.18"
+          curl -fsSL https://bun.sh/install | bash
           echo "$HOME/.bun/bin" >> $GITHUB_PATH
 
       - name: Install dependencies
