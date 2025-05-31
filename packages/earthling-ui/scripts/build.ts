@@ -1,4 +1,14 @@
+import { Glob } from "bun";
 import dts from "bun-plugin-dts";
+
+const external = [
+  "react",
+  "react-dom",
+  "react/jsx-runtime",
+  "react/jsx-dev-runtime",
+  "react-dom/client",
+  "react-dom/server",
+];
 
 (async () => {
   await Bun.build({
@@ -27,7 +37,7 @@ import dts from "bun-plugin-dts";
     minify: true,
     splitting: true,
     banner: '"use client";',
-    external: ["react"],
+    external,
     plugins: [dts()],
   });
 
@@ -37,7 +47,7 @@ import dts from "bun-plugin-dts";
     root: "src/utils",
     minify: true,
     splitting: true,
-    external: ["react"],
+    external,
     plugins: [dts()],
   });
 })();
