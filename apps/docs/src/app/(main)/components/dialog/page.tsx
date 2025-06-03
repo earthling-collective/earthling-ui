@@ -4,7 +4,7 @@ export default async function () {
   return (
     <ComponentSublayout
       path="dialog"
-      anatomy="<Dialog><DialogTrigger /><DialogContent><DialogHeader><DialogTitle /><DialogDescription /></DialogHeader><DialogFooter /></DialogContent></Dialog>"
+      anatomy="<Dialog><DialogTrigger /><DialogContent><DialogHeader><DialogExitButton /><DialogTitle /><DialogDescription /></DialogHeader><DialogFooter /></DialogContent></Dialog>"
     />
   );
 }

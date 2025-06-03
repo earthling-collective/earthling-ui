@@ -8,6 +8,8 @@ import {
   DialogDescription,
   DialogFooter,
   DialogClose,
+  DialogExitButton,
+  DialogForm,
 } from "earthling-ui/dialog";
 
 export default function (props: Record<string, any>) {
@@ -16,18 +18,25 @@ export default function (props: Record<string, any>) {
       <DialogTrigger asChild>
         <Button>Open Dialog</Button>
       </DialogTrigger>
-      <DialogContent>
-        <DialogHeader>
-          <DialogTitle>Dialog Title</DialogTitle>
-          <DialogDescription>Dialog Description</DialogDescription>
-        </DialogHeader>
-        Dialog Content
-        <DialogFooter>
-          <DialogClose asChild>
-            <Button scheme="secondary">Cancel</Button>
-          </DialogClose>
-          <Button>Save</Button>
-        </DialogFooter>
+      <DialogContent asChild>
+        <DialogForm
+          action={async () => {
+            console.log("Submitted");
+          }}
+        >
+          <DialogExitButton />
+          <DialogHeader>
+            <DialogTitle>Dialog Title</DialogTitle>
+            <DialogDescription>Dialog Description</DialogDescription>
+          </DialogHeader>
+          Dialog Content
+          <DialogFooter>
+            <DialogClose asChild>
+              <Button scheme="secondary">Cancel</Button>
+            </DialogClose>
+            <Button type="submit">Save</Button>
+          </DialogFooter>
+        </DialogForm>
       </DialogContent>
     </Dialog>
   );

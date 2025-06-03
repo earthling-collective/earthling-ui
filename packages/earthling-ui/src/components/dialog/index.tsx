@@ -3,12 +3,56 @@
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { cn } from "@/utils/cn";
 import {
+  createContext,
   forwardRef,
+  useContext,
+  useState,
+  type ComponentProps,
   type ComponentPropsWithoutRef,
   type ComponentRef,
 } from "react";
+import { on } from "events";
+import { Slot } from "@radix-ui/react-slot";
 
-const Dialog = DialogPrimitive.Root;
+type DialogContextValue = {
+  isOpen: boolean;
+  close: () => void;
+};
+const DialogContext = createContext<DialogContextValue>({
+  isOpen: false,
+  close: () => {},
+});
+const useDialog = () => useContext(DialogContext);
+
+const Dialog = ({
+  open: openProp,
+  defaultOpen,
+  onOpenChange,
+  ...rest
+}: ComponentProps<typeof DialogPrimitive.Root>) => {
+  const [openState, setOpenState] = useState(defaultOpen || false);
+  const isOpen = openProp === undefined ? openState : openProp;
+  return (
+    <DialogContext.Provider
+      value={{
+        isOpen,
+        close: () => {
+          setOpenState(false);
+          onOpenChange?.(false);
+        },
+      }}
+    >
+      <DialogPrimitive.Root
+        {...rest}
+        open={isOpen}
+        onOpenChange={(isOpen) => {
+          setOpenState(isOpen);
+          onOpenChange?.(isOpen);
+        }}
+      />
+    </DialogContext.Provider>
+  );
+};
 
 const DialogTrigger = DialogPrimitive.Trigger;
 
@@ -46,14 +90,28 @@ const DialogContent = forwardRef<
       {...props}
     >
       {children}
-      <DialogPrimitive.Close className="absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground">
-        <i className="icon-[lucide--x]" />
-        <span className="sr-only">Close</span>
-      </DialogPrimitive.Close>
     </DialogPrimitive.Content>
   </DialogPortal>
 ));
 DialogContent.displayName = DialogPrimitive.Content.displayName;
+
+const DialogExitButton = forwardRef<
+  ComponentRef<typeof DialogPrimitive.Close>,
+  ComponentPropsWithoutRef<typeof DialogPrimitive.Close>
+>(({ className, ...props }, ref) => (
+  <DialogPrimitive.Close
+    ref={ref}
+    className={cn(
+      "absolute right-4 top-4 rounded-sm opacity-70 ring-offset-background transition-opacity hover:opacity-100 focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 disabled:pointer-events-none data-[state=open]:bg-accent data-[state=open]:text-muted-foreground cursor-pointer",
+      className
+    )}
+    {...props}
+  >
+    <i className="icon-[lucide--x] block" />
+    <span className="sr-only">Close</span>
+  </DialogPrimitive.Close>
+));
+DialogExitButton.displayName = "DialogExitButton";
 
 const DialogHeader = ({
   className,
@@ -110,15 +168,41 @@ const DialogDescription = forwardRef<
 ));
 DialogDescription.displayName = DialogPrimitive.Description.displayName;
 
+const DialogForm = forwardRef<
+  ComponentRef<"form">,
+  ComponentProps<"form"> & { asChild?: boolean }
+>(({ action, asChild, ...props }, ref) => {
+  const dialog = useDialog();
+  const Comp = asChild ? Slot : "form";
+  return (
+    <Comp
+      ref={ref}
+      {...props}
+      action={
+        typeof action === "function"
+          ? async (formData) => {
+              await action(formData);
+              dialog.close();
+            }
+          : action
+      }
+    />
+  );
+});
+DialogForm.displayName = "DialogForm";
+
 export {
   Dialog,
-  DialogPortal,
-  DialogOverlay,
   DialogClose,
-  DialogTrigger,
   DialogContent,
-  DialogHeader,
-  DialogFooter,
-  DialogTitle,
   DialogDescription,
+  DialogExitButton,
+  DialogFooter,
+  DialogForm,
+  DialogHeader,
+  DialogOverlay,
+  DialogPortal,
+  DialogTitle,
+  DialogTrigger,
+  useDialog,
 };
