@@ -11,7 +11,6 @@ import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
 } from "react";
-import { on } from "events";
 import { Slot } from "@radix-ui/react-slot";
 
 type DialogContextValue = {
@@ -25,13 +24,13 @@ const DialogContext = createContext<DialogContextValue>({
 const useDialog = () => useContext(DialogContext);
 
 const Dialog = ({
-  open: openProp,
+  open,
   defaultOpen,
   onOpenChange,
   ...rest
 }: ComponentProps<typeof DialogPrimitive.Root>) => {
   const [openState, setOpenState] = useState(defaultOpen || false);
-  const isOpen = openProp === undefined ? openState : openProp;
+  const isOpen = open === undefined ? openState : open;
   return (
     <DialogContext.Provider
       value={{
@@ -44,6 +43,7 @@ const Dialog = ({
     >
       <DialogPrimitive.Root
         {...rest}
+        defaultOpen={defaultOpen}
         open={isOpen}
         onOpenChange={(isOpen) => {
           setOpenState(isOpen);
