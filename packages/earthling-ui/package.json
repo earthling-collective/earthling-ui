@@ -1,6 +1,6 @@
 {
   "name": "earthling-ui",
-  "version": "1.1.0-alpha.32",
+  "version": "1.1.0-alpha.33",
   "homepage": "https://ui.earthling.dev",
   "bugs": "https://github.com/earthling-dev/earthling-ui/issues",
   "repository": {
@@ -48,6 +48,8 @@
     "@clack/prompts": "^0.11.0",
     "@iconify/tailwind4": "^1.0.6",
     "@next/third-parties": "^15.3.3",
+    "@radix-ui/react-dropdown-menu": "^2.1.15",
+    "@radix-ui/react-scroll-area": "^1.2.9",
     "bun": "^1.2.15",
     "commander": "^14.0.0",
     "copy-paste": "^2.1.1",

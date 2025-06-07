@@ -1,4 +1,3 @@
-import { Glob } from "bun";
 import dts from "bun-plugin-dts";
 
 const external = [
@@ -22,6 +21,7 @@ const external = [
         "drawer",
         "input",
         "popover",
+        "scroll-area",
         "select",
         "separator",
         "slider",
