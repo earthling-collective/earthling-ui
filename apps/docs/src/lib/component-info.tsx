@@ -838,4 +838,26 @@ export const componentInformation: ComponentInfo[] = [
     exports: ["ScrollArea", "ScrollBar"],
     props: [],
   },
+  {
+    path: "color-picker",
+    name: "ColorPicker",
+    description: "A color picker with area, sliders, and swatches",
+    dependencies: [
+      "react",
+      "class-variance-authority",
+      "react-aria-components",
+      "@/utils/cn",
+    ],
+    exports: [
+      "ColorPicker",
+      "ColorSwatch",
+      "ColorArea",
+      "ColorSlider",
+      "ColorField",
+      "ColorSwatchPicker",
+      "ColorSwatchPickerItem",
+      "parseColor",
+    ],
+    props: [],
+  },
 ];

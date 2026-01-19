@@ -24,6 +24,7 @@ const external = [
         "checkbox",
         "chip",
         "collapsible",
+        "color-picker",
         "context-menu",
         "dialog",
         "drawer",
