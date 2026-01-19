@@ -57,7 +57,7 @@ export default async function () {
           </div>
         </div>
       </main>
-      <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex"></aside>
+      <aside className="hidden w-70 flex-col border-l border-transparent xl:flex"></aside>
     </>
   );
 }

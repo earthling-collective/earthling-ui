@@ -13,7 +13,7 @@ export default async function ({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="flex min-h-screen flex-1 flex-col">
-      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between px-4 py-3 backdrop-blur-lg">
+      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between border-b px-4 py-3 backdrop-blur-lg">
         <Link
           href="/"
           className="flex flex-row items-center gap-2 hover:opacity-80"
@@ -95,15 +95,15 @@ export default async function ({ children }: { children: React.ReactNode }) {
               </Button>
             </DrawerTrigger>
             <DrawerContent>
-              <div className="flex w-[280px] flex-col gap-2 p-4">
+              <div className="flex w-70 flex-col gap-2 p-4">
                 <MobileNav />
               </div>
             </DrawerContent>
           </Drawer>
         </div>
       </header>
-      <div className="grid grid-cols-[auto_1fr_auto]">
-        <aside className="hidden w-[280px] flex-col justify-end border-r border-[transparent] xl:flex">
+      <div className="from-foreground/10 to-foreground/0 via-foreground/0 grid grid-cols-[auto_1fr_auto] bg-radial-[at_50%_0%] bg-fixed">
+        <aside className="hidden w-70 flex-col justify-end border-r border-transparent xl:flex">
           <Nav />
         </aside>
         {children}
