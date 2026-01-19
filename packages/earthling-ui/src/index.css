@@ -25,7 +25,7 @@
   /* other color schemes */
   --color-primary: var(--color-primary);
   --color-primary-foreground: var(--color-primary-foreground);
-  --color-pimary-accent: var(--color-primary-accent);
+  --color-primary-accent: var(--color-primary-accent);
 
   --color-secondary: var(--color-secondary);
   --color-secondary-foreground: var(--color-secondary-foreground);
