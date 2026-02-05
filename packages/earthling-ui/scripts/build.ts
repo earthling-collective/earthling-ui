@@ -1,5 +1,5 @@
 import dts from "bun-plugin-dts";
-import { readdir, rename } from "node:fs/promises";
+import { rename } from "node:fs/promises";
 import { join } from "node:path";
 
 const external = [
@@ -23,6 +23,7 @@ const componentNames = [
   "checkbox",
   "chip",
   "collapsible",
+  "color-picker",
   "context-menu",
   "dialog",
   "drawer",
@@ -48,7 +49,7 @@ const componentNames = [
 ];
 
 const componentEntrypoints = componentNames.map(
-  (name) => `src/components/${name}/index.tsx`
+  (name) => `src/components/${name}/index.tsx`,
 );
 
 (async () => {
