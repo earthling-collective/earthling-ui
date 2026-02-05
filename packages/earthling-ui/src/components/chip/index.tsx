@@ -1,4 +1,6 @@
-import { type ComponentProps } from "react";
+"use client";
+
+import { type ComponentProps, forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 import { Slot } from "@radix-ui/react-slot";
@@ -32,15 +34,19 @@ export interface ChipProps
   asChild?: boolean;
 }
 
-function Chip({ className, material, scheme, ...props }: ChipProps) {
-  const Comp = props.asChild ? Slot : "div";
+const Chip = forwardRef<HTMLDivElement, ChipProps>(
+  ({ className, material, scheme, asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "div";
 
-  return (
-    <Comp
-      className={cn(chipVariants({ material, scheme }), className)}
-      {...props}
-    />
-  );
-}
+    return (
+      <Comp
+        className={cn(chipVariants({ material, scheme }), className)}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Chip.displayName = "Chip";
 
 export { Chip, chipVariants };

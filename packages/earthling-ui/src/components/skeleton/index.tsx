@@ -1,15 +1,19 @@
 "use client";
 
 import { cn } from "@/utils/cn";
-import { type ComponentProps } from "react";
+import { type ComponentProps, forwardRef } from "react";
 
-function Skeleton({ className, ...props }: ComponentProps<"div">) {
-  return (
-    <div
-      className={cn("animate-pulse rounded-md bg-muted", className)}
-      {...props}
-    />
-  );
-}
+const Skeleton = forwardRef<HTMLDivElement, ComponentProps<"div">>(
+  ({ className, ...props }, ref) => {
+    return (
+      <div
+        className={cn("animate-pulse rounded-md bg-muted", className)}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Skeleton.displayName = "Skeleton";
 
 export { Skeleton };

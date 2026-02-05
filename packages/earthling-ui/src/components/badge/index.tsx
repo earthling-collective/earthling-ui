@@ -1,6 +1,6 @@
 "use client";
 
-import { type ComponentProps } from "react";
+import { type ComponentProps, forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 import { Slot } from "@radix-ui/react-slot";
@@ -37,21 +37,19 @@ export interface BadgeProps
   asChild?: boolean;
 }
 
-function Badge({
-  className,
-  material,
-  scheme,
-  asChild,
-  ...props
-}: BadgeProps) {
-  const Comp = asChild ? Slot : "span";
+const Badge = forwardRef<HTMLSpanElement, BadgeProps>(
+  ({ className, material, scheme, asChild, ...props }, ref) => {
+    const Comp = asChild ? Slot : "span";
 
-  return (
-    <Comp
-      className={cn(badgeVariants({ material, scheme }), className)}
-      {...props}
-    />
-  );
-}
+    return (
+      <Comp
+        className={cn(badgeVariants({ material, scheme }), className)}
+        ref={ref}
+        {...props}
+      />
+    );
+  }
+);
+Badge.displayName = "Badge";
 
 export { Badge, badgeVariants };

@@ -1,68 +1,106 @@
 # Earthling UI
 
-A modern, themeable React component library built with TypeScript, Tailwind CSS, and a suite of CLI tools to scaffold projects quickly.
+A modern, themeable React component library built with TypeScript, Tailwind CSS, and Radix UI primitives.
 
-> ⚠️ **Alpha Status**: This project is in active development. APIs and features may change between releases.
+> **Alpha Status**: This project is in active development. APIs and features may change between releases.
 
 ## Features
 
-- 🎨 **Themeable Components**: Switch between light and dark themes effortlessly.
-- 🔧 **Type-Safe**: Built with TypeScript for an excellent developer experience.
-- 📦 **Modern Stack**: React + Tailwind CSS + Radix UI primitives.
-- 🎯 **Flexible Templates**: Create new projects from a variety of templates:
-  - **ssr** – Server-side rendered applications (scaffolded under `apps/*`)
-  - **spa** – Single-page applications (scaffolded under `apps/*`)
-  - **db** – Package projects (scaffolded under `packages/*`)
-  - **cli** – Package projects (scaffolded under `packages/*`)
-  - **monorepo** – Full repository setups at the root
-- 🛠 **CLI Tool**: Quickly scaffold projects using our CLI commands.
-- 💡 **Additional Commands**:
-  - **Eject** components to integrate them directly into your project.
-  - **Copy** component snippets directly to your clipboard.
+- **Themeable Components**: Light and dark themes with CSS custom properties
+- **Type-Safe**: Built with TypeScript for full IntelliSense support
+- **Modern Stack**: React 18/19 + Tailwind CSS 4 + Radix UI primitives
+- **Tree-Shakeable**: Import only the components you need
+- **SSR Ready**: All components include `"use client"` directives for Next.js App Router
+- **CLI Tool**: Scaffold projects from templates (SSR, SPA, monorepo, CLI, DB)
+- **Eject**: Copy component source directly into your project
 
 ## Installation
 
-Install Earthling UI via Bun:
-
 ```bash
 bun add earthling-ui
+# or
+npm install earthling-ui
 ```
 
 ## Components
 
-Current components:
+### Form Inputs
+- `Button` - Versatile button with paper, outline, and ghost materials
+- `Input` - Text input field
+- `TextArea` - Multi-line text input
+- `Checkbox` - Accessible checkbox
+- `Radio` - Radio group and radio items
+- `Switch` - Toggle switch
+- `Select` - Dropdown select with compound components
+- `Slider` - Range slider
 
-- `Button`: Versatile button with filled, outline, and ghost variants
-- `Card`: Container component for grouping related content
-- `Input`: Text input field with various states and validation
-- `Textarea`: Multi-line text input
-- `ThemeSwitcher`: Toggle between light and dark themes
+### Layout & Containers
+- `Card` - Container for grouping related content
+- `Surface` - Flexible surface with paper/glass variants
+- `Table` - Data table with compound components
+- `ScrollArea` - Scrollable area with custom scrollbar
+- `Separator` - Visual divider
+- `Tabs` - Tab interface
 
-Each component supports:
+### Overlays
+- `Dialog` - Modal dialog with form support
+- `AlertDialog` - Confirmation dialog
+- `Drawer` - Slide-out drawer (top/bottom/left/right)
+- `Popover` - Floating popover
+- `HoverCard` - Hover-activated card
+- `Tooltip` - Accessible tooltip
+- `DropdownMenu` - Dropdown menu with nested items
+- `ContextMenu` - Right-click context menu
 
-- Variants: filled, outline, ghost
-- Sizes: sm, md, lg
-- Color schemes: default, primary, secondary, good, bad
+### Feedback & Display
+- `Alert` - Alert message with severity variants
+- `Badge` - Small label/tag
+- `Chip` - Interactive tag
+- `Avatar` - User avatar with fallback
+- `Skeleton` - Loading placeholder
+- `Progress` - Progress bar
+- `Toast` - Toast notifications
+- `Accordion` - Expandable sections
+- `Collapsible` - Simple collapsible section
+- `Breadcrumbs` - Navigation breadcrumb trail
+- `ToggleGroup` - Button toggle group
+
+### Variant System
+
+Components support a consistent variant system:
+
+- **Materials**: `paper`, `outline`, `ghost`
+- **Schemes**: `primary`, `secondary`, `tertiary`, `neutral`, `muted`, `good`, `caution`, `bad`
+- **Sizes**: `sm`, `md`, `lg`
 
 ## Usage
 
+Import components individually for optimal tree-shaking:
+
 ```tsx
 import { Button } from "earthling-ui/button";
+import { Input } from "earthling-ui/input";
+```
 
+Or import from the barrel export:
+
+```tsx
+import { Button, Input } from "earthling-ui";
+```
+
+```tsx
 function App() {
   return (
-    <div>
-      <Button material="filled" scheme="primary" size="md">
-        Click me
-      </Button>
-    </div>
+    <Button material="paper" scheme="primary" size="md">
+      Click me
+    </Button>
   );
 }
 ```
 
 ## Theming
 
-Earthling UI supports light, dark, and system themes through data attributes:
+Earthling UI supports light, dark, and system themes through CSS custom properties:
 
 ```css
 /* Import required styles */
@@ -93,7 +131,7 @@ document.documentElement.setAttribute("data-theme", "dark"); // or 'light' or 's
 This is a monorepo managed with Bun workspaces. Key packages:
 
 - `packages/earthling-ui`: The main UI component library
-- `apps/pwa`: Demo/documentation site (work in progress)
+- `apps/docs`: Documentation site
 
 ```bash
 # Install dependencies
@@ -103,8 +141,8 @@ bun install
 cd packages/earthling-ui
 bun run dev
 
-# Run the demo site
-cd apps/pwa
+# Run the documentation site
+cd apps/docs
 bun run dev
 ```
 
