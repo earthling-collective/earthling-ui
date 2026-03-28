@@ -4,6 +4,8 @@ import fs from "node:fs";
 import path from "node:path";
 import pkg from "../package.json";
 import { createAction } from "./actions/create";
+import { ejectAction } from "./actions/eject";
+import { initAction } from "./actions/init";
 
 const handleSigTerm = () => process.exit(0);
 process.on("SIGINT", handleSigTerm);
@@ -22,11 +24,14 @@ program
   .action(createAction);
 
 program
+  .command("init")
+  .description("Initialize earthling-ui config for your project")
+  .action(initAction);
+
+program
   .command("eject <component>")
   .description("Eject a component from earthling-ui into your project")
-  .action(async (component) => {
-    console.log(`🚧 Coming soon`);
-  });
+  .action(ejectAction);
 
 program
   .command("copy <snippet>")
