@@ -32,6 +32,11 @@ const toastVariants = cva(
     variants: {
       scheme: {
         default: "border bg-background text-foreground",
+        primary: "border-primary/50 bg-primary text-primary-foreground",
+        secondary: "border-secondary/50 bg-secondary text-secondary-foreground",
+        tertiary: "border-tertiary/50 bg-tertiary text-tertiary-foreground",
+        neutral: "border-neutral/50 bg-neutral text-neutral-foreground",
+        muted: "border-muted/50 bg-muted text-muted-foreground",
         good: "border-good/50 bg-good text-good-foreground",
         caution: "border-caution/50 bg-caution text-caution-foreground",
         bad: "border-bad/50 bg-bad text-bad-foreground",

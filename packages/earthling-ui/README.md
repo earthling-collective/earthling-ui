@@ -28,11 +28,13 @@ npm install earthling-ui
 - `Button` - Versatile button with paper, outline, and ghost materials
 - `Input` - Text input field
 - `TextArea` - Multi-line text input
+- `Label` - Accessible form-control label
 - `Checkbox` - Accessible checkbox
 - `Radio` - Radio group and radio items
 - `Switch` - Toggle switch
 - `Select` - Dropdown select with compound components
 - `Slider` - Range slider
+- `ColorPicker` - Color area, sliders, and swatches
 
 ### Layout & Containers
 - `Card` - Container for grouping related content
@@ -62,8 +64,15 @@ npm install earthling-ui
 - `Toast` - Toast notifications
 - `Accordion` - Expandable sections
 - `Collapsible` - Simple collapsible section
-- `Breadcrumbs` - Navigation breadcrumb trail
 - `ToggleGroup` - Button toggle group
+- `Spinner` - Animated loading indicator
+- `Kbd` - Keyboard key display
+
+### Navigation
+- `Breadcrumbs` - Navigation breadcrumb trail
+- `Pagination` - Page navigation
+- `Menubar` - Persistent menu bar with nested menus
+- `NavigationMenu` - Site navigation with content panels
 
 ### Variant System
 
@@ -125,6 +134,20 @@ Earthling UI supports light, dark, and system themes through CSS custom properti
 // Manual theme control
 document.documentElement.setAttribute("data-theme", "dark"); // or 'light' or 'system'
 ```
+
+If your bundler imports stylesheets from JavaScript instead of CSS `@import`, the direct file paths work everywhere:
+
+```ts
+import "earthling-ui/index.css";
+import "earthling-ui/themes/dark.css";
+```
+
+## Bundler Compatibility
+
+- **Next.js (App Router / RSC)**: works out of the box — every module ships a `"use client"` directive.
+- **Vite**: works out of the box. During `vite build`, Rollup may warn that module-level directives were ignored; this is expected and harmless in client-only apps. To silence the warnings, filter `MODULE_LEVEL_DIRECTIVE` in `build.rollupOptions.onwarn`.
+- **CommonJS / Node**: `require("earthling-ui/button")` resolves to a dedicated CJS build with matching type declarations.
+- **CLI**: `npx earthling-ui` and `bunx earthling-ui` both work — the CLI is pre-built for Node.
 
 ## Development
 

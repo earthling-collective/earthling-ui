@@ -4,6 +4,10 @@
     "apps/*",
     "packages/*"
   ],
+  "scripts": {
+    "build": "bun run --cwd packages/earthling-ui build",
+    "test": "bun run --cwd packages/earthling-ui build && bun test tests/build-output.test.ts tests/eject.test.ts tests/vite-consumer.test.ts"
+  },
   "devDependencies": {
     "@types/bun": "^1.3.6"
   },

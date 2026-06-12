@@ -12,16 +12,14 @@ import fs from "node:fs";
 import fsp from "node:fs/promises";
 import path from "node:path";
 import { loadConfig } from "../init";
+import { getPackageRoot } from "../../utils/package-root";
 
 /**
- * Resolve the earthling-ui package source directory.
- * This file lives at src/actions/eject/index.ts, so
- * the package root is three levels up.
+ * Resolve the earthling-ui package source directory. Component sources ship
+ * in the published package under src/, which eject copies from.
  */
 function getPackageSrcDir(): string {
-  // import.meta.dir is the directory of this file
-  // Go up: eject → actions → src (which is the src directory)
-  return path.resolve(import.meta.dir, "../..");
+  return path.join(getPackageRoot(), "src");
 }
 
 /**

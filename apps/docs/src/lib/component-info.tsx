@@ -18,6 +18,82 @@ const allSchemes = [
   "bad",
 ];
 
+export type ComponentCategory = {
+  name: string;
+  description: string;
+  icon: string;
+  paths: string[];
+};
+
+/** Ordered category groupings for the landing page and navigation. */
+export const componentCategories: ComponentCategory[] = [
+  {
+    name: "Inputs",
+    description: "Collect input from people with accessible form controls.",
+    icon: "icon-[lucide--text-cursor-input]",
+    paths: [
+      "button",
+      "checkbox",
+      "color-picker",
+      "input",
+      "label",
+      "radio",
+      "select",
+      "slider",
+      "switch",
+      "textarea",
+      "toggle-group",
+    ],
+  },
+  {
+    name: "Overlays",
+    description: "Dialogs, menus, and floating panels layered over the page.",
+    icon: "icon-[lucide--layers]",
+    paths: [
+      "alert-dialog",
+      "context-menu",
+      "dialog",
+      "drawer",
+      "dropdown-menu",
+      "hover-card",
+      "popover",
+      "tooltip",
+    ],
+  },
+  {
+    name: "Navigation",
+    description: "Help people move through your app and find their place.",
+    icon: "icon-[lucide--compass]",
+    paths: ["breadcrumbs", "menubar", "navigation-menu", "pagination", "tabs"],
+  },
+  {
+    name: "Feedback",
+    description: "Communicate state, progress, and outcomes.",
+    icon: "icon-[lucide--message-square-dot]",
+    paths: ["alert", "progress", "skeleton", "spinner", "toast"],
+  },
+  {
+    name: "Data Display",
+    description: "Present content and data clearly.",
+    icon: "icon-[lucide--table-properties]",
+    paths: [
+      "accordion",
+      "avatar",
+      "badge",
+      "chip",
+      "collapsible",
+      "kbd",
+      "table",
+    ],
+  },
+  {
+    name: "Layout",
+    description: "Structure pages and group related content.",
+    icon: "icon-[lucide--layout-panel-left]",
+    paths: ["card", "scroll-area", "separator", "surface"],
+  },
+];
+
 export type ComponentPropInfo = {
   label: string;
   prop: string;
@@ -474,7 +550,7 @@ export const componentInformation: ComponentInfo[] = [
         label: "Scheme",
         type: "select",
         options: allSchemes,
-        defaultValue: "primary",
+        defaultValue: "neutral",
         description: "The color scheme of the toggle group",
       },
     ],
@@ -490,7 +566,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "muted", "good", "caution", "bad"],
+        options: ["default", ...allSchemes],
         defaultValue: "default",
         description: "The color scheme of the alert",
       },
@@ -500,11 +576,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "alert-dialog",
     name: "AlertDialog",
     description: "A modal dialog for important confirmations",
-    dependencies: [
-      "react",
-      "@radix-ui/react-alert-dialog",
-      "@/utils/cn",
-    ],
+    dependencies: ["react", "@radix-ui/react-alert-dialog", "@/utils/cn"],
     exports: [
       "AlertDialog",
       "AlertDialogTrigger",
@@ -608,7 +680,8 @@ export const componentInformation: ComponentInfo[] = [
   {
     path: "checkbox",
     name: "Checkbox",
-    description: "A control that allows the user to toggle between checked and unchecked",
+    description:
+      "A control that allows the user to toggle between checked and unchecked",
     dependencies: [
       "react",
       "class-variance-authority",
@@ -621,7 +694,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "tertiary", "good", "caution", "bad"],
+        options: ["default", ...allSchemes],
         defaultValue: "default",
         description: "The color scheme of the checkbox",
       },
@@ -639,11 +712,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "context-menu",
     name: "ContextMenu",
     description: "Displays a menu triggered by right-click",
-    dependencies: [
-      "react",
-      "@radix-ui/react-context-menu",
-      "@/utils/cn",
-    ],
+    dependencies: ["react", "@radix-ui/react-context-menu", "@/utils/cn"],
     exports: [
       "ContextMenu",
       "ContextMenuTrigger",
@@ -666,18 +735,15 @@ export const componentInformation: ComponentInfo[] = [
     path: "hover-card",
     name: "HoverCard",
     description: "For sighted users to preview content available behind a link",
-    dependencies: [
-      "react",
-      "@radix-ui/react-hover-card",
-      "@/utils/cn",
-    ],
+    dependencies: ["react", "@radix-ui/react-hover-card", "@/utils/cn"],
     exports: ["HoverCard", "HoverCardTrigger", "HoverCardContent"],
     props: [],
   },
   {
     path: "progress",
     name: "Progress",
-    description: "Displays an indicator showing the completion progress of a task",
+    description:
+      "Displays an indicator showing the completion progress of a task",
     dependencies: [
       "react",
       "class-variance-authority",
@@ -697,7 +763,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "tertiary", "good", "caution", "bad"],
+        options: ["default", ...allSchemes],
         defaultValue: "default",
         description: "The color scheme of the progress bar",
       },
@@ -706,7 +772,8 @@ export const componentInformation: ComponentInfo[] = [
   {
     path: "radio",
     name: "RadioGroup",
-    description: "A set of checkable buttons where only one can be checked at a time",
+    description:
+      "A set of checkable buttons where only one can be checked at a time",
     dependencies: [
       "react",
       "class-variance-authority",
@@ -719,7 +786,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "primary", "secondary", "tertiary", "good", "caution", "bad"],
+        options: ["default", ...allSchemes],
         defaultValue: "default",
         description: "The color scheme of the radio group",
       },
@@ -774,7 +841,7 @@ export const componentInformation: ComponentInfo[] = [
         prop: "scheme",
         label: "Scheme",
         type: "select",
-        options: ["default", "good", "caution", "bad"],
+        options: ["default", ...allSchemes],
         defaultValue: "default",
         description: "The color scheme of the toast",
       },
@@ -783,12 +850,9 @@ export const componentInformation: ComponentInfo[] = [
   {
     path: "tooltip",
     name: "Tooltip",
-    description: "A popup that displays information related to an element when hovered",
-    dependencies: [
-      "react",
-      "@radix-ui/react-tooltip",
-      "@/utils/cn",
-    ],
+    description:
+      "A popup that displays information related to an element when hovered",
+    dependencies: ["react", "@radix-ui/react-tooltip", "@/utils/cn"],
     exports: [
       "Tooltip",
       "TooltipTrigger",
@@ -802,11 +866,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "dropdown-menu",
     name: "DropdownMenu",
     description: "Displays a menu of actions triggered by a button",
-    dependencies: [
-      "react",
-      "@radix-ui/react-dropdown-menu",
-      "@/utils/cn",
-    ],
+    dependencies: ["react", "@radix-ui/react-dropdown-menu", "@/utils/cn"],
     exports: [
       "DropdownMenu",
       "DropdownMenuTrigger",
@@ -830,11 +890,7 @@ export const componentInformation: ComponentInfo[] = [
     path: "scroll-area",
     name: "ScrollArea",
     description: "Augments native scroll functionality with custom styling",
-    dependencies: [
-      "react",
-      "@radix-ui/react-scroll-area",
-      "@/utils/cn",
-    ],
+    dependencies: ["react", "@radix-ui/react-scroll-area", "@/utils/cn"],
     exports: ["ScrollArea", "ScrollBar"],
     props: [],
   },
@@ -857,6 +913,133 @@ export const componentInformation: ComponentInfo[] = [
       "ColorSwatchPicker",
       "ColorSwatchPickerItem",
       "parseColor",
+    ],
+    props: [],
+  },
+  {
+    path: "label",
+    name: "Label",
+    description: "An accessible label for form controls",
+    dependencies: [
+      "react",
+      "class-variance-authority",
+      "@radix-ui/react-slot",
+      "@/utils/cn",
+    ],
+    exports: ["Label"],
+    props: [
+      {
+        prop: "size",
+        label: "Size",
+        type: "toggle-group",
+        options: ["sm", "md", "lg"],
+        defaultValue: "md",
+        description: "The size of the label",
+      },
+    ],
+  },
+  {
+    path: "kbd",
+    name: "Kbd",
+    description: "Displays a keyboard key or shortcut",
+    dependencies: ["react", "class-variance-authority", "@/utils/cn"],
+    exports: ["Kbd"],
+    props: [
+      {
+        prop: "size",
+        label: "Size",
+        type: "toggle-group",
+        options: ["sm", "md", "lg"],
+        defaultValue: "md",
+        description: "The size of the key cap",
+      },
+    ],
+  },
+  {
+    path: "spinner",
+    name: "Spinner",
+    description: "An animated loading indicator",
+    dependencies: ["react", "class-variance-authority", "@/utils/cn"],
+    exports: ["Spinner"],
+    props: [
+      {
+        prop: "scheme",
+        label: "Scheme",
+        type: "select",
+        options: ["default", ...allSchemes],
+        defaultValue: "default",
+        description: "The color scheme of the spinner",
+      },
+      {
+        prop: "size",
+        label: "Size",
+        type: "toggle-group",
+        options: ["sm", "md", "lg"],
+        defaultValue: "md",
+        description: "The size of the spinner",
+      },
+    ],
+  },
+  {
+    path: "pagination",
+    name: "Pagination",
+    description: "Navigation between pages of content",
+    dependencies: ["react", "class-variance-authority", "@/utils/cn"],
+    exports: [
+      "Pagination",
+      "PaginationContent",
+      "PaginationItem",
+      "PaginationLink",
+      "PaginationPrevious",
+      "PaginationNext",
+      "PaginationEllipsis",
+    ],
+    props: [],
+  },
+  {
+    path: "menubar",
+    name: "Menubar",
+    description: "A persistent menu bar with nested dropdown menus",
+    dependencies: ["react", "@radix-ui/react-menubar", "@/utils/cn"],
+    exports: [
+      "Menubar",
+      "MenubarMenu",
+      "MenubarTrigger",
+      "MenubarContent",
+      "MenubarItem",
+      "MenubarCheckboxItem",
+      "MenubarRadioGroup",
+      "MenubarRadioItem",
+      "MenubarLabel",
+      "MenubarSeparator",
+      "MenubarShortcut",
+      "MenubarGroup",
+      "MenubarPortal",
+      "MenubarSub",
+      "MenubarSubTrigger",
+      "MenubarSubContent",
+    ],
+    props: [],
+  },
+  {
+    path: "navigation-menu",
+    name: "NavigationMenu",
+    description: "A collection of links and menus for site navigation",
+    dependencies: [
+      "react",
+      "@radix-ui/react-navigation-menu",
+      "class-variance-authority",
+      "@/utils/cn",
+    ],
+    exports: [
+      "NavigationMenu",
+      "NavigationMenuList",
+      "NavigationMenuItem",
+      "NavigationMenuTrigger",
+      "NavigationMenuContent",
+      "NavigationMenuLink",
+      "NavigationMenuIndicator",
+      "NavigationMenuViewport",
     ],
     props: [],
   },

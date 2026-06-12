@@ -1,3 +1,5 @@
+export const metadata = {"title":"Getting Started","description":"Install Earthling UI and build your first project with Next.js or Vite."};
+
 # Getting Started with Earthling UI
 
 Earthling UI is a modern, opinionated component library designed to help you build beautiful, accessible, and consistent user interfaces. It's built with a focus on developer experience and flexibility, allowing you to either import components directly or eject them into your project.
@@ -8,7 +10,11 @@ Install Earthling UI in your project:
 
 ```bash
 bun add earthling-ui
+# or
+npm install earthling-ui
 ```
+
+Earthling UI is styled with **Tailwind CSS 4**, so your project needs Tailwind set up (the framework guides below cover this). React 18 and React 19 are both supported.
 
 ## Quick Start
 
@@ -20,14 +26,15 @@ The easiest way to get started is to create a new project using the Earthling UI
 bunx earthling-ui create next my-app
 ```
 
-This will create a new Next.js project with Earthling UI pre-configured. You can also use other templates like `spa` (Vite), `tauri` (desktop app), or `monorepo`.
+This will create a new Next.js project with Earthling UI and Tailwind pre-configured. You can also use other templates like `spa` (Vite), `tauri` (desktop app), or `monorepo`.
 
 ### Option 2: Add to an existing project
 
 1. Install the package as shown above
-2. Import the CSS in your main CSS file:
+2. Import the library styles in your main Tailwind CSS file:
 
 ```css
+@import "tailwindcss";
 @import "earthling-ui";
 ```
 
@@ -40,6 +47,53 @@ export default function MyComponent() {
   return <Button>Click me</Button>;
 }
 ```
+
+## Framework Setup
+
+### Next.js (App Router)
+
+Earthling UI components ship with `"use client"` directives, so they work out of the box with React Server Components — import them from server or client components and Next.js does the right thing.
+
+```css
+/* app/globals.css */
+@import "tailwindcss";
+@import "earthling-ui";
+```
+
+```jsx
+import { Button } from "earthling-ui/button";
+
+export default function Page() {
+  return <Button scheme="primary">Hello</Button>;
+}
+```
+
+### Vite
+
+Install the Tailwind Vite plugin alongside Earthling UI:
+
+```bash
+bun add earthling-ui tailwindcss @tailwindcss/vite
+```
+
+```ts
+// vite.config.ts
+import { defineConfig } from "vite";
+import react from "@vitejs/plugin-react";
+import tailwindcss from "@tailwindcss/vite";
+
+export default defineConfig({
+  plugins: [react(), tailwindcss()],
+});
+```
+
+```css
+/* src/index.css */
+@import "tailwindcss";
+@import "earthling-ui";
+```
+
+> During `vite build`, Rollup may log that module-level `"use client"` directives were ignored. This is expected and harmless in a client-only app — the directives only carry meaning for React Server Components.
 
 ## Using Themes
 
@@ -62,4 +116,4 @@ You can apply themes using CSS classes:
 - Explore the [CLI documentation](/cli) to learn about project creation and component management
 - Check out the [theming guide](/theming) to customize the look and feel of your components
 - Browse the available [templates](/templates) for different project types
-- View the [component documentation](/components) to see all available components
+- View the [component documentation](/#components) to see all available components

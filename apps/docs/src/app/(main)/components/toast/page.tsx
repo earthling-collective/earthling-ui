@@ -1,4 +1,7 @@
 import { ComponentSublayout } from "../sublayout";
+import { componentMetadata } from "@/lib/component-metadata";
+
+export const metadata = componentMetadata("toast");
 
 export default async function () {
   return (

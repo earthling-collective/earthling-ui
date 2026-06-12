@@ -10,6 +10,14 @@ const alertVariants = cva(
     variants: {
       scheme: {
         default: "bg-background text-foreground",
+        primary:
+          "border-primary/50 text-primary bg-primary/10 [&>svg]:text-primary",
+        secondary:
+          "border-secondary/50 text-secondary bg-secondary/10 [&>svg]:text-secondary",
+        tertiary:
+          "border-tertiary/50 text-tertiary bg-tertiary/10 [&>svg]:text-tertiary",
+        neutral:
+          "border-neutral/50 text-neutral bg-neutral/10 [&>svg]:text-neutral",
         muted: "border-muted/50 text-muted-foreground bg-muted/10 [&>svg]:text-muted-foreground",
         good: "border-good/50 text-good bg-good/10 [&>svg]:text-good",
         caution:

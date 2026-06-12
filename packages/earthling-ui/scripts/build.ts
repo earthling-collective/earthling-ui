@@ -30,6 +30,11 @@ const componentNames = [
   "dropdown-menu",
   "hover-card",
   "input",
+  "kbd",
+  "label",
+  "menubar",
+  "navigation-menu",
+  "pagination",
   "popover",
   "progress",
   "radio",
@@ -38,6 +43,7 @@ const componentNames = [
   "separator",
   "skeleton",
   "slider",
+  "spinner",
   "surface",
   "switch",
   "table",
@@ -67,6 +73,8 @@ const componentEntrypoints = componentNames.map(
   });
 
   // CJS build (no code splitting, source maps)
+  // No "use client" banner: the directive is an RSC/ESM concern and only
+  // produces bundler warnings in CJS consumers.
   await Bun.build({
     entrypoints: ["src/components/index.ts", ...componentEntrypoints],
     outdir: "dist/cjs/components",
@@ -75,7 +83,6 @@ const componentEntrypoints = componentNames.map(
     minify: true,
     splitting: false,
     sourcemap: "linked",
-    banner: '"use client";',
     external,
   });
 
@@ -114,4 +121,44 @@ const componentEntrypoints = componentNames.map(
       // .d.ts may already exist if source was .ts
     }
   }
+
+  // CLI build (node-compatible ESM, referenced by the package "bin" entry).
+  // Runtime deps stay external; package.json version is inlined.
+  await Bun.build({
+    entrypoints: ["src/cli.ts"],
+    outdir: "dist",
+    target: "node",
+    format: "esm",
+    banner: "#!/usr/bin/env node",
+    sourcemap: "linked",
+    external: [
+      "commander",
+      "@clack/prompts",
+      "find-parent-dir",
+      "isomorphic-git",
+    ],
+  });
+
+  // Mirror type declarations into dist/cjs. The CommonJS marker below makes
+  // TypeScript treat these copies as CJS-flavored, so require() consumers
+  // get correctly-resolved types instead of ESM-masquerading ones.
+  for (const file of new Bun.Glob("**/*.d.ts").scanSync("dist/components")) {
+    await Bun.write(
+      join("dist", "cjs", "components", file),
+      Bun.file(join("dist", "components", file)),
+    );
+  }
+  for (const file of new Bun.Glob("*.d.ts").scanSync("dist/utils")) {
+    await Bun.write(
+      join("dist", "cjs", "utils", file),
+      Bun.file(join("dist", "utils", file)),
+    );
+  }
+
+  // Mark dist/cjs as CommonJS. The package root is "type": "module", so
+  // without this Node would parse the CJS-syntax .js files as ESM.
+  await Bun.write(
+    join("dist", "cjs", "package.json"),
+    JSON.stringify({ type: "commonjs" }, null, 2) + "\n",
+  );
 })();

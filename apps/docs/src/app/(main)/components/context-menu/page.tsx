@@ -1,4 +1,7 @@
 import { ComponentSublayout } from "../sublayout";
+import { componentMetadata } from "@/lib/component-metadata";
+
+export const metadata = componentMetadata("context-menu");
 
 export default async function () {
   return (

@@ -1,6 +1,12 @@
+export const metadata = {"title":"Theming","description":"Customize Earthling UI with CSS variables, built-in themes, and your own custom themes."};
+
+import { ThemeDemo } from "@/components/theme-demo";
+
 # Theming
 
 Earthling UI provides a flexible theming system that allows you to customize the look and feel of your components. The theming system is built on CSS variables and utility classes, making it easy to create and switch between different themes.
+
+<ThemeDemo />
 
 ## Theme Structure
 
@@ -37,11 +43,18 @@ Earthling UI comes with a default light theme that's applied automatically. Here
 
 Earthling UI includes additional themes that you can import and use:
 
-```jsx
-// Import the default theme
+```css
+/* Import the default theme */
 @import "earthling-ui";
-// Import the dark theme
+/* Import the dark theme */
 @import "earthling-ui/theme/dark";
+```
+
+If your bundler imports stylesheets from JavaScript instead, the direct file paths work in any bundler:
+
+```ts
+import "earthling-ui/index.css";
+import "earthling-ui/themes/dark.css";
 ```
 
 To apply a theme, use the corresponding CSS class:

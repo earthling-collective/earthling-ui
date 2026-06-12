@@ -1,62 +1,60 @@
+export const metadata = {"title":"Changelog","description":"The latest changes and improvements to Earthling UI."};
+
 # Changelog
 
 This page documents the current state of Earthling UI and ongoing development.
 
-## Current Version: v1.1.0-alpha.25
+## v1.1.0-alpha.39
 
-Earthling UI is currently in internal alpha. This documentation reflects the features available in the current version.
+The "ready for the world" release — packaging correctness, a Node-compatible CLI, six new components, and a consistency pass across the whole library.
 
-### Current Features
+### New Components
 
-- **Component Library**: A collection of accessible, customizable UI components:
+- **Label** — accessible form-control label
+- **Kbd** — keyboard key and shortcut display
+- **Spinner** — animated loading indicator with full scheme support
+- **Pagination** — page navigation with previous/next and ellipsis
+- **Menubar** — persistent menu bar with nested dropdown menus
+- **Navigation Menu** — site navigation with expandable content panels
 
-  - Accordion
-  - Breadcrumbs
-  - Button
-  - Chip
-  - Drawer
-  - Input
-  - Popover
-  - Select
-  - Separator
-  - Surface
-  - Switch
-  - Tabs
-  - Textarea
-  - Toggle Group
+This brings the library to **40 components**, all importable à la carte or ejectable into your project.
 
-- **Theming System**: CSS variables and utility classes for consistent styling and easy customization
+### Improvements
 
-  - Default light theme
-  - Dark theme
-  - Support for custom themes
+- **Full scheme coverage**: alert, checkbox, input, progress, radio, tabs, textarea, toast, and toggle-group now support the complete scheme set (`primary`, `secondary`, `tertiary`, `neutral`, `muted`, `good`, `caution`, `bad`)
+- **Color Picker** is now exported from the package root alongside its subpath import
+- **Breadcrumbs** supports `aria-current="page"` via the new `current` prop
 
-- **CLI Tool**: Command-line interface for project management
+### Fixes
 
-  - Create new projects from templates
-  - Copy component snippets
-  - Component ejection (work in progress)
+- Toggle group items now correctly receive their scheme colors (previously the scheme classes were silently dropped)
+- `TextArea.displayName` corrected to `"TextArea"`
+- Breadcrumbs ships its `"use client"` directive in source (matters for ejected copies)
 
-- **Project Templates**: Pre-configured templates for various project types
-  - Next.js applications
-  - Vite single-page applications
-  - Tauri desktop applications
-  - Electron kiosk applications
-  - Database packages with Drizzle
-  - Library packages
-  - CLI packages
-  - Monorepo workspaces
+### Packaging & Compatibility
 
-### Work in Progress
+- **Vite support**: stylesheet subpath exports (`earthling-ui/index.css`, `earthling-ui/themes/dark.css`) work with plain JS imports in any bundler
+- **CommonJS consumers**: `require("earthling-ui/...")` now resolves correctly under Node, with proper CJS-flavored type declarations
+- **CLI runs under Node**: `npx earthling-ui` works without Bun — the CLI ships pre-built with a proper shebang
+- `sideEffects` now correctly preserves CSS imports under aggressive tree-shaking
+- The unfinished `copy` command was removed
 
-The following features are currently under development:
+## Earlier Releases
 
-- **Component Ejection**: Ability to eject components from the library into your project for customization
-- **Documentation Improvements**: More examples and usage guidelines
-- **Component Refinements**: Ongoing improvements to existing components
-- **Build System Optimizations**: Improving the build process for better performance
+### v1.1.0-alpha.25 → alpha.38
 
-### Development Philosophy
+- Component ejection (`earthling-ui eject`) and config wizard (`earthling-ui init`) shipped
+- Color picker (rough draft), dropdown menu, scroll area, context menu, dialog improvements (`DialogForm`, `DialogExitButton`, better SSR)
+- Docs site: radial gradient background, component sandbox improvements
+
+### v1.1.0-alpha (initial)
+
+- Initial component library with the CVA + scheme-variable design system
+- Light and dark themes via CSS custom properties
+- Project templates: Next.js, Vite, Tauri, Electron kiosk, database (Drizzle), library, CLI, and monorepo
+- `create` command for scaffolding projects from templates
+
+## Development Philosophy
 
 Earthling UI is being developed with these principles in mind:
 
@@ -67,6 +65,6 @@ Earthling UI is being developed with these principles in mind:
 
 ## Project Status
 
-Earthling UI is in active development. The API and component set may change as we work towards a stable release. We appreciate your patience and feedback as we continue to improve the library.
+Earthling UI is in public alpha. The API is stabilizing, but minor changes may still occur before the stable release.
 
-If you encounter any issues or have suggestions, please file an issue on the [GitHub repository](https://github.com/earthling-collective/earthling-ui/issues).
+If you encounter any issues or have suggestions, please file an issue on the [GitHub repository](https://github.com/earthling-dev/earthling-ui/issues).

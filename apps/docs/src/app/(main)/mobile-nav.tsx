@@ -1,6 +1,7 @@
 "use client";
 
 import { pageInformation } from "@/lib/page-info";
+import { Search } from "@/components/search";
 import { Button } from "earthling-ui/button";
 import { DrawerClose } from "earthling-ui/drawer";
 import Link from "next/link";
@@ -11,6 +12,7 @@ export const MobileNav = () => {
 
   return (
     <>
+      <Search className="mb-2" />
       <div className="flex flex-col">
         {pageInformation.map(({ href, label, icon }) => (
           <Button

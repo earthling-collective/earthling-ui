@@ -21,6 +21,7 @@ const toggleGroupVariants = cva("flex items-center justify-center", {
       primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
       secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
       tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
+      neutral: `[--scheme-tint:var(--color-neutral)] [--scheme-foreground:var(--color-neutral-foreground)]`,
       muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
       good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
       caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
@@ -28,7 +29,7 @@ const toggleGroupVariants = cva("flex items-center justify-center", {
     },
     size: { sm: "p-1", md: "p-1", lg: "p-1" },
   },
-  defaultVariants: { material: "paper", size: "md" },
+  defaultVariants: { material: "paper", size: "md", scheme: "neutral" },
 });
 
 const ToggleGroupContext = createContext<
@@ -59,16 +60,17 @@ const toggleGroupItemVariants = cva(
     variants: {
       material: {
         paper:
-          "aria-checked:bg-primary aria-checked:text-primary-foreground rounded-control",
+          "aria-checked:bg-(--scheme-tint) aria-checked:text-(--scheme-foreground) rounded-control",
       },
       scheme: {
-        primary: `[--scheme-tint:var(--color-primary);--scheme-foreground:var(--color-primary-foreground)]`,
-        secondary: `[--scheme-tint:var(--color-secondary);--scheme-foreground:var(--color-secondary-foreground)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary);--scheme-foreground:var(--color-tertiary-foreground)]`,
-        muted: `[--scheme-tint:var(--color-muted);--scheme-foreground:var(--color-muted-foreground)]`,
-        good: `[--scheme-tint:var(--color-good);--scheme-foreground:var(--color-good-foreground)]`,
-        caution: `[--scheme-tint:var(--color-caution);--scheme-foreground:var(--color-caution-foreground)]`,
-        bad: `[--scheme-tint:var(--color-bad);--scheme-foreground:var(--color-bad-foreground)]`,
+        primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
+        secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
+        tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
+        neutral: `[--scheme-tint:var(--color-neutral)] [--scheme-foreground:var(--color-neutral-foreground)]`,
+        muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
+        good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
+        caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
+        bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
       },
       size: {
         sm: "h-7 px-2.5 min-w-9",
@@ -77,7 +79,7 @@ const toggleGroupItemVariants = cva(
       },
     },
     defaultVariants: { material: "paper", size: "md" },
-  }
+  },
 );
 
 const ToggleGroupItem = forwardRef<
@@ -96,7 +98,7 @@ const ToggleGroupItem = forwardRef<
           scheme: scheme || context.scheme,
           size: size || context.size,
         }),
-        className
+        className,
       )}
       {...props}
     >

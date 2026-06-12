@@ -19,6 +19,8 @@ const progressVariants = cva(
         primary: `[--scheme-tint:var(--color-primary)]`,
         secondary: `[--scheme-tint:var(--color-secondary)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)]`,
+        neutral: `[--scheme-tint:var(--color-neutral)]`,
+        muted: `[--scheme-tint:var(--color-muted)]`,
         good: `[--scheme-tint:var(--color-good)]`,
         caution: `[--scheme-tint:var(--color-caution)]`,
         bad: `[--scheme-tint:var(--color-bad)]`,

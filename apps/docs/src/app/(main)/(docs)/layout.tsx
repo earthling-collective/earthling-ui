@@ -1,6 +1,7 @@
 import { cn } from "earthling-ui/utils/cn";
 import { cookies } from "next/headers";
 import { ReactNode } from "react";
+import { Toc } from "@/components/toc";
 
 export default async function ({ children }: { children: ReactNode }) {
   const jar = await cookies();
@@ -21,7 +22,9 @@ export default async function ({ children }: { children: ReactNode }) {
           </article>
         </div>
       </main>
-      <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex"></aside>
+      <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex">
+        <Toc />
+      </aside>
     </>
   );
 }

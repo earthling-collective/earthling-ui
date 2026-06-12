@@ -1,3 +1,5 @@
+"use client";
+
 import { cn } from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 import {
@@ -45,17 +47,25 @@ const breadcrumbVariants = cva(
 
 export interface BreadcrumbProps
   extends ComponentPropsWithoutRef<typeof BreadcrumbPrimitive>,
-    VariantProps<typeof breadcrumbVariants> {}
+    VariantProps<typeof breadcrumbVariants> {
+  /** Marks this breadcrumb as the current page (sets `aria-current="page"`). */
+  current?: boolean;
+}
 
 const Breadcrumb = forwardRef<
   ComponentRef<typeof BreadcrumbPrimitive>,
   BreadcrumbProps
->(({ className, ...props }, ref) => {
+>(({ className, current, ...props }, ref) => {
   return (
     <BreadcrumbPrimitive
       ref={ref}
+      aria-current={current ? "page" : undefined}
       {...props}
-      className={cn(breadcrumbVariants({}), className)}
+      className={cn(
+        breadcrumbVariants({}),
+        "aria-[current=page]:text-foreground aria-[current=page]:font-medium",
+        className
+      )}
     />
   );
 });

@@ -9,12 +9,18 @@ export { Card, CardHeader, CardFooter, CardTitle, CardDescription, CardContent, 
 export { Checkbox, checkboxVariants } from "@/components/checkbox/index.tsx";
 export { Chip, chipVariants } from "@/components/chip/index.tsx";
 export { Collapsible, CollapsibleTrigger, CollapsibleContent } from "@/components/collapsible/index.tsx";
+export { ColorPicker, ColorSwatch, ColorArea, ColorSlider, ColorField, ColorSwatchPicker, ColorSwatchPickerItem, parseColor } from "@/components/color-picker/index.tsx";
 export { ContextMenu, ContextMenuTrigger, ContextMenuContent, ContextMenuItem, ContextMenuCheckboxItem, ContextMenuRadioItem, ContextMenuLabel, ContextMenuSeparator, ContextMenuShortcut, ContextMenuGroup, ContextMenuPortal, ContextMenuSub, ContextMenuSubContent, ContextMenuSubTrigger, ContextMenuRadioGroup } from "@/components/context-menu/index.tsx";
 export { Dialog, DialogClose, DialogContent, DialogDescription, DialogExitButton, DialogFooter, DialogForm, DialogHeader, DialogOverlay, DialogPortal, DialogTitle, DialogTrigger, useDialog } from "@/components/dialog/index.tsx";
 export { Drawer, DrawerPortal, DrawerOverlay, DrawerTrigger, DrawerClose, DrawerContent, DrawerHeader, DrawerFooter, DrawerTitle, DrawerDescription } from "@/components/drawer/index.tsx";
 export { DropdownMenu, DropdownMenuPortal, DropdownMenuTrigger, DropdownMenuContent, DropdownMenuGroup, DropdownMenuLabel, DropdownMenuItem, DropdownMenuCheckboxItem, DropdownMenuRadioGroup, DropdownMenuRadioItem, DropdownMenuSeparator, DropdownMenuShortcut, DropdownMenuSub, DropdownMenuSubTrigger, DropdownMenuSubContent } from "@/components/dropdown-menu/index.tsx";
 export { HoverCard, HoverCardTrigger, HoverCardContent } from "@/components/hover-card/index.tsx";
 export { Input } from "@/components/input/index.tsx";
+export { Kbd, kbdVariants } from "@/components/kbd/index.tsx";
+export { Label, labelVariants } from "@/components/label/index.tsx";
+export { Menubar, MenubarMenu, MenubarGroup, MenubarPortal, MenubarTrigger, MenubarContent, MenubarItem, MenubarCheckboxItem, MenubarRadioGroup, MenubarRadioItem, MenubarLabel, MenubarSeparator, MenubarShortcut, MenubarSub, MenubarSubTrigger, MenubarSubContent } from "@/components/menubar/index.tsx";
+export { NavigationMenu, NavigationMenuList, NavigationMenuItem, NavigationMenuTrigger, NavigationMenuContent, NavigationMenuLink, NavigationMenuIndicator, NavigationMenuViewport, navigationMenuTriggerStyle } from "@/components/navigation-menu/index.tsx";
+export { Pagination, PaginationContent, PaginationItem, PaginationLink, PaginationPrevious, PaginationNext, PaginationEllipsis, paginationLinkVariants } from "@/components/pagination/index.tsx";
 export { Popover, PopoverTrigger, PopoverContent, PopoverArrow } from "@/components/popover/index.tsx";
 export { Progress, progressVariants } from "@/components/progress/index.tsx";
 export { RadioGroup, RadioGroupItem, radioGroupVariants } from "@/components/radio/index.tsx";
@@ -23,6 +29,7 @@ export { Select, SelectGroup, SelectValue, SelectTrigger, SelectContent, SelectL
 export { Separator } from "@/components/separator/index.tsx";
 export { Skeleton } from "@/components/skeleton/index.tsx";
 export { Slider, sliderVariants } from "@/components/slider/index.tsx";
+export { Spinner, spinnerVariants } from "@/components/spinner/index.tsx";
 export { Surface } from "@/components/surface/index.tsx";
 export { Switch } from "@/components/switch/index.tsx";
 export { Table, TableHeader, TableBody, TableFooter, TableHead, TableRow, TableCell, TableCaption } from "@/components/table/index.tsx";

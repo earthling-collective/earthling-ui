@@ -2,6 +2,7 @@
 
 import { componentInformation } from "@/lib/component-info";
 import { pageInformation } from "@/lib/page-info";
+import { Search } from "@/components/search";
 import { Button } from "earthling-ui/button";
 import { Separator } from "earthling-ui/separator";
 import Link from "next/link";
@@ -11,10 +12,7 @@ export const Nav = () => {
   const pathname = usePathname();
   return (
     <nav className="sticky bottom-0 flex min-h-[calc(100vh-61px)] flex-col gap-2 p-4">
-      <Button className="mb-2 justify-start" material="paper" scheme={"muted"}>
-        <i className="icon-[lucide--search]" />
-        <div>Search...</div>
-      </Button>
+      <Search className="mb-2" />
 
       <div className="flex flex-col">
         {pageInformation.map(({ href, label, icon }) => (
