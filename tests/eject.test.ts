@@ -60,8 +60,7 @@ test(
     const deps = Object.keys(pkg.dependencies ?? {});
     expect(deps).toContain("class-variance-authority");
     expect(deps).toContain("@radix-ui/react-slot");
-    expect(deps).toContain("clsx");
-    expect(deps).toContain("tailwind-merge");
+    expect(deps).toContain("cnfast");
 
     expect(output).toContain("ejected successfully");
   },
