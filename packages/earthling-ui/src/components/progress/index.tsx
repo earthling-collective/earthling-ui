@@ -15,7 +15,7 @@ const progressVariants = cva(
   {
     variants: {
       scheme: {
-        default: `[--scheme-tint:var(--color-primary)]`,
+        default: `[--scheme-tint:var(--color-foreground)]`,
         primary: `[--scheme-tint:var(--color-primary)]`,
         secondary: `[--scheme-tint:var(--color-secondary)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)]`,
@@ -44,7 +44,7 @@ const Progress = forwardRef<
     {...props}
   >
     <ProgressPrimitive.Indicator
-      className="h-full w-full flex-1 bg-(--scheme-tint) transition-all"
+      className="h-full w-full flex-1 bg-(--scheme-tint) transition-transform duration-300 ease-out"
       style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
     />
   </ProgressPrimitive.Root>

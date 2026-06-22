@@ -14,6 +14,7 @@ const sliderVariants = cva(
   {
     variants: {
       scheme: {
+        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
@@ -44,7 +45,7 @@ const Slider = forwardRef<
     <SliderPrimitive.Track className="relative h-2 w-full grow overflow-hidden rounded-full bg-(--scheme-tint)/20">
       <SliderPrimitive.Range className="absolute h-full bg-(--scheme-tint)" />
     </SliderPrimitive.Track>
-    <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-(--scheme-tint) bg-background ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
+    <SliderPrimitive.Thumb className="block h-5 w-5 rounded-full border-2 border-(--scheme-tint) bg-background ring-offset-background transition-[color,border-color,scale] duration-150 ease-out active:scale-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50" />
   </SliderPrimitive.Root>
 ));
 Slider.displayName = SliderPrimitive.Root.displayName;

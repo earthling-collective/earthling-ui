@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn";
 import { Slot } from "@radix-ui/react-slot";
 
 const chipVariants = cva(
-  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2",
+  "inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-outline focus:ring-offset-2",
   {
     variants: {
       material: {
@@ -14,6 +14,7 @@ const chipVariants = cva(
           "border-transparent bg-(--scheme-tint) text-(--scheme-foreground) hover:bg-(--scheme-tint)/80",
       },
       scheme: {
+        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,

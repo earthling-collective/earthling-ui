@@ -6,7 +6,7 @@ import { cn } from "@/utils/cn";
 import { type ComponentProps, forwardRef } from "react";
 
 const buttonVariants = cva(
-  "focus-visible:ring-ring inline-flex aspect-(--scheme-aspect) cursor-pointer items-center items-center justify-center justify-center gap-2 rounded-control border border-transparent text-sm font-medium whitespace-nowrap  ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden aria-disabled:pointer-events-none aria-disabled:opacity-50",
+  "inline-flex aspect-(--scheme-aspect) cursor-pointer items-center justify-center gap-2 rounded-control border border-transparent text-sm font-medium whitespace-nowrap ring-offset-background transition-[color,background-color,border-color,box-shadow,scale] duration-150 ease-out focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden aria-disabled:pointer-events-none aria-disabled:opacity-50",
   {
     variants: {
       material: {
@@ -18,6 +18,7 @@ const buttonVariants = cva(
           "text-foreground hover:bg-(--scheme-tint)/5 aria-pressed:bg-(--scheme-tint)/10 aria-pressed:hover:bg-(--scheme-tint)/15",
       },
       scheme: {
+        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
@@ -43,11 +44,22 @@ export interface ButtonProps
   extends ComponentProps<"button">,
     VariantProps<typeof buttonVariants> {
   asChild?: boolean;
+  /** Disables the tactile scale-on-press feedback when motion would distract. */
+  static?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
-    { className, material, size, scheme, shape, asChild = false, ...props },
+    {
+      className,
+      material,
+      size,
+      scheme,
+      shape,
+      asChild = false,
+      static: isStatic = false,
+      ...props
+    },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
@@ -55,6 +67,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       <Comp
         className={cn(
           buttonVariants({ material, size, scheme, shape }),
+          !isStatic && "active:scale-[0.96]",
           className
         )}
         ref={ref}

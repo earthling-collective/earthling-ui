@@ -13,7 +13,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 const radioGroupVariants = cva("grid gap-2", {
   variants: {
     scheme: {
-      default: `[--scheme-tint:currentColor] [--scheme-foreground:var(--color-background)]`,
+      default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
       primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
       secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
       tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,

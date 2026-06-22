@@ -42,7 +42,7 @@ AccordionItem.displayName = "AccordionItem";
 const accordionTriggerVariants = cva("flex");
 
 const accordionTriggerButtonVariants = cva(
-  "flex flex-1 items-center justify-between gap-2 py-4 font-medium transition-all hover:underline group outline-none focus-visible:ring-2 focus-visible:ring-outline cursor-pointer"
+  "flex flex-1 items-center justify-between gap-2 py-4 font-medium transition-colors hover:underline group outline-none focus-visible:ring-2 focus-visible:ring-outline cursor-pointer"
 );
 
 const AccordionTrigger = forwardRef<
@@ -71,7 +71,7 @@ AccordionTrigger.displayName = "AccordionTrigger";
 
 // AccordionContent
 const accordionContentVariants = cva(
-  "overflow-hidden text-sm transition-all data-[state=closed]:animate-accordion-up data-[state=open]:animate-accordion-down"
+  "h-[var(--disclosure-panel-height)] overflow-hidden text-sm transition-[height] duration-200 ease-out motion-reduce:transition-none"
 );
 
 const AccordionContent = forwardRef<

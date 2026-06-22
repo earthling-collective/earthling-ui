@@ -75,6 +75,7 @@ const tabVariants = cva(
     variants: {
       size: { sm: "h-9 px-3 text-sm", md: "h-10 px-4", lg: "h-11 px-8" },
       scheme: {
+        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,

@@ -16,7 +16,7 @@ const switchVariants = cva(
     variants: {
       material: { paper: "bg-muted data-[state=checked]:bg-(--scheme-tint)" },
       scheme: {
-        default: `[--scheme-tint:currentColor]`,
+        default: `[--scheme-tint:var(--color-foreground)]`,
         primary: `[--scheme-tint:var(--color-primary)]`,
         secondary: `[--scheme-tint:var(--color-secondary)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)]`,

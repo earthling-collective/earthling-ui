@@ -18,6 +18,7 @@ const toggleGroupVariants = cva("flex items-center justify-center", {
         "rounded-control bg-(--scheme-base) bg-muted text-muted-foreground",
     },
     scheme: {
+      default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
       primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
       secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
       tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
@@ -63,6 +64,7 @@ const toggleGroupItemVariants = cva(
           "aria-checked:bg-(--scheme-tint) aria-checked:text-(--scheme-foreground) rounded-control",
       },
       scheme: {
+        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,

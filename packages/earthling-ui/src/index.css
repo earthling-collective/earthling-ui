@@ -1,5 +1,7 @@
 @source "./";
 
+@import "tw-animate-css";
+
 @plugin "@iconify/tailwind4";
 
 @theme {

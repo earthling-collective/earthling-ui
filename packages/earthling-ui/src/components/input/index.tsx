@@ -6,7 +6,7 @@ import { type ComponentProps, forwardRef } from "react";
 import { Input as InputPrimitive } from "react-aria-components";
 
 const inputVariants = cva(
-  "focus-visible:ring-ring rounded-control border text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
+  "rounded-control border text-sm font-medium whitespace-nowrap ring-offset-background transition-colors focus-visible:ring-2 focus-visible:ring-outline focus-visible:outline-hidden disabled:pointer-events-none disabled:opacity-50",
   {
     variants: {
       material: {
@@ -17,7 +17,7 @@ const inputVariants = cva(
       },
       size: { sm: "h-9 px-3", md: "h-10 px-4 py-2", lg: "h-11 px-8" },
       scheme: {
-        default: `[--scheme-tint:currentColor] [--scheme-foreground:var(--color-background)]`,
+        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
         primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
         secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
         tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
