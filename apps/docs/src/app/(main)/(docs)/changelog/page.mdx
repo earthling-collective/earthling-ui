@@ -4,6 +4,32 @@ export const metadata = {"title":"Changelog","description":"The latest changes a
 
 This page documents the current state of Earthling UI and ongoing development.
 
+## v1.1.0-alpha.41
+
+A focused release: the `cn` utility now runs on a single, faster dependency.
+
+### Improvements
+
+- **`cn` is now powered by [cnfast](https://www.npmjs.com/package/cnfast)**, replacing the `clsx` + `tailwind-merge` pair — same class-merging behavior, one smaller and faster dependency
+- Ejected components now pull in `cnfast` instead of `clsx` and `tailwind-merge`
+
+## v1.1.0-alpha.40
+
+A polish pass across the whole library — a new neutral `default` scheme, tactile motion, and a token consistency sweep.
+
+### Improvements
+
+- **New `default` scheme** (foreground-on-background neutral) available on badge, button, checkbox, chip, input, pagination, progress, radio, slider, switch, tabs, textarea, toggle group, and tooltip; textarea now defaults to it instead of `primary`
+- **Tactile press feedback**: buttons and checkboxes scale down slightly on press, and slider thumbs scale up while dragging — buttons can opt out via the new `static` prop
+- **Motion polish**: checkbox indicators animate in, accordion content animates height with `motion-reduce` support, progress bars ease their fill, and components transition only the properties they need instead of `transition-all` (via the new `tw-animate-css` dependency)
+- **Token consistency**: menus, dropdowns, menubar, select, dialogs, and navigation menu now use Earthling tokens (`muted`, `background`, `bad`) instead of leftover shadcn-style tokens (`accent`, `popover`, `destructive`)
+- Visual details: avatar images get a subtle outline ring, dialog and card titles use `text-balance`, descriptions use `text-pretty`, and focus rings are standardized on `ring-outline`
+- Docs sandbox: scheme controls for slider and tooltip, and a `static` toggle for button
+
+### Fixes
+
+- Docs component info now lists the correct `TextArea` export name
+
 ## v1.1.0-alpha.39
 
 The "ready for the world" release — packaging correctness, a Node-compatible CLI, six new components, and a consistency pass across the whole library.
