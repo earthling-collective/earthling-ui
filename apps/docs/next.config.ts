@@ -5,7 +5,7 @@ import remarkGfm from "remark-gfm";
 import rehypeSlug from "rehype-slug";
 
 const nextConfig: NextConfig = {
-  distDir: process.env.NODE_ENV === "development" ? ".next/dev" : ".next/build",
+  distDir: process.env.NODE_ENV === "development" ? ".next-dev" : ".next",
   outputFileTracingRoot: resolve(__dirname, "../.."),
   outputFileTracingIncludes: {
     "/components/*": [
