@@ -1,99 +1,56 @@
-export const metadata = {"title":"CLI","description":"Create projects, initialize configs, and eject components with the Earthling UI CLI."};
+export const metadata = {
+  title: "CLI",
+  description: "Discover, inspect, and eject Earthling UI components.",
+};
 
 # CLI
 
-Earthling UI provides a command-line interface (CLI) to help you create new projects, eject components, and manage your UI development workflow. The CLI is built to be simple and intuitive, making it easy to get started with Earthling UI.
+The package includes a Node 20+ CLI. Use `npx earthling-ui` or `bunx earthling-ui` from your project.
 
-## Installation
+## Discover
 
-The CLI is included when you install the Earthling UI package:
-
-```bash
-bun add earthling-ui
+```sh
+npx earthling-ui list --json
+npx earthling-ui info button --json
+npx earthling-ui info dialog --source --json
 ```
 
-You can also run it directly without installing:
+Discovery reads the installed version's source and reports exports, type paths, dependencies, and required helper files. Add `--source` when you need implementation details. The same metadata ships as `earthling-ui/catalog.json`.
 
-```bash
-# with bun
-bunx earthling-ui <command>
+## Initialize
 
-# with node / npm
-npx earthling-ui <command>
+```sh
+npx earthling-ui init
 ```
 
-The CLI runs under both Bun and Node.js.
+The wizard creates a config with component and utility directories. Automation can write it directly:
 
-## Commands
-
-### create
-
-Create a new project with Earthling UI pre-configured.
-
-```bash
-bunx earthling-ui create [template] [destination]
+```json
+{ "componentDir": "src/components", "utilsDir": "src/utils" }
 ```
 
-**Arguments:**
+## Eject
 
-- `template`: The template to use (optional, defaults to `monorepo`)
-- `destination`: The name of the project (and directory) to create
-
-**Examples:**
-
-```bash
-# Create a Next.js project
-bunx earthling-ui create next my-app
-
-# Create a Vite SPA project
-bunx earthling-ui create spa my-spa
-
-# Create a monorepo
-bunx earthling-ui create monorepo my-workspace
+```sh
+npx earthling-ui eject button --dry-run --json
+npx earthling-ui eject button
 ```
 
-### init
+Eject finds the nearest parent config, copies the component and its transitive source dependencies, rewrites local imports, and installs the declared dependencies with your package manager. Destinations must stay inside the configured project.
 
-Initialize an `earthling-ui.config.json` for your project. The config tells the `eject` command where to place components and shared utilities. Projects created from Earthling UI templates come with this file preconfigured.
+- `--dry-run`: preview without writing or installing.
+- `--no-install`: copy files and leave dependency installation to you.
+- `--overwrite`: replace existing component files; customized shared utilities are preserved and reported.
+- `--json`: machine-readable output without prompts; failures exit nonzero.
 
-```bash
-bunx earthling-ui init
+Keep the `earthling-ui/index.css` import in your Tailwind stylesheet. Ejected source is yours to maintain; ensure Tailwind scans its directory.
+
+## Create a project
+
+```sh
+npx earthling-ui create ssr my-app
+npx earthling-ui create spa my-spa
+npx earthling-ui create monorepo my-workspace
 ```
 
-The wizard asks for:
-
-- **Component directory** — where ejected components are placed (default `src/components`)
-- **Utils directory** — where shared utilities like `cn.ts` are placed (default `src/utils`)
-
-### eject
-
-Eject a component from Earthling UI into your project. The component's source is copied into your project so you can customize it freely — similar to shadcn/ui, but each component lives in its own folder.
-
-```bash
-bunx earthling-ui eject <component>
-```
-
-**Arguments:**
-
-- `component`: The name of the component to eject (e.g. `button`, `dialog`, `select`)
-
-**Example:**
-
-```bash
-bunx earthling-ui eject button
-```
-
-The eject command:
-
-1. Finds your `earthling-ui.config.json` (run `init` first if you don't have one — you can run eject from any subdirectory of your project)
-2. Copies the component folder into your component directory
-3. Copies the `cn` utility into your utils directory if it isn't already there
-4. Rewrites internal imports to relative paths
-5. Detects the component's dependencies and installs them with your package manager (bun, pnpm, yarn, or npm — detected from your lockfile)
-
-## Best Practices
-
-1. **Use the create command** for new projects to ensure proper setup with Earthling UI
-2. **Choose the right template** based on your project needs (Next.js for SSR, Vite for SPAs, etc.)
-3. **Consider using a monorepo** for larger projects with multiple apps or packages
-4. **Eject components only when necessary** — importing directly is preferred for most use cases, and ejected components don't receive library updates
+Templates also include `cli` and `db`. Omit arguments to use the interactive setup.

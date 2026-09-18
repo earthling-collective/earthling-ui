@@ -2,32 +2,22 @@
 
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { schemes } from "@/utils/variants";
 import { type ComponentProps, forwardRef } from "react";
 
 const spinnerVariants = cva(
-  "inline-block shrink-0 animate-spin icon-[lucide--loader-circle] text-(--scheme-tint)",
+  "inline-block shrink-0 animate-spin icon-[lucide--loader-circle] text-(--scheme-tint) motion-reduce:animate-none",
   {
     variants: {
-      scheme: {
-        default: `[--scheme-tint:currentColor]`,
-        primary: `[--scheme-tint:var(--color-primary)]`,
-        secondary: `[--scheme-tint:var(--color-secondary)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary)]`,
-        neutral: `[--scheme-tint:var(--color-neutral)]`,
-        muted: `[--scheme-tint:var(--color-muted)]`,
-        good: `[--scheme-tint:var(--color-good)]`,
-        caution: `[--scheme-tint:var(--color-caution)]`,
-        bad: `[--scheme-tint:var(--color-bad)]`,
-      },
+      scheme: { ...schemes, default: "[--scheme-tint:currentColor]" },
       size: { sm: "size-4", md: "size-5", lg: "size-7" },
     },
     defaultVariants: { scheme: "default", size: "md" },
-  }
+  },
 );
 
 export interface SpinnerProps
-  extends ComponentProps<"span">,
-    VariantProps<typeof spinnerVariants> {}
+  extends ComponentProps<"span">, VariantProps<typeof spinnerVariants> {}
 
 const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
   ({ className, scheme, size, ...props }, ref) => {
@@ -41,7 +31,7 @@ const Spinner = forwardRef<HTMLSpanElement, SpinnerProps>(
         {...props}
       />
     );
-  }
+  },
 );
 Spinner.displayName = "Spinner";
 

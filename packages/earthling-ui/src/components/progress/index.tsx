@@ -8,47 +8,55 @@ import {
 import * as ProgressPrimitive from "@radix-ui/react-progress";
 
 import { cn } from "@/utils/cn";
+import { schemes } from "@/utils/variants";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const progressVariants = cva(
   "relative h-2 w-full overflow-hidden rounded-full bg-muted",
   {
     variants: {
-      scheme: {
-        default: `[--scheme-tint:var(--color-foreground)]`,
-        primary: `[--scheme-tint:var(--color-primary)]`,
-        secondary: `[--scheme-tint:var(--color-secondary)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary)]`,
-        neutral: `[--scheme-tint:var(--color-neutral)]`,
-        muted: `[--scheme-tint:var(--color-muted)]`,
-        good: `[--scheme-tint:var(--color-good)]`,
-        caution: `[--scheme-tint:var(--color-caution)]`,
-        bad: `[--scheme-tint:var(--color-bad)]`,
-      },
+      scheme: schemes,
     },
     defaultVariants: { scheme: "default" },
-  }
+  },
 );
 
 export interface ProgressProps
-  extends ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
+  extends
+    ComponentPropsWithoutRef<typeof ProgressPrimitive.Root>,
     VariantProps<typeof progressVariants> {}
 
 const Progress = forwardRef<
   ComponentRef<typeof ProgressPrimitive.Root>,
   ProgressProps
->(({ className, value, scheme, ...props }, ref) => (
-  <ProgressPrimitive.Root
-    ref={ref}
-    className={cn(progressVariants({ scheme }), className)}
-    {...props}
-  >
-    <ProgressPrimitive.Indicator
-      className="h-full w-full flex-1 bg-(--scheme-tint) transition-transform duration-300 ease-out"
-      style={{ transform: `translateX(-${100 - (value || 0)}%)` }}
-    />
-  </ProgressPrimitive.Root>
-));
+>(({ className, value, max = 100, scheme, ...props }, ref) => {
+  const normalizedMax = Number.isFinite(max) && max > 0 ? max : 100;
+  const normalizedValue =
+    value == null || !Number.isFinite(value)
+      ? null
+      : Math.min(Math.max(value, 0), normalizedMax);
+  const percentage =
+    normalizedValue === null ? null : (normalizedValue / normalizedMax) * 100;
+
+  return (
+    <ProgressPrimitive.Root
+      ref={ref}
+      value={normalizedValue}
+      max={normalizedMax}
+      className={cn(progressVariants({ scheme }), className)}
+      {...props}
+    >
+      <ProgressPrimitive.Indicator
+        className="h-full w-full bg-(--scheme-tint) transition-transform duration-300 ease-out data-[state=indeterminate]:w-1/2 data-[state=indeterminate]:translate-x-1/2 data-[state=indeterminate]:animate-pulse motion-reduce:animate-none motion-reduce:transition-none"
+        style={
+          percentage === null
+            ? undefined
+            : { transform: `translateX(-${100 - percentage}%)` }
+        }
+      />
+    </ProgressPrimitive.Root>
+  );
+});
 Progress.displayName = ProgressPrimitive.Root.displayName;
 
 export { Progress, progressVariants };

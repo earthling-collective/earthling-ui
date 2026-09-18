@@ -1,141 +1,98 @@
 import Link from "next/link";
-import { Button } from "earthling-ui/button";
 import { cookies } from "next/headers";
-import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
+import { Button } from "earthling-ui/button";
+import { Search } from "@/components/search";
 import { Nav } from "./nav";
-import { Drawer, DrawerContent, DrawerTrigger } from "earthling-ui/drawer";
-import { pageInformation } from "@/lib/page-info";
 import { MobileNav } from "./mobile-nav";
+import { ThemeSwitch } from "./theme-switch";
 
-export default async function ({ children }: { children: React.ReactNode }) {
-  const jar = await cookies();
-  const theme = jar.get("theme")?.value ?? "system";
-
+export default async function DocsLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  const savedTheme = (await cookies()).get("theme")?.value;
+  const theme =
+    savedTheme === "light" || savedTheme === "dark" ? savedTheme : "system";
   return (
-    <div className="flex min-h-screen flex-1 flex-col">
-      <header className="bg-background/50 sticky top-0 z-10 flex flex-row items-center justify-between border-b px-4 py-3 backdrop-blur-lg">
-        <Link
-          href="/"
-          className="flex flex-row items-center gap-2 hover:opacity-80"
-        >
-          <h1 className="font-display font-medium tracking-widest">
-            Earthling UI
-          </h1>
-        </Link>
-        <div className="flex flex-row items-center gap-2">
-          <Button asChild size="sm">
+    <div className="flex min-h-dvh flex-col">
+      <a
+        href="#main-content"
+        className="bg-background fixed top-3 left-3 z-50 -translate-y-24 rounded-lg border px-4 py-2 focus:translate-y-0"
+      >
+        Skip to content
+      </a>
+      <header className="bg-background/90 sticky top-0 z-40 h-16 border-b backdrop-blur-xl">
+        <div className="mx-auto flex h-full max-w-[1600px] items-center justify-between gap-2 px-3 sm:px-6">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <MobileNav />
             <Link
-              href={`https://github.com/earthling-collective/earthling-ui`}
-              target="_blank"
-              rel="noopener noreferrer"
+              href="/"
+              aria-label="Earthling UI home"
+              className="font-display text-base tracking-tight sm:text-lg"
             >
-              <i className="icon-[simple-icons--github]" />
-              <div>Github</div>
+              earthling
+              <span className="text-muted-foreground ml-1.5 font-sans text-xs font-medium tracking-normal">
+                UI
+              </span>
             </Link>
-          </Button>
-          <Button
-            asChild
-            size="sm"
-            material={"ghost"}
-            className="hidden md:flex"
-          >
-            <Link
-              href={`http://npmjs.com/package/earthling-ui`}
-              target="_blank"
-              rel="noopener noreferrer"
+          </div>
+          <div className="flex items-center gap-1 sm:gap-4">
+            <Search className="h-8 w-9 px-2 sm:w-56" />
+            <div className="hidden h-5 border-l sm:block" />
+            <ThemeSwitch initialTheme={theme} />
+            <Button
+              asChild
+              material="ghost"
+              scheme="neutral"
+              size="sm"
+              shape="icon"
+              className="hidden sm:inline-flex"
             >
-              <i className="icon-[simple-icons--npm]" />
-            </Link>
-          </Button>
-          <Button
-            asChild
-            size="sm"
-            material={"ghost"}
-            className="hidden md:flex"
-          >
-            <Link
-              href={`http://x.com/slowjamsteve`}
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <i className="icon-[simple-icons--x]" />
-            </Link>
-          </Button>
-          <ToggleGroup
-            type="single"
-            size="sm"
-            value={theme}
-            onValueChange={async (value) => {
-              "use server";
-              if (!value) return;
-              const jar = await cookies();
-              jar.set("theme", value);
-            }}
-            className="hidden md:block"
-          >
-            <ToggleGroupItem value="system">
-              <i className="icon-[lucide--computer]" />
-            </ToggleGroupItem>
-            <ToggleGroupItem value="light">
-              <i className="icon-[lucide--sun]" />
-            </ToggleGroupItem>
-            <ToggleGroupItem value="dark">
-              <i className="icon-[lucide--moon]" />
-            </ToggleGroupItem>
-          </ToggleGroup>
-          <Drawer position="right">
-            <DrawerTrigger asChild>
-              <Button
-                size="sm"
-                material={"ghost"}
-                shape={"icon"}
-                className="md:hidden"
+              <a
+                href="https://github.com/earthling-dev/earthling-ui"
+                aria-label="Earthling UI on GitHub"
               >
-                <i className="icon-[lucide--menu]" />
-              </Button>
-            </DrawerTrigger>
-            <DrawerContent>
-              <div className="flex w-70 flex-col gap-2 p-4">
-                <MobileNav />
-              </div>
-            </DrawerContent>
-          </Drawer>
+                <i aria-hidden="true" className="icon-[simple-icons--github]" />
+              </a>
+            </Button>
+          </div>
         </div>
       </header>
-      <div className="from-foreground/10 to-foreground/0 via-foreground/0 grid grid-cols-[auto_1fr_auto] bg-radial-[at_50%_0%] bg-fixed">
-        <aside className="hidden w-70 flex-col justify-end border-r border-transparent xl:flex">
+      <div className="mx-auto grid w-full max-w-[1600px] flex-1 grid-cols-1 lg:grid-cols-[15rem_minmax(0,1fr)] xl:grid-cols-[15rem_minmax(0,1fr)_13rem]">
+        <aside className="sticky top-16 hidden h-[calc(100dvh-4rem)] overflow-y-auto border-r lg:block">
           <Nav />
         </aside>
         {children}
       </div>
-      <footer className="mt-4 flex flex-row items-center justify-center gap-4 border-t py-4 text-center">
-        <div className="font-display text-xs">Earthling UI</div>
-        <Link
-          href="https://github.com/earthling-collective/earthling-ui"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground text-xs underline hover:no-underline"
-        >
-          GitHub
-        </Link>
-        <Link
-          href="https://www.npmjs.com/package/earthling-ui"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-muted-foreground text-xs underline hover:no-underline"
-        >
-          NPM
-        </Link>
-        <div className="text-muted-foreground max-w-md text-center text-xs">
-          Created by{" "}
-          <Link
-            href="https://stevenfrady.com"
-            target="_blank"
-            className="underline hover:no-underline"
-          >
-            Steven Frady
-          </Link>
-          .
+      <footer className="text-muted-foreground border-t px-6 py-6 text-xs">
+        <div className="mx-auto flex max-w-[1552px] flex-wrap items-center justify-between gap-4">
+          <p>
+            Earthling UI · Made by{" "}
+            <a
+              className="hover:text-foreground underline underline-offset-4"
+              href="https://stevenfrady.com"
+            >
+              Steven Frady
+            </a>
+          </p>
+          <div className="flex gap-5">
+            <a
+              className="hover:text-foreground"
+              href="https://github.com/earthling-dev/earthling-ui"
+            >
+              GitHub
+            </a>
+            <a
+              className="hover:text-foreground"
+              href="https://www.npmjs.com/package/earthling-ui"
+            >
+              npm
+            </a>
+            <a className="hover:text-foreground" href="/llms.txt">
+              llms.txt
+            </a>
+          </div>
         </div>
       </footer>
     </div>

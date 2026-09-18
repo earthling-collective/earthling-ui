@@ -7,17 +7,11 @@ import { cn } from "earthling-ui/utils/cn";
 
 type Heading = { id: string; text: string; level: number };
 
-/**
- * Table of contents for prose pages. Scans the rendered article for h2/h3
- * headings (ids come from rehype-slug) and highlights the one in view.
- */
 export function Toc({ className }: { className?: string }) {
   const pathname = usePathname();
   const [headings, setHeadings] = useState<Heading[]>([]);
   const [activeId, setActiveId] = useState<string | null>(null);
 
-  // Re-scan on navigation: the shared layout (and this component) persist
-  // across sibling pages, so mount-only scanning goes stale.
   useEffect(() => {
     setActiveId(null);
     const elements = Array.from(
@@ -53,9 +47,12 @@ export function Toc({ className }: { className?: string }) {
   return (
     <nav
       aria-label="On this page"
-      className={cn("sticky top-[61px] flex flex-col gap-2 p-4", className)}
+      className={cn(
+        "sticky top-16 max-h-[calc(100dvh-4rem)] overflow-y-auto px-5 py-12",
+        className,
+      )}
     >
-      <div className="my-12 flex flex-col">
+      <div className="flex flex-col">
         <div className="text-muted-foreground mb-2 px-3 text-xs font-medium">
           On this page
         </div>
@@ -64,8 +61,9 @@ export function Toc({ className }: { className?: string }) {
             key={id}
             href={`#${id}`}
             data-active={activeId === id}
+            aria-current={activeId === id ? "location" : undefined}
             className={cn(
-              "text-muted-foreground hover:text-foreground data-[active=true]:text-foreground border-l-2 border-transparent px-3 py-1 text-sm font-medium transition-colors data-[active=true]:border-current",
+              "text-muted-foreground hover:text-foreground data-[active=true]:text-foreground border-l-2 border-transparent px-3 py-1 text-sm font-medium data-[active=true]:border-current",
               level === 3 && "pl-6",
             )}
           >

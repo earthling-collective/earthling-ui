@@ -1,21 +1,27 @@
-import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
+"use client";
 
-export default function (props: Record<string, any>) {
+import type { ComponentProps } from "react";
+import { Tab, TabList, TabPanel, Tabs } from "earthling-ui/tabs";
+
+export default function Example({
+  defaultSelectedKey = "overview",
+  ...props
+}: ComponentProps<typeof Tabs>) {
   return (
-    <Tabs {...props}>
-      <TabList>
-        <Tab id="tab1">Tab 1</Tab>
-        <Tab id="tab2">Tab 2</Tab>
-        <Tab id="tab3">Tab 3</Tab>
+    <Tabs defaultSelectedKey={defaultSelectedKey} {...props}>
+      <TabList aria-label="Project details">
+        <Tab id="overview">Overview</Tab>
+        <Tab id="activity">Activity</Tab>
+        <Tab id="settings">Settings</Tab>
       </TabList>
-      <TabPanel id="tab1" className={"py-4"}>
-        <div>Tab 1 content</div>
+      <TabPanel id="overview" className="text-muted-foreground pt-4 text-sm">
+        Track the milestones, owners, and next steps for this project.
       </TabPanel>
-      <TabPanel id="tab2" className={"py-4"}>
-        <div>Tab 2 content</div>
+      <TabPanel id="activity" className="text-muted-foreground pt-4 text-sm">
+        No new activity since your last visit.
       </TabPanel>
-      <TabPanel id="tab3" className={"py-4"}>
-        <div>Tab 3 content</div>
+      <TabPanel id="settings" className="text-muted-foreground pt-4 text-sm">
+        Manage project visibility and notification preferences.
       </TabPanel>
     </Tabs>
   );

@@ -1,9 +1,14 @@
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useId } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
-import { Dialog, DialogContent, DialogTitle } from "earthling-ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogTitle,
+  DialogDescription,
+} from "earthling-ui/dialog";
 import { Button } from "earthling-ui/button";
 import { Kbd } from "earthling-ui/kbd";
 import { cn } from "earthling-ui/utils/cn";
@@ -49,6 +54,7 @@ function matchScore(entry: SearchEntry, query: string): number {
 
 export function Search({ className }: { className?: string }) {
   const router = useRouter();
+  const id = useId();
   const [open, setOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [activeIndex, setActiveIndex] = useState(0);
@@ -80,6 +86,13 @@ export function Search({ className }: { className?: string }) {
     }
   }, [open]);
 
+  useEffect(() => {
+    if (open)
+      document
+        .getElementById(`${id}-result-${activeIndex}`)
+        ?.scrollIntoView({ block: "nearest" });
+  }, [activeIndex, open, id]);
+
   const navigate = (href: string) => {
     setOpen(false);
     router.push(href);
@@ -95,19 +108,27 @@ export function Search({ className }: { className?: string }) {
         aria-label="Search documentation"
       >
         <i className="icon-[lucide--search]" />
-        <div className="flex-1 text-left">Search...</div>
-        <Kbd size="sm" className="max-md:hidden">
-          Ctrl K
+        <div className="hidden flex-1 text-left text-xs sm:block">
+          Search docs
+        </div>
+        <Kbd size="sm" className="max-sm:hidden">
+          ⌘ / Ctrl K
         </Kbd>
       </Button>
 
       <Dialog open={open} onOpenChange={setOpen}>
         <DialogContent className="top-24 max-w-lg translate-y-0 gap-0 overflow-hidden p-0">
           <DialogTitle className="sr-only">Search documentation</DialogTitle>
+          <DialogDescription className="sr-only">
+            Search guides and components. Use the arrow keys to select a result,
+            then Enter to open it.
+          </DialogDescription>
           <div className="flex items-center gap-2 border-b px-4">
-            <i className="text-muted-foreground size-4 shrink-0 icon-[lucide--search]" />
+            <i className="text-muted-foreground icon-[lucide--search] size-4 shrink-0" />
             <input
               autoFocus
+              aria-label="Search documentation"
+              aria-autocomplete="list"
               value={query}
               onChange={(e) => {
                 setQuery(e.target.value);
@@ -116,7 +137,9 @@ export function Search({ className }: { className?: string }) {
               onKeyDown={(e) => {
                 if (e.key === "ArrowDown") {
                   e.preventDefault();
-                  setActiveIndex((i) => Math.min(i + 1, results.length - 1));
+                  setActiveIndex((i) =>
+                    Math.max(0, Math.min(i + 1, results.length - 1)),
+                  );
                 } else if (e.key === "ArrowUp") {
                   e.preventDefault();
                   setActiveIndex((i) => Math.max(i - 1, 0));
@@ -129,22 +152,23 @@ export function Search({ className }: { className?: string }) {
               className="placeholder:text-muted-foreground h-12 w-full bg-transparent text-sm outline-none"
               role="combobox"
               aria-expanded="true"
-              aria-controls="search-results"
+              aria-controls={id + "-results"}
               aria-activedescendant={
-                results[activeIndex]
-                  ? `search-result-${activeIndex}`
-                  : undefined
+                results[activeIndex] ? `${id}-result-${activeIndex}` : undefined
               }
             />
           </div>
           <ul
-            id="search-results"
+            id={id + "-results"}
             role="listbox"
             aria-label="Search results"
             className="max-h-80 overflow-y-auto p-2"
           >
             {results.length === 0 && (
-              <li className="text-muted-foreground px-3 py-8 text-center text-sm">
+              <li
+                role="presentation"
+                className="text-muted-foreground px-3 py-8 text-center text-sm"
+              >
                 No results for “{query}”
               </li>
             )}
@@ -158,15 +182,16 @@ export function Search({ className }: { className?: string }) {
                     </div>
                   )}
                   <Link
-                    id={`search-result-${i}`}
+                    id={`${id}-result-${i}`}
                     role="option"
+                    tabIndex={-1}
                     aria-selected={i === activeIndex}
                     href={entry.href}
                     onClick={() => setOpen(false)}
                     onMouseMove={() => setActiveIndex(i)}
                     className={cn(
                       "flex items-center gap-3 rounded-md px-3 py-2 text-sm",
-                      i === activeIndex && "bg-(--color-primary)/10",
+                      i === activeIndex && "bg-primary/10",
                     )}
                   >
                     <i className={cn("size-4 shrink-0", entry.icon)} />

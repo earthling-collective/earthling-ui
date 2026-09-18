@@ -7,12 +7,15 @@ const Skeleton = forwardRef<HTMLDivElement, ComponentProps<"div">>(
   ({ className, ...props }, ref) => {
     return (
       <div
-        className={cn("animate-pulse rounded-md bg-muted", className)}
+        className={cn(
+          "animate-pulse rounded-md bg-muted motion-reduce:animate-none",
+          className,
+        )}
         ref={ref}
         {...props}
       />
     );
-  }
+  },
 );
 Skeleton.displayName = "Skeleton";
 

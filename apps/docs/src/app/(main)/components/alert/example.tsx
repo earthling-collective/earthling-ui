@@ -1,11 +1,16 @@
-import { Alert, AlertTitle, AlertDescription } from "earthling-ui/alert";
+"use client";
 
-export default function (props: Record<string, any>) {
+import type { ComponentProps } from "react";
+import { Alert, AlertDescription, AlertTitle } from "earthling-ui/alert";
+
+type AlertExampleProps = ComponentProps<typeof Alert>;
+
+export default function Example(props: AlertExampleProps) {
   return (
     <Alert {...props}>
-      <AlertTitle>Heads up!</AlertTitle>
+      <AlertTitle>Deployment ready</AlertTitle>
       <AlertDescription>
-        You can add components to your app using the cli.
+        Your changes passed every check and can be published when you are ready.
       </AlertDescription>
     </Alert>
   );

@@ -1,0 +1,12 @@
+@import "tailwindcss";
+@import "earthling-ui/index.css";
+@import "earthling-ui/themes/dark.css";
+
+@layer base {
+  :root[data-theme="dark"] {
+    @apply theme-dark;
+  }
+  body {
+    margin: 0;
+  }
+}

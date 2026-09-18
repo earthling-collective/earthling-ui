@@ -1,34 +1,46 @@
 "use client";
-
 import {
   createContext,
-  SetStateAction,
-  Dispatch,
-  useState,
   useContext,
+  useState,
+  type Dispatch,
+  type ReactNode,
+  type SetStateAction,
 } from "react";
-
-const ComponentSandboxContext = createContext<
-  [
-    props: Record<string, any>,
-    setProps: Dispatch<SetStateAction<Record<string, any>>>,
-  ]
->([{}, () => {}]);
-
-export const ComponentSandboxProvider = function ({
+type Props = Record<string, string | number | boolean | undefined>;
+const Context = createContext<{
+  props: Props;
+  setProps: Dispatch<SetStateAction<Props>>;
+  reset: () => void;
+  revision: number;
+} | null>(null);
+export function ComponentSandboxProvider({
   children,
   defaultProps,
 }: {
-  children: React.ReactNode;
-  defaultProps?: Record<string, any>;
+  children: ReactNode;
+  defaultProps: Props;
 }) {
-  const [props, setProps] = useState(defaultProps ?? {});
-
+  const [props, setProps] = useState(defaultProps);
+  const [revision, setRevision] = useState(0);
   return (
-    <ComponentSandboxContext.Provider value={[props, setProps]}>
+    <Context.Provider
+      value={{
+        props,
+        setProps,
+        revision,
+        reset: () => {
+          setProps(defaultProps);
+          setRevision((value) => value + 1);
+        },
+      }}
+    >
       {children}
-    </ComponentSandboxContext.Provider>
+    </Context.Provider>
   );
-};
-
-export const useComponentSandbox = () => useContext(ComponentSandboxContext);
+}
+export function useComponentSandbox() {
+  const context = useContext(Context);
+  if (!context) throw new Error("Missing component sandbox provider");
+  return context;
+}

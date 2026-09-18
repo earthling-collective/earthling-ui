@@ -46,7 +46,9 @@ export default async function ({
   children: React.ReactNode;
 }>) {
   const jar = await cookies();
-  const theme = jar.get("theme")?.value ?? "system";
+  const savedTheme = jar.get("theme")?.value;
+  const theme =
+    savedTheme === "light" || savedTheme === "dark" ? savedTheme : "system";
 
   return (
     <html

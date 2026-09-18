@@ -8,6 +8,7 @@ import {
   type ComponentPropsWithoutRef,
   type ComponentRef,
   type ForwardRefExoticComponent,
+  type RefAttributes,
 } from "react";
 import { Drawer as DrawerPrimitive } from "vaul";
 import { cn } from "@/utils/cn";
@@ -23,9 +24,14 @@ export type DrawerProps = ComponentProps<typeof DrawerPrimitive.Root> & {
   position?: "left" | "right" | "top" | "bottom";
 };
 
-const Drawer = ({ position, children, ...props }: DrawerProps) => (
-  <DrawerPrimitive.Root direction={position} {...props}>
-    <DrawerContext.Provider value={{ position: position || "bottom" }}>
+const Drawer = ({
+  position = "bottom",
+  direction = position,
+  children,
+  ...props
+}: DrawerProps) => (
+  <DrawerPrimitive.Root direction={direction} {...props}>
+    <DrawerContext.Provider value={{ position: direction }}>
       {children}
     </DrawerContext.Provider>
   </DrawerPrimitive.Root>
@@ -45,39 +51,48 @@ const DrawerClose = DrawerPrimitive.Close as React.FC<DrawerCloseProps>;
 type DrawerOverlayPrimitive = typeof DrawerPrimitive.Overlay;
 export type DrawerOverlayProps =
   ComponentPropsWithoutRef<DrawerOverlayPrimitive>;
-const DrawerOverlay: ForwardRefExoticComponent<DrawerOverlayProps> = forwardRef<
-  ComponentRef<DrawerOverlayPrimitive>,
-  DrawerOverlayProps
->(({ className, ...props }, ref) => (
-  <DrawerPrimitive.Overlay
-    ref={ref}
-    className={cn("fixed inset-0 z-50 bg-muted/60", className)}
-    {...props}
-  />
-));
+const DrawerOverlay: ForwardRefExoticComponent<
+  DrawerOverlayProps & RefAttributes<ComponentRef<DrawerOverlayPrimitive>>
+> = forwardRef<ComponentRef<DrawerOverlayPrimitive>, DrawerOverlayProps>(
+  ({ className, ...props }, ref) => (
+    <DrawerPrimitive.Overlay
+      ref={ref}
+      className={cn(
+        "fixed inset-0 z-50 bg-muted/60 duration-150 ease-out data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 motion-reduce:animate-none",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 DrawerOverlay.displayName = DrawerPrimitive.Overlay.displayName;
 
-const drawerContentVariants = cva("fixed z-50 flex h-auto bg-background", {
-  variants: {
-    position: {
-      bottom: "inset-x-0 bottom-0 rounded-t-lg border-t flex-col",
-      top: "inset-x-0 top-0 rounded-b-lg border-b flex-col-reverse",
-      left: "inset-y-0 left-0 rounded-r-lg border-r flex-row-reverse",
-      right: "inset-y-0 right-0 rounded-l-lg border-l flex-row",
+const drawerContentVariants = cva(
+  "fixed z-50 flex h-auto overflow-auto bg-background outline-none motion-reduce:transition-none",
+  {
+    variants: {
+      position: {
+        bottom:
+          "inset-x-0 bottom-0 max-h-[calc(100dvh-1rem)] flex-col rounded-t-xl border-t",
+        top: "inset-x-0 top-0 max-h-[calc(100dvh-1rem)] flex-col-reverse rounded-b-xl border-b",
+        left: "inset-y-0 left-0 max-w-[calc(100vw-1rem)] flex-row-reverse rounded-r-xl border-r",
+        right:
+          "inset-y-0 right-0 max-w-[calc(100vw-1rem)] flex-row rounded-l-xl border-l",
+      },
+    },
+    defaultVariants: {
+      position: "bottom",
     },
   },
-  defaultVariants: {
-    position: "bottom",
-  },
-});
+);
 
 const drawerHandleVariants = cva("rounded-full bg-muted", {
   variants: {
     position: {
-      bottom: "h-2 w-[100px] mx-auto mt-4",
-      top: "h-2 w-[100px] mx-auto mb-4",
-      left: "w-2 h-[100px] my-auto mr-4",
-      right: "w-2 h-[100px] my-auto ml-4",
+      bottom: "mx-auto mt-4 h-1.5 w-24",
+      top: "mx-auto mb-4 h-1.5 w-24",
+      left: "my-auto me-4 h-24 w-1.5",
+      right: "my-auto ms-4 h-24 w-1.5",
     },
   },
   defaultVariants: {
@@ -86,13 +101,14 @@ const drawerHandleVariants = cva("rounded-full bg-muted", {
 });
 
 export interface DrawerContentProps
-  extends ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>,
+  extends
+    ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>,
     VariantProps<typeof drawerContentVariants> {}
 
 const DrawerContent = forwardRef<
   ComponentRef<typeof DrawerPrimitive.Content>,
   DrawerContentProps
->(({ className, children, ...props }, ref) => {
+>(({ className, children, position, ...props }, ref) => {
   const context = useContext(DrawerContext);
 
   return (
@@ -102,17 +118,17 @@ const DrawerContent = forwardRef<
         ref={ref}
         className={cn(
           drawerContentVariants({
-            position: props.position || context.position,
+            position: position || context.position,
           }),
-          className
+          className,
         )}
         {...props}
       >
         <div
           className={cn(
             drawerHandleVariants({
-              position: props.position || context.position,
-            })
+              position: position || context.position,
+            }),
           )}
         />
         {children}
@@ -140,34 +156,38 @@ DrawerFooter.displayName = "DrawerFooter";
 
 type DrawerTitlePrimitive = typeof DrawerPrimitive.Title;
 export type DrawerTitleProps = ComponentPropsWithoutRef<DrawerTitlePrimitive>;
-const DrawerTitle: ForwardRefExoticComponent<DrawerTitleProps> = forwardRef<
-  ComponentRef<DrawerTitlePrimitive>,
-  DrawerTitleProps
->(({ className, ...props }, ref) => (
-  <DrawerPrimitive.Title
-    ref={ref}
-    className={cn(
-      "text-lg font-semibold leading-none tracking-tight",
-      className
-    )}
-    {...props}
-  />
-));
+const DrawerTitle: ForwardRefExoticComponent<
+  DrawerTitleProps & RefAttributes<ComponentRef<DrawerTitlePrimitive>>
+> = forwardRef<ComponentRef<DrawerTitlePrimitive>, DrawerTitleProps>(
+  ({ className, ...props }, ref) => (
+    <DrawerPrimitive.Title
+      ref={ref}
+      className={cn(
+        "text-lg font-semibold leading-none tracking-tight text-balance",
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 DrawerTitle.displayName = DrawerPrimitive.Title.displayName;
 
 type DrawerDescriptionPrimitive = typeof DrawerPrimitive.Description;
 export type DrawerDescriptionProps =
   ComponentPropsWithoutRef<DrawerDescriptionPrimitive>;
-const DrawerDescription: ForwardRefExoticComponent<DrawerDescriptionProps> =
-  forwardRef<ComponentRef<DrawerDescriptionPrimitive>, DrawerDescriptionProps>(
-    ({ className, ...props }, ref) => (
-      <DrawerPrimitive.Description
-        ref={ref}
-        className={cn("text-sm text-muted-foreground", className)}
-        {...props}
-      />
-    )
-  );
+const DrawerDescription: ForwardRefExoticComponent<
+  DrawerDescriptionProps &
+    RefAttributes<ComponentRef<DrawerDescriptionPrimitive>>
+> = forwardRef<
+  ComponentRef<DrawerDescriptionPrimitive>,
+  DrawerDescriptionProps
+>(({ className, ...props }, ref) => (
+  <DrawerPrimitive.Description
+    ref={ref}
+    className={cn("text-sm text-muted-foreground text-pretty", className)}
+    {...props}
+  />
+));
 DrawerDescription.displayName = DrawerPrimitive.Description.displayName;
 
 export {

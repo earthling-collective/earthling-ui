@@ -1,5 +1,4 @@
-"use client";
-import "highlight.js/styles/night-owl.min.css";
+import "server-only";
 
 import highlight from "highlight.js/lib/core";
 import typescript from "highlight.js/lib/languages/typescript";
@@ -15,3 +14,8 @@ highlight.registerLanguage("bash", bash);
 highlight.registerLanguage("css", css);
 
 export default highlight;
+
+import plaintext from "highlight.js/lib/languages/plaintext";
+import xml from "highlight.js/lib/languages/xml";
+highlight.registerLanguage("plaintext", plaintext);
+highlight.registerLanguage("xml", xml);

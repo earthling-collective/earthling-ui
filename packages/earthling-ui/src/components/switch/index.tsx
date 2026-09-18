@@ -8,52 +8,23 @@ import {
 import * as SwitchPrimitives from "@radix-ui/react-switch";
 
 import { cn } from "@/utils/cn";
+import { schemes } from "@/utils/variants";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const switchVariants = cva(
-  "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline  disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:bg-muted",
+  "peer inline-flex h-6 w-11 shrink-0 cursor-pointer items-center rounded-full border-2 border-transparent ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-bad aria-invalid:ring-bad/30 ",
   {
     variants: {
       material: { paper: "bg-muted data-[state=checked]:bg-(--scheme-tint)" },
-      scheme: {
-        default: `[--scheme-tint:var(--color-foreground)]`,
-        primary: `[--scheme-tint:var(--color-primary)]`,
-        secondary: `[--scheme-tint:var(--color-secondary)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary)]`,
-        muted: `[--scheme-tint:var(--color-muted)]`,
-        good: `[--scheme-tint:var(--color-good)]`,
-        caution: `[--scheme-tint:var(--color-caution)]`,
-        bad: `[--scheme-tint:var(--color-bad)]`,
-      },
+      scheme: schemes,
     },
     defaultVariants: { material: "paper", scheme: "default" },
-  }
-);
-
-const switchThumbVariants = cva(
-  "pointer-events-none block h-5 w-5 rounded-full bg-background shadow-lg ring-0 transition-[translate,background-color] data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0",
-  {
-    variants: {
-      material: {
-        paper: "bg-muted-foreground data-[state=checked]:bg-(--scheme-tint)",
-      },
-      scheme: {
-        default: `[--scheme-tint:var(--color-background)]`,
-        primary: `[--scheme-tint:var(--color-primary-foreground)]`,
-        secondary: `[--scheme-tint:var(--color-secondary-foreground)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary-foreground)]`,
-        muted: `[--scheme-tint:var(--color-muted-foreground)]`,
-        good: `[--scheme-tint:var(--color-good-foreground)]`,
-        caution: `[--scheme-tint:var(--color-caution-foreground)]`,
-        bad: `[--scheme-tint:var(--color-bad-foreground)]`,
-      },
-    },
-    defaultVariants: { material: "paper", scheme: "default" },
-  }
+  },
 );
 
 export interface SwitchProps
-  extends ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>,
+  extends
+    ComponentPropsWithoutRef<typeof SwitchPrimitives.Root>,
     VariantProps<typeof switchVariants> {}
 
 const Switch = forwardRef<
@@ -65,9 +36,7 @@ const Switch = forwardRef<
     {...props}
     ref={ref}
   >
-    <SwitchPrimitives.Thumb
-      className={cn(switchThumbVariants({ material, scheme }))}
-    />
+    <SwitchPrimitives.Thumb className="pointer-events-none block size-5 rounded-full bg-muted-foreground shadow-sm transition-transform duration-150 ease-out motion-reduce:transition-none data-[state=checked]:bg-(--scheme-foreground) data-[state=checked]:translate-x-5 data-[state=unchecked]:translate-x-0 rtl:data-[state=checked]:-translate-x-5" />
   </SwitchPrimitives.Root>
 ));
 Switch.displayName = SwitchPrimitives.Root.displayName;

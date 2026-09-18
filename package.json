@@ -6,7 +6,10 @@
   ],
   "scripts": {
     "build": "bun run --cwd packages/earthling-ui build",
-    "test": "bun run --cwd packages/earthling-ui build && bun test tests/build-output.test.ts tests/eject.test.ts tests/vite-consumer.test.ts"
+    "test": "bun run typecheck && bun run test:unit && bun run test:integration",
+    "typecheck": "tsc --noEmit -p packages/earthling-ui/tsconfig.json",
+    "test:unit": "bun test ./tests/catalog.test.ts ./tests/components.test.tsx ./tests/theme.test.ts",
+    "test:integration": "bun run build && bun test ./tests/build-output.test.ts ./tests/eject.test.ts ./tests/vite-consumer.test.ts"
   },
   "devDependencies": {
     "@types/bun": "^1.3.6"

@@ -1,6 +1,5 @@
 "use client";
-
-import { ComponentPropInfo } from "@/lib/component-info";
+import type { ComponentPropInfo } from "@/lib/component-info";
 import { Input } from "earthling-ui/input";
 import {
   Select,
@@ -10,122 +9,106 @@ import {
   SelectValue,
 } from "earthling-ui/select";
 import { Switch } from "earthling-ui/switch";
-import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
+import { Button } from "earthling-ui/button";
 import { useComponentSandbox } from "./context";
-
-export interface ComponentSandboxControlsProps {
-  controls: ComponentPropInfo[];
-}
+import { useId } from "react";
 
 export function ComponentSandboxControls({
   controls,
-}: ComponentSandboxControlsProps) {
-  const [props, setProps] = useComponentSandbox();
-
-  if (!controls?.length) return null;
-
+}: {
+  controls: ComponentPropInfo[];
+}) {
+  const { props, setProps, reset } = useComponentSandbox();
+  const id = useId();
+  if (!controls.length) return null;
   return (
-    <div className="grid grid-cols-[2fr_1fr_1fr_auto] overflow-hidden rounded-lg border">
-      <div className="bg-muted text-muted-foreground col-span-full grid grid-cols-subgrid grid-rows-1 items-center gap-4 border-b px-4 py-2 text-sm font-medium">
-        <div></div>
-        <div>Prop</div>
-        <div>Default Value</div>
-        <div>Value</div>
+    <div className="mt-5 rounded-xl border">
+      <div className="flex items-center justify-between border-b px-4 py-2">
+        <h3 className="text-sm font-medium">Playground</h3>
+        <Button material="ghost" scheme="neutral" size="sm" onClick={reset}>
+          Reset
+        </Button>
       </div>
-      {controls
-        .sort((a, b) => (a.label > b.label ? 1 : a.label < b.label ? -1 : 0))
-        .map((control) => (
-          <div
-            key={control.prop}
-            className="col-span-full grid grid-cols-subgrid grid-rows-1 items-center gap-4 p-4 not-last:border-b"
-          >
-            <div>
-              <label className="text font-medium">{control.label}</label>
-              <div className="text-muted-foreground text-sm">
-                {control.description}
+      <div className="grid sm:grid-cols-2">
+        {controls.map((control) => {
+          const controlId = id + control.prop;
+          const value = props[control.prop];
+          const update = (value: string | boolean | number | undefined) =>
+            setProps((p) => ({ ...p, [control.prop]: value }));
+          return (
+            <div
+              key={control.prop}
+              className="flex min-w-0 flex-col gap-2 border-b p-4 last:border-b-0 sm:odd:border-r"
+            >
+              <div className="flex items-center justify-between gap-3">
+                <label
+                  id={controlId + "-label"}
+                  htmlFor={controlId}
+                  className="text-sm font-medium"
+                >
+                  {control.label}
+                </label>
+                <code className="text-muted-foreground text-xs">
+                  {control.prop}
+                </code>
               </div>
-            </div>
-            <div>
-              <span className="bg-neutral rounded px-1 text-sm">
-                {control.prop}
-              </span>
-            </div>
-            <div>{`${control.defaultValue}`}</div>
-            <div>
-              {control.type === "string" && (
+              {(control.type === "string" || control.type === "number") && (
                 <Input
-                  className="flex-1 rounded-md border border-current/10 bg-current/5 px-3 py-2 text-sm text-current/60 outline-none"
-                  value={(props as any)[control.prop] || ""}
-                  onChange={(e) => {
-                    setProps({
-                      ...props,
-                      [control.prop]: e.target.value || undefined,
-                    });
-                  }}
+                  id={controlId}
+                  aria-describedby={controlId + "-help"}
+                  type={control.type === "number" ? "number" : "text"}
+                  value={typeof value === "boolean" ? "" : (value ?? "")}
+                  onChange={(e) =>
+                    update(
+                      control.type === "number"
+                        ? e.target.value === ""
+                          ? undefined
+                          : e.target.valueAsNumber
+                        : e.target.value,
+                    )
+                  }
                 />
               )}
               {control.type === "boolean" && (
                 <Switch
-                  checked={(props as any)[control.prop] || false}
-                  onCheckedChange={(checked) => {
-                    setProps({
-                      ...props,
-                      [control.prop]: checked || false,
-                    });
-                  }}
+                  id={controlId}
+                  aria-describedby={controlId + "-help"}
+                  checked={value === true}
+                  onCheckedChange={update}
                 />
               )}
-              {control.type === "select" && (
-                <div className="flex flex-row flex-wrap items-center gap-2">
-                  <Select
-                    value={(props as any)[control.prop] || control.defaultValue}
-                    onValueChange={(value) => {
-                      setProps({
-                        ...props,
-                        [control.prop]: value,
-                      });
-                    }}
+              {(control.type === "select" ||
+                control.type === "toggle-group") && (
+                <Select
+                  value={String(value ?? control.defaultValue ?? "")}
+                  onValueChange={update}
+                >
+                  <SelectTrigger
+                    id={controlId}
+                    aria-describedby={controlId + "-help"}
+                    className="w-full"
                   >
-                    <SelectTrigger>
-                      <SelectValue />
-                    </SelectTrigger>
-                    <SelectContent>
-                      {control.options.map((option) => (
-                        <SelectItem value={option} key={option}>
-                          {option}
-                        </SelectItem>
-                      ))}
-                    </SelectContent>
-                  </Select>
-                </div>
-              )}
-              {control.type === "toggle-group" && (
-                <div className="flex flex-row flex-wrap items-center gap-2">
-                  <ToggleGroup
-                    type="single"
-                    className="flex-wrap"
-                    value={(props as any)[control.prop] || ""}
-                  >
+                    <SelectValue />
+                  </SelectTrigger>
+                  <SelectContent>
                     {control.options.map((option) => (
-                      <ToggleGroupItem
-                        value={option}
-                        key={option}
-                        onClick={() => {
-                          setProps({
-                            ...props,
-                            [control.prop]: option,
-                          });
-                        }}
-                      >
+                      <SelectItem key={option} value={option}>
                         {option}
-                      </ToggleGroupItem>
+                      </SelectItem>
                     ))}
-                  </ToggleGroup>
-                </div>
+                  </SelectContent>
+                </Select>
               )}
+              <p
+                id={controlId + "-help"}
+                className="text-muted-foreground text-xs leading-5"
+              >
+                {control.description}
+              </p>
             </div>
-          </div>
-        ))}
+          );
+        })}
+      </div>
     </div>
   );
 }

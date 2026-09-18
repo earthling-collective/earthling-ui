@@ -1,144 +1,62 @@
-export const metadata = {"title":"Theming","description":"Customize Earthling UI with CSS variables, built-in themes, and your own custom themes."};
+export const metadata = {
+  title: "Theming",
+  description: "Customize Earthling UI with shared CSS tokens.",
+};
 
 import { ThemeDemo } from "@/components/theme-demo";
 
 # Theming
 
-Earthling UI provides a flexible theming system that allows you to customize the look and feel of your components. The theming system is built on CSS variables and utility classes, making it easy to create and switch between different themes.
+Theme tokens control color, radius, and typography across imported and ejected components.
 
 <ThemeDemo />
 
-## Theme Structure
+## Light and dark
 
-Themes in Earthling UI are defined using CSS variables that control various aspects of the design:
-
-- **Colors**: Background, foreground, primary, secondary, tertiary, neutral, muted, and semantic colors (good, caution, bad)
-- **Radius**: Border radius for controls like buttons and inputs
-- **Typography**: Font families for display, body, and monospace text
-
-## Default Theme
-
-Earthling UI comes with a default light theme that's applied automatically. Here's a sample of the default theme variables:
+Use your framework's Tailwind CSS 4 integration:
 
 ```css
-:root {
-  --radius-control: 999px;
+@import "tailwindcss";
+@import "earthling-ui/index.css";
+@import "earthling-ui/themes/dark.css";
 
-  --color-surface: oklch(0.99 0 0);
-  --color-outline: oklch(0 0 0);
-  --color-light: oklch(1 0 0 / 0.2);
-  --color-shadow: oklch(0.25 0 0);
-
-  --color-foreground: oklch(0.25 0 0);
-  --color-background: oklch(0.99 0 0);
-
-  --color-primary: oklch(17.42% 0.0017 17.32);
-  --color-primary-foreground: oklch(96.29% 0 0);
-
-  /* Additional color variables... */
+@layer base {
+  :root[data-theme="dark"] {
+    @apply theme-dark;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="system"] {
+      @apply theme-dark;
+    }
+  }
 }
 ```
 
-## Using Built-in Themes
+Set the root's `data-theme` to `light`, `dark`, or `system`. The root canvas and native controls follow the theme. Apply `theme-dark` to a container for a scoped theme, keeping portaled overlays in mind.
 
-Earthling UI includes additional themes that you can import and use:
-
-```css
-/* Import the default theme */
-@import "earthling-ui";
-/* Import the dark theme */
-@import "earthling-ui/theme/dark";
-```
-
-If your bundler imports stylesheets from JavaScript instead, the direct file paths work in any bundler:
-
-```ts
-import "earthling-ui/index.css";
-import "earthling-ui/themes/dark.css";
-```
-
-To apply a theme, use the corresponding CSS class:
-
-```jsx
-<div className="theme-dark">
-  {/* Components in here will use the dark theme */}
-</div>
-```
-
-## Creating Custom Themes
-
-You can create your own themes by defining a set of CSS variables:
+## Customize
 
 ```css
-@utility theme-custom {
-  --radius-control: 8px;
-
-  --color-background: oklch(98% 0.01 240);
-  --color-foreground: oklch(20% 0.02 240);
-
-  --color-primary: oklch(60% 0.2 200);
-  --color-primary-foreground: oklch(98% 0 0);
-
-  /* Define other color variables... */
+@layer base {
+  :root {
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --radius-control: 0.75rem;
+    --color-primary: oklch(0.45 0.16 265);
+    --color-primary-foreground: oklch(0.98 0 0);
+  }
 }
 ```
 
-Then apply your custom theme using the class name:
+Dark mode changes color tokens without resetting your radius. Use `className` for individual component overrides.
 
-```jsx
-<div className="theme-custom">
-  {/* Components in here will use your custom theme */}
-</div>
-```
+## Tokens
 
-## Theme Variables Reference
+| Group      | Tokens                                                                           |
+| ---------- | -------------------------------------------------------------------------------- |
+| Typography | `--font-display`, `--font-body`, `--font-mono`                                   |
+| Shape      | `--radius-control`                                                               |
+| Canvas     | `--color-background`, `--color-foreground`, `--color-surface`                    |
+| Details    | `--color-outline`, `--color-image-outline`, `--color-light`, `--color-shadow`    |
+| Schemes    | `primary`, `secondary`, `tertiary`, `neutral`, `muted`, `good`, `caution`, `bad` |
 
-Here's a complete list of theme variables you can customize:
-
-### Typography
-
-- `--font-display`: Font for headings and display text
-- `--font-body`: Font for body text
-- `--font-mono`: Font for monospace text (code)
-
-### Radius
-
-- `--radius-control`: Border radius for controls (buttons, inputs, etc.)
-
-### Utility Colors
-
-- `--color-surface`: Background color for surfaces (cards, dialogs)
-- `--color-outline`: Color for focus rings and outlines
-- `--color-light`: Color for highlight effects
-- `--color-shadow`: Color for shadows
-
-### Base Colors
-
-- `--color-background`: Default background color
-- `--color-foreground`: Default text color
-
-### Semantic Colors
-
-Each semantic color has three variants:
-
-- Base color (e.g., `--color-primary`)
-- Foreground color (e.g., `--color-primary-foreground`)
-- Accent color (e.g., `--color-primary-accent`)
-
-Available semantic colors:
-
-- `primary`: Main brand color
-- `secondary`: Secondary brand color
-- `tertiary`: Tertiary brand color
-- `neutral`: Neutral color for backgrounds
-- `muted`: Subdued color for less important elements
-- `good`: Success/positive color
-- `caution`: Warning color
-- `bad`: Error/negative color
-
-## Best Practices
-
-1. **Use semantic color variables** instead of hardcoding colors to ensure consistency across themes
-2. **Test your components in all themes** to ensure they look good in different color schemes
-3. **Consider accessibility** when creating custom themes, ensuring sufficient contrast between text and background
-4. **Use the oklch color space** for smooth transitions and better color perception across different screens
+Each scheme has `--color-<scheme>` and `--color-<scheme>-foreground`. Set both together and check text contrast. The package's `src/index.css` and `src/themes/dark.css` are the source of truth for default values.

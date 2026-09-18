@@ -1,0 +1,13 @@
+# Earthling UI
+
+> React 18/19 and Tailwind CSS 4 components. Import from earthling-ui/<name> or eject source for ownership.
+
+Use installed-version metadata. Run `earthling-ui list --json`, then `earthling-ui info <name> --json`; add `--source` only when needed. Preview ejection with `earthling-ui eject <name> --dry-run --json`. Keep the package stylesheet when ejecting.
+
+## Reference
+
+- [Usage and conventions](README.md): installation, theming, composition, and CLI.
+- [Component catalog](dist/catalog.json): generated exports, import paths, source files, and versioned dependencies.
+- [Component source](src/components/index.ts): public entry points; each component directory has its implementation.
+- [Theme](src/index.css): default tokens and Tailwind integration.
+- [Dark theme](src/themes/dark.css): theme-dark utility.

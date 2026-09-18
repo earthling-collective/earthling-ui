@@ -1,5 +1,6 @@
 "use client";
 
+import type { ComponentProps } from "react";
 import {
   AlertDialog,
   AlertDialogAction,
@@ -13,23 +14,25 @@ import {
 } from "earthling-ui/alert-dialog";
 import { Button } from "earthling-ui/button";
 
-export default function (props: Record<string, any>) {
+type AlertDialogExampleProps = ComponentProps<typeof AlertDialog>;
+
+export default function Example(props: AlertDialogExampleProps) {
   return (
     <AlertDialog {...props}>
       <AlertDialogTrigger asChild>
-        <Button material="outline">Open Alert Dialog</Button>
+        <Button material="outline">Revoke API key</Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Are you sure?</AlertDialogTitle>
+          <AlertDialogTitle>Revoke this API key?</AlertDialogTitle>
           <AlertDialogDescription>
-            This action cannot be undone. This will permanently delete your
-            account and remove your data from our servers.
+            Requests using “Production sync” will stop immediately. This cannot
+            be undone, but you can create a new key later.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
-          <AlertDialogAction>Continue</AlertDialogAction>
+          <AlertDialogCancel>Keep key</AlertDialogCancel>
+          <AlertDialogAction>Revoke key</AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>

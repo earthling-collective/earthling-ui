@@ -1,5 +1,10 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import { Badge } from "earthling-ui/badge";
 
-export default function (props: Record<string, any>) {
-  return <Badge {...props}>Badge</Badge>;
+type BadgeExampleProps = ComponentProps<typeof Badge>;
+
+export default function Example(props: BadgeExampleProps) {
+  return <Badge {...props}>Operational</Badge>;
 }

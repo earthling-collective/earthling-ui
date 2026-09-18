@@ -1,65 +1,52 @@
-import { componentInformation, ComponentPropInfo } from "@/lib/component-info";
+import { readFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import type { ReactElement } from "react";
+import type { ComponentPropInfo } from "@/lib/component-info";
 import { Tabs, TabList, TabPanel, Tab } from "earthling-ui/tabs";
-import { notFound } from "next/navigation";
+import { Code } from "@/components/code";
 import { ComponentSandboxProvider } from "./context";
 import { ComponentSandboxPreview } from "./preview";
-import { ComponentSandboxCode } from "./code";
 import { ComponentSandboxControls } from "./controls";
-import { resolve } from "path";
-import { readFile } from "fs/promises";
-
-function captureComponentChildren(code: string): string | null {
-  const regex = /return\s*\(?\s*([\s\S]*?)\s*\)?;(?=\s*})/;
-  const match = code.match(regex);
-  return match ? match[1].trim() : null;
-}
 
 export async function ComponentSandbox({
   path,
   propInfo,
+  example,
 }: {
   path: string;
   propInfo: ComponentPropInfo[];
+  example: ReactElement;
 }) {
-  const info = componentInformation.find((c) => c.path === path);
-  if (!info) return notFound();
-
-  try {
-    const filePath = resolve(
-      process.cwd(),
-      `./src/app/(main)/components/${path}/example.tsx`,
-    );
-    var exampleCode = captureComponentChildren(
-      await readFile(filePath, "utf-8"),
-    );
-  } catch (e) {
-    console.error(e);
-    return notFound();
-  }
-
+  const source = await readFile(
+    resolve(process.cwd(), "src/app/(main)/components", path, "example.tsx"),
+    "utf8",
+  );
   return (
     <ComponentSandboxProvider
+      key={path}
       defaultProps={Object.fromEntries(
-        info.props.map((x) => [x.prop, x.defaultValue]),
+        propInfo.map((p) => [p.prop, p.defaultValue]),
       )}
     >
-      <Tabs defaultSelectedKey="props" size="sm">
-        <TabList className="mx-4 justify-end">
-          <Tab id="props">Preview</Tab>
-          <Tab id="code">Code</Tab>
+      <Tabs defaultSelectedKey="preview" size="sm">
+        <TabList aria-label="Component example" className="mb-4 w-fit">
+          <Tab id="preview">Preview</Tab>
+          <Tab id="code">Example code</Tab>
         </TabList>
-        <TabPanel id="props">
-          <ComponentSandboxPreview path={path} />
+        <TabPanel id="preview">
+          <ComponentSandboxPreview example={example} />
         </TabPanel>
         <TabPanel id="code">
-          <ComponentSandboxCode>
-            {exampleCode || undefined}
-          </ComponentSandboxCode>
+          <Code language="typescript" expandable>
+            {source}
+          </Code>
+          <p className="text-muted-foreground mt-3 text-xs">
+            The complete example, including its imports and default state.
+            Playground changes apply to the preview.
+          </p>
         </TabPanel>
       </Tabs>
-      <div className="my-4 flex flex-col gap-4">
-        <ComponentSandboxControls controls={propInfo} />
-      </div>
+      <ComponentSandboxControls controls={propInfo} />
     </ComponentSandboxProvider>
   );
 }

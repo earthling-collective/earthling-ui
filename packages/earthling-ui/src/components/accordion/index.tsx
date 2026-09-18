@@ -12,48 +12,54 @@ import {
   DisclosurePanel,
   Header,
   Button,
+  composeRenderProps,
 } from "react-aria-components";
-import { cva } from "class-variance-authority";
 
 // Accordion
 const Accordion = forwardRef<
   ComponentRef<typeof DisclosureGroup>,
   ComponentPropsWithoutRef<typeof DisclosureGroup>
 >(({ className, ...props }, ref) => (
-  <DisclosureGroup ref={ref} {...props} className={cn("w-full", className)} />
+  <DisclosureGroup
+    ref={ref}
+    {...props}
+    className={composeRenderProps(className, (className) =>
+      cn("w-full", className),
+    )}
+  />
 ));
+Accordion.displayName = "Accordion";
 
 // AccordionItem
-const accordionItemVariants = cva("border-b last:border-b-0");
-
 const AccordionItem = forwardRef<
   ComponentRef<typeof Disclosure>,
   ComponentPropsWithoutRef<typeof Disclosure>
 >(({ className, ...props }, ref) => (
   <Disclosure
     ref={ref}
-    className={cn(accordionItemVariants(), className)}
+    className={composeRenderProps(className, (className) =>
+      cn("border-b last:border-b-0", className),
+    )}
     {...props}
   />
 ));
 AccordionItem.displayName = "AccordionItem";
 
 // AccordionTrigger
-const accordionTriggerVariants = cva("flex");
-
-const accordionTriggerButtonVariants = cva(
-  "flex flex-1 items-center justify-between gap-2 py-4 font-medium transition-colors hover:underline group outline-none focus-visible:ring-2 focus-visible:ring-outline cursor-pointer"
-);
-
 const AccordionTrigger = forwardRef<
   ComponentRef<typeof Button>,
   ComponentPropsWithoutRef<typeof Button>
 >(({ className, children, ...props }, ref) => (
-  <Header className={cn(accordionTriggerVariants())}>
+  <Header className="flex">
     <Button
-      slot={"trigger"}
+      slot="trigger"
       ref={ref}
-      className={cn(accordionTriggerButtonVariants(), className)}
+      className={composeRenderProps(className, (className) =>
+        cn(
+          "group flex flex-1 cursor-pointer items-center justify-between gap-3 rounded-sm py-4 text-left font-medium outline-none hover:underline focus-visible:ring-2 focus-visible:ring-outline",
+          className,
+        ),
+      )}
       {...props}
     >
       {typeof children === "function" ? (
@@ -61,7 +67,10 @@ const AccordionTrigger = forwardRef<
       ) : (
         <>
           {children}
-          <i className="icon-[lucide--chevron-down] shrink-0 transition-transform duration-200 group-aria-[expanded=true]:rotate-180" />
+          <i
+            aria-hidden="true"
+            className="icon-[lucide--chevron-down] shrink-0 transition-transform duration-200 ease-out group-aria-[expanded=true]:rotate-180 motion-reduce:transition-none"
+          />
         </>
       )}
     </Button>
@@ -70,20 +79,21 @@ const AccordionTrigger = forwardRef<
 AccordionTrigger.displayName = "AccordionTrigger";
 
 // AccordionContent
-const accordionContentVariants = cva(
-  "h-[var(--disclosure-panel-height)] overflow-hidden text-sm transition-[height] duration-200 ease-out motion-reduce:transition-none"
-);
-
 const AccordionContent = forwardRef<
   ComponentRef<typeof DisclosurePanel>,
   ComponentPropsWithoutRef<typeof DisclosurePanel>
 >(({ className, children, ...props }, ref) => (
   <DisclosurePanel
     ref={ref}
-    className={cn(accordionContentVariants(), className)}
+    className={composeRenderProps(className, (className) =>
+      cn(
+        "h-[var(--disclosure-panel-height)] overflow-hidden text-sm transition-[height] duration-200 ease-out motion-reduce:transition-none",
+        className,
+      ),
+    )}
     {...props}
   >
-    <div className={cn("pb-4 pt-0", className)}>{children}</div>
+    <div className="pb-4 pt-0">{children}</div>
   </DisclosurePanel>
 ));
 

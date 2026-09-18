@@ -1,41 +1,37 @@
-export const metadata = {"title":"Templates","description":"Pre-configured project templates for Next.js, Vite, Tauri, and more."};
+export const metadata = {
+  title: "Templates",
+  description: "Projects available through the Earthling UI create command.",
+};
 
 # Templates
 
-Earthling UI provides a variety of project templates to help you get started quickly. These templates are pre-configured with Earthling UI and follow best practices for their respective project types.
+`earthling-ui create` clones a maintained template repository, replaces project placeholders, and removes the template Git history. It requires network access and an empty destination directory.
 
-## Available Templates
+```bash
+npx earthling-ui create <template> <destination>
+```
 
-### Application Templates
+The destination accepts lowercase letters, numbers, and dashes.
 
-Application templates are designed for building user-facing applications.
+## Available templates
 
-| Template Name            | Aliases          | Command                                         |
-| ------------------------ | ---------------- | ----------------------------------------------- |
-| Next.js (`next`)         | `ssr`, `nextjs`  | `bunx earthling-ui create next my-app`          |
-| Vite SPA (`vite`)        | `spa`            | `bunx earthling-ui create vite my-spa`          |
-| Tauri Desktop (`tauri`)  | `app`, `desktop` | `bunx earthling-ui create tauri my-desktop-app` |
-| Electron Kiosk (`kiosk`) | `electron`       | `bunx earthling-ui create kiosk my-kiosk-app`   |
+| Template   | Aliases               | Kind       | Example                                          |
+| ---------- | --------------------- | ---------- | ------------------------------------------------ |
+| `next`     | `ssr`, `nextjs`       | App        | `npx earthling-ui create next customer-portal`   |
+| `vite`     | `spa`                 | App        | `npx earthling-ui create vite dashboard`         |
+| `tauri`    | `app`, `desktop`      | App        | `npx earthling-ui create tauri desktop-client`   |
+| `kiosk`    | `electron`            | App        | `npx earthling-ui create kiosk lobby-display`    |
+| `db`       | `database`, `drizzle` | Package    | `npx earthling-ui create db data-access`         |
+| `lib`      | `library`             | Package    | `npx earthling-ui create lib shared-utils`       |
+| `cli`      | —                     | Package    | `npx earthling-ui create cli release-tools`      |
+| `monorepo` | `repo`                | Repository | `npx earthling-ui create monorepo product-suite` |
 
-### Package Templates
+Aliases select the same canonical repository. For example, `spa` clones `template-vite`, and `ssr` clones `template-next`.
 
-Package templates are designed for building libraries and utilities.
+## Destination behavior
 
-| Template Name           | Aliases               | Command                                     |
-| ----------------------- | --------------------- | ------------------------------------------- |
-| Database Package (`db`) | `database`, `drizzle` | `bunx earthling-ui create db my-db-package` |
-| Library Package (`lib`) | `library`             | `bunx earthling-ui create lib my-library`   |
-| CLI Package (`cli`)     |                       | `bunx earthling-ui create cli my-cli`       |
+Inside a workspace whose root `package.json` includes `apps/*`, app templates are placed under `apps`. Package templates use `packages/*` in the same way. Repository templates are created at the requested path and initialized as a new Git repository.
 
-### Repository Templates
+Outside a matching workspace, the destination is created under the current directory.
 
-| Template Name         | Aliases | Command                                          |
-| --------------------- | ------- | ------------------------------------------------ |
-| Monorepo (`monorepo`) | `repo`  | `bunx earthling-ui create monorepo my-workspace` |
-
-## Best Practices
-
-1. **Choose the right template** for your project type
-2. **Keep dependencies up to date** to benefit from the latest features and security fixes
-3. **Follow the established patterns** in the template for consistency
-4. **Contribute improvements** back to the Earthling UI project if you find ways to enhance the templates
+Templates live under the [`earthling-collective`](https://github.com/earthling-collective) organization. Review the generated `package.json` and setup notes before adding credentials or deploying.

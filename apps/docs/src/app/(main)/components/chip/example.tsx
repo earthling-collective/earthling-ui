@@ -1,5 +1,10 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import { Chip } from "earthling-ui/chip";
 
-export default function (props: Record<string, any>) {
-  return <Chip {...props}>Greetings</Chip>;
+type ChipExampleProps = ComponentProps<typeof Chip>;
+
+export default function Example(props: ChipExampleProps) {
+  return <Chip {...props}>Design system</Chip>;
 }

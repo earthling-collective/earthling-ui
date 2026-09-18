@@ -1,59 +1,43 @@
 "use client";
-
-import { componentInformation } from "@/lib/component-info";
+import {
+  componentCategories,
+  componentInformation,
+} from "@/lib/component-info";
 import { pageInformation } from "@/lib/page-info";
-import { Search } from "@/components/search";
-import { Button } from "earthling-ui/button";
-import { Separator } from "earthling-ui/separator";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
-export const Nav = () => {
+export function Nav({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
+  const link = (href: string, label: string) => (
+    <Link
+      key={href}
+      href={href}
+      onClick={onNavigate}
+      aria-current={pathname === href ? "page" : undefined}
+      className="docs-nav-link"
+    >
+      {label}
+    </Link>
+  );
   return (
-    <nav className="sticky bottom-0 flex min-h-[calc(100vh-61px)] flex-col gap-2 p-4">
-      <Search className="mb-2" />
-
-      <div className="flex flex-col">
-        {pageInformation.map(({ href, label, icon }) => (
-          <Button
-            key={href}
-            material={"ghost"}
-            size={"sm"}
-            className="justify-start"
-            aria-pressed={pathname === href}
-            asChild
-          >
-            <Link href={href}>
-              <i className={icon} />
-              <div>{label}</div>
-            </Link>
-          </Button>
-        ))}
+    <nav aria-label="Documentation" className="flex flex-col gap-6 px-4 py-7">
+      <div>
+        <p className="docs-nav-label">Get started</p>
+        <div className="flex flex-col gap-0.5">
+          {pageInformation.map((p) => link(p.href, p.label))}
+        </div>
       </div>
-
-      <Separator className="mx-3 w-auto" />
-
-      <div className="text-muted-foreground mx-3 mt-3 mb-1 text-xs">
-        Components
-      </div>
-
-      <div className="flex flex-col">
-        {componentInformation
-          .sort((a, b) => (a.name > b.name ? 1 : -1))
-          .map((info) => (
-            <Button
-              key={info.path}
-              material="ghost"
-              size="sm"
-              asChild
-              aria-pressed={pathname === `/components/${info.path}`}
-              className="justify-start"
-            >
-              <Link href={`/components/${info.path}`}>{info.name}</Link>
-            </Button>
-          ))}
-      </div>
+      {componentCategories.map((category) => (
+        <div key={category.name}>
+          <p className="docs-nav-label">{category.name}</p>
+          <div className="flex flex-col gap-0.5">
+            {category.paths.map((path) => {
+              const info = componentInformation.find((c) => c.path === path);
+              return info ? link("/components/" + path, info.name) : null;
+            })}
+          </div>
+        </div>
+      ))}
     </nav>
   );
-};
+}

@@ -1,261 +1,181 @@
-import {
-  intro,
-  outro,
-  confirm,
-  isCancel,
-  cancel,
-  log,
-  spinner,
-} from "@clack/prompts";
-import { execSync } from "node:child_process";
+import { confirm, isCancel } from "@clack/prompts";
+import { execFileSync } from "node:child_process";
 import fs from "node:fs";
-import fsp from "node:fs/promises";
 import path from "node:path";
 import { loadConfig } from "../init";
+import { inspectComponent, resolveSourceImport } from "../../utils/catalog";
 import { getPackageRoot } from "../../utils/package-root";
 
-/**
- * Resolve the earthling-ui package source directory. Component sources ship
- * in the published package under src/, which eject copies from.
- */
-function getPackageSrcDir(): string {
-  return path.join(getPackageRoot(), "src");
-}
+type EjectOptions = {
+  dryRun?: boolean;
+  json?: boolean;
+  overwrite?: boolean;
+  install?: boolean;
+};
 
-/**
- * List all available component directory names.
- */
-function listComponents(componentsDir: string): string[] {
-  return fs
-    .readdirSync(componentsDir, { withFileTypes: true })
-    .filter((d) => d.isDirectory())
-    .map((d) => d.name)
-    .sort();
-}
-
-/**
- * Extract npm package names from import statements in source code.
- * Skips relative imports, react, and react-dom.
- */
-function extractDeps(source: string): string[] {
-  const importRegex = /import\s+[\s\S]*?from\s+["']([^"'.][^"']*)["']/g;
-  const deps = new Set<string>();
-  let match;
-  while ((match = importRegex.exec(source)) !== null) {
-    const specifier = match[1];
-    if (specifier.startsWith("@")) {
-      // Scoped package: @scope/package
-      deps.add(specifier.split("/").slice(0, 2).join("/"));
-    } else {
-      // Unscoped package
-      deps.add(specifier.split("/")[0]);
-    }
-  }
-  // Remove peer deps consumers should already have
-  deps.delete("react");
-  deps.delete("react-dom");
-  return [...deps];
-}
-
-/**
- * Detect which package manager the project uses based on lockfiles.
- */
-function detectPackageManager(projectRoot: string): string {
-  if (fs.existsSync(path.join(projectRoot, "bun.lockb"))) return "bun";
-  if (fs.existsSync(path.join(projectRoot, "bun.lock"))) return "bun";
-  if (fs.existsSync(path.join(projectRoot, "pnpm-lock.yaml"))) return "pnpm";
-  if (fs.existsSync(path.join(projectRoot, "yarn.lock"))) return "yarn";
-  return "npm";
-}
-
-/**
- * Recursively copy a directory.
- */
-async function copyDir(src: string, dest: string) {
-  await fsp.mkdir(dest, { recursive: true });
-  const entries = await fsp.readdir(src, { withFileTypes: true });
-  for (const entry of entries) {
-    const srcPath = path.join(src, entry.name);
-    const destPath = path.join(dest, entry.name);
-    if (entry.isDirectory()) {
-      await copyDir(srcPath, destPath);
-    } else {
-      await fsp.copyFile(srcPath, destPath);
-    }
-  }
-}
-
-/**
- * Rewrite `@/utils/...` imports to relative paths in a file.
- */
-async function rewriteImports(
-  filePath: string,
-  targetUtilsDir: string
-) {
-  let content = await fsp.readFile(filePath, "utf8");
-
-  // Compute relative path from the file to the utils directory
-  const fileDir = path.dirname(filePath);
-  const relativeToUtils = path
-    .relative(fileDir, targetUtilsDir)
-    .replace(/\\/g, "/");
-  const utilsPrefix = relativeToUtils.startsWith(".")
-    ? relativeToUtils
-    : "./" + relativeToUtils;
-
-  // Replace @/utils/ imports with the computed relative path
-  content = content.replace(
-    /from\s+["']@\/utils\/([^"']*)["']/g,
-    (_, utilName) => {
-      // Strip .ts/.tsx extension if present in the import
-      const cleanName = utilName.replace(/\.(ts|tsx)$/, "");
-      return `from "${utilsPrefix}/${cleanName}"`;
-    }
-  );
-
-  await fsp.writeFile(filePath, content, "utf8");
-}
-
-export async function ejectAction(componentName: string) {
-  intro(`Ejecting "${componentName}"`);
-
-  // 1. Load config
-  const result = loadConfig();
-  if (!result) {
-    log.error(
-      "Could not find earthling-ui.config.json in any parent directory."
-    );
-    log.info("Run `bun earthling-ui init` to create one.");
-    cancel("Eject cancelled.");
-    process.exit(1);
-  }
-
-  const { config, configDir } = result;
-
-  // 2. Resolve paths
-  const packageSrcDir = getPackageSrcDir();
-  const sourceComponentsDir = path.join(packageSrcDir, "components");
-  const sourceUtilsDir = path.join(packageSrcDir, "utils");
-
-  const targetComponentDir = path.resolve(configDir, config.componentDir);
-  const targetUtilsDir = path.resolve(configDir, config.utilsDir);
-
-  // 3. Validate component exists
-  const componentSrcDir = path.join(sourceComponentsDir, componentName);
+function destination(root: string, directory: string, file: string) {
+  const target = path.resolve(root, directory, file);
+  const relative = path.relative(root, target);
   if (
-    !fs.existsSync(componentSrcDir) ||
-    !fs.statSync(componentSrcDir).isDirectory()
+    !relative ||
+    relative === ".." ||
+    relative.startsWith(`..${path.sep}`) ||
+    path.isAbsolute(relative)
+  )
+    throw new Error("Eject destinations must stay inside the project.");
+  for (
+    let current = target;
+    current !== root;
+    current = path.dirname(current)
   ) {
-    const available = listComponents(sourceComponentsDir);
-    log.error(`Component "${componentName}" not found.`);
-    log.info(`Available components:\n  ${available.join(", ")}`);
-    cancel("Eject cancelled.");
-    process.exit(1);
+    if (fs.existsSync(current) && fs.lstatSync(current).isSymbolicLink())
+      throw new Error(`Cannot eject through a symbolic link: ${current}`);
   }
+  return target;
+}
 
-  // 4. Check if component already exists at target
-  const componentDestDir = path.join(targetComponentDir, componentName);
-  if (fs.existsSync(componentDestDir)) {
-    const overwrite = await confirm({
-      message: `"${componentName}" already exists at ${componentDestDir}. Overwrite?`,
-    });
-    if (isCancel(overwrite) || !overwrite) {
-      cancel("Eject cancelled.");
-      process.exit(0);
-    }
-    // Remove existing before copy
-    await fsp.rm(componentDestDir, { recursive: true, force: true });
+export async function ejectAction(
+  componentName: string,
+  options: EjectOptions = {},
+) {
+  const root = getPackageRoot();
+  const component = inspectComponent(componentName, root);
+  const loaded = loadConfig();
+  if (!loaded)
+    throw new Error(
+      "No valid earthling-ui.config.json found. Run earthling-ui init.",
+    );
+  const { config, configDir } = loaded;
+  const files = component.files.map((source) => {
+    const utility = source.startsWith("src/utils/");
+    const target = destination(
+      configDir,
+      utility ? config.utilsDir : config.componentDir,
+      source.replace(/^src\/(utils|components)\//, ""),
+    );
+    return { source, target, exists: fs.existsSync(target), utility };
+  });
+  if (new Set(files.map((file) => file.target)).size !== files.length)
+    throw new Error("Component and utility destinations overlap.");
+  const warnings = files
+    .filter(
+      (file) =>
+        file.exists &&
+        file.utility &&
+        fs.readFileSync(file.target, "utf8") !==
+          fs.readFileSync(path.join(root, file.source), "utf8"),
+    )
+    .map(
+      (file) =>
+        `Preserving customized helper ${file.target}; verify its exports and dependencies.`,
+    );
+  const plan = {
+    component: component.name,
+    files,
+    dependencies: component.dependencies,
+    warnings,
+  };
+  if (options.dryRun) {
+    console.log(
+      options.json
+        ? JSON.stringify(plan, null, 2)
+        : files
+            .map(
+              (file) => `${file.exists ? "exists" : "create"} ${file.target}`,
+            )
+            .join("\n"),
+    );
+    return;
   }
-
-  // 5. Copy component folder
-  const s = spinner();
-  s.start(`Copying ${componentName} component`);
-
-  await copyDir(componentSrcDir, componentDestDir);
-
-  // 6. Copy cn.ts utility if not present
-  const cnTargetPath = path.join(targetUtilsDir, "cn.ts");
-  let cnWasCopied = false;
-  if (!fs.existsSync(cnTargetPath)) {
-    await fsp.mkdir(targetUtilsDir, { recursive: true });
-    await fsp.copyFile(path.join(sourceUtilsDir, "cn.ts"), cnTargetPath);
-    cnWasCopied = true;
-  }
-
-  // 7. Rewrite @/utils/ imports in all copied files
-  s.message("Rewriting imports");
-
-  const copiedFiles = await fsp.readdir(componentDestDir);
-  for (const file of copiedFiles) {
-    const filePath = path.join(componentDestDir, file);
-    const stat = await fsp.stat(filePath);
-    if (stat.isFile() && /\.(ts|tsx|js|jsx)$/.test(file)) {
-      await rewriteImports(filePath, targetUtilsDir);
-    }
-  }
-
-  // 8. Detect dependencies
-  s.message("Detecting dependencies");
-
-  // Collect deps from the component file(s)
-  const allDeps = new Set<string>();
-  for (const file of copiedFiles) {
-    const filePath = path.join(componentDestDir, file);
-    const stat = await fsp.stat(filePath);
-    if (stat.isFile() && /\.(ts|tsx|js|jsx)$/.test(file)) {
-      const source = await fsp.readFile(filePath, "utf8");
-      for (const dep of extractDeps(source)) {
-        allDeps.add(dep);
-      }
-    }
-  }
-
-  // If we copied cn.ts, also add its dependencies
-  if (cnWasCopied) {
-    const cnSource = await fsp.readFile(cnTargetPath, "utf8");
-    for (const dep of extractDeps(cnSource)) {
-      allDeps.add(dep);
-    }
-  }
-
-  // Remove class-variance-authority internal alias if present
-  allDeps.delete("class-variance-authority/types");
-
-  // 9. Install dependencies
-  const depsToInstall = [...allDeps];
-  if (depsToInstall.length > 0) {
-    const pm = detectPackageManager(configDir);
-    const installCmd =
-      pm === "npm"
-        ? `npm install ${depsToInstall.join(" ")}`
-        : `${pm} add ${depsToInstall.join(" ")}`;
-
-    s.message(`Installing dependencies with ${pm}`);
-
-    try {
-      execSync(installCmd, { cwd: configDir, stdio: "pipe" });
-    } catch (err: any) {
-      s.stop("Dependencies could not be auto-installed");
-      log.warning(
-        `Failed to install dependencies automatically.\nRun manually: ${installCmd}`
+  const conflicts = files.filter((file) => file.exists && !file.utility);
+  if (conflicts.length && !options.overwrite) {
+    if (!process.stdin.isTTY || options.json)
+      throw new Error(
+        "Component files already exist. Inspect --dry-run, then use --overwrite to replace them.",
       );
-      log.info(`\nEjected files:`);
-      log.info(`  Component: ${componentDestDir}`);
-      if (cnWasCopied) log.info(`  Utility:   ${cnTargetPath}`);
-      outro("Eject completed with warnings.");
-      return;
+    const answer = await confirm({
+      message: `Overwrite ${conflicts.length} existing component file(s)?`,
+    });
+    if (isCancel(answer) || !answer) return;
+  }
+  for (const file of files) {
+    if (file.exists && file.utility) continue;
+    let source = fs.readFileSync(path.join(root, file.source), "utf8");
+    source = source.replace(
+      /((?:\bfrom\s*|\bimport\s*)["'])([^"']+)(["'])/g,
+      (match, prefix, specifier, quote) => {
+        if (!specifier.startsWith(".") && !specifier.startsWith("@/"))
+          return match;
+        const resolved = resolveSourceImport(
+          specifier,
+          path.join(root, file.source),
+          root,
+        );
+        const dependency = files.find(
+          (item) => path.join(root, item.source) === resolved,
+        );
+        if (!dependency)
+          throw new Error(`Unplanned source dependency: ${specifier}`);
+        let relative = path
+          .relative(path.dirname(file.target), dependency.target)
+          .replace(/\\/g, "/")
+          .replace(/\.tsx?$/, "");
+        if (!relative.startsWith(".")) relative = `./${relative}`;
+        return `${prefix}${relative}${quote}`;
+      },
+    );
+    fs.mkdirSync(path.dirname(file.target), { recursive: true });
+    fs.writeFileSync(file.target, source);
+  }
+  const dependencies = Object.entries(component.dependencies).map(
+    ([name, version]) => `${name}@${version}`,
+  );
+  if (options.install !== false && dependencies.length) {
+    let directory = configDir;
+    let manager = "npm";
+    while (true) {
+      const detected = [
+        ["bun.lock", "bun"],
+        ["bun.lockb", "bun"],
+        ["pnpm-lock.yaml", "pnpm"],
+        ["yarn.lock", "yarn"],
+        ["package-lock.json", "npm"],
+      ].find(([lock]) => fs.existsSync(path.join(directory, lock!)));
+      if (detected) {
+        manager = detected[1]!;
+        break;
+      }
+      const parent = path.dirname(directory);
+      if (parent === directory) break;
+      directory = parent;
     }
+    // Windows package managers use .cmd shims; arguments come from shipped metadata.
+    execFileSync(
+      manager,
+      [manager === "npm" ? "install" : "add", ...dependencies].map(
+        (argument) =>
+          process.platform === "win32" ? `"${argument}"` : argument,
+      ),
+      {
+        cwd: configDir,
+        stdio: options.json ? "pipe" : "inherit",
+        shell: process.platform === "win32",
+      },
+    );
   }
-
-  s.stop("Done");
-
-  // 10. Summary
-  log.success(`Component "${componentName}" ejected successfully.`);
-  log.info(`  Component: ${componentDestDir}`);
-  if (cnWasCopied) log.info(`  Utility:   ${cnTargetPath}`);
-  if (depsToInstall.length > 0) {
-    log.info(`  Installed: ${depsToInstall.join(", ")}`);
-  }
-
-  outro("Happy building!");
+  if (!options.json) for (const warning of warnings) console.warn(warning);
+  console.log(
+    options.json
+      ? JSON.stringify(
+          {
+            ...plan,
+            written: files
+              .filter((file) => !file.exists || !file.utility)
+              .map((file) => file.target),
+          },
+          null,
+          2,
+        )
+      : `Component "${componentName}" ejected successfully.\nKeep earthling-ui/index.css in your Tailwind stylesheet.`,
+  );
 }

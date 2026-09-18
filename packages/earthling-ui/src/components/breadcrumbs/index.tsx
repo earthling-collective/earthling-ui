@@ -1,7 +1,6 @@
 "use client";
 
 import { cn } from "@/utils/cn";
-import { cva, type VariantProps } from "class-variance-authority";
 import {
   forwardRef,
   type ComponentPropsWithoutRef,
@@ -10,17 +9,13 @@ import {
 import {
   Breadcrumbs as BreadcrumbsPrimitive,
   Breadcrumb as BreadcrumbPrimitive,
+  composeRenderProps,
 } from "react-aria-components";
 
 //Breadcrumbs
-const breadcrumbsVariants = cva("flex items-center list-none m-0 p-0", {
-  variants: {},
-  defaultVariants: {},
-});
-
-export interface BreadcrumbsProps
-  extends ComponentPropsWithoutRef<typeof BreadcrumbsPrimitive>,
-    VariantProps<typeof breadcrumbsVariants> {}
+export interface BreadcrumbsProps extends ComponentPropsWithoutRef<
+  typeof BreadcrumbsPrimitive
+> {}
 
 const Breadcrumbs = forwardRef<
   ComponentRef<typeof BreadcrumbsPrimitive>,
@@ -30,24 +25,19 @@ const Breadcrumbs = forwardRef<
     <BreadcrumbsPrimitive
       ref={ref}
       {...props}
-      className={cn(breadcrumbsVariants({}), className)}
+      className={cn(
+        "m-0 flex list-none flex-wrap items-center p-0 text-sm text-muted-foreground",
+        className,
+      )}
     />
   );
 });
 Breadcrumbs.displayName = "Breadcrumbs";
 
 //Breadcrumb
-const breadcrumbVariants = cva(
-  "after:px-1.5 after:icon-[lucide--chevron-right] last:after:hidden flex items-center",
-  {
-    variants: {},
-    defaultVariants: {},
-  }
-);
-
-export interface BreadcrumbProps
-  extends ComponentPropsWithoutRef<typeof BreadcrumbPrimitive>,
-    VariantProps<typeof breadcrumbVariants> {
+export interface BreadcrumbProps extends ComponentPropsWithoutRef<
+  typeof BreadcrumbPrimitive
+> {
   /** Marks this breadcrumb as the current page (sets `aria-current="page"`). */
   current?: boolean;
 }
@@ -61,10 +51,11 @@ const Breadcrumb = forwardRef<
       ref={ref}
       aria-current={current ? "page" : undefined}
       {...props}
-      className={cn(
-        breadcrumbVariants({}),
-        "aria-[current=page]:text-foreground aria-[current=page]:font-medium",
-        className
+      className={composeRenderProps(className, (className) =>
+        cn(
+          "flex min-w-0 items-center after:mx-1.5 after:size-3.5 after:shrink-0 after:icon-[lucide--chevron-right] last:after:hidden aria-[current=page]:font-medium aria-[current=page]:text-foreground",
+          className,
+        ),
       )}
     />
   );

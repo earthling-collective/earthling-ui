@@ -8,27 +8,19 @@ import {
 import * as RadioGroupPrimitive from "@radix-ui/react-radio-group";
 
 import { cn } from "@/utils/cn";
+import { schemes } from "@/utils/variants";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const radioGroupVariants = cva("grid gap-2", {
   variants: {
-    scheme: {
-      default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
-      primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
-      secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
-      tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
-      neutral: `[--scheme-tint:var(--color-neutral)] [--scheme-foreground:var(--color-neutral-foreground)]`,
-      muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
-      good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
-      caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
-      bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
-    },
+    scheme: schemes,
   },
   defaultVariants: { scheme: "default" },
 });
 
 export interface RadioGroupProps
-  extends ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
+  extends
+    ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>,
     VariantProps<typeof radioGroupVariants> {}
 
 const RadioGroup = forwardRef<
@@ -53,8 +45,8 @@ const RadioGroupItem = forwardRef<
     <RadioGroupPrimitive.Item
       ref={ref}
       className={cn(
-        "aspect-square h-5 w-5 rounded-full border border-current/20 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-outline disabled:cursor-not-allowed disabled:opacity-50 data-[state=checked]:border-transparent data-[state=checked]:bg-(--scheme-tint)",
-        className
+        "size-5 rounded-full border border-current/30 ring-offset-background focus:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 aria-invalid:border-bad aria-invalid:ring-bad/30 data-[state=checked]:border-transparent data-[state=checked]:bg-(--scheme-tint)",
+        className,
       )}
       {...props}
     >

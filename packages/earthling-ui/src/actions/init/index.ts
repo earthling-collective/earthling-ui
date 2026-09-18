@@ -17,7 +17,11 @@ export type EarthlingUIConfig = {
 };
 
 export function findConfigDir(): string | null {
-  return findParentDir.sync(process.cwd(), "earthling-ui.config.json");
+  const directory = findParentDir.sync(
+    process.cwd(),
+    "earthling-ui.config.json",
+  );
+  return directory ? path.resolve(directory) : null;
 }
 
 export function loadConfig(): {
@@ -30,7 +34,16 @@ export function loadConfig(): {
   try {
     const configPath = path.join(configDir, "earthling-ui.config.json");
     const raw = fs.readFileSync(configPath, "utf8");
-    return { config: JSON.parse(raw) as EarthlingUIConfig, configDir };
+    const config = JSON.parse(raw);
+    if (
+      !config ||
+      typeof config.componentDir !== "string" ||
+      !config.componentDir.trim() ||
+      typeof config.utilsDir !== "string" ||
+      !config.utilsDir.trim()
+    )
+      return null;
+    return { config, configDir };
   } catch {
     return null;
   }

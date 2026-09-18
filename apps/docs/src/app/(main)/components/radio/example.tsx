@@ -1,22 +1,36 @@
 "use client";
 
+import { useId, type ComponentProps } from "react";
+import { Label } from "earthling-ui/label";
 import { RadioGroup, RadioGroupItem } from "earthling-ui/radio";
 
-export default function (props: Record<string, any>) {
+const choices = [
+  ["comfortable", "Comfortable"],
+  ["compact", "Compact"],
+  ["spacious", "Spacious"],
+] as const;
+
+export default function Example({
+  defaultValue = "comfortable",
+  ...props
+}: ComponentProps<typeof RadioGroup>) {
+  const groupId = useId();
+
   return (
-    <RadioGroup defaultValue="option-one" {...props}>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option-one" id="option-one" />
-        <label htmlFor="option-one">Default</label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option-two" id="option-two" />
-        <label htmlFor="option-two">Comfortable</label>
-      </div>
-      <div className="flex items-center space-x-2">
-        <RadioGroupItem value="option-three" id="option-three" />
-        <label htmlFor="option-three">Compact</label>
-      </div>
+    <RadioGroup
+      aria-label="Interface density"
+      defaultValue={defaultValue}
+      {...props}
+    >
+      {choices.map(([value, label]) => {
+        const id = groupId + "-" + value;
+        return (
+          <div key={value} className="flex items-center gap-2">
+            <RadioGroupItem id={id} value={value} />
+            <Label htmlFor={id}>{label}</Label>
+          </div>
+        );
+      })}
     </RadioGroup>
   );
 }

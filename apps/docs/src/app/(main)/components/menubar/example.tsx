@@ -1,8 +1,14 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import {
   Menubar,
+  MenubarCheckboxItem,
   MenubarContent,
   MenubarItem,
   MenubarMenu,
+  MenubarRadioGroup,
+  MenubarRadioItem,
   MenubarSeparator,
   MenubarShortcut,
   MenubarSub,
@@ -11,17 +17,19 @@ import {
   MenubarTrigger,
 } from "earthling-ui/menubar";
 
-export default function (props: Record<string, any>) {
+type MenubarExampleProps = ComponentProps<typeof Menubar>;
+
+export default function Example(props: MenubarExampleProps) {
   return (
     <Menubar {...props}>
       <MenubarMenu>
         <MenubarTrigger>File</MenubarTrigger>
         <MenubarContent>
           <MenubarItem>
-            New File <MenubarShortcut>⌘N</MenubarShortcut>
+            New document <MenubarShortcut>⌘N</MenubarShortcut>
           </MenubarItem>
           <MenubarItem>
-            Open <MenubarShortcut>⌘O</MenubarShortcut>
+            Open… <MenubarShortcut>⌘O</MenubarShortcut>
           </MenubarItem>
           <MenubarSeparator />
           <MenubarSub>
@@ -32,7 +40,7 @@ export default function (props: Record<string, any>) {
             </MenubarSubContent>
           </MenubarSub>
           <MenubarSeparator />
-          <MenubarItem variant="destructive">Delete</MenubarItem>
+          <MenubarItem variant="destructive">Move to trash</MenubarItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
@@ -41,16 +49,21 @@ export default function (props: Record<string, any>) {
           <MenubarItem>
             Undo <MenubarShortcut>⌘Z</MenubarShortcut>
           </MenubarItem>
-          <MenubarItem>
+          <MenubarItem disabled>
             Redo <MenubarShortcut>⇧⌘Z</MenubarShortcut>
           </MenubarItem>
+          <MenubarSeparator />
+          <MenubarCheckboxItem defaultChecked>Smart quotes</MenubarCheckboxItem>
         </MenubarContent>
       </MenubarMenu>
       <MenubarMenu>
         <MenubarTrigger>View</MenubarTrigger>
         <MenubarContent>
-          <MenubarItem>Zoom In</MenubarItem>
-          <MenubarItem>Zoom Out</MenubarItem>
+          <MenubarRadioGroup defaultValue="comfortable">
+            <MenubarRadioItem value="compact">Compact</MenubarRadioItem>
+            <MenubarRadioItem value="comfortable">Comfortable</MenubarRadioItem>
+            <MenubarRadioItem value="spacious">Spacious</MenubarRadioItem>
+          </MenubarRadioGroup>
         </MenubarContent>
       </MenubarMenu>
     </Menubar>

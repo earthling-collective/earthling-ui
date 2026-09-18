@@ -1,16 +1,167 @@
 @import "tailwindcss";
 @import "earthling-ui";
 @import "earthling-ui/theme/dark";
-
 @plugin "@tailwindcss/typography";
 
 @layer base {
+  :root {
+    --syntax-keyword: oklch(0.43 0.1 300);
+    --syntax-string: oklch(0.4 0.075 155);
+    --syntax-number: oklch(0.43 0.1 50);
+    --syntax-title: oklch(0.43 0.085 250);
+  }
   :root[data-theme="dark"] {
     @apply theme-dark;
+    --syntax-keyword: oklch(0.8 0.085 300);
+    --syntax-string: oklch(0.8 0.09 155);
+    --syntax-number: oklch(0.81 0.085 60);
+    --syntax-title: oklch(0.8 0.085 250);
   }
-  :root[data-theme="system"] {
-    @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="system"] {
       @apply theme-dark;
+      --syntax-keyword: oklch(0.8 0.085 300);
+      --syntax-string: oklch(0.8 0.09 155);
+      --syntax-number: oklch(0.81 0.085 60);
+      --syntax-title: oklch(0.8 0.085 250);
     }
+  }
+  :is(h1, h2, h3, section)[id] {
+    scroll-margin-top: 6rem;
+  }
+  ::selection {
+    background: color-mix(in oklch, var(--color-foreground) 15%, transparent);
+  }
+}
+
+@layer components {
+  .docs-nav-label {
+    @apply text-muted-foreground mb-2 px-3 text-xs font-medium;
+  }
+  .docs-nav-link {
+    @apply text-muted-foreground hover:bg-muted/60 hover:text-foreground focus-visible:outline-outline rounded-lg px-3 py-1.5 text-[13px] leading-5 focus-visible:outline-2;
+  }
+  .docs-nav-link[aria-current="page"] {
+    @apply bg-muted text-foreground font-medium;
+  }
+  .docs-link {
+    @apply text-foreground underline decoration-current/30 underline-offset-4 hover:decoration-current;
+  }
+  .docs-section {
+    @apply mb-10;
+  }
+  .docs-section > h2 {
+    @apply mb-4 text-xl font-semibold tracking-tight;
+  }
+  .preview-canvas {
+    background-color: var(--color-surface);
+    background-image: radial-gradient(
+      color-mix(in oklch, var(--color-foreground) 9%, transparent) 0.7px,
+      transparent 0.7px
+    );
+    background-size: 12px 12px;
+  }
+  .code-block {
+    @apply bg-tertiary/45 text-foreground;
+  }
+  .code-block pre {
+    font-family: var(--font-mono);
+  }
+  .code-block pre:focus-visible {
+    outline: 2px solid var(--color-outline);
+    outline-offset: -3px;
+  }
+  .hljs {
+    display: block;
+    min-width: max-content;
+  }
+  .hljs-comment,
+  .hljs-quote {
+    color: var(--color-muted-foreground);
+  }
+  .hljs-keyword,
+  .hljs-selector-tag,
+  .hljs-literal,
+  .hljs-doctag {
+    color: var(--syntax-keyword);
+  }
+  .hljs-string,
+  .hljs-regexp,
+  .hljs-addition,
+  .hljs-attribute {
+    color: var(--syntax-string);
+  }
+  .hljs-number,
+  .hljs-symbol,
+  .hljs-bullet,
+  .hljs-variable,
+  .hljs-template-variable {
+    color: var(--syntax-number);
+  }
+  .hljs-title,
+  .hljs-name,
+  .hljs-selector-id,
+  .hljs-selector-class,
+  .hljs-built_in,
+  .hljs-type,
+  .hljs-attr,
+  .hljs-meta {
+    color: var(--syntax-title);
+  }
+  .hljs-deletion {
+    color: var(--color-bad);
+  }
+  .hljs-emphasis {
+    font-style: italic;
+  }
+  .hljs-strong {
+    font-weight: 600;
+  }
+}
+
+@layer utilities {
+  .prose.docs-prose {
+    --tw-prose-body: var(--color-muted-foreground);
+    --tw-prose-headings: var(--color-foreground);
+    --tw-prose-links: var(--color-foreground);
+    --tw-prose-bold: var(--color-foreground);
+    --tw-prose-counters: var(--color-muted-foreground);
+    --tw-prose-bullets: var(--color-muted-foreground);
+    --tw-prose-hr: color-mix(
+      in oklch,
+      var(--color-foreground) 15%,
+      transparent
+    );
+    --tw-prose-quotes: var(--color-foreground);
+    --tw-prose-quote-borders: var(--color-neutral);
+    --tw-prose-code: var(--color-foreground);
+    --tw-prose-th-borders: var(--color-neutral);
+    --tw-prose-td-borders: var(--color-neutral);
+    font-size: 0.9375rem;
+    line-height: 1.85;
+  }
+  .docs-prose h1 {
+    @apply text-4xl font-semibold tracking-tight sm:text-5xl;
+  }
+  .docs-prose h2 {
+    @apply text-2xl font-semibold tracking-tight;
+  }
+  .docs-prose h3 {
+    @apply text-lg font-semibold;
+  }
+  .docs-prose :not(pre) > code {
+    @apply bg-muted rounded px-1.5 py-0.5 text-[0.85em] font-normal;
+  }
+  .docs-prose :not(pre) > code::before,
+  .docs-prose :not(pre) > code::after {
+    content: none;
+  }
+  .docs-prose table {
+    display: block;
+    overflow-x: auto;
+  }
+  .docs-prose a {
+    text-decoration-thickness: 1px;
+    text-underline-offset: 3px;
   }
 }

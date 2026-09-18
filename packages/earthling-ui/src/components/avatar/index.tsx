@@ -11,7 +11,7 @@ import { cn } from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
 
 const avatarVariants = cva(
-  "relative flex shrink-0 overflow-hidden rounded-full",
+  "relative flex shrink-0 overflow-hidden rounded-full bg-muted",
   {
     variants: {
       size: {
@@ -22,11 +22,12 @@ const avatarVariants = cva(
       },
     },
     defaultVariants: { size: "md" },
-  }
+  },
 );
 
 export interface AvatarProps
-  extends ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
+  extends
+    ComponentPropsWithoutRef<typeof AvatarPrimitive.Root>,
     VariantProps<typeof avatarVariants> {}
 
 const Avatar = forwardRef<
@@ -48,8 +49,8 @@ const AvatarImage = forwardRef<
   <AvatarPrimitive.Image
     ref={ref}
     className={cn(
-      "aspect-square h-full w-full object-cover outline outline-1 -outline-offset-1 outline-black/10 dark:outline-white/10",
-      className
+      "aspect-square h-full w-full object-cover outline outline-1 -outline-offset-1 outline-(--color-image-outline)",
+      className,
     )}
     {...props}
   />
@@ -64,7 +65,7 @@ const AvatarFallback = forwardRef<
     ref={ref}
     className={cn(
       "flex h-full w-full items-center justify-center rounded-full bg-muted text-muted-foreground font-medium",
-      className
+      className,
     )}
     {...props}
   />

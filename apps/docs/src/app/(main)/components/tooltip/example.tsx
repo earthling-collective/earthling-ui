@@ -1,20 +1,41 @@
+"use client";
+
+import type { ComponentProps } from "react";
+import { Button } from "earthling-ui/button";
 import {
   Tooltip,
+  TooltipArrow,
   TooltipContent,
   TooltipProvider,
   TooltipTrigger,
 } from "earthling-ui/tooltip";
-import { Button } from "earthling-ui/button";
 
-export default function ({ scheme, ...props }: Record<string, any>) {
+type TooltipExampleProps = {
+  delayDuration?: number;
+  scheme?: ComponentProps<typeof TooltipContent>["scheme"];
+  side?: ComponentProps<typeof TooltipContent>["side"];
+};
+
+export default function Example({
+  delayDuration = 500,
+  scheme,
+  side = "top",
+}: TooltipExampleProps) {
   return (
-    <TooltipProvider>
-      <Tooltip {...props}>
+    <TooltipProvider delayDuration={delayDuration} skipDelayDuration={300}>
+      <Tooltip>
         <TooltipTrigger asChild>
-          <Button material="outline">Hover me</Button>
+          <Button
+            aria-label="Copy project link"
+            className="size-10 px-0"
+            material="outline"
+          >
+            <i aria-hidden="true" className="icon-[lucide--link] size-4" />
+          </Button>
         </TooltipTrigger>
-        <TooltipContent scheme={scheme}>
-          <p>Add to library</p>
+        <TooltipContent scheme={scheme} side={side}>
+          Copy project link
+          <TooltipArrow />
         </TooltipContent>
       </Tooltip>
     </TooltipProvider>

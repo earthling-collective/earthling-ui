@@ -10,8 +10,7 @@ export const pageInformation = [
     href: "/cli",
     label: "CLI",
     icon: "icon-[lucide--square-terminal]",
-    description:
-      "Learn how to use the CLI tool to create projects and manage components.",
+    description: "Discover, inspect, and eject components with the CLI.",
   },
   {
     href: "/theming",

@@ -1,3 +1,6 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -7,54 +10,51 @@ import {
   NavigationMenuTrigger,
 } from "earthling-ui/navigation-menu";
 
-export default function (props: Record<string, any>) {
+type NavigationMenuExampleProps = ComponentProps<typeof NavigationMenu>;
+
+const links = [
+  {
+    description: "Install the package and configure your styles.",
+    href: "/getting-started",
+    title: "Getting started",
+  },
+  {
+    description: "Compose accessible primitives for product interfaces.",
+    href: "/#components",
+    title: "Components",
+  },
+  {
+    description: "Use color, spacing, and typography consistently.",
+    href: "/theming",
+    title: "Themes",
+  },
+];
+
+export default function Example(props: NavigationMenuExampleProps) {
   return (
     <NavigationMenu {...props}>
       <NavigationMenuList>
         <NavigationMenuItem>
-          <NavigationMenuTrigger>Getting started</NavigationMenuTrigger>
+          <NavigationMenuTrigger>Explore</NavigationMenuTrigger>
           <NavigationMenuContent>
-            <div className="grid w-[300px] gap-1 p-1">
-              <NavigationMenuLink href="#">
-                <div className="font-medium">Introduction</div>
-                <div className="text-muted-foreground text-xs">
-                  Build accessible apps with Earthling UI.
-                </div>
-              </NavigationMenuLink>
-              <NavigationMenuLink href="#">
-                <div className="font-medium">Installation</div>
-                <div className="text-muted-foreground text-xs">
-                  How to install and configure the library.
-                </div>
-              </NavigationMenuLink>
-            </div>
-          </NavigationMenuContent>
-        </NavigationMenuItem>
-        <NavigationMenuItem>
-          <NavigationMenuTrigger>Components</NavigationMenuTrigger>
-          <NavigationMenuContent>
-            <div className="grid w-[300px] gap-1 p-1">
-              <NavigationMenuLink href="#">
-                <div className="font-medium">Button</div>
-                <div className="text-muted-foreground text-xs">
-                  Trigger actions with a click.
-                </div>
-              </NavigationMenuLink>
-              <NavigationMenuLink href="#">
-                <div className="font-medium">Dialog</div>
-                <div className="text-muted-foreground text-xs">
-                  Modal windows for focused tasks.
-                </div>
-              </NavigationMenuLink>
+            <div className="grid w-[min(22rem,calc(100vw-3rem))] gap-1 p-1">
+              {links.map((link) => (
+                <NavigationMenuLink href={link.href} key={link.title}>
+                  <span className="font-medium">{link.title}</span>
+                  <span className="text-muted-foreground text-xs">
+                    {link.description}
+                  </span>
+                </NavigationMenuLink>
+              ))}
             </div>
           </NavigationMenuContent>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <NavigationMenuLink
-            href="#"
-            className="group inline-flex h-10 w-max items-center justify-center rounded-control px-4 py-2 text-sm font-medium"
+            className="hover:bg-primary/5 focus-visible:ring-outline inline-flex h-10 items-center rounded-lg px-4 text-sm font-medium focus-visible:ring-2 focus-visible:outline-none"
+            href="/#components"
           >
-            Docs
+            All components
           </NavigationMenuLink>
         </NavigationMenuItem>
       </NavigationMenuList>

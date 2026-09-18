@@ -1,20 +1,33 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import { ToggleGroup, ToggleGroupItem } from "earthling-ui/toggle-group";
 
-export default function (props: Record<string, any>) {
+type ToggleGroupExampleProps = Pick<
+  ComponentProps<typeof ToggleGroup>,
+  "className" | "disabled" | "material" | "scheme" | "size"
+>;
+
+const themes = [
+  ["system", "icon-[lucide--monitor]", "System"],
+  ["light", "icon-[lucide--sun]", "Light"],
+  ["dark", "icon-[lucide--moon]", "Dark"],
+] as const;
+
+export default function Example(props: ToggleGroupExampleProps) {
   return (
-    <ToggleGroup {...props} type="single" defaultValue="system">
-      <ToggleGroupItem value="system">
-        <i className="icon-[lucide--computer]" />
-        <div>System</div>
-      </ToggleGroupItem>
-      <ToggleGroupItem value="light">
-        <i className="icon-[lucide--sun]" />
-        <div>Light</div>
-      </ToggleGroupItem>
-      <ToggleGroupItem value="dark">
-        <i className="icon-[lucide--moon]" />
-        <div>Dark</div>
-      </ToggleGroupItem>
+    <ToggleGroup
+      type="single"
+      defaultValue="system"
+      aria-label="Color theme"
+      {...props}
+    >
+      {themes.map(([value, icon, label]) => (
+        <ToggleGroupItem key={value} value={value} aria-label={label}>
+          <i aria-hidden="true" className={icon} />
+          <span>{label}</span>
+        </ToggleGroupItem>
+      ))}
     </ToggleGroup>
   );
 }

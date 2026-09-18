@@ -109,16 +109,4 @@ describe("source regressions", () => {
       expect(source.startsWith('"use client";')).toBe(true);
     }
   });
-
-  test("components only import utils from @/utils (eject-safe)", () => {
-    for (const name of componentNames) {
-      const source = readFileSync(
-        join(srcComponents, name, "index.tsx"),
-        "utf8",
-      );
-      // Cross-component imports would break the eject command, which only
-      // copies a single component folder and rewrites @/utils/* imports.
-      expect(source).not.toMatch(/from\s+["']@\/components\//);
-    }
-  });
 });

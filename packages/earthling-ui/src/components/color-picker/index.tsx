@@ -18,6 +18,7 @@ import {
   Input,
   Label,
   parseColor,
+  composeRenderProps,
 } from "react-aria-components";
 import { cn } from "@/utils/cn";
 import { cva, type VariantProps } from "class-variance-authority";
@@ -40,11 +41,12 @@ const colorSwatchVariants = cva(
       },
     },
     defaultVariants: { size: "md" },
-  }
+  },
 );
 
 export interface ColorSwatchProps
-  extends ComponentPropsWithoutRef<typeof ColorSwatchPrimitive>,
+  extends
+    ComponentPropsWithoutRef<typeof ColorSwatchPrimitive>,
     VariantProps<typeof colorSwatchVariants> {}
 
 const ColorSwatch = forwardRef<
@@ -53,7 +55,9 @@ const ColorSwatch = forwardRef<
 >(({ className, size, ...props }, ref) => (
   <ColorSwatchPrimitive
     ref={ref}
-    className={cn(colorSwatchVariants({ size }), className)}
+    className={composeRenderProps(className, (value) =>
+      cn(colorSwatchVariants({ size }), value),
+    )}
     {...props}
   />
 ));
@@ -71,71 +75,90 @@ const colorAreaVariants = cva(
       },
     },
     defaultVariants: { size: "md" },
-  }
+  },
 );
 
 export interface ColorAreaProps
-  extends ComponentPropsWithoutRef<typeof ColorAreaPrimitive>,
+  extends
+    ComponentPropsWithoutRef<typeof ColorAreaPrimitive>,
     VariantProps<typeof colorAreaVariants> {}
 
 const ColorArea = forwardRef<
   ComponentRef<typeof ColorAreaPrimitive>,
   ColorAreaProps
->(({ className, size, ...props }, ref) => (
+>(({ className, size, children, ...props }, ref) => (
   <ColorAreaPrimitive
     ref={ref}
-    className={cn(colorAreaVariants({ size }), className)}
+    className={composeRenderProps(className, (value) =>
+      cn(colorAreaVariants({ size }), value),
+    )}
     {...props}
   >
-    <ColorThumb className="h-5 w-5 rounded-full border-2 border-white shadow-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2" />
+    {children ?? (
+      <ColorThumb className="size-5 rounded-full border-2 border-white shadow-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2" />
+    )}
   </ColorAreaPrimitive>
 ));
 ColorArea.displayName = "ColorArea";
 
 // ColorSlider
-export interface ColorSliderProps
-  extends ComponentPropsWithoutRef<typeof ColorSliderPrimitive> {
+export interface ColorSliderProps extends ComponentPropsWithoutRef<
+  typeof ColorSliderPrimitive
+> {
   label?: string;
 }
 
 const ColorSlider = forwardRef<
   ComponentRef<typeof ColorSliderPrimitive>,
   ColorSliderProps
->(({ className, label, ...props }, ref) => (
+>(({ className, label, children, ...props }, ref) => (
   <ColorSliderPrimitive
     ref={ref}
-    className={cn("group flex w-full flex-col gap-1", className)}
+    className={composeRenderProps(className, (value) =>
+      cn("group flex w-full flex-col gap-1", value),
+    )}
     {...props}
   >
-    {label && (
-      <Label className="text-sm font-medium text-foreground">{label}</Label>
+    {children ?? (
+      <>
+        {label && (
+          <Label className="text-sm font-medium text-foreground">{label}</Label>
+        )}
+        <SliderTrack className="relative h-6 w-full rounded-md border border-current/10 shadow-sm forced-color-adjust-none">
+          <ColorThumb className="top-1/2 size-5 -translate-y-1/2 rounded-full border-2 border-white shadow-md ring-offset-background focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2" />
+        </SliderTrack>
+      </>
     )}
-    <SliderTrack className="relative h-6 w-full rounded-md border border-current/10 shadow-sm forced-color-adjust-none">
-      <ColorThumb className="top-1/2 h-5 w-5 -translate-y-1/2 rounded-full border-2 border-white shadow-md ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2" />
-    </SliderTrack>
   </ColorSliderPrimitive>
 ));
 ColorSlider.displayName = "ColorSlider";
 
 // ColorField
-export interface ColorFieldProps
-  extends ComponentPropsWithoutRef<typeof ColorFieldPrimitive> {
+export interface ColorFieldProps extends ComponentPropsWithoutRef<
+  typeof ColorFieldPrimitive
+> {
   label?: string;
 }
 
 const ColorField = forwardRef<
   ComponentRef<typeof ColorFieldPrimitive>,
   ColorFieldProps
->(({ className, label, ...props }, ref) => (
+>(({ className, label, children, ...props }, ref) => (
   <ColorFieldPrimitive
     ref={ref}
-    className={cn("group flex flex-col gap-1", className)}
+    className={composeRenderProps(className, (value) =>
+      cn("group flex flex-col gap-1", value),
+    )}
     {...props}
   >
-    {label && (
-      <Label className="text-sm font-medium text-foreground">{label}</Label>
+    {children ?? (
+      <>
+        {label && (
+          <Label className="text-sm font-medium text-foreground">{label}</Label>
+        )}
+        <Input className="h-10 w-full rounded-(--radius-control) border border-current/30 bg-background px-3 text-base font-medium text-foreground ring-offset-background hover:border-current/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-invalid:border-bad data-invalid:ring-bad/30 sm:text-sm" />
+      </>
     )}
-    <Input className="h-10 w-full rounded-control border border-current/30 bg-background px-3 text-sm font-medium text-foreground ring-offset-background transition-colors hover:border-current/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline disabled:pointer-events-none disabled:opacity-50" />
   </ColorFieldPrimitive>
 ));
 ColorField.displayName = "ColorField";
@@ -147,7 +170,9 @@ const ColorSwatchPicker = forwardRef<
 >(({ className, ...props }, ref) => (
   <ColorSwatchPickerPrimitive
     ref={ref}
-    className={cn("flex flex-wrap gap-2", className)}
+    className={composeRenderProps(className, (value) =>
+      cn("flex flex-wrap gap-2", value),
+    )}
     {...props}
   />
 ));
@@ -161,9 +186,11 @@ const ColorSwatchPickerItem = forwardRef<
   <ColorSwatchPickerItemPrimitive
     ref={ref}
     color={color}
-    className={cn(
-      "h-8 w-8 cursor-pointer rounded-md border border-current/20 shadow-sm ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 data-selected:ring-2 data-selected:ring-primary",
-      className
+    className={composeRenderProps(className, (value) =>
+      cn(
+        "size-8 cursor-pointer rounded-md border border-current/30 shadow-sm ring-offset-background hover:border-current/50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 data-disabled:cursor-not-allowed data-disabled:opacity-50 data-selected:ring-2 data-selected:ring-primary",
+        value,
+      ),
     )}
     {...props}
   />

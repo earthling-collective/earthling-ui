@@ -12,7 +12,7 @@ const Table = forwardRef<HTMLTableElement, ComponentProps<"table">>(
         {...props}
       />
     </div>
-  )
+  ),
 );
 Table.displayName = "Table";
 
@@ -31,7 +31,7 @@ const TableBody = forwardRef<HTMLTableSectionElement, ComponentProps<"tbody">>(
       className={cn("[&_tr:last-child]:border-0", className)}
       {...props}
     />
-  )
+  ),
 );
 TableBody.displayName = "TableBody";
 
@@ -43,7 +43,7 @@ const TableFooter = forwardRef<
     ref={ref}
     className={cn(
       "border-t bg-muted/50 font-medium [&>tr]:last:border-b-0",
-      className
+      className,
     )}
     {...props}
   />
@@ -55,40 +55,52 @@ const TableRow = forwardRef<HTMLTableRowElement, ComponentProps<"tr">>(
     <tr
       ref={ref}
       className={cn(
-        "border-b transition-colors hover:bg-muted/50 data-[state=selected]:bg-muted",
-        className
+        "border-b hover:bg-muted/50 data-[state=selected]:bg-muted",
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 TableRow.displayName = "TableRow";
 
-const TableHead = forwardRef<HTMLTableCellElement, ComponentProps<"th">>(
-  ({ className, ...props }, ref) => (
+export interface TableHeadProps extends ComponentProps<"th"> {
+  numeric?: boolean;
+}
+
+const TableHead = forwardRef<HTMLTableCellElement, TableHeadProps>(
+  ({ className, numeric = false, ...props }, ref) => (
     <th
       ref={ref}
+      data-numeric={numeric || undefined}
       className={cn(
         "h-10 px-2 text-left align-middle font-medium text-muted-foreground [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
+        numeric && "text-right tabular-nums",
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 TableHead.displayName = "TableHead";
 
-const TableCell = forwardRef<HTMLTableCellElement, ComponentProps<"td">>(
-  ({ className, ...props }, ref) => (
+export interface TableCellProps extends ComponentProps<"td"> {
+  numeric?: boolean;
+}
+
+const TableCell = forwardRef<HTMLTableCellElement, TableCellProps>(
+  ({ className, numeric = false, ...props }, ref) => (
     <td
       ref={ref}
+      data-numeric={numeric || undefined}
       className={cn(
         "p-2 align-middle [&:has([role=checkbox])]:pr-0 [&>[role=checkbox]]:translate-y-[2px]",
-        className
+        numeric && "text-right tabular-nums",
+        className,
       )}
       {...props}
     />
-  )
+  ),
 );
 TableCell.displayName = "TableCell";
 

@@ -1,59 +1,55 @@
 "use client";
-
-import { pageInformation } from "@/lib/page-info";
-import { Search } from "@/components/search";
+import { useState } from "react";
+import {
+  Drawer,
+  DrawerContent,
+  DrawerTitle,
+  DrawerDescription,
+  DrawerTrigger,
+  DrawerClose,
+} from "earthling-ui/drawer";
 import { Button } from "earthling-ui/button";
-import { DrawerClose } from "earthling-ui/drawer";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-
-export const MobileNav = () => {
-  const pathname = usePathname();
-
+import { Nav } from "./nav";
+export function MobileNav() {
+  const [open, setOpen] = useState(false);
   return (
-    <>
-      <Search className="mb-2" />
-      <div className="flex flex-col">
-        {pageInformation.map(({ href, label, icon }) => (
-          <Button
-            key={href}
-            material={"ghost"}
-            size={"sm"}
-            className="justify-start"
-            aria-pressed={pathname === href}
-            asChild
-          >
+    <Drawer direction="left" open={open} onOpenChange={setOpen}>
+      <DrawerTrigger asChild>
+        <Button
+          className="lg:hidden"
+          material="ghost"
+          scheme="neutral"
+          shape="icon"
+          size="sm"
+          aria-label="Open navigation"
+        >
+          <i aria-hidden="true" className="icon-[lucide--menu]" />
+        </Button>
+      </DrawerTrigger>
+      <DrawerContent className="w-80 max-w-[90vw] gap-0 p-0">
+        <div className="flex min-h-0 min-w-0 flex-1 flex-col">
+          <div className="flex items-center justify-between border-b px-5 py-4">
+            <DrawerTitle>Documentation</DrawerTitle>
             <DrawerClose asChild>
-              <Link href={href}>
-                <i className={icon} />
-                <div>{label}</div>
-              </Link>
+              <Button
+                material="ghost"
+                scheme="neutral"
+                shape="icon"
+                size="sm"
+                aria-label="Close navigation"
+              >
+                <i aria-hidden="true" className="icon-[lucide--x]" />
+              </Button>
             </DrawerClose>
-          </Button>
-        ))}
-      </div>
-      <div className="flex flex-col">
-        <Button asChild size="sm" material="ghost" className="justify-start">
-          <Link
-            href={`https://github.com/earthling-collective/earthling-ui`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="icon-[simple-icons--github]" />
-            <div>Github</div>
-          </Link>
-        </Button>
-        <Button asChild size="sm" material="ghost" className="justify-start">
-          <Link
-            href={`http://npmjs.com/package/earthling-ui`}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <i className="icon-[simple-icons--npm]" />
-            <div>NPM</div>
-          </Link>
-        </Button>
-      </div>
-    </>
+          </div>
+          <DrawerDescription className="sr-only">
+            Guides and all Earthling UI components.
+          </DrawerDescription>
+          <div className="min-h-0 flex-1 overflow-y-auto">
+            <Nav onNavigate={() => setOpen(false)} />
+          </div>
+        </div>
+      </DrawerContent>
+    </Drawer>
   );
-};
+}

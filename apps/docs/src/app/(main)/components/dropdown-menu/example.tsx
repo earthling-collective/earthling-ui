@@ -1,35 +1,55 @@
 "use client";
 
+import type { ComponentProps } from "react";
+import { Button } from "earthling-ui/button";
 import {
   DropdownMenu,
+  DropdownMenuCheckboxItem,
   DropdownMenuContent,
   DropdownMenuItem,
-  DropdownMenuTrigger,
+  DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuShortcut,
+  DropdownMenuSub,
+  DropdownMenuSubContent,
+  DropdownMenuSubTrigger,
+  DropdownMenuTrigger,
 } from "earthling-ui/dropdown-menu";
-import { Button } from "earthling-ui/button";
 
-export default function (props: Record<string, any>) {
+type DropdownMenuExampleProps = ComponentProps<typeof DropdownMenu>;
+
+export default function Example(props: DropdownMenuExampleProps) {
   return (
     <DropdownMenu {...props}>
       <DropdownMenuTrigger asChild>
-        <Button material="outline">Open Menu</Button>
+        <Button material="outline">
+          Workspace
+          <i
+            aria-hidden="true"
+            className="icon-[lucide--chevron-down] size-4"
+          />
+        </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent className="w-56">
+      <DropdownMenuContent align="end" className="w-60">
+        <DropdownMenuLabel>Acme Studio</DropdownMenuLabel>
         <DropdownMenuItem>
-          Profile
-          <DropdownMenuShortcut>Ctrl+P</DropdownMenuShortcut>
+          Command palette
+          <DropdownMenuShortcut>⌘K</DropdownMenuShortcut>
         </DropdownMenuItem>
-        <DropdownMenuItem>
-          Settings
-          <DropdownMenuShortcut>Ctrl+S</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <DropdownMenuItem>Workspace settings</DropdownMenuItem>
+        <DropdownMenuCheckboxItem defaultChecked>
+          Show completed tasks
+        </DropdownMenuCheckboxItem>
         <DropdownMenuSeparator />
-        <DropdownMenuItem>
-          Logout
-          <DropdownMenuShortcut>Ctrl+Q</DropdownMenuShortcut>
-        </DropdownMenuItem>
+        <DropdownMenuSub>
+          <DropdownMenuSubTrigger>Switch workspace</DropdownMenuSubTrigger>
+          <DropdownMenuSubContent className="w-48">
+            <DropdownMenuItem>Acme Studio</DropdownMenuItem>
+            <DropdownMenuItem>Personal</DropdownMenuItem>
+          </DropdownMenuSubContent>
+        </DropdownMenuSub>
+        <DropdownMenuSeparator />
+        <DropdownMenuItem variant="destructive">Sign out</DropdownMenuItem>
       </DropdownMenuContent>
     </DropdownMenu>
   );

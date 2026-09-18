@@ -1,106 +1,44 @@
-@source "./";
-
 @import "tw-animate-css";
-
+@source "./components";
+@source "./utils/variants.ts";
 @plugin "@iconify/tailwind4";
 
 @theme {
-  --font-display: var(--font-display);
-  --font-body: var(--font-body);
-  --font-mono: var(--font-mono);
+  --font-display: ui-sans-serif, system-ui, sans-serif;
+  --font-body: ui-sans-serif, system-ui, sans-serif;
+  --font-mono: ui-monospace, monospace;
+  --radius-control: 999px;
 
-  --radius-control: var(--radius-control); /* buttons, inputs, etc */
+  --color-surface: oklch(0.99 0 0);
+  --color-outline: oklch(0.25 0 0);
+  --color-image-outline: rgb(0 0 0 / 0.1);
+  --color-light: oklch(1 0 0 / 0.2);
+  --color-shadow: oklch(0.25 0 0);
+  --color-background: oklch(0.99 0 0);
+  --color-foreground: oklch(0.25 0 0);
 
-  /* utility colors */
-  --color-surface: var(--color-surface); /* paper, glass, etc */
-  --color-outline: var(--color-outline); /* focus rings */
-  --color-light: var(--color-light); /* highlight effects */
-  --color-shadow: var(--color-shadow); /* shadows */
-
-  --tw-shadow-color: oklch(0 100% 0);
-
-  /* default color scheme */
-  --color-background: var(--color-background);
-  --color-foreground: var(--color-foreground);
-  --color-accent: var(--color-accent);
-
-  /* other color schemes */
-  --color-primary: var(--color-primary);
-  --color-primary-foreground: var(--color-primary-foreground);
-  --color-primary-accent: var(--color-primary-accent);
-
-  --color-secondary: var(--color-secondary);
-  --color-secondary-foreground: var(--color-secondary-foreground);
-  --color-secondary-accent: var(--color-secondary-accent);
-
-  --color-tertiary: var(--color-tertiary);
-  --color-tertiary-foreground: var(--color-tertiary-foreground);
-  --color-tertiary-accent: var(--color-tertiary-accent);
-
-  --color-neutral: var(--color-neutral);
-  --color-neutral-foreground: var(--color-neutral-foreground);
-  --color-neutral-accent: var(--color-neutral-accent);
-
-  --color-muted: var(--color-muted);
-  --color-muted-foreground: var(--color-muted-foreground);
-  --color-muted-accent: var(--color-muted-accent);
-
-  --color-good: var(--color-good);
-  --color-good-foreground: var(--color-good-foreground);
-  --color-good-accent: var(--color-good-accent);
-
-  --color-caution: var(--color-caution);
-  --color-caution-foreground: var(--color-caution-foreground);
-  --color-caution-accent: var(--color-caution-accent);
-
-  --color-bad: var(--color-bad);
-  --color-bad-foreground: var(--color-bad-foreground);
-  --color-bad-accent: var(--color-bad-accent);
+  --color-primary: oklch(0.2 0 0);
+  --color-primary-foreground: oklch(0.98 0 0);
+  --color-secondary: oklch(0.9 0 0);
+  --color-secondary-foreground: oklch(0.25 0 0);
+  --color-tertiary: oklch(0.96 0 0);
+  --color-tertiary-foreground: oklch(0.3 0 0);
+  --color-neutral: oklch(0.94 0 0);
+  --color-neutral-foreground: oklch(0.25 0 0);
+  --color-muted: oklch(0.94 0 0);
+  --color-muted-foreground: oklch(0.45 0 0);
+  --color-good: oklch(0.45 0.12 145);
+  --color-good-foreground: oklch(0.98 0 0);
+  --color-caution: oklch(0.8 0.15 85);
+  --color-caution-foreground: oklch(0.25 0.04 70);
+  --color-bad: oklch(0.48 0.18 28);
+  --color-bad-foreground: oklch(0.98 0 0);
 }
 
-/* default theme */
 @layer base {
   :root {
-    --radius-control: 999px;
-
-    --color-surface: oklch(0.99 0 0);
-    --color-outline: oklch(0 0 0);
-    --color-light: oklch(1 0 0 / 0.2);
-    --color-shadow: oklch(0.25 0 0);
-
-    --color-foreground: oklch(0.25 0 0);
-    --color-background: oklch(0.99 0 0);
-
-    --color-primary: oklch(17.42% 0.0017 17.32);
-    --color-primary-foreground: oklch(96.29% 0 0);
-
-    --color-secondary: oklch(17.42% 0.0017 17.32);
-    --color-secondary-foreground: oklch(96.29% 0 0);
-
-    --color-tertiary: oklch(17.42% 0.0017 17.32);
-    --color-tertiary-foreground: oklch(96.29% 0 0);
-
-    --color-neutral: oklch(94% 0 0);
-    --color-neutral-foreground: oklch(0.25 0 0);
-
-    --color-muted: oklch(94% 0 0);
-    --color-muted-foreground: oklch(0.5 0 0);
-
-    --color-good: oklch(0.6 0.17 140);
-    --color-good-foreground: oklch(0.98 0 0);
-
-    --color-caution: oklch(0.6 0.2 90);
-    --color-caution-foreground: oklch(0.98 0 0);
-
-    --color-bad: oklch(0.6 0.2 30);
-    --color-bad-foreground: oklch(0.98 0 0);
-  }
-}
-
-/* universal styles */
-@layer base {
-  :root {
-    @apply min-h-screen bg-background text-foreground font-body;
+    color-scheme: light;
+    @apply min-h-dvh bg-background text-foreground font-body antialiased;
   }
   * {
     @apply border-current/15;

@@ -1,11 +1,23 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import { Breadcrumb, Breadcrumbs } from "earthling-ui/breadcrumbs";
 
-export default function (props: Record<string, any>) {
+type BreadcrumbsExampleProps = Pick<
+  ComponentProps<typeof Breadcrumbs>,
+  "isDisabled"
+>;
+
+export default function Example(props: BreadcrumbsExampleProps) {
   return (
-    <Breadcrumbs {...props}>
-      <Breadcrumb>Home</Breadcrumb>
-      <Breadcrumb>Library</Breadcrumb>
-      <Breadcrumb>Data</Breadcrumb>
+    <Breadcrumbs {...props} aria-label="Documentation breadcrumb">
+      <Breadcrumb>
+        <a href="/">Docs</a>
+      </Breadcrumb>
+      <Breadcrumb>
+        <a href="/#components">Components</a>
+      </Breadcrumb>
+      <Breadcrumb current>Breadcrumbs</Breadcrumb>
     </Breadcrumbs>
   );
 }

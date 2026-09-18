@@ -1,3 +1,6 @@
+"use client";
+
+import type { ComponentProps } from "react";
 import {
   Accordion,
   AccordionContent,
@@ -5,31 +8,37 @@ import {
   AccordionTrigger,
 } from "earthling-ui/accordion";
 
-export default function (props: Record<string, any>) {
+type AccordionExampleProps = Pick<
+  ComponentProps<typeof Accordion>,
+  "allowsMultipleExpanded" | "isDisabled"
+>;
+
+export default function Example(props: AccordionExampleProps) {
   return (
-    <Accordion {...props}>
-      <AccordionItem id="item-1">
-        <AccordionTrigger>Item 1</AccordionTrigger>
-        <AccordionContent>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
-          nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet
-          ullamcorper velit nisl in velit.
+    <Accordion
+      className="max-w-xl"
+      defaultExpandedKeys={["shipping"]}
+      {...props}
+    >
+      <AccordionItem id="shipping">
+        <AccordionTrigger>When will my order ship?</AccordionTrigger>
+        <AccordionContent className="text-muted-foreground">
+          Orders placed before 2 PM usually leave our studio the same business
+          day. We will email tracking details as soon as the carrier scans it.
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem id="item-2">
-        <AccordionTrigger>Item 2</AccordionTrigger>
-        <AccordionContent>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
-          nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet
-          ullamcorper velit nisl in velit.
+      <AccordionItem id="returns">
+        <AccordionTrigger>Can I return an item?</AccordionTrigger>
+        <AccordionContent className="text-muted-foreground">
+          Unused items can be returned within 30 days in their original
+          packaging.
         </AccordionContent>
       </AccordionItem>
-      <AccordionItem id="item-3">
-        <AccordionTrigger>Item 3</AccordionTrigger>
-        <AccordionContent>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed molestie,
-          nisl vel ultricies aliquet, ipsum nisi aliquam nisi, sit amet
-          ullamcorper velit nisl in velit.
+      <AccordionItem id="international">
+        <AccordionTrigger>Do you ship internationally?</AccordionTrigger>
+        <AccordionContent className="text-muted-foreground">
+          Yes. Duties and delivery estimates appear at checkout for supported
+          destinations.
         </AccordionContent>
       </AccordionItem>
     </Accordion>

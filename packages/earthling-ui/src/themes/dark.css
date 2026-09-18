@@ -1,33 +1,24 @@
 @utility theme-dark {
-  --radius-control: 999px;
-
-  --color-surface: oklch(0.2 0 0);
-  --color-outline: oklch(1 0 0);
-
-  --color-background: oklch(17.42% 0.0017 17.32);
-  --color-foreground: oklch(96.29% 0 0);
-
-  --color-primary: oklch(96.29% 0 0);
-  --color-primary-foreground: oklch(17.42% 0.0017 17.32);
-
-  --color-secondary: oklch(35% 0 0);
-  --color-secondary-foreground: oklch(95% 0.0017 17.32);
-
-  --color-tertiary: oklch(95 0.0017 0);
-  --color-tertiary-foreground: oklch(17.42% 0.0017 17.32);
-
-  --color-neutral: oklch(35% 0 0);
-  --color-neutral-foreground: oklch(95% 0.0017 17.32);
-
+  color-scheme: dark;
+  --color-surface: oklch(0.22 0 0);
+  --color-outline: oklch(0.96 0 0);
+  --color-image-outline: rgb(255 255 255 / 0.1);
+  --color-background: oklch(0.17 0 0);
+  --color-foreground: oklch(0.96 0 0);
+  --color-primary: oklch(0.96 0 0);
+  --color-primary-foreground: oklch(0.2 0 0);
+  --color-secondary: oklch(0.35 0 0);
+  --color-secondary-foreground: oklch(0.96 0 0);
+  --color-tertiary: oklch(0.25 0 0);
+  --color-tertiary-foreground: oklch(0.9 0 0);
+  --color-neutral: oklch(0.35 0 0);
+  --color-neutral-foreground: oklch(0.96 0 0);
   --color-muted: oklch(0.3 0 0);
-  --color-muted-foreground: oklch(0.6 0 0);
-
-  --color-good: oklch(0.55 0.2 140);
-  --color-good-foreground: oklch(0.95 0 0);
-
-  --color-caution: oklch(0.6 0.2 90);
-  --color-caution-foreground: oklch(0.98 0 0);
-
-  --color-bad: oklch(0.5 0.25 30);
-  --color-bad-foreground: oklch(0.95 0 0);
+  --color-muted-foreground: oklch(0.72 0 0);
+  --color-good: oklch(0.7 0.16 145);
+  --color-good-foreground: oklch(0.2 0.02 145);
+  --color-caution: oklch(0.8 0.15 85);
+  --color-caution-foreground: oklch(0.25 0.04 70);
+  --color-bad: oklch(0.48 0.18 28);
+  --color-bad-foreground: oklch(0.98 0 0);
 }

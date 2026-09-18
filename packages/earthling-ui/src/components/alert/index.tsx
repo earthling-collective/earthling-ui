@@ -3,35 +3,20 @@
 import { type ComponentProps, forwardRef } from "react";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { schemes } from "@/utils/variants";
 
 const alertVariants = cva(
-  "relative w-full rounded-lg border p-4 [&>svg~*]:pl-7 [&>svg+div]:translate-y-[-3px] [&>svg]:absolute [&>svg]:left-4 [&>svg]:top-4 [&>svg]:text-foreground",
+  "relative w-full rounded-lg border border-(--scheme-tint)/25 bg-(--scheme-tint)/5 p-4 text-sm text-foreground [&>svg~*]:ps-7 [&>svg]:absolute [&>svg]:start-4 [&>svg]:top-4 [&>svg]:size-4 [&>svg]:text-current",
   {
     variants: {
-      scheme: {
-        default: "bg-background text-foreground",
-        primary:
-          "border-primary/50 text-primary bg-primary/10 [&>svg]:text-primary",
-        secondary:
-          "border-secondary/50 text-secondary bg-secondary/10 [&>svg]:text-secondary",
-        tertiary:
-          "border-tertiary/50 text-tertiary bg-tertiary/10 [&>svg]:text-tertiary",
-        neutral:
-          "border-neutral/50 text-neutral bg-neutral/10 [&>svg]:text-neutral",
-        muted: "border-muted/50 text-muted-foreground bg-muted/10 [&>svg]:text-muted-foreground",
-        good: "border-good/50 text-good bg-good/10 [&>svg]:text-good",
-        caution:
-          "border-caution/50 text-caution bg-caution/10 [&>svg]:text-caution",
-        bad: "border-bad/50 text-bad bg-bad/10 [&>svg]:text-bad",
-      },
+      scheme: schemes,
     },
     defaultVariants: { scheme: "default" },
-  }
+  },
 );
 
 export interface AlertProps
-  extends ComponentProps<"div">,
-    VariantProps<typeof alertVariants> {}
+  extends ComponentProps<"div">, VariantProps<typeof alertVariants> {}
 
 const Alert = forwardRef<HTMLDivElement, AlertProps>(
   ({ className, scheme, ...props }, ref) => (
@@ -41,32 +26,30 @@ const Alert = forwardRef<HTMLDivElement, AlertProps>(
       className={cn(alertVariants({ scheme }), className)}
       {...props}
     />
-  )
+  ),
 );
 Alert.displayName = "Alert";
 
-const AlertTitle = forwardRef<
-  HTMLParagraphElement,
-  ComponentProps<"h5">
->(({ className, ...props }, ref) => (
-  <h5
-    ref={ref}
-    className={cn("mb-1 font-medium leading-none tracking-tight", className)}
-    {...props}
-  />
-));
+const AlertTitle = forwardRef<HTMLHeadingElement, ComponentProps<"h5">>(
+  ({ className, ...props }, ref) => (
+    <h5
+      ref={ref}
+      className={cn("mb-1 font-medium leading-tight tracking-tight", className)}
+      {...props}
+    />
+  ),
+);
 AlertTitle.displayName = "AlertTitle";
 
-const AlertDescription = forwardRef<
-  HTMLParagraphElement,
-  ComponentProps<"div">
->(({ className, ...props }, ref) => (
-  <div
-    ref={ref}
-    className={cn("text-sm [&_p]:leading-relaxed", className)}
-    {...props}
-  />
-));
+const AlertDescription = forwardRef<HTMLDivElement, ComponentProps<"div">>(
+  ({ className, ...props }, ref) => (
+    <div
+      ref={ref}
+      className={cn("text-sm/relaxed [&_p]:leading-relaxed", className)}
+      {...props}
+    />
+  ),
+);
 AlertDescription.displayName = "AlertDescription";
 
 export { Alert, AlertTitle, AlertDescription, alertVariants };

@@ -1,119 +1,146 @@
-export const metadata = {"title":"Getting Started","description":"Install Earthling UI and build your first project with Next.js or Vite."};
+export const metadata = {
+  title: "Getting Started",
+  description:
+    "Install Earthling UI in a React 18 or 19 project with Tailwind CSS 4.",
+};
 
-# Getting Started with Earthling UI
+# Getting Started
 
-Earthling UI is a modern, opinionated component library designed to help you build beautiful, accessible, and consistent user interfaces. It's built with a focus on developer experience and flexibility, allowing you to either import components directly or eject them into your project.
+Earthling UI supports React 18 and 19. Use Node.js 20 or newer for the documented toolchain and CLI.
 
-## Installation
-
-Install Earthling UI in your project:
+## Install
 
 ```bash
-bun add earthling-ui
-# or
 npm install earthling-ui
 ```
 
-Earthling UI is styled with **Tailwind CSS 4**, so your project needs Tailwind set up (the framework guides below cover this). React 18 and React 19 are both supported.
-
-## Quick Start
-
-### Option 1: Create a new project
-
-The easiest way to get started is to create a new project using the Earthling UI CLI:
-
-```bash
-bunx earthling-ui create next my-app
-```
-
-This will create a new Next.js project with Earthling UI and Tailwind pre-configured. You can also use other templates like `spa` (Vite), `tauri` (desktop app), or `monorepo`.
-
-### Option 2: Add to an existing project
-
-1. Install the package as shown above
-2. Import the library styles in your main Tailwind CSS file:
+Configure Tailwind CSS 4 for your framework, then add these explicit paths to its global stylesheet:
 
 ```css
 @import "tailwindcss";
-@import "earthling-ui";
+@import "earthling-ui/index.css";
+@import "earthling-ui/themes/dark.css";
 ```
 
-3. Import components directly:
-
-```jsx
-import { Button } from "earthling-ui/button";
-
-export default function MyComponent() {
-  return <Button>Click me</Button>;
-}
-```
-
-## Framework Setup
-
-### Next.js (App Router)
-
-Earthling UI components ship with `"use client"` directives, so they work out of the box with React Server Components — import them from server or client components and Next.js does the right thing.
+The dark stylesheet defines `theme-dark`. Apply it directly or through a selector:
 
 ```css
-/* app/globals.css */
-@import "tailwindcss";
-@import "earthling-ui";
-```
-
-```jsx
-import { Button } from "earthling-ui/button";
-
-export default function Page() {
-  return <Button scheme="primary">Hello</Button>;
+@layer base {
+  :root[data-theme="dark"] {
+    @apply theme-dark;
+  }
 }
 ```
 
-### Vite
+Import individual component entry points to keep dependency graphs focused:
 
-Install the Tailwind Vite plugin alongside Earthling UI:
+```tsx
+import { Button } from "earthling-ui/button";
+import { Input } from "earthling-ui/input";
+
+export function SignupForm() {
+  return (
+    <form className="grid gap-4">
+      <Input aria-label="Email" autoComplete="email" type="email" />
+      <Button type="submit">Create account</Button>
+    </form>
+  );
+}
+```
+
+## Next.js App Router
+
+If `create-next-app` configured Tailwind, keep its PostCSS setup and add the Earthling imports to `app/globals.css` or `src/app/globals.css`.
+
+For a manual Tailwind 4 setup:
 
 ```bash
-bun add earthling-ui tailwindcss @tailwindcss/vite
+npm install -D tailwindcss @tailwindcss/postcss postcss
+```
+
+```js
+// postcss.config.mjs
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
+```
+
+Import the global stylesheet once from the root layout:
+
+```tsx
+// app/layout.tsx
+import "./globals.css";
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+Earthling entry points include `"use client"`. Server Components may render them normally; add your own client boundary only when your code uses state, effects, handlers, or browser APIs.
+
+See the official [Next.js CSS guide](https://nextjs.org/docs/pages/getting-started/css#tailwind-css) for the current Tailwind integration.
+
+## Vite
+
+Tailwind recommends its Vite plugin for new projects:
+
+```bash
+npm install earthling-ui
+npm install -D tailwindcss @tailwindcss/vite
 ```
 
 ```ts
 // vite.config.ts
-import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
+import { defineConfig } from "vite";
 
 export default defineConfig({
   plugins: [react(), tailwindcss()],
 });
 ```
 
-```css
-/* src/index.css */
-@import "tailwindcss";
-@import "earthling-ui";
+Put the three CSS imports shown above in `src/styles.css`, then import that file from `src/main.tsx`.
+
+If the Vite plugin is unsuitable for your build, use PostCSS instead:
+
+```bash
+npm install -D tailwindcss @tailwindcss/postcss postcss
 ```
 
-> During `vite build`, Rollup may log that module-level `"use client"` directives were ignored. This is expected and harmless in a client-only app — the directives only carry meaning for React Server Components.
-
-## Using Themes
-
-Earthling UI comes with a default theme, but you can also import additional themes:
-
-```css
-@import "earthling-ui/theme/dark";
+```js
+// postcss.config.mjs
+export default {
+  plugins: {
+    "@tailwindcss/postcss": {},
+  },
+};
 ```
 
-You can apply themes using CSS classes:
+Use one Tailwind integration, not both. The Earthling stylesheet carries its own source directives, so imported component classes are included. Vite may report harmless notices about ignored module-level `"use client"` directives in a client-only build.
 
-```jsx
-<div className="theme-dark">
-  {/* Components in here will use the dark theme */}
-</div>
+See the official [Tailwind Vite guide](https://tailwindcss.com/docs/installation/using-vite) for the current plugin setup.
+
+## Import or own the source
+
+Package imports receive library updates. To copy a component into your project, initialize destination paths and preview the operation:
+
+```bash
+npx earthling-ui init
+npx earthling-ui eject dialog --dry-run --json
+npx earthling-ui eject dialog
 ```
 
-## What's Next?
+Keep `earthling-ui/index.css` after ejection because source ownership and theme delivery are separate. Add an `@source` directive if your ejected directory is outside Tailwind automatic detection.
 
-- Explore the [CLI documentation](/cli) to learn about project creation and component management
-- Check out the [theming guide](/theming) to customize the look and feel of your components
-- Browse the available [templates](/templates) for different project types
-- View the [component documentation](/#components) to see all available components
+Continue with the [theming guide](/theming), [CLI reference](/cli), or [component catalog](/#components).

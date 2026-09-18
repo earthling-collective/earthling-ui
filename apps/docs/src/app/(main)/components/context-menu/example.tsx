@@ -1,38 +1,58 @@
 "use client";
 
+import type { ComponentProps } from "react";
 import {
   ContextMenu,
+  ContextMenuCheckboxItem,
   ContextMenuContent,
   ContextMenuItem,
-  ContextMenuTrigger,
+  ContextMenuLabel,
   ContextMenuSeparator,
   ContextMenuShortcut,
+  ContextMenuSub,
+  ContextMenuSubContent,
+  ContextMenuSubTrigger,
+  ContextMenuTrigger,
 } from "earthling-ui/context-menu";
 
-export default function (props: Record<string, any>) {
+type ContextMenuExampleProps = ComponentProps<typeof ContextMenu>;
+
+export default function Example(props: ContextMenuExampleProps) {
   return (
     <ContextMenu {...props}>
-      <ContextMenuTrigger className="flex h-[150px] w-[300px] items-center justify-center rounded-md border border-dashed text-sm">
-        Right click here
+      <ContextMenuTrigger
+        className="bg-background focus-visible:ring-outline flex min-h-44 w-72 flex-col justify-between rounded-xl border p-4 text-start shadow-sm outline-none focus-visible:ring-2"
+        tabIndex={0}
+      >
+        <span className="text-sm font-medium">Quarterly roadmap</span>
+        <span className="text-muted-foreground text-xs">
+          Right-click or press Shift+F10
+        </span>
       </ContextMenuTrigger>
-      <ContextMenuContent className="w-64">
+      <ContextMenuContent className="w-60">
+        <ContextMenuLabel>Roadmap</ContextMenuLabel>
         <ContextMenuItem>
-          Back
-          <ContextMenuShortcut>⌘[</ContextMenuShortcut>
-        </ContextMenuItem>
-        <ContextMenuItem disabled>
-          Forward
-          <ContextMenuShortcut>⌘]</ContextMenuShortcut>
+          Open
+          <ContextMenuShortcut>Enter</ContextMenuShortcut>
         </ContextMenuItem>
         <ContextMenuItem>
-          Reload
-          <ContextMenuShortcut>⌘R</ContextMenuShortcut>
+          Rename
+          <ContextMenuShortcut>F2</ContextMenuShortcut>
         </ContextMenuItem>
+        <ContextMenuCheckboxItem defaultChecked>
+          Available offline
+        </ContextMenuCheckboxItem>
         <ContextMenuSeparator />
-        <ContextMenuItem>
-          Save Page As...
-          <ContextMenuShortcut>⌘S</ContextMenuShortcut>
-        </ContextMenuItem>
+        <ContextMenuSub>
+          <ContextMenuSubTrigger>Move to</ContextMenuSubTrigger>
+          <ContextMenuSubContent className="w-44">
+            <ContextMenuItem>Planning</ContextMenuItem>
+            <ContextMenuItem>In progress</ContextMenuItem>
+            <ContextMenuItem>Archive</ContextMenuItem>
+          </ContextMenuSubContent>
+        </ContextMenuSub>
+        <ContextMenuSeparator />
+        <ContextMenuItem>Copy link</ContextMenuItem>
       </ContextMenuContent>
     </ContextMenu>
   );

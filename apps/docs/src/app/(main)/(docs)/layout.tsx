@@ -1,28 +1,17 @@
-import { cn } from "earthling-ui/utils/cn";
-import { cookies } from "next/headers";
-import { ReactNode } from "react";
+import type { ReactNode } from "react";
 import { Toc } from "@/components/toc";
-
-export default async function ({ children }: { children: ReactNode }) {
-  const jar = await cookies();
-  const theme = jar.get("theme")?.value;
-
+export default function GuideLayout({ children }: { children: ReactNode }) {
   return (
     <>
-      <main className="col-span-3 flex flex-1 flex-col px-4 xl:col-span-1">
-        <div className="container mx-auto max-w-3xl py-10 md:my-4">
-          <article
-            className={cn(
-              "prose prose-neutral max-w-none",
-              (!theme || theme === "system") && "dark:prose-invert",
-              theme === "dark" && "prose-invert",
-            )}
-          >
-            {children}
-          </article>
-        </div>
+      <main
+        id="main-content"
+        className="min-w-0 px-5 py-10 sm:px-8 lg:px-10 lg:py-12"
+      >
+        <article className="docs-prose prose mx-auto max-w-3xl">
+          {children}
+        </article>
       </main>
-      <aside className="hidden w-[280px] flex-col border-l border-transparent xl:flex">
+      <aside className="hidden xl:block">
         <Toc />
       </aside>
     </>

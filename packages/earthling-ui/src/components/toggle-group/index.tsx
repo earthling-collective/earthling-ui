@@ -10,27 +10,17 @@ import {
 import * as ToggleGroupPrimitive from "@radix-ui/react-toggle-group";
 import { cva, type VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
+import { schemes } from "@/utils/variants";
 
 const toggleGroupVariants = cva("flex items-center justify-center", {
   variants: {
     material: {
-      paper:
-        "rounded-control bg-(--scheme-base) bg-muted text-muted-foreground",
+      paper: "rounded-(--radius-control) bg-muted text-muted-foreground",
     },
-    scheme: {
-      default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
-      primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
-      secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
-      tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
-      neutral: `[--scheme-tint:var(--color-neutral)] [--scheme-foreground:var(--color-neutral-foreground)]`,
-      muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
-      good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
-      caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
-      bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
-    },
+    scheme: schemes,
     size: { sm: "p-1", md: "p-1", lg: "p-1" },
   },
-  defaultVariants: { material: "paper", size: "md", scheme: "neutral" },
+  defaultVariants: { material: "paper", size: "md", scheme: "primary" },
 });
 
 const ToggleGroupContext = createContext<
@@ -41,39 +31,41 @@ const ToggleGroup = forwardRef<
   ComponentRef<typeof ToggleGroupPrimitive.Root>,
   ComponentPropsWithoutRef<typeof ToggleGroupPrimitive.Root> &
     VariantProps<typeof toggleGroupVariants>
->(({ className, material, size, scheme, children, ...props }, ref) => (
-  <ToggleGroupPrimitive.Root
-    ref={ref}
-    className={cn(toggleGroupVariants({ material, size, scheme }), className)}
-    {...props}
-  >
-    <ToggleGroupContext.Provider value={{ material, scheme, size }}>
-      {children}
-    </ToggleGroupContext.Provider>
-  </ToggleGroupPrimitive.Root>
-));
+>(
+  (
+    {
+      className,
+      material = "paper",
+      size = "md",
+      scheme = "primary",
+      children,
+      ...props
+    },
+    ref,
+  ) => (
+    <ToggleGroupPrimitive.Root
+      ref={ref}
+      className={cn(toggleGroupVariants({ material, size, scheme }), className)}
+      {...props}
+    >
+      <ToggleGroupContext.Provider value={{ material, scheme, size }}>
+        {children}
+      </ToggleGroupContext.Provider>
+    </ToggleGroupPrimitive.Root>
+  ),
+);
 
 ToggleGroup.displayName = ToggleGroupPrimitive.Root.displayName;
 
 const toggleGroupItemVariants = cva(
-  "-ml-px inline-flex cursor-pointer items-center justify-center gap-1.5 transition-colors first:ml-0 first:rounded-l-control last:rounded-r-control text-sm font-medium",
+  "inline-flex cursor-pointer items-center justify-center gap-1.5 text-sm font-medium ring-offset-background hover:bg-(--scheme-tint)/5 focus-visible:relative focus-visible:z-10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-outline focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50",
   {
     variants: {
       material: {
         paper:
-          "aria-checked:bg-(--scheme-tint) aria-checked:text-(--scheme-foreground) rounded-control",
+          "data-[state=on]:bg-(--scheme-tint) data-[state=on]:text-(--scheme-foreground) data-[state=on]:shadow-xs rounded-[max(0px,calc(var(--radius-control)-0.25rem))]",
       },
-      scheme: {
-        default: `[--scheme-tint:var(--color-foreground)] [--scheme-foreground:var(--color-background)]`,
-        primary: `[--scheme-tint:var(--color-primary)] [--scheme-foreground:var(--color-primary-foreground)]`,
-        secondary: `[--scheme-tint:var(--color-secondary)] [--scheme-foreground:var(--color-secondary-foreground)]`,
-        tertiary: `[--scheme-tint:var(--color-tertiary)] [--scheme-foreground:var(--color-tertiary-foreground)]`,
-        neutral: `[--scheme-tint:var(--color-neutral)] [--scheme-foreground:var(--color-neutral-foreground)]`,
-        muted: `[--scheme-tint:var(--color-muted)] [--scheme-foreground:var(--color-muted-foreground)]`,
-        good: `[--scheme-tint:var(--color-good)] [--scheme-foreground:var(--color-good-foreground)]`,
-        caution: `[--scheme-tint:var(--color-caution)] [--scheme-foreground:var(--color-caution-foreground)]`,
-        bad: `[--scheme-tint:var(--color-bad)] [--scheme-foreground:var(--color-bad-foreground)]`,
-      },
+      scheme: schemes,
       size: {
         sm: "h-7 px-2.5 min-w-9",
         md: "h-8 px-3 min-w-10",
@@ -96,9 +88,9 @@ const ToggleGroupItem = forwardRef<
       ref={ref}
       className={cn(
         toggleGroupItemVariants({
-          material: material || context.material,
-          scheme: scheme || context.scheme,
-          size: size || context.size,
+          material: material ?? context.material,
+          scheme: scheme ?? context.scheme,
+          size: size ?? context.size,
         }),
         className,
       )}

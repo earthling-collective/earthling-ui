@@ -1,129 +1,26 @@
 # Earthling UI
 
-A modern, themeable React component library built with TypeScript, Tailwind CSS, and Radix UI primitives.
+Opinionated React components with two equal paths: import the package, or eject source into your own codebase. React 18/19, Tailwind CSS 4, Node 20+. Alpha: APIs can evolve.
 
-> **Alpha Status**: This project is in active development. APIs and features may change between releases.
+## Install
 
-## Features
-
-- **Themeable Components**: Light and dark themes with CSS custom properties
-- **Type-Safe**: Built with TypeScript for full IntelliSense support
-- **Modern Stack**: React 18/19 + Tailwind CSS 4 + Radix UI primitives
-- **Tree-Shakeable**: Import only the components you need
-- **SSR Ready**: All components include `"use client"` directives for Next.js App Router
-- **CLI Tool**: Scaffold projects from templates (SSR, SPA, monorepo, CLI, DB)
-- **Eject**: Copy component source directly into your project
-
-## Installation
-
-```bash
-bun add earthling-ui
-# or
+```sh
 npm install earthling-ui
 ```
 
-## Components
-
-### Form Inputs
-- `Button` - Versatile button with paper, outline, and ghost materials
-- `Input` - Text input field
-- `TextArea` - Multi-line text input
-- `Label` - Accessible form-control label
-- `Checkbox` - Accessible checkbox
-- `Radio` - Radio group and radio items
-- `Switch` - Toggle switch
-- `Select` - Dropdown select with compound components
-- `Slider` - Range slider
-- `ColorPicker` - Color area, sliders, and swatches
-
-### Layout & Containers
-- `Card` - Container for grouping related content
-- `Surface` - Flexible surface with paper/glass variants
-- `Table` - Data table with compound components
-- `ScrollArea` - Scrollable area with custom scrollbar
-- `Separator` - Visual divider
-- `Tabs` - Tab interface
-
-### Overlays
-- `Dialog` - Modal dialog with form support
-- `AlertDialog` - Confirmation dialog
-- `Drawer` - Slide-out drawer (top/bottom/left/right)
-- `Popover` - Floating popover
-- `HoverCard` - Hover-activated card
-- `Tooltip` - Accessible tooltip
-- `DropdownMenu` - Dropdown menu with nested items
-- `ContextMenu` - Right-click context menu
-
-### Feedback & Display
-- `Alert` - Alert message with severity variants
-- `Badge` - Small label/tag
-- `Chip` - Interactive tag
-- `Avatar` - User avatar with fallback
-- `Skeleton` - Loading placeholder
-- `Progress` - Progress bar
-- `Toast` - Toast notifications
-- `Accordion` - Expandable sections
-- `Collapsible` - Simple collapsible section
-- `ToggleGroup` - Button toggle group
-- `Spinner` - Animated loading indicator
-- `Kbd` - Keyboard key display
-
-### Navigation
-- `Breadcrumbs` - Navigation breadcrumb trail
-- `Pagination` - Page navigation
-- `Menubar` - Persistent menu bar with nested menus
-- `NavigationMenu` - Site navigation with content panels
-
-### Variant System
-
-Components support a consistent variant system:
-
-- **Materials**: `paper`, `outline`, `ghost`
-- **Schemes**: `primary`, `secondary`, `tertiary`, `neutral`, `muted`, `good`, `caution`, `bad`
-- **Sizes**: `sm`, `md`, `lg`
-
-## Usage
-
-Import components individually for optimal tree-shaking:
-
-```tsx
-import { Button } from "earthling-ui/button";
-import { Input } from "earthling-ui/input";
-```
-
-Or import from the barrel export:
-
-```tsx
-import { Button, Input } from "earthling-ui";
-```
-
-```tsx
-function App() {
-  return (
-    <Button material="paper" scheme="primary" size="md">
-      Click me
-    </Button>
-  );
-}
-```
-
-## Theming
-
-Earthling UI supports light, dark, and system themes through CSS custom properties:
+Use your framework's Tailwind 4 integration, then import the styles in its global CSS:
 
 ```css
-/* Import required styles */
 @import "tailwindcss";
-@import "earthling-ui";
-@import "earthling-ui/theme/dark";
+@import "earthling-ui/index.css";
+@import "earthling-ui/themes/dark.css";
 
-/* Apply themes based on data-theme attribute */
 @layer base {
   :root[data-theme="dark"] {
     @apply theme-dark;
   }
-  :root[data-theme="system"] {
-    @media (prefers-color-scheme: dark) {
+  @media (prefers-color-scheme: dark) {
+    :root[data-theme="system"] {
       @apply theme-dark;
     }
   }
@@ -131,44 +28,73 @@ Earthling UI supports light, dark, and system themes through CSS custom properti
 ```
 
 ```tsx
-// Manual theme control
-document.documentElement.setAttribute("data-theme", "dark"); // or 'light' or 'system'
+import { Button } from "earthling-ui/button";
+import { Input } from "earthling-ui/input";
+
+<Button loading={saving} type="submit">Save changes</Button>
+<Input aria-label="Email" type="email" autoComplete="email" />
 ```
 
-If your bundler imports stylesheets from JavaScript instead of CSS `@import`, the direct file paths work everywhere:
+Per-component imports keep dependency graphs focused. Barrel imports from `earthling-ui` also work. ESM entries carry `"use client"` for React Server Components; CommonJS exports include matching declarations. Vite may report harmless ignored-directive notices.
 
-```ts
-import "earthling-ui/index.css";
-import "earthling-ui/themes/dark.css";
+## Conventions
+
+- Controls use `size="sm" | "md" | "lg"`. Supported variants depend on the component; inspect its types instead of assuming every variant is universal.
+- Schemes: `default`, `primary`, `secondary`, `tertiary`, `neutral`, `muted`, `good`, `caution`, `bad`.
+- Buttons support `paper`, `outline`, and `ghost`; surfaces support `paper` and `glass`.
+- Use `className` for local overrides and CSS variables for shared theme changes. Refs and native/primitive props are forwarded.
+- Label icon-only controls, inputs, and slider thumbs. Include dialog titles and descriptions. Use interactive surfaces with `asChild` and a semantic button or link.
+- Hover and selection feedback are immediate. Spatial motion respects reduced-motion preferences.
+- `Button loading` retains the label's width and disables native buttons. `asChild` retains the child's layout; provide its loading indicator and disabled link behavior.
+- `Slider value={[20, 80]} thumbLabels={["Minimum", "Maximum"]}` renders a range; `orientation="vertical"` is supported.
+- `Progress value={null}` is indeterminate; finite values are clamped to `max`.
+- `TableHead numeric` and `TableCell numeric` align numeric columns with tabular figures.
+- `TextArea` wraps text and resizes vertically; override with `className="resize-none"` when needed.
+
+## Theme
+
+Override tokens in your own CSS. The root canvas follows the active theme, including native control color scheme.
+
+```css
+@layer base {
+  :root {
+    --font-body: "Inter", ui-sans-serif, system-ui, sans-serif;
+    --radius-control: 0.75rem;
+    --color-primary: oklch(0.45 0.16 265);
+    --color-primary-foreground: oklch(0.98 0 0);
+  }
+}
 ```
 
-## Bundler Compatibility
+Each scheme has a color and a foreground token. Shared tokens include `--color-background`, `--color-foreground`, `--color-surface`, `--color-outline`, `--color-image-outline`, `--color-light`, and `--color-shadow`. Check contrast when overriding paired colors. Dark mode changes colors without resetting your radius.
 
-- **Next.js (App Router / RSC)**: works out of the box — every module ships a `"use client"` directive.
-- **Vite**: works out of the box. During `vite build`, Rollup may warn that module-level directives were ignored; this is expected and harmless in client-only apps. To silence the warnings, filter `MODULE_LEVEL_DIRECTIVE` in `build.rollupOptions.onwarn`.
-- **CommonJS / Node**: `require("earthling-ui/button")` resolves to a dedicated CJS build with matching type declarations.
-- **CLI**: `npx earthling-ui` and `bunx earthling-ui` both work — the CLI is pre-built for Node.
+## Discover and eject
 
-## Development
+Commands read the installed version's shipped source, so discovery stays aligned with the code you will use:
 
-This is a monorepo managed with Bun workspaces. Key packages:
-
-- `packages/earthling-ui`: The main UI component library
-- `apps/docs`: Documentation site
-
-```bash
-# Install dependencies
-bun install
-
-# Build the UI library and watch for changes
-cd packages/earthling-ui
-bun run dev
-
-# Run the documentation site
-cd apps/docs
-bun run dev
+```sh
+npx earthling-ui list --json
+npx earthling-ui info button --json
+npx earthling-ui info dialog --source --json
+npx earthling-ui init
+npx earthling-ui eject button --dry-run --json
+npx earthling-ui eject button --no-install --json
 ```
 
-## License
+`init` writes `earthling-ui.config.json`; automation can write this small file directly:
+
+```json
+{ "componentDir": "src/components", "utilsDir": "src/utils" }
+```
+
+Eject finds the nearest parent config, copies transitive local source dependencies, rewrites aliases, and installs declared dependency versions with the project's package manager. Paths stay inside that project. Existing component files require `--overwrite`; existing shared utilities are preserved. `--dry-run` writes nothing and installs nothing. `--no-install` reports dependencies for you to install separately. JSON output avoids prompts and errors exit nonzero.
+
+Keep the package CSS import after ejecting: source ownership and theme delivery are separate. Tailwind must scan your ejected source directory; add `@source "./path/to/components";` if it is outside automatic scanning. Keep React and React DOM installed.
+
+## Agents
+
+Start with [llms.txt](llms.txt). Use `list` to discover names, `info` for exact exports/dependencies, and `info --source` only when implementation detail is needed. Published `earthling-ui/catalog.json` exposes the same source-derived metadata without launching the CLI. Read the matching `dist/components/<name>/index.d.ts` for prop types. Prefer existing components before creating new primitives.
+
+The metadata is Earthling's local package catalog, not a shadcn registry endpoint. This uses concise guidance and progressive discovery informed by [AGENTS.md](https://agents.md/), the [llms.txt proposal](https://llmstxt.org/), and [shadcn registry metadata](https://ui.shadcn.com/docs/registry/registry-item-json). No additional agent server is required.
 
 MIT © [Steven Frady](https://stevenfrady.com)
