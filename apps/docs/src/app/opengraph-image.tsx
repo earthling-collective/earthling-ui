@@ -17,7 +17,7 @@ export default async function Image() {
           flexDirection: "column",
           alignItems: "center",
           justifyContent: "center",
-          background: "#111010",
+          background: "#09090b",
           color: "#f5f5f4",
           fontFamily: "sans-serif",
         }}
